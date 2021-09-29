@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+	  <AssemblyName>Havit.NewProjectTemplate.Resources</AssemblyName>
+	  <RootNamespace>Havit.NewProjectTemplate.Resources</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Havit.Extensions.Localization" Version="1.0.2" />
+    <PackageReference Include="Havit.SourceGenerators.StrongApiStringLocalizers" Version="1.0.5" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Model\" />
+  </ItemGroup>
+
+</Project>

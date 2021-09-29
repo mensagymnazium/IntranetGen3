@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<AssemblyName>Havit.NewProjectTemplate.Model</AssemblyName>
+		<RootNamespace>Havit.NewProjectTemplate.Model</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Havit.Core" Version="2.0.19" />
+		<PackageReference Include="Havit.Data.EntityFrameworkCore.Abstractions" Version="2.1.0" />
+		<PackageReference Include="Havit.Model" Version="2.0.4" />
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+	</ItemGroup>
+
+</Project>

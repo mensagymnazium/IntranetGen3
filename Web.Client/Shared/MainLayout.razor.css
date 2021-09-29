@@ -1,0 +1,4 @@
+.sidebar {
+  box-shadow: var(--sidebar-box-shadow);
+  background: var(--sidebar-background-color);
+}
