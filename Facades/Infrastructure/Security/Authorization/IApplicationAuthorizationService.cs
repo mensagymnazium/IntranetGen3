@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Havit.NewProjectTemplate.Facades.Infrastructure.Security.Authorization
+namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authorization
 {
 	/// <summary>
 	/// Autorizační služby pro aplikaci.

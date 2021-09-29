@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Havit.ComponentModel;
 
-namespace Havit.NewProjectTemplate.Contracts.Crm
+namespace MensaGymnazium.IntranetGen3.Contracts.Crm
 {
 	[ApiContract]
 	public interface IContactFacade

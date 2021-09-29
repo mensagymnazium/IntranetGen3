@@ -14,38 +14,38 @@ using Havit.Data.EntityFrameworkCore.Patterns;
 using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.Repositories;
 
-namespace Havit.NewProjectTemplate.DataLayer.DataEntries.Security
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries.Security
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public class RoleEntries : DataEntries<Havit.NewProjectTemplate.Model.Security.Role>, IRoleEntries 
+	public class RoleEntries : DataEntries<MensaGymnazium.IntranetGen3.Model.Security.Role>, IRoleEntries 
 	{
-		public Havit.NewProjectTemplate.Model.Security.Role SystemAdministrator
+		public MensaGymnazium.IntranetGen3.Model.Security.Role SystemAdministrator
         {
             get
             {
 				if (systemAdministrator == null)
 				{
-					systemAdministrator = GetEntry(Havit.NewProjectTemplate.Model.Security.Role.Entry.SystemAdministrator);
+					systemAdministrator = GetEntry(MensaGymnazium.IntranetGen3.Model.Security.Role.Entry.SystemAdministrator);
 				}
 				return systemAdministrator;
             }
         }
-		private Havit.NewProjectTemplate.Model.Security.Role systemAdministrator;
+		private MensaGymnazium.IntranetGen3.Model.Security.Role systemAdministrator;
 
-		public Havit.NewProjectTemplate.Model.Security.Role UserSettingsAdministrator
+		public MensaGymnazium.IntranetGen3.Model.Security.Role UserSettingsAdministrator
         {
             get
             {
 				if (userSettingsAdministrator == null)
 				{
-					userSettingsAdministrator = GetEntry(Havit.NewProjectTemplate.Model.Security.Role.Entry.UserSettingsAdministrator);
+					userSettingsAdministrator = GetEntry(MensaGymnazium.IntranetGen3.Model.Security.Role.Entry.UserSettingsAdministrator);
 				}
 				return userSettingsAdministrator;
             }
         }
-		private Havit.NewProjectTemplate.Model.Security.Role userSettingsAdministrator;
+		private MensaGymnazium.IntranetGen3.Model.Security.Role userSettingsAdministrator;
 
-		public RoleEntries(Havit.NewProjectTemplate.DataLayer.Repositories.Security.IRoleRepository repository)
+		public RoleEntries(MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security.IRoleRepository repository)
 			: base(repository)
 		{
 		}

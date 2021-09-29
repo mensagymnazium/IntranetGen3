@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using Havit.Data.EntityFrameworkCore;
 using Havit.Data.EntityFrameworkCore.Metadata.Conventions;
 using Havit.Data.Patterns.DataSeeds;
-using Havit.NewProjectTemplate.DataLayer.Seeds.Core;
+using MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Havit.NewProjectTemplate.Web.Server.Tools
+namespace MensaGymnazium.IntranetGen3.Web.Server.Tools
 {
 	public static class DatabaseMigration
 	{

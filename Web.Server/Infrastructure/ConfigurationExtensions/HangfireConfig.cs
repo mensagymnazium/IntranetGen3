@@ -6,7 +6,7 @@ using Havit.Hangfire.Extensions.Filters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Havit.NewProjectTemplate.Web.Server.Infrastructure.ConfigurationExtensions
+namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ConfigurationExtensions
 {
 	public static class HangfireConfig
 	{

@@ -12,10 +12,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Data.Patterns.DataSources;
 
-namespace Havit.NewProjectTemplate.DataLayer.DataSources.Common
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources.Common
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public interface IDateInfoDataSource : IDataSource<Havit.NewProjectTemplate.Model.Common.DateInfo>
+	public interface IDateInfoDataSource : IDataSource<MensaGymnazium.IntranetGen3.Model.Common.DateInfo>
 	{
 	}
 }

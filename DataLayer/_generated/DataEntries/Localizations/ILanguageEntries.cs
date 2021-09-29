@@ -12,14 +12,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Data.Patterns.DataEntries;
 
-namespace Havit.NewProjectTemplate.DataLayer.DataEntries.Localizations
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries.Localizations
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 	public interface ILanguageEntries : IDataEntries
 	{
-		Havit.NewProjectTemplate.Model.Localizations.Language Czech { get; }
+		MensaGymnazium.IntranetGen3.Model.Localizations.Language Czech { get; }
 			
-		Havit.NewProjectTemplate.Model.Localizations.Language English { get; }
+		MensaGymnazium.IntranetGen3.Model.Localizations.Language English { get; }
 			
 	}
 }

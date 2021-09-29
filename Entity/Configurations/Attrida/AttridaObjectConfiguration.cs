@@ -1,4 +1,4 @@
-﻿using Havit.NewProjectTemplate.Model.Attrida;
+﻿using MensaGymnazium.IntranetGen3.Model.Attrida;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.NewProjectTemplate.Entity.Configurations.Attrida
+namespace MensaGymnazium.IntranetGen3.Entity.Configurations.Attrida
 {
 	public class AttridaObjectConfiguration : IEntityTypeConfiguration<AttridaObject>
 	{

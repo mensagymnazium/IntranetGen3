@@ -18,12 +18,12 @@ using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.DataLoaders;
 using Havit.Data.Patterns.Infrastructure;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Common
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Common
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public abstract class DateInfoDbRepositoryBase : DbRepository<Havit.NewProjectTemplate.Model.Common.DateInfo>
+	public abstract class DateInfoDbRepositoryBase : DbRepository<MensaGymnazium.IntranetGen3.Model.Common.DateInfo>
 	{
-		protected DateInfoDbRepositoryBase(IDbContext dbContext, Havit.NewProjectTemplate.DataLayer.DataSources.Common.IDateInfoDataSource dataSource, IEntityKeyAccessor<Havit.NewProjectTemplate.Model.Common.DateInfo, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
+		protected DateInfoDbRepositoryBase(IDbContext dbContext, MensaGymnazium.IntranetGen3.DataLayer.DataSources.Common.IDateInfoDataSource dataSource, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.Common.DateInfo, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
 			: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
 		{
 		}

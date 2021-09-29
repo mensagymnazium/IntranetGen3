@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.NewProjectTemplate.Model.Security
+namespace MensaGymnazium.IntranetGen3.Model.Security
 {
 	public class UserRole
 	{

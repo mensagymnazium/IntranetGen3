@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.NewProjectTemplate.Model.Attrida
+namespace MensaGymnazium.IntranetGen3.Model.Attrida
 {
 	/// <summary>
 	/// G2: Document, DocumentRelation

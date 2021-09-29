@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Havit.Data.Patterns.Repositories;
-using Havit.NewProjectTemplate.Model.Security;
+using MensaGymnazium.IntranetGen3.Model.Security;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Security
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security
 {
 	public partial interface IUserRepository
 	{

@@ -1,13 +1,11 @@
 ﻿param (
-    [string]$NewSolutionName = "NewProjectTemplate",
-	[string]$NewSolutionCode = "999.XXX",
-	[string]$NewWebProjectPort = "9900",
-	[string]$NewWebHttpsProjectCode = "44301",
+	[string]$NewFullName = "MensaGymnazium.IntranetGen3",
+    [string]$NewSolutionName = "IntranetGen3",
+	[string]$NewWebProjectPort = "44319",
 
-    [string]$OriginalSolutionName = "NewProjectTemplate",
-    [string]$OriginalSolutionCode = "999.XXX",
-	[string]$OriginalWebProjectPort = "9900",
-	[string]$OriginalWebAPIProjectCode = "44301"
+    [string]$OriginalSolutionName = "IntranetGen3",
+	[string]$OriginalWebProjectPort = "44319",
+	[string]$OriginalFullName = "MensaGymnazium.IntranetGen3"
 )
 
 [string]$SolutionFolder = [System.IO.Path]::GetDirectoryName($MyInvocation.MyCommand.Path);
@@ -16,14 +14,13 @@ Get-ChildItem -recurse $SolutionFolder -include *.cs,*.csproj,*.config,*.ps1,*.j
 Foreach-Object {
     Set-ItemProperty $_.FullName -name IsReadOnly -value $false
     [string]$Content = [IO.File]::ReadAllText($_.FullName)
+    $Content = $Content.Replace($OriginalFullName, $NewFullName)
     $Content = $Content.Replace($OriginalSolutionName, $NewSolutionName)
-    $Content = $Content.Replace($OriginalSolutionCode, $NewSolutionCode)
     $Content = $Content.Replace($OriginalWebProjectPort, $NewWebProjectPort)
-    $Content = $Content.Replace($OriginalWebAPIProjectCode, $NewWebAPIProjectCode)
     [IO.File]::WriteAllText($_.FullName, $Content, [System.Text.Encoding]::UTF8)
 }
 
 Rename-Item -path ([System.IO.Path]::Combine($SolutionFolder, $OriginalSolutionName + '.sln')) -newName ($NewSolutionName + '.sln')
-Rename-Item -path ([System.IO.Path]::Combine($SolutionFolder, 'Entity\NewProjectTemplateDbContext.cs')) -newName ($NewSolutionName + 'DbContext.cs')
-Rename-Item -path ([System.IO.Path]::Combine($SolutionFolder, 'Entity\NewProjectTemplateDesignTimeDbContextFactory.cs')) -newName ($NewSolutionName + 'DesignTimeDbContextFactory.cs')
-Rename-Item -path ([System.IO.Path]::Combine($SolutionFolder, 'Entity.Tests\NewProjectTemplateDbContextTests.cs')) -newName ($NewSolutionName + 'DbContextTests.cs')
+Rename-Item -path ([System.IO.Path]::Combine($SolutionFolder, 'Entity\IntranetGen3DbContext.cs')) -newName ($NewSolutionName + 'DbContext.cs')
+Rename-Item -path ([System.IO.Path]::Combine($SolutionFolder, 'Entity\IntranetGen3DesignTimeDbContextFactory.cs')) -newName ($NewSolutionName + 'DesignTimeDbContextFactory.cs')
+Rename-Item -path ([System.IO.Path]::Combine($SolutionFolder, 'Entity.Tests\IntranetGen3DbContextTests.cs')) -newName ($NewSolutionName + 'DbContextTests.cs')

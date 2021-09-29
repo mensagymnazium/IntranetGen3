@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Havit.Data.Patterns.Repositories;
-using Havit.NewProjectTemplate.Model.Common;
+using MensaGymnazium.IntranetGen3.Model.Common;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Common
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Common
 {
 	public partial interface IDateInfoRepository
 	{

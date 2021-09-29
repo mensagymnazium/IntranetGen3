@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Havit.NewProjectTemplate.Contracts.Infrastructure
+namespace MensaGymnazium.IntranetGen3.Contracts.Infrastructure
 {
 	public class MailingOptions
 	{

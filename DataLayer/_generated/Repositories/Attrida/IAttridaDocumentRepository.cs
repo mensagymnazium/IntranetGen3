@@ -12,10 +12,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Data.Patterns.Repositories;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Attrida
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Attrida
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public partial interface IAttridaDocumentRepository : IRepository<Havit.NewProjectTemplate.Model.Attrida.AttridaDocument>
+	public partial interface IAttridaDocumentRepository : IRepository<MensaGymnazium.IntranetGen3.Model.Attrida.AttridaDocument>
 	{
 	}
 }

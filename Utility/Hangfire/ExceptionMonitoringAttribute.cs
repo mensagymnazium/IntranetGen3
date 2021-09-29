@@ -4,7 +4,7 @@ using Hangfire.Server;
 using Havit.AspNetCore.ExceptionMonitoring.Services;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Havit.NewProjectTemplate.Utility.Hangfire
+namespace MensaGymnazium.IntranetGen3.Utility.Hangfire
 {
 	public class ExceptionMonitoringAttribute : JobFilterAttribute, IServerFilter
 	{

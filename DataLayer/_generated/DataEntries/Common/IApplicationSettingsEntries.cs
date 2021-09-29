@@ -12,12 +12,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Data.Patterns.DataEntries;
 
-namespace Havit.NewProjectTemplate.DataLayer.DataEntries.Common
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries.Common
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 	public interface IApplicationSettingsEntries : IDataEntries
 	{
-		Havit.NewProjectTemplate.Model.Common.ApplicationSettings Current { get; }
+		MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings Current { get; }
 			
 	}
 }

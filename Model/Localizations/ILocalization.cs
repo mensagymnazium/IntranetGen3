@@ -1,4 +1,4 @@
-﻿namespace Havit.NewProjectTemplate.Model.Localizations
+﻿namespace MensaGymnazium.IntranetGen3.Model.Localizations
 {
 	/// <summary>
 	/// Lokalizace.

@@ -1,4 +1,4 @@
-﻿namespace Havit.NewProjectTemplate.Services.Jobs
+﻿namespace MensaGymnazium.IntranetGen3.Services.Jobs
 {
 	public static class Jobs
 	{

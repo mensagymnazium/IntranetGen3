@@ -10,9 +10,9 @@ using Havit.Data.Patterns.DataSources;
 using Havit.Data.Patterns.Infrastructure;
 using Havit.Data.Patterns.Repositories;
 using Havit.Diagnostics.Contracts;
-using Havit.NewProjectTemplate.Model.Crm;
+using MensaGymnazium.IntranetGen3.Model.Crm;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Crm
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Crm
 {
 	public class CountryByIsoCodeLookupService : LookupServiceBase<string, Country>, ICountryByIsoCodeLookupService
 	{

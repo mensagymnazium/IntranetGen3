@@ -14,18 +14,18 @@ using Havit.Data.EntityFrameworkCore.Patterns.DataSources.Fakes;
 using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
 using Havit.Data.Patterns.Attributes;
 
-namespace Havit.NewProjectTemplate.DataLayer.DataSources.Crm.Fakes
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources.Crm.Fakes
 {
 	[Fake]
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public class FakeCountryDataSource : FakeDataSource<Havit.NewProjectTemplate.Model.Crm.Country>, Havit.NewProjectTemplate.DataLayer.DataSources.Crm.ICountryDataSource
+	public class FakeCountryDataSource : FakeDataSource<MensaGymnazium.IntranetGen3.Model.Crm.Country>, MensaGymnazium.IntranetGen3.DataLayer.DataSources.Crm.ICountryDataSource
 	{
-		public FakeCountryDataSource(params Havit.NewProjectTemplate.Model.Crm.Country[] data)
-			: this((IEnumerable<Havit.NewProjectTemplate.Model.Crm.Country>)data)
+		public FakeCountryDataSource(params MensaGymnazium.IntranetGen3.Model.Crm.Country[] data)
+			: this((IEnumerable<MensaGymnazium.IntranetGen3.Model.Crm.Country>)data)
 		{			
 		}
 
-		public FakeCountryDataSource(IEnumerable<Havit.NewProjectTemplate.Model.Crm.Country> data, ISoftDeleteManager softDeleteManager = null)
+		public FakeCountryDataSource(IEnumerable<MensaGymnazium.IntranetGen3.Model.Crm.Country> data, ISoftDeleteManager softDeleteManager = null)
 			: base(data, softDeleteManager)
 		{
 		}

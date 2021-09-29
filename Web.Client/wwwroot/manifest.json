@@ -1,6 +1,6 @@
 ﻿{
-	"name": "NewProjectTemplate",
-	"short_name": "NewProjectTemplate",
+	"name": "IntranetGen3",
+	"short_name": "IntranetGen3",
 	"start_url": "./",
 	"display": "standalone",
 	"background_color": "#ffffff",

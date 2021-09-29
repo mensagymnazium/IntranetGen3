@@ -1,8 +1,8 @@
-﻿using Havit.NewProjectTemplate.Model.Localizations;
+﻿using MensaGymnazium.IntranetGen3.Model.Localizations;
 using Havit.Model.Localizations;
 using System.ComponentModel.DataAnnotations;
 
-namespace Havit.NewProjectTemplate.Model.Crm
+namespace MensaGymnazium.IntranetGen3.Model.Crm
 {
 	public class CountryLocalization : ILocalization<Country>
 	{

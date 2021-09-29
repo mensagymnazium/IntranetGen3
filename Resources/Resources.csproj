@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-	  <AssemblyName>Havit.NewProjectTemplate.Resources</AssemblyName>
-	  <RootNamespace>Havit.NewProjectTemplate.Resources</RootNamespace>
+	  <AssemblyName>MensaGymnazium.IntranetGen3.Resources</AssemblyName>
+	  <RootNamespace>MensaGymnazium.IntranetGen3.Resources</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

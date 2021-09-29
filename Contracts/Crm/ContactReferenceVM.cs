@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.NewProjectTemplate.Contracts.Crm
+namespace MensaGymnazium.IntranetGen3.Contracts.Crm
 {
 	public record ContactReferenceVM
 	{

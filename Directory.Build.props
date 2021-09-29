@@ -5,7 +5,7 @@
 		<Copyright>Copyright HAVIT, s.r.o., 2021</Copyright>
 		<FileVersion>1.0.0.0</FileVersion>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
-		<Product>NewProjectTemplate</Product>
+		<Product>IntranetGen3</Product>
 		<LangVersion>latest</LangVersion>
 		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 		<DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>

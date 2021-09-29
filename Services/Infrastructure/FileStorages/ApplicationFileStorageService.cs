@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Services.FileStorage;
 
-namespace Havit.NewProjectTemplate.Services.Infrastructure.FileStorages
+namespace MensaGymnazium.IntranetGen3.Services.Infrastructure.FileStorages
 {
 	public class ApplicationFileStorageService : FileStorageWrappingService<ApplicationFileStorage>, IApplicationFileStorageService
 	{

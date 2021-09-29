@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Havit.Model.Localizations;
 
-namespace Havit.NewProjectTemplate.Model.Localizations
+namespace MensaGymnazium.IntranetGen3.Model.Localizations
 {
 	public class Language : ILanguage
 	{

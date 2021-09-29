@@ -2,14 +2,14 @@
 using Hangfire;
 using Hangfire.Dashboard;
 using Havit.Blazor.Grpc.Server;
-using Havit.NewProjectTemplate.Contracts;
-using Havit.NewProjectTemplate.Contracts.System;
-using Havit.NewProjectTemplate.DependencyInjection;
-using Havit.NewProjectTemplate.Facades.Infrastructure.Security;
-using Havit.NewProjectTemplate.Model.Security;
-using Havit.NewProjectTemplate.Web.Server.Infrastructure.ApplicationInsights;
-using Havit.NewProjectTemplate.Web.Server.Infrastructure.ConfigurationExtensions;
-using Havit.NewProjectTemplate.Web.Server.Tools;
+using MensaGymnazium.IntranetGen3.Contracts;
+using MensaGymnazium.IntranetGen3.Contracts.System;
+using MensaGymnazium.IntranetGen3.DependencyInjection;
+using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security;
+using MensaGymnazium.IntranetGen3.Model.Security;
+using MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ApplicationInsights;
+using MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ConfigurationExtensions;
+using MensaGymnazium.IntranetGen3.Web.Server.Tools;
 using Microsoft.ApplicationInsights.DependencyCollector;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
@@ -22,7 +22,7 @@ using ProtoBuf.Grpc.Configuration;
 using ProtoBuf.Grpc.Server;
 using ProtoBuf.Meta;
 
-namespace Havit.NewProjectTemplate.Web.Server
+namespace MensaGymnazium.IntranetGen3.Web.Server
 {
 	public class Startup
 	{
@@ -120,7 +120,7 @@ namespace Havit.NewProjectTemplate.Web.Server
 				{
 					Authorization = new List<IDashboardAuthorizationFilter>() { }, // see https://sahansera.dev/securing-hangfire-dashboard-with-endpoint-routing-auth-policy-aspnetcore/
 					DisplayStorageConnectionString = false,
-					DashboardTitle = "NewProjectTemplate - Jobs",
+					DashboardTitle = "IntranetGen3 - Jobs",
 					StatsPollingInterval = 60_000 // once a minute
 				})
 				.RequireAuthorization(PolicyNames.HangfireDashboardAcccessPolicy);

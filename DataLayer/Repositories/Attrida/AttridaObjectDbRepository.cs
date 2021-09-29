@@ -8,9 +8,9 @@ using Havit.Data.EntityFrameworkCore.Patterns.Repositories;
 using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
 using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.DataLoaders;
-using Havit.NewProjectTemplate.Model.Attrida;
+using MensaGymnazium.IntranetGen3.Model.Attrida;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Attrida
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Attrida
 {
 	public partial class AttridaObjectDbRepository : IAttridaObjectRepository
 	{

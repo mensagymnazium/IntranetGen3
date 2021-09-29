@@ -14,18 +14,18 @@ using Havit.Data.EntityFrameworkCore.Patterns.DataSources.Fakes;
 using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
 using Havit.Data.Patterns.Attributes;
 
-namespace Havit.NewProjectTemplate.DataLayer.DataSources.Crm.Fakes
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources.Crm.Fakes
 {
 	[Fake]
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public class FakeAddressDataSource : FakeDataSource<Havit.NewProjectTemplate.Model.Crm.Address>, Havit.NewProjectTemplate.DataLayer.DataSources.Crm.IAddressDataSource
+	public class FakeAddressDataSource : FakeDataSource<MensaGymnazium.IntranetGen3.Model.Crm.Address>, MensaGymnazium.IntranetGen3.DataLayer.DataSources.Crm.IAddressDataSource
 	{
-		public FakeAddressDataSource(params Havit.NewProjectTemplate.Model.Crm.Address[] data)
-			: this((IEnumerable<Havit.NewProjectTemplate.Model.Crm.Address>)data)
+		public FakeAddressDataSource(params MensaGymnazium.IntranetGen3.Model.Crm.Address[] data)
+			: this((IEnumerable<MensaGymnazium.IntranetGen3.Model.Crm.Address>)data)
 		{			
 		}
 
-		public FakeAddressDataSource(IEnumerable<Havit.NewProjectTemplate.Model.Crm.Address> data, ISoftDeleteManager softDeleteManager = null)
+		public FakeAddressDataSource(IEnumerable<MensaGymnazium.IntranetGen3.Model.Crm.Address> data, ISoftDeleteManager softDeleteManager = null)
 			: base(data, softDeleteManager)
 		{
 		}

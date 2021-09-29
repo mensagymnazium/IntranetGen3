@@ -2,12 +2,12 @@
 
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
-		<AssemblyName>Havit.NewProjectTemplate.Facades</AssemblyName>
-		<RootNamespace>Havit.NewProjectTemplate.Facades</RootNamespace>
+		<AssemblyName>MensaGymnazium.IntranetGen3.Facades</AssemblyName>
+		<RootNamespace>MensaGymnazium.IntranetGen3.Facades</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="Havit.NewProjectTemplate.Facades.Tests" />
+		<InternalsVisibleTo Include="MensaGymnazium.IntranetGen3.Facades.Tests" />
 	</ItemGroup>
 
 	<ItemGroup>

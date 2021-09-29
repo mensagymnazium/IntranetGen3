@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Havit.Extensions.DependencyInjection.Abstractions;
-using Havit.NewProjectTemplate.Contracts;
-using Havit.NewProjectTemplate.Contracts.Crm;
-using Havit.NewProjectTemplate.DataLayer.Repositories.Crm;
+using MensaGymnazium.IntranetGen3.Contracts;
+using MensaGymnazium.IntranetGen3.Contracts.Crm;
+using MensaGymnazium.IntranetGen3.DataLayer.Repositories.Crm;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Havit.NewProjectTemplate.Facades.Crm
+namespace MensaGymnazium.IntranetGen3.Facades.Crm
 {
 	[Service]
 	[Authorize] // TODO Fine-tune authorization

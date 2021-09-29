@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Havit.Diagnostics.Contracts;
-using Havit.NewProjectTemplate.Facades.Infrastructure.Security.Authentication;
-using Havit.NewProjectTemplate.Model.Security;
+using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
+using MensaGymnazium.IntranetGen3.Model.Security;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
-using Havit.NewProjectTemplate.DataLayer.Repositories.Security;
+using MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
 
-namespace Havit.NewProjectTemplate.Web.Server.Infrastructure.Security
+namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.Security
 {
 	/// <summary>
 	/// Poskytuje uživatele z HttpContextu.

@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace Havit.NewProjectTemplate.Entity
+namespace MensaGymnazium.IntranetGen3.Entity
 {
 
-	public class NewProjectTemplateDesignTimeDbContextFactory : IDesignTimeDbContextFactory<NewProjectTemplateDbContext>
+	public class IntranetGen3DesignTimeDbContextFactory : IDesignTimeDbContextFactory<IntranetGen3DbContext>
 	{
-		public NewProjectTemplateDbContext CreateDbContext(string[] args)
+		public IntranetGen3DbContext CreateDbContext(string[] args)
 		{
 			// Příkazy pro tooling EF Core Migrations (Add-Migration, ...) tooling získávají DbContext z této metody.
 			// Stejně tak  CodeGenerator.
@@ -27,7 +27,7 @@ namespace Havit.NewProjectTemplate.Entity
 
 			string connectionString = configuration.GetConnectionString("Database");
 
-			return new NewProjectTemplateDbContext(new DbContextOptionsBuilder<NewProjectTemplateDbContext>().UseSqlServer(connectionString).Options);
+			return new IntranetGen3DbContext(new DbContextOptionsBuilder<IntranetGen3DbContext>().UseSqlServer(connectionString).Options);
 		}
 	}
 }

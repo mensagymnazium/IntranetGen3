@@ -1,12 +1,12 @@
 ﻿using Havit.Data.Patterns.DataSeeds;
-using Havit.NewProjectTemplate.Model.Localizations;
+using MensaGymnazium.IntranetGen3.Model.Localizations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.NewProjectTemplate.DataLayer.Seeds.Core.Localizations
+namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core.Localizations
 {
 	public class LanguageSeed : DataSeed<CoreProfile>
 	{

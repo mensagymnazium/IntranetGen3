@@ -12,10 +12,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Data.Patterns.DataSources;
 
-namespace Havit.NewProjectTemplate.DataLayer.DataSources.Crm
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources.Crm
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public interface IAddressDataSource : IDataSource<Havit.NewProjectTemplate.Model.Crm.Address>
+	public interface IAddressDataSource : IDataSource<MensaGymnazium.IntranetGen3.Model.Crm.Address>
 	{
 	}
 }

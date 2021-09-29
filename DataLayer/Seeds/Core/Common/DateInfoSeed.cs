@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Havit.Data.Patterns.DataSeeds;
-using Havit.NewProjectTemplate.Model.Common;
+using MensaGymnazium.IntranetGen3.Model.Common;
 
-namespace Havit.NewProjectTemplate.DataLayer.Seeds.Core.Common
+namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core.Common
 {
 	public class DateInfoSeed : DataSeed<CoreProfile>
 	{

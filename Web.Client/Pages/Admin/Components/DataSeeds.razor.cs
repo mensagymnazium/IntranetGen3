@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Blazor.Components.Web;
 using Havit.Blazor.Components.Web.Bootstrap;
-using Havit.NewProjectTemplate.Contracts.System;
+using MensaGymnazium.IntranetGen3.Contracts.System;
 using Microsoft.AspNetCore.Components;
 
-namespace Havit.NewProjectTemplate.Web.Client.Pages.Admin.Components
+namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Admin.Components
 {
 	public partial class DataSeeds : ComponentBase
 	{

@@ -18,12 +18,12 @@ using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.DataLoaders;
 using Havit.Data.Patterns.Infrastructure;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Crm
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Crm
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public abstract class AddressDbRepositoryBase : DbRepository<Havit.NewProjectTemplate.Model.Crm.Address>
+	public abstract class AddressDbRepositoryBase : DbRepository<MensaGymnazium.IntranetGen3.Model.Crm.Address>
 	{
-		protected AddressDbRepositoryBase(IDbContext dbContext, Havit.NewProjectTemplate.DataLayer.DataSources.Crm.IAddressDataSource dataSource, IEntityKeyAccessor<Havit.NewProjectTemplate.Model.Crm.Address, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
+		protected AddressDbRepositoryBase(IDbContext dbContext, MensaGymnazium.IntranetGen3.DataLayer.DataSources.Crm.IAddressDataSource dataSource, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.Crm.Address, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
 			: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
 		{
 		}

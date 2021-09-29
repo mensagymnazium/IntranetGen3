@@ -1,4 +1,4 @@
-﻿using Havit.NewProjectTemplate.Model.Crm;
+﻿using MensaGymnazium.IntranetGen3.Model.Crm;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.NewProjectTemplate.Entity.Configurations.Crm
+namespace MensaGymnazium.IntranetGen3.Entity.Configurations.Crm
 {
 	public class ContactConfiguration : IEntityTypeConfiguration<Contact>
 	{

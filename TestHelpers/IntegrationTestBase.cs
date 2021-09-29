@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Data.EntityFrameworkCore;
 using Havit.Data.Patterns.DataSeeds;
-using Havit.NewProjectTemplate.DataLayer.Seeds.Core;
+using MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Havit.NewProjectTemplate.DependencyInjection;
+using MensaGymnazium.IntranetGen3.DependencyInjection;
 
-namespace Havit.NewProjectTemplate.TestHelpers
+namespace MensaGymnazium.IntranetGen3.TestHelpers
 {
 	public class IntegrationTestBase
 	{

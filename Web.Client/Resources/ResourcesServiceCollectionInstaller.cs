@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Havit.NewProjectTemplate.Web.Client.Resources
+namespace MensaGymnazium.IntranetGen3.Web.Client.Resources
 {
 	/// <summary>
 	/// Marker file for RESX source generator.

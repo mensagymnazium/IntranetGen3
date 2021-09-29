@@ -5,10 +5,10 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Havit.NewProjectTemplate.Facades.Infrastructure.Security.Authentication;
-using Havit.NewProjectTemplate.Facades.Infrastructure.Security.Identity;
-using Havit.NewProjectTemplate.Model.Security;
-using Havit.NewProjectTemplate.Web.Server.Infrastructure.Security;
+using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
+using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Identity;
+using MensaGymnazium.IntranetGen3.Model.Security;
+using MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.Security;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -18,7 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
 
-namespace Havit.NewProjectTemplate.Web.Server.Infrastructure.ConfigurationExtensions
+namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ConfigurationExtensions
 {
 	public static class AuthConfig
 	{
@@ -62,7 +62,7 @@ namespace Havit.NewProjectTemplate.Web.Server.Infrastructure.ConfigurationExtens
 
 			services.PostConfigure<ApiAuthorizationOptions>(options =>
 			{
-				options.Clients["Havit.NewProjectTemplate.Web.Client"].AlwaysIncludeUserClaimsInIdToken = true;
+				options.Clients["MensaGymnazium.IntranetGen3.Web.Client"].AlwaysIncludeUserClaimsInIdToken = true;
 				options.IdentityResources["openid"].UserClaims.Add("name");
 				options.ApiResources.Single().UserClaims.Add("name");
 				options.IdentityResources["openid"].UserClaims.Add("role");

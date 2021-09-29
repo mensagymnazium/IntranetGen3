@@ -9,7 +9,7 @@ using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Http;
 
-namespace Havit.NewProjectTemplate.Web.Server.Infrastructure.ApplicationInsights
+namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ApplicationInsights
 {
 	/// <summary>
 	/// Application Insights telemetry initializer responsible for setting gRPC requests as failed (based on grpc-status HTTP Header).

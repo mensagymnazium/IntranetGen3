@@ -1,4 +1,4 @@
-﻿using Havit.NewProjectTemplate.Model.Common;
+﻿using MensaGymnazium.IntranetGen3.Model.Common;
 using Havit.Data.Patterns.DataSeeds;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.NewProjectTemplate.DataLayer.Seeds.Core.Common
+namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core.Common
 {
 	public class ApplicationSettingsSeed : DataSeed<CoreProfile>
 	{

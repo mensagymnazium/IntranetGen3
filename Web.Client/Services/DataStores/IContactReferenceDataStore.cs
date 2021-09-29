@@ -1,7 +1,7 @@
 ﻿using Havit.Blazor.Components.Web.Services.DataStores;
-using Havit.NewProjectTemplate.Contracts.Crm;
+using MensaGymnazium.IntranetGen3.Contracts.Crm;
 
-namespace Havit.NewProjectTemplate.Web.Client.Services.DataStores
+namespace MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores
 {
 	public interface IContactReferenceDataStore : IDictionaryStaticDataStore<int, ContactReferenceVM>
 	{

@@ -2,8 +2,8 @@
 
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
-		<AssemblyName>Havit.NewProjectTemplate.DataLayer</AssemblyName>
-		<RootNamespace>Havit.NewProjectTemplate.DataLayer</RootNamespace>
+		<AssemblyName>MensaGymnazium.IntranetGen3.DataLayer</AssemblyName>
+		<RootNamespace>MensaGymnazium.IntranetGen3.DataLayer</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>

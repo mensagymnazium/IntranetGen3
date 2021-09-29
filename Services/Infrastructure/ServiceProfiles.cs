@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.NewProjectTemplate.Services.Infrastructure
+namespace MensaGymnazium.IntranetGen3.Services.Infrastructure
 {
 	public static class ServiceProfiles
 	{

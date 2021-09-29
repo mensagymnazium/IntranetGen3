@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
-using Havit.NewProjectTemplate.Model.Security;
+using MensaGymnazium.IntranetGen3.Model.Security;
 
-namespace Havit.NewProjectTemplate.Facades.Infrastructure.Security.Authentication
+namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication
 {
 	/// <summary>
 	/// Vrací aktuálně přihlášeného uživatele jako ClaimsPrincipal nebo LoginAccount.

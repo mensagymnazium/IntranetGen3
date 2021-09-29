@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.NewProjectTemplate.DependencyInjection.ConfigrationOptions
+namespace MensaGymnazium.IntranetGen3.DependencyInjection.ConfigrationOptions
 {
 	public class FileStorageOptions
 	{

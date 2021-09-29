@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using Havit.NewProjectTemplate.Model.Metadata.Security;
-using Havit.NewProjectTemplate.Model.Security;
+//using MensaGymnazium.IntranetGen3.Model.Metadata.Security;
+using MensaGymnazium.IntranetGen3.Model.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Havit.NewProjectTemplate.Entity.Configurations.Security
+namespace MensaGymnazium.IntranetGen3.Entity.Configurations.Security
 {
 	public class UserConfiguration : IEntityTypeConfiguration<User>
 	{

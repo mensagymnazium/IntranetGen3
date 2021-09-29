@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Services.TimeServices;
 
-namespace Havit.NewProjectTemplate.Services.TimeServices
+namespace MensaGymnazium.IntranetGen3.Services.TimeServices
 {
 	/// <summary>
 	/// Provides current time in local time-zone ("Central Europe Standard Time", "Europe/Prague" for non-Windows platforms).

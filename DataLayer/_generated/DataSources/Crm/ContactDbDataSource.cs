@@ -14,10 +14,10 @@ using Havit.Data.EntityFrameworkCore;
 using Havit.Data.EntityFrameworkCore.Patterns.DataSources;
 using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
 
-namespace Havit.NewProjectTemplate.DataLayer.DataSources.Crm
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources.Crm
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public partial class ContactDbDataSource : DbDataSource<Havit.NewProjectTemplate.Model.Crm.Contact>, IContactDataSource
+	public partial class ContactDbDataSource : DbDataSource<MensaGymnazium.IntranetGen3.Model.Crm.Contact>, IContactDataSource
 	{
 		public ContactDbDataSource(IDbContext dbContext, ISoftDeleteManager softDeleteManager)
 			: base(dbContext, softDeleteManager)

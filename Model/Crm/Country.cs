@@ -1,9 +1,9 @@
 ﻿using Havit.Data.EntityFrameworkCore.Attributes;
-using Havit.NewProjectTemplate.Model.Localizations;
+using MensaGymnazium.IntranetGen3.Model.Localizations;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Havit.NewProjectTemplate.Model.Crm
+namespace MensaGymnazium.IntranetGen3.Model.Crm
 {
 	[Cache]
 	public class Country : ILocalized<CountryLocalization>

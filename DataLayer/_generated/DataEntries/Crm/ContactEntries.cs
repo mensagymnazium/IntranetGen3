@@ -14,25 +14,25 @@ using Havit.Data.EntityFrameworkCore.Patterns;
 using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.Repositories;
 
-namespace Havit.NewProjectTemplate.DataLayer.DataEntries.Crm
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries.Crm
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public class ContactEntries : DataEntries<Havit.NewProjectTemplate.Model.Crm.Contact>, IContactEntries 
+	public class ContactEntries : DataEntries<MensaGymnazium.IntranetGen3.Model.Crm.Contact>, IContactEntries 
 	{
-		public Havit.NewProjectTemplate.Model.Crm.Contact Self
+		public MensaGymnazium.IntranetGen3.Model.Crm.Contact Self
         {
             get
             {
 				if (self == null)
 				{
-					self = GetEntry(Havit.NewProjectTemplate.Model.Crm.Contact.Entry.Self);
+					self = GetEntry(MensaGymnazium.IntranetGen3.Model.Crm.Contact.Entry.Self);
 				}
 				return self;
             }
         }
-		private Havit.NewProjectTemplate.Model.Crm.Contact self;
+		private MensaGymnazium.IntranetGen3.Model.Crm.Contact self;
 
-		public ContactEntries(Havit.NewProjectTemplate.DataLayer.Repositories.Crm.IContactRepository repository)
+		public ContactEntries(MensaGymnazium.IntranetGen3.DataLayer.Repositories.Crm.IContactRepository repository)
 			: base(repository)
 		{
 		}

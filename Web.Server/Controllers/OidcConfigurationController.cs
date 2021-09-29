@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Havit.NewProjectTemplate.Web.Server.Controllers
+namespace MensaGymnazium.IntranetGen3.Web.Server.Controllers
 {
 	public class OidcConfigurationController : Controller
 	{

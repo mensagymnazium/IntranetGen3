@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Havit.Extensions.DependencyInjection.Abstractions;
-using Havit.NewProjectTemplate.Contracts.System;
-using Havit.NewProjectTemplate.Model.Security;
+using MensaGymnazium.IntranetGen3.Contracts.System;
+using MensaGymnazium.IntranetGen3.Model.Security;
 using Havit.Services.Caching;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Havit.NewProjectTemplate.Facades.System
+namespace MensaGymnazium.IntranetGen3.Facades.System
 {
 	[Service]
 	[Authorize(Roles = nameof(Role.Entry.SystemAdministrator))]

@@ -14,18 +14,18 @@ using Havit.Data.EntityFrameworkCore.Patterns.DataSources.Fakes;
 using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
 using Havit.Data.Patterns.Attributes;
 
-namespace Havit.NewProjectTemplate.DataLayer.DataSources.Crm.Fakes
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources.Crm.Fakes
 {
 	[Fake]
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public class FakeContactDataSource : FakeDataSource<Havit.NewProjectTemplate.Model.Crm.Contact>, Havit.NewProjectTemplate.DataLayer.DataSources.Crm.IContactDataSource
+	public class FakeContactDataSource : FakeDataSource<MensaGymnazium.IntranetGen3.Model.Crm.Contact>, MensaGymnazium.IntranetGen3.DataLayer.DataSources.Crm.IContactDataSource
 	{
-		public FakeContactDataSource(params Havit.NewProjectTemplate.Model.Crm.Contact[] data)
-			: this((IEnumerable<Havit.NewProjectTemplate.Model.Crm.Contact>)data)
+		public FakeContactDataSource(params MensaGymnazium.IntranetGen3.Model.Crm.Contact[] data)
+			: this((IEnumerable<MensaGymnazium.IntranetGen3.Model.Crm.Contact>)data)
 		{			
 		}
 
-		public FakeContactDataSource(IEnumerable<Havit.NewProjectTemplate.Model.Crm.Contact> data, ISoftDeleteManager softDeleteManager = null)
+		public FakeContactDataSource(IEnumerable<MensaGymnazium.IntranetGen3.Model.Crm.Contact> data, ISoftDeleteManager softDeleteManager = null)
 			: base(data, softDeleteManager)
 		{
 		}

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Havit.NewProjectTemplate.Model.Crm;
+using MensaGymnazium.IntranetGen3.Model.Crm;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Havit.NewProjectTemplate.Entity.Configurations.Crm
+namespace MensaGymnazium.IntranetGen3.Entity.Configurations.Crm
 {
 	public class CountryConfiguration : IEntityTypeConfiguration<Country>
 	{

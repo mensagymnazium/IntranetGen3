@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Havit.Data.Patterns.Repositories;
-using Havit.NewProjectTemplate.Model.Crm;
+using MensaGymnazium.IntranetGen3.Model.Crm;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Crm
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Crm
 {
 	public partial interface IAddressRepository
 	{

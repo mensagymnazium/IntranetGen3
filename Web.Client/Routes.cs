@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.NewProjectTemplate.Web.Client
+namespace MensaGymnazium.IntranetGen3.Web.Client
 {
 	public static class Routes
 	{

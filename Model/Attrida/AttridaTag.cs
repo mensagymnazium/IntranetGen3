@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Havit.NewProjectTemplate.Model.Attrida
+namespace MensaGymnazium.IntranetGen3.Model.Attrida
 {
 	public class AttridaTag
 	{

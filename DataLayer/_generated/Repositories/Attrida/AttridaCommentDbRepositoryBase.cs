@@ -18,12 +18,12 @@ using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.DataLoaders;
 using Havit.Data.Patterns.Infrastructure;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Attrida
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Attrida
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public abstract class AttridaCommentDbRepositoryBase : DbRepository<Havit.NewProjectTemplate.Model.Attrida.AttridaComment>
+	public abstract class AttridaCommentDbRepositoryBase : DbRepository<MensaGymnazium.IntranetGen3.Model.Attrida.AttridaComment>
 	{
-		protected AttridaCommentDbRepositoryBase(IDbContext dbContext, Havit.NewProjectTemplate.DataLayer.DataSources.Attrida.IAttridaCommentDataSource dataSource, IEntityKeyAccessor<Havit.NewProjectTemplate.Model.Attrida.AttridaComment, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
+		protected AttridaCommentDbRepositoryBase(IDbContext dbContext, MensaGymnazium.IntranetGen3.DataLayer.DataSources.Attrida.IAttridaCommentDataSource dataSource, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.Attrida.AttridaComment, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
 			: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
 		{
 		}

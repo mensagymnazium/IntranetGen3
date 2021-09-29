@@ -14,10 +14,10 @@ using Havit.Data.EntityFrameworkCore;
 using Havit.Data.EntityFrameworkCore.Patterns.DataSources;
 using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
 
-namespace Havit.NewProjectTemplate.DataLayer.DataSources.Common
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources.Common
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public partial class DateInfoDbDataSource : DbDataSource<Havit.NewProjectTemplate.Model.Common.DateInfo>, IDateInfoDataSource
+	public partial class DateInfoDbDataSource : DbDataSource<MensaGymnazium.IntranetGen3.Model.Common.DateInfo>, IDateInfoDataSource
 	{
 		public DateInfoDbDataSource(IDbContext dbContext, ISoftDeleteManager softDeleteManager)
 			: base(dbContext, softDeleteManager)

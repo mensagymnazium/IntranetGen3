@@ -13,9 +13,9 @@ using Havit.Diagnostics.Contracts;
 using Havit.Hangfire.Extensions.BackgroundJobs;
 using Havit.Hangfire.Extensions.Filters;
 using Havit.Hangfire.Extensions.RecurringJobs;
-using Havit.NewProjectTemplate.DependencyInjection;
-using Havit.NewProjectTemplate.Services.Jobs;
-using Havit.NewProjectTemplate.Utility.Hangfire;
+using MensaGymnazium.IntranetGen3.DependencyInjection;
+using MensaGymnazium.IntranetGen3.Services.Jobs;
+using MensaGymnazium.IntranetGen3.Utility.Hangfire;
 using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.WebJobs;
@@ -23,7 +23,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Havit.NewProjectTemplate.Utility
+namespace MensaGymnazium.IntranetGen3.Utility
 {
 	public static class Program
 	{

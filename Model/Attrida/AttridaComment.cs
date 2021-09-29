@@ -1,4 +1,4 @@
-﻿using Havit.NewProjectTemplate.Model.Security;
+﻿using MensaGymnazium.IntranetGen3.Model.Security;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.NewProjectTemplate.Model.Attrida
+namespace MensaGymnazium.IntranetGen3.Model.Attrida
 {
 	/// <summary>
 	/// G2: Zapisek

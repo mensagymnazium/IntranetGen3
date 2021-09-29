@@ -9,11 +9,11 @@ using Havit.Data.EntityFrameworkCore.Patterns.Repositories;
 using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
 using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.DataLoaders;
-using Havit.NewProjectTemplate.Contracts.Crm;
-using Havit.NewProjectTemplate.Model.Crm;
+using MensaGymnazium.IntranetGen3.Contracts.Crm;
+using MensaGymnazium.IntranetGen3.Model.Crm;
 using Microsoft.EntityFrameworkCore;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Crm
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Crm
 {
 	public partial class ContactDbRepository : IContactRepository
 	{

@@ -6,12 +6,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Havit.Data.Patterns.UnitOfWorks;
 using Havit.Diagnostics.Contracts;
-using Havit.NewProjectTemplate.DataLayer.DataEntries.Security;
-using Havit.NewProjectTemplate.DataLayer.Repositories.Security;
-using Havit.NewProjectTemplate.Model.Security;
+using MensaGymnazium.IntranetGen3.DataLayer.DataEntries.Security;
+using MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
+using MensaGymnazium.IntranetGen3.Model.Security;
 using Microsoft.AspNetCore.Identity;
 
-namespace Havit.NewProjectTemplate.Facades.Infrastructure.Security.Identity
+namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Identity
 {
 	public class UserStore :
 		IUserStore<User>,

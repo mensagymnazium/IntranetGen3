@@ -12,11 +12,11 @@ using Havit.Blazor.Components.Web.Bootstrap;
 using Havit.Blazor.Grpc.Client;
 using Havit.Blazor.Grpc.Client.ServerExceptions;
 using Havit.Blazor.Grpc.Client.WebAssembly;
-using Havit.NewProjectTemplate.Contracts;
-using Havit.NewProjectTemplate.Contracts.System;
-using Havit.NewProjectTemplate.Web.Client.Infrastructure.Grpc;
-using Havit.NewProjectTemplate.Web.Client.Infrastructure.Security;
-using Havit.NewProjectTemplate.Web.Client.Services.DataStores;
+using MensaGymnazium.IntranetGen3.Contracts;
+using MensaGymnazium.IntranetGen3.Contracts.System;
+using MensaGymnazium.IntranetGen3.Web.Client.Infrastructure.Grpc;
+using MensaGymnazium.IntranetGen3.Web.Client.Infrastructure.Security;
+using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -24,7 +24,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Havit.NewProjectTemplate.Web.Client
+namespace MensaGymnazium.IntranetGen3.Web.Client
 {
 	public class Program
 	{
@@ -46,8 +46,8 @@ namespace Havit.NewProjectTemplate.Web.Client
 			builder.Services.AddHxServices();
 			builder.Services.AddHxMessenger();
 			builder.Services.AddHxMessageBoxHost();
-			Havit.NewProjectTemplate.Web.Client.Resources.ResourcesServiceCollectionInstaller.AddGeneratedResourceWrappers(builder.Services);
-			Havit.NewProjectTemplate.Resources.ResourcesServiceCollectionInstaller.AddGeneratedResourceWrappers(builder.Services);
+			MensaGymnazium.IntranetGen3.Web.Client.Resources.ResourcesServiceCollectionInstaller.AddGeneratedResourceWrappers(builder.Services);
+			MensaGymnazium.IntranetGen3.Resources.ResourcesServiceCollectionInstaller.AddGeneratedResourceWrappers(builder.Services);
 			SetHxComponents();
 
 			builder.Services.AddScoped<IContactReferenceDataStore, ContactReferenceDataStore>();
@@ -80,7 +80,7 @@ namespace Havit.NewProjectTemplate.Web.Client
 						var backendUrl = navigationManager.BaseUri;
 
 						return provider.GetRequiredService<AuthorizationMessageHandler>()
-							.ConfigureHandler(authorizedUrls: new[] { backendUrl }); // TODO? as neede: , scopes: new[] { "havit-NewProjectTemplate-api" });
+							.ConfigureHandler(authorizedUrls: new[] { backendUrl }); // TODO? as neede: , scopes: new[] { "havit-IntranetGen3-api" });
 					})
 					.AddInterceptor<AuthorizationGrpcClientInterceptor>();
 				});

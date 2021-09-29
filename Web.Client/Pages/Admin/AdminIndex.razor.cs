@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using Havit.Blazor.Components.Web;
 using Havit.Blazor.Components.Web.Bootstrap;
-using Havit.NewProjectTemplate.Contracts.System;
-using Havit.NewProjectTemplate.Web.Client.Pages.Admin.Components;
-using Havit.NewProjectTemplate.Web.Client.Resources;
-using Havit.NewProjectTemplate.Web.Client.Resources.Pages.Admin;
+using MensaGymnazium.IntranetGen3.Contracts.System;
+using MensaGymnazium.IntranetGen3.Web.Client.Pages.Admin.Components;
+using MensaGymnazium.IntranetGen3.Web.Client.Resources;
+using MensaGymnazium.IntranetGen3.Web.Client.Resources.Pages.Admin;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 
-namespace Havit.NewProjectTemplate.Web.Client.Pages.Admin
+namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Admin
 {
 	public partial class AdminIndex : ComponentBase
 	{

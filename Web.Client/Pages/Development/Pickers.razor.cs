@@ -5,11 +5,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Havit.NewProjectTemplate.Contracts.Crm;
-using Havit.NewProjectTemplate.Web.Client.Services.DataStores;
+using MensaGymnazium.IntranetGen3.Contracts.Crm;
+using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 using Microsoft.AspNetCore.Components;
 
-namespace Havit.NewProjectTemplate.Web.Client.Pages.Development
+namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Development
 {
 	public partial class Pickers
 	{

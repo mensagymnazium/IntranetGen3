@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Havit.NewProjectTemplate.DependencyInjection
+namespace MensaGymnazium.IntranetGen3.DependencyInjection
 {
 	internal class InstallConfiguration
 	{

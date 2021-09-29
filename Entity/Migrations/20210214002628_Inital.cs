@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Havit.NewProjectTemplate.Entity.Migrations
+namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 {
     public partial class Inital : Migration
     {

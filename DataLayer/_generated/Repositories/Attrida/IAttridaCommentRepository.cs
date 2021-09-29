@@ -12,10 +12,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Data.Patterns.Repositories;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Attrida
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Attrida
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public partial interface IAttridaCommentRepository : IRepository<Havit.NewProjectTemplate.Model.Attrida.AttridaComment>
+	public partial interface IAttridaCommentRepository : IRepository<MensaGymnazium.IntranetGen3.Model.Attrida.AttridaComment>
 	{
 	}
 }

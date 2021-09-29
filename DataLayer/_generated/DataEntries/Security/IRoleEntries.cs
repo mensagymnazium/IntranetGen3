@@ -12,14 +12,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Data.Patterns.DataEntries;
 
-namespace Havit.NewProjectTemplate.DataLayer.DataEntries.Security
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries.Security
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 	public interface IRoleEntries : IDataEntries
 	{
-		Havit.NewProjectTemplate.Model.Security.Role SystemAdministrator { get; }
+		MensaGymnazium.IntranetGen3.Model.Security.Role SystemAdministrator { get; }
 			
-		Havit.NewProjectTemplate.Model.Security.Role UserSettingsAdministrator { get; }
+		MensaGymnazium.IntranetGen3.Model.Security.Role UserSettingsAdministrator { get; }
 			
 	}
 }

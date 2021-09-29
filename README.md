@@ -1,7 +1,7 @@
 ﻿# New Project Template - Blazor Stack
 
 ## Initial Setup
-1. SetupSolution.ps1 - NewProjectTemplate => ProjectName
+1. [DONE] SetupSolution.ps1 - NewProjectTemplate => ProjectName
    1. Open SetupSolution.ps1 and set parameters.
    1. Run SetupSolution.ps1.
    1. Delete SetupSolution.ps1

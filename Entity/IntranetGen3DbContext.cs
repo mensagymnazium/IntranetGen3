@@ -3,15 +3,15 @@ using Havit.Data.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace Havit.NewProjectTemplate.Entity
+namespace MensaGymnazium.IntranetGen3.Entity
 {
-	public class NewProjectTemplateDbContext : Havit.Data.EntityFrameworkCore.DbContext
+	public class IntranetGen3DbContext : Havit.Data.EntityFrameworkCore.DbContext
 	{
 		/// <summary>
 		/// Konstruktor.
 		/// Pro použití v unit testech, jiné použití nemá.
 		/// </summary>
-		internal NewProjectTemplateDbContext()
+		internal IntranetGen3DbContext()
 		{
 			// NOOP
 		}
@@ -19,7 +19,7 @@ namespace Havit.NewProjectTemplate.Entity
 		/// <summary>
 		/// Konstruktor.
 		/// </summary>
-		public NewProjectTemplateDbContext(DbContextOptions options) : base(options)
+		public IntranetGen3DbContext(DbContextOptions options) : base(options)
 		{
 			// NOOP
 		}
@@ -31,7 +31,7 @@ namespace Havit.NewProjectTemplate.Entity
 
 			modelBuilder.HasSequence<int>("ContactSequence");
 
-			modelBuilder.RegisterModelFromAssembly(typeof(Havit.NewProjectTemplate.Model.Localizations.Language).Assembly);
+			modelBuilder.RegisterModelFromAssembly(typeof(MensaGymnazium.IntranetGen3.Model.Localizations.Language).Assembly);
 			modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
 		}
 	}

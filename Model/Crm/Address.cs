@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Havit.NewProjectTemplate.Model.Crm
+namespace MensaGymnazium.IntranetGen3.Model.Crm
 {
 	/// <summary>
 	/// G2: AdresaSubjektu

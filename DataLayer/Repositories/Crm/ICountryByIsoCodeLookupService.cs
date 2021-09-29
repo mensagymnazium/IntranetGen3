@@ -1,6 +1,6 @@
-﻿using Havit.NewProjectTemplate.Model.Crm;
+﻿using MensaGymnazium.IntranetGen3.Model.Crm;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Crm
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Crm
 {
 	public interface ICountryByIsoCodeLookupService
 	{

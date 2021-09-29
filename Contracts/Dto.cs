@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ProtoBuf;
 
-namespace Havit.NewProjectTemplate.Contracts
+namespace MensaGymnazium.IntranetGen3.Contracts
 {
 	[ProtoContract]
 	public class Dto<TValue>

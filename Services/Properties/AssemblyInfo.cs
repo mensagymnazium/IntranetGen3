@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Havit.NewProjectTemplate.Services.Properties
+namespace MensaGymnazium.IntranetGen3.Services.Properties
 {
 	public class AssemblyInfo
 	{

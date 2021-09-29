@@ -14,10 +14,10 @@ using Havit.Data.EntityFrameworkCore;
 using Havit.Data.EntityFrameworkCore.Patterns.DataSources;
 using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
 
-namespace Havit.NewProjectTemplate.DataLayer.DataSources.Attrida
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources.Attrida
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public partial class AttridaCommentDbDataSource : DbDataSource<Havit.NewProjectTemplate.Model.Attrida.AttridaComment>, IAttridaCommentDataSource
+	public partial class AttridaCommentDbDataSource : DbDataSource<MensaGymnazium.IntranetGen3.Model.Attrida.AttridaComment>, IAttridaCommentDataSource
 	{
 		public AttridaCommentDbDataSource(IDbContext dbContext, ISoftDeleteManager softDeleteManager)
 			: base(dbContext, softDeleteManager)

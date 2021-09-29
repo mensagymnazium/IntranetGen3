@@ -1,5 +1,5 @@
 ﻿using Havit.Data.EntityFrameworkCore.Attributes;
-using Havit.NewProjectTemplate.Model.Attrida;
+using MensaGymnazium.IntranetGen3.Model.Attrida;
 using Havit.Model.Collections.Generic;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Havit.NewProjectTemplate.Model.Crm
+namespace MensaGymnazium.IntranetGen3.Model.Crm
 {
 	/// <summary>
 	/// Person or organization.

@@ -1,11 +1,11 @@
 ﻿using Havit.Data.Patterns.DataSeeds;
-using Havit.NewProjectTemplate.Model.Crm;
-using Havit.NewProjectTemplate.Model.Localizations;
+using MensaGymnazium.IntranetGen3.Model.Crm;
+using MensaGymnazium.IntranetGen3.Model.Localizations;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Havit.NewProjectTemplate.DataLayer.Seeds.Core.Crm
+namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core.Crm
 {
 	public class CountrySeed : DataSeed<CoreProfile>
 	{

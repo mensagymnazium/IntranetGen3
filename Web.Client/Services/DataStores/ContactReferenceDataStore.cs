@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Havit.Blazor.Components.Web.Services.DataStores;
-using Havit.NewProjectTemplate.Contracts.Crm;
+using MensaGymnazium.IntranetGen3.Contracts.Crm;
 
-namespace Havit.NewProjectTemplate.Web.Client.Services.DataStores
+namespace MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores
 {
 	public class ContactReferenceDataStore : DictionaryStaticDataStore<int, ContactReferenceVM>, IContactReferenceDataStore
 	{

@@ -1,21 +1,21 @@
 ﻿using System;
-using Havit.NewProjectTemplate.Entity;
+using MensaGymnazium.IntranetGen3.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Havit.NewProjectTemplate.Entity.Tests
+namespace MensaGymnazium.IntranetGen3.Entity.Tests
 {
 	[TestClass]
-	public class NewProjectTemplateDbContextTests
+	public class IntranetGen3DbContextTests
 	{
 		[TestMethod]
-		public void NewProjectTemplateDbContext_CheckModelConventions()
+		public void IntranetGen3DbContext_CheckModelConventions()
 		{
 			// Arrange
-			DbContextOptions<NewProjectTemplateDbContext> options = new DbContextOptionsBuilder<NewProjectTemplateDbContext>()
-				.UseInMemoryDatabase(nameof(NewProjectTemplateDbContext))
+			DbContextOptions<IntranetGen3DbContext> options = new DbContextOptionsBuilder<IntranetGen3DbContext>()
+				.UseInMemoryDatabase(nameof(IntranetGen3DbContext))
 				.Options;
-			NewProjectTemplateDbContext dbContext = new NewProjectTemplateDbContext(options);
+			IntranetGen3DbContext dbContext = new IntranetGen3DbContext(options);
 
 			// Act
 			Havit.Data.EntityFrameworkCore.ModelValidation.ModelValidator modelValidator = new Havit.Data.EntityFrameworkCore.ModelValidation.ModelValidator();

@@ -7,10 +7,10 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using Havit.Extensions.DependencyInjection.Abstractions;
-using Havit.NewProjectTemplate.Contracts.Infrastructure;
+using MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
 using Microsoft.Extensions.Options;
 
-namespace Havit.NewProjectTemplate.Services.Mailing
+namespace MensaGymnazium.IntranetGen3.Services.Mailing
 {
 	[Service]
 	public class MailingService : IMailingService

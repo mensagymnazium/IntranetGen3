@@ -18,12 +18,12 @@ using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.DataLoaders;
 using Havit.Data.Patterns.Infrastructure;
 
-namespace Havit.NewProjectTemplate.DataLayer.Repositories.Attrida
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Attrida
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 	public partial class AttridaObjectDbRepository : AttridaObjectDbRepositoryBase, IAttridaObjectRepository
 	{
-		public AttridaObjectDbRepository(IDbContext dbContext, Havit.NewProjectTemplate.DataLayer.DataSources.Attrida.IAttridaObjectDataSource dataSource, IEntityKeyAccessor<Havit.NewProjectTemplate.Model.Attrida.AttridaObject, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
+		public AttridaObjectDbRepository(IDbContext dbContext, MensaGymnazium.IntranetGen3.DataLayer.DataSources.Attrida.IAttridaObjectDataSource dataSource, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.Attrida.AttridaObject, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
 			: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
 		{
 		}

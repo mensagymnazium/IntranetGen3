@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Havit.NewProjectTemplate.Web.Server
+namespace MensaGymnazium.IntranetGen3.Web.Server
 {
 	public class Program
 	{

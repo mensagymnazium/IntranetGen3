@@ -1,4 +1,4 @@
-﻿namespace Havit.NewProjectTemplate.Facades.Infrastructure.Security
+﻿namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security
 {
 	public static class PolicyNames
 	{

@@ -3,8 +3,8 @@
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
 		<DisableImplicitComponentsAnalyzers>true</DisableImplicitComponentsAnalyzers>
-		<AssemblyName>Havit.NewProjectTemplate.Web.Server</AssemblyName>
-		<RootNamespace>Havit.NewProjectTemplate.Web.Server</RootNamespace>
+		<AssemblyName>MensaGymnazium.IntranetGen3.Web.Server</AssemblyName>
+		<RootNamespace>MensaGymnazium.IntranetGen3.Web.Server</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -69,7 +69,7 @@
 	</Target>
 
     <Target Name="EnsureWebJobInPackage" AfterTargets="CreateReadyToRunImages" BeforeTargets="_PrepareForReadyToRunCompilation">
-        <Error Text="WebJob file Havit.NewProjectTemplate.Utility.exe not found when preparing web deploy package." Condition="!Exists('..\Utility\bin\Release\net5.0\Havit.NewProjectTemplate.Utility.exe')" />
+        <Error Text="WebJob file MensaGymnazium.IntranetGen3.Utility.exe not found when preparing web deploy package." Condition="!Exists('..\Utility\bin\Release\net5.0\MensaGymnazium.IntranetGen3.Utility.exe')" />
         <ItemGroup>
             <!-- Vybereme soubory k publikaci. Předpokládá, že Utility je závislostí WebAPI nastavené v SLN. -->
             <WebJobFiles Include="..\Utility\bin\Release\net5.0\**" />

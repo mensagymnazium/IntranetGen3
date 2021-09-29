@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
-    <AssemblyName>Havit.NewProjectTemplate.Utility</AssemblyName>
-    <RootNamespace>Havit.NewProjectTemplate.Utility</RootNamespace>
+    <AssemblyName>MensaGymnazium.IntranetGen3.Utility</AssemblyName>
+    <RootNamespace>MensaGymnazium.IntranetGen3.Utility</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

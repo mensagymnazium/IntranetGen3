@@ -2,8 +2,8 @@
 
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
-		<AssemblyName>Havit.NewProjectTemplate.Web.Client</AssemblyName>
-		<RootNamespace>Havit.NewProjectTemplate.Web.Client</RootNamespace>
+		<AssemblyName>MensaGymnazium.IntranetGen3.Web.Client</AssemblyName>
+		<RootNamespace>MensaGymnazium.IntranetGen3.Web.Client</RootNamespace>
 		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
 	</PropertyGroup>
 
