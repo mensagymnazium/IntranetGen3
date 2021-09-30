@@ -1,4 +1,85 @@
 ﻿@page "/development/benjamin-swart"
 @page "/development/ben-swart"
 
+@using System.Globalization
+
 <h1>Benjamin Swart</h1>
+
+<p>
+    <label>
+        Počet vrcholů: <input type="range" min="2" max="100" @bind="VertexCount" @bind:event="oninput"> (@VertexCount)
+    </label>
+</p>
+
+<p>
+    <label>
+        Velikost kroku: <input type="range" min="1" max="@(VertexCount - 1)" @bind="StepSize" @bind:event="oninput"> (@StepSize)
+    </label>
+</p>
+
+<svg viewBox="-60 -60 120 120" class="w-50">
+    <path d="@(GetPath())" stroke="red" stroke-width="1" fill="none" />
+</svg>
+
+@code{
+    private int vertexCount = 60;
+    private int stepSize = 26;
+
+    private int VertexCount
+    {
+        get { return vertexCount; }
+        set
+        {
+            vertexCount = value;
+            stepSize = Math.Min(stepSize, vertexCount - 1);
+        }
+    }
+
+    private int StepSize
+    {
+        get { return stepSize; }
+        set { stepSize = value; }
+    }
+
+    struct Point
+    {
+        public double x;
+        public double y;
+
+        public Point(double x, double y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    private string GetPath()
+    {
+        List<Point> points = new List<Point>();
+
+        int vertex = 0;
+
+        do
+        {
+            vertex += stepSize;
+            vertex %= vertexCount;
+
+            double angle = (vertex / (float)vertexCount) * Math.PI * 2;
+
+            points.Add(new Point(Math.Sin(angle), Math.Cos(angle)));
+        } while (vertex != 0);
+
+        List<string> elements = new List<string>();
+        elements.Add("M");
+
+        foreach (Point point in points)
+        {
+            elements.Add((point.x * 50).ToString(CultureInfo.InvariantCulture));
+            elements.Add((point.y * 50).ToString(CultureInfo.InvariantCulture));
+        }
+
+        elements.Add("z");
+
+        return string.Join(" ", elements);
+    }
+}
