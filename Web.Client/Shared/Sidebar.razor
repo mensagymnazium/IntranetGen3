@@ -2,27 +2,38 @@
 @inject INavigationLocalizer NavigationLocalizer
 
 <HxSidebar CssClass="sticky-top">
-    <HeaderTemplate>
-        <HxSidebarBrand BrandName="IntranetGen3" BrandNameShort="NP" />
-    </HeaderTemplate>
+	<HeaderTemplate>
+		<HxSidebarBrand BrandName="IntranetGen3" BrandNameShort="NP" />
+	</HeaderTemplate>
 
-    <ItemsTemplate>
-        <HxSidebarItem Text="Dashboard" Href="@Routes.Home" Icon="@BootstrapIcon.Columns" />
-        <HxSidebarItem Text="Section 1" Icon="@BootstrapIcon.Person">
-            <HxSidebarItem Text="Section Item 1" Href="/one" Match="NavLinkMatch.All" />
-            <HxSidebarItem Text="Section Item 2" Href="/two" Match="NavLinkMatch.All" />
-            <HxSidebarItem Text="Section Item 3" Href="/three" Match="NavLinkMatch.All" />
-            <HxSidebarItem Text="Section Item 4" Href="/four" Match="NavLinkMatch.All" />
-        </HxSidebarItem>
-        <HxSidebarItem Text="Section 2" Icon="@BootstrapIcon.Clock" />
-        <HxSidebarItem Text="Section 3" Icon="@BootstrapIcon.Kanban" />
-        <HxSidebarItem Text="@NavigationLocalizer.Administration" Href="@Routes.Administration.Index" Icon="@BootstrapIcon.Gear" />
-        <HxSidebarItem Text="Development" Href="/development" Icon="@BootstrapIcon.FileCode" />
-    </ItemsTemplate>
+	<ItemsTemplate>
+		<HxSidebarItem Text="Dashboard" Href="@Routes.Home" Icon="@BootstrapIcon.Columns" />
+		<HxSidebarItem Text="Section 1" Icon="@BootstrapIcon.Person">
+			<HxSidebarItem Text="Section Item 1" Href="/one" Match="NavLinkMatch.All" />
+			<HxSidebarItem Text="Section Item 2" Href="/two" Match="NavLinkMatch.All" />
+			<HxSidebarItem Text="Section Item 3" Href="/three" Match="NavLinkMatch.All" />
+			<HxSidebarItem Text="Section Item 4" Href="/four" Match="NavLinkMatch.All" />
+		</HxSidebarItem>
+		<HxSidebarItem Text="Section 2" Icon="@BootstrapIcon.Clock" />
+		<HxSidebarItem Text="Section 3" Icon="@BootstrapIcon.Kanban" />
+		<HxSidebarItem Text="@NavigationLocalizer.Administration" Href="@Routes.Administration.Index" Icon="@BootstrapIcon.Gear" />
+		<HxSidebarItem Text="Development" Icon="@BootstrapIcon.FileCode">
+			<HxSidebarItem Text="Richard Dobíšek" Href="/development/richard-dobisek" />
+			<HxSidebarItem Text="Vojtěch Procházka" Href="/development/vojtech-prochazka" />
+			<HxSidebarItem Text="Jan Slíva" Href="/development/jan-sliva" />
+			<HxSidebarItem Text="Lukáš Říha" Href="/development/lukas-riha" />
+			<HxSidebarItem Text="Benjamin Swart" Href="/development/benjamin-swart" />
+			<HxSidebarItem Text="Martin Truksa" Href="/development/martin-truksa" />
+			<HxSidebarItem Text="Vojtěch Tvrdík" Href="/development/vojtech-tvrdik" />
+			<HxSidebarItem Text="Veronika Jůzková" Href="/development/veronika-juzkova" />
+			<HxSidebarItem Text="Vladimír Táborovec" Href="/development/vladimir-taborovec" />
+			<HxSidebarItem Text="Placeholder 1" Href="/development/placeholder1" />
+			<HxSidebarItem Text="Placeholder 2" Href="/development/placeholder2" />
+			<HxSidebarItem Text="Ostatní" Href="/development" Match="NavLinkMatch.All" />
+		</HxSidebarItem>
+	</ItemsTemplate>
 
-    <FooterTemplate>
-        <div class="p-4 mt-auto">
-            <LoginDisplay />
-        </div>
-    </FooterTemplate>
+	<FooterTemplate>
+		<LoginDisplay />
+	</FooterTemplate>
 </HxSidebar>
