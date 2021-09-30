@@ -1,8 +1,9 @@
-# Dokumentace
+Ôªø# Dokumentace
 
-## V˝voj
+## V√Ωvoj
 
 * [ASP.NET Blazor - Microsoft Docs](https://docs.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-5.0) - technologie pro implementaci UI
-* [HAVIT Blazor](https://havit.blazor.eu) - pouûÌvanÈ UI komponenty
-* [HAVIT Stack](https://github.com/mensagymnazium/IntranetGen3/tree/master/doc/HAVIT%20Stack) - PDFka dokumentace k pouûÌvanÈmu stacku
-* [HAVIT YouTube Channel](https://www.youtube.com/channel/UCTLcN8h-1p08yln1lqKHCRw) - videa k pouûÌvanÈmu stacku (zejm. playlist [Blazor.cz](https://www.youtube.com/playlist?list=PLZ1cA0V89gosZ9ThD9diDhaHwZQplBPMl))
+* [HAVIT Blazor](https://havit.blazor.eu) - pou≈æ√≠van√© UI komponenty
+* [HAVIT Stack](https://github.com/mensagymnazium/IntranetGen3/tree/master/doc/HAVIT%20Stack) - PDFka dokumentace k pou≈æ√≠van√©mu stacku
+* [HAVIT YouTube Channel](https://www.youtube.com/channel/UCTLcN8h-1p08yln1lqKHCRw) - videa k pou≈æ√≠van√©mu stacku (zejm. playlist [Blazor.cz](https://www.youtube.com/playlist?list=PLZ1cA0V89gosZ9ThD9diDhaHwZQplBPMl))
+* **Jako √∫pln√Ω zaƒç√°tek v≈°em doporuƒçuji [onboarding-video](https://www.youtube.com/watch?v=goR55zE-VKM)!**
