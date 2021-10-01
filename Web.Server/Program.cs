@@ -23,7 +23,6 @@ namespace MensaGymnazium.IntranetGen3.Web.Server
 					webBuilder.UseStartup<Startup>();
 #if DEBUG
 					webBuilder.UseEnvironment("Development"); // pro Red-Gate ANTS Performance Profiler
-					webBuilder.UseUrls("http://localhost:9900"); // pro Red-Gate ANTS Performance Profiler
 #endif
 				})
 				.ConfigureAppConfiguration((hostContext, config) =>
