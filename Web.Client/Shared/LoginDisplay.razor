@@ -12,14 +12,13 @@
 			<a class="login-display-nickname mx-3">@context?.User?.Identity?.Name</a>
 			<div class="ms-auto">
 				<HxContextMenu>
-					<CultureSelector />
-					<HxContextMenuItem Text="Log out" OnClick="BeginSignOut" />
+					<HxContextMenuItem Text="Odhlásit" OnClick="BeginSignOut" />
 				</HxContextMenu>
 			</div>
 
 		</Authorized>
 		<NotAuthorized>
-			<span><a href="authentication/register">Register</a> or <a href="authentication/login">Log in</a></span>
+			<span><a href="authentication/register">Registrace</a> or <a href="authentication/login">Přihlášení</a></span>
 		</NotAuthorized>
 	</AuthorizeView>
 </div>

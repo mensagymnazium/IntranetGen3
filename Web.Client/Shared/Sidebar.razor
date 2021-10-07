@@ -1,7 +1,4 @@
-﻿@using MensaGymnazium.IntranetGen3.Web.Client.Resources
-@inject INavigationLocalizer NavigationLocalizer
-
-<HxSidebar CssClass="sticky-top">
+﻿<HxSidebar CssClass="sticky-top">
     <HeaderTemplate>
         <HxSidebarBrand BrandName="Intranet">
             <Logo>
@@ -20,7 +17,7 @@
         </HxSidebarItem>
         <HxSidebarItem Text="Section 2" Icon="@BootstrapIcon.Clock" />
         <HxSidebarItem Text="Section 3" Icon="@BootstrapIcon.Kanban" />
-        <HxSidebarItem Text="@NavigationLocalizer.Administration" Href="@Routes.Administration.Index" Icon="@BootstrapIcon.Gear" />
+        <HxSidebarItem Text="Administrace" Href="@Routes.Administration.Index" Icon="@BootstrapIcon.Gear" />
         <HxSidebarItem Text="Development" Icon="@BootstrapIcon.FileCode">
             <HxSidebarItem Text="Richard Dobíšek" Href="/development/richard-dobisek" />
             <HxSidebarItem Text="Vojtěch Procházka" Href="/development/vojtech-prochazka" />

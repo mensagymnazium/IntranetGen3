@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using BlazorApplicationInsights;
-using Blazored.LocalStorage;
 using FluentValidation;
 using Havit.Blazor.Components.Web;
 using Havit.Blazor.Components.Web.Bootstrap;
@@ -30,6 +29,10 @@ namespace MensaGymnazium.IntranetGen3.Web.Client
 	{
 		public static async Task Main(string[] args)
 		{
+			var cultureInfo = new CultureInfo("cs-CZ");
+			CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+			CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
 			var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
 			AddLoggingAndApplicationInsights(builder);
@@ -40,14 +43,11 @@ namespace MensaGymnazium.IntranetGen3.Web.Client
 			builder.Services.AddScoped(typeof(AccountClaimsPrincipalFactory<RemoteUserAccount>), typeof(RolesAccountClaimsPrincipalFactory)); // multiple roles workaround
 			builder.Services.AddApiAuthorization();
 
-			builder.Services.AddBlazoredLocalStorage();
 			builder.Services.AddValidatorsFromAssemblyContaining<Dto<object>>();
 
 			builder.Services.AddHxServices();
 			builder.Services.AddHxMessenger();
 			builder.Services.AddHxMessageBoxHost();
-			MensaGymnazium.IntranetGen3.Web.Client.Resources.ResourcesServiceCollectionInstaller.AddGeneratedResourceWrappers(builder.Services);
-			MensaGymnazium.IntranetGen3.Resources.ResourcesServiceCollectionInstaller.AddGeneratedResourceWrappers(builder.Services);
 			SetHxComponents();
 
 			builder.Services.AddScoped<IContactReferenceDataStore, ContactReferenceDataStore>();
@@ -55,8 +55,6 @@ namespace MensaGymnazium.IntranetGen3.Web.Client
 			AddGrpcClient(builder);
 
 			WebAssemblyHost webAssemblyHost = builder.Build();
-
-			await SetLanguage(webAssemblyHost);
 
 			await webAssemblyHost.RunAsync();
 		}
@@ -84,19 +82,6 @@ namespace MensaGymnazium.IntranetGen3.Web.Client
 					})
 					.AddInterceptor<AuthorizationGrpcClientInterceptor>();
 				});
-		}
-
-		private static async ValueTask SetLanguage(WebAssemblyHost webAssemblyHost)
-		{
-			var localStorageService = webAssemblyHost.Services.GetService<ILocalStorageService>();
-
-			var culture = await localStorageService.GetItemAsStringAsync("culture");
-			if (!String.IsNullOrWhiteSpace(culture))
-			{
-				var cultureInfo = new CultureInfo(culture);
-				CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
-				CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-			}
 		}
 
 		private static void AddLoggingAndApplicationInsights(WebAssemblyHostBuilder builder)
