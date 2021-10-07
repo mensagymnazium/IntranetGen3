@@ -7,3 +7,6 @@
 * [HAVIT Stack](https://github.com/mensagymnazium/IntranetGen3/tree/master/doc/HAVIT%20Stack) - PDFka dokumentace k používanému stacku
 * [HAVIT YouTube Channel](https://www.youtube.com/channel/UCTLcN8h-1p08yln1lqKHCRw) - videa k používanému stacku (zejm. playlist [Blazor.cz](https://www.youtube.com/playlist?list=PLZ1cA0V89gosZ9ThD9diDhaHwZQplBPMl))
 * **Jako úplný začátek všem doporučuji [onboarding-video](https://www.youtube.com/watch?v=goR55zE-VKM)!**
+
+### Specifické vývojové úkony
+* [Seedování dat](DataSeeds.md)
