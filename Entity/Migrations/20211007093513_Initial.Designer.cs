@@ -5,14 +5,16 @@ using MensaGymnazium.IntranetGen3.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 {
     [DbContext(typeof(IntranetGen3DbContext))]
-    partial class IntranetGen3DbContextModelSnapshot : ModelSnapshot
+    [Migration("20211007093513_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

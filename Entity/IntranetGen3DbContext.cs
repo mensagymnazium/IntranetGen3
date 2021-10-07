@@ -29,9 +29,7 @@ namespace MensaGymnazium.IntranetGen3.Entity
 		{
 			base.CustomizeModelCreating(modelBuilder);
 
-			modelBuilder.HasSequence<int>("ContactSequence");
-
-			modelBuilder.RegisterModelFromAssembly(typeof(MensaGymnazium.IntranetGen3.Model.Localizations.Language).Assembly);
+			modelBuilder.RegisterModelFromAssembly(typeof(MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings).Assembly);
 			modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
 		}
 	}

@@ -7,7 +7,6 @@ using Havit.Data.EntityFrameworkCore.Patterns.UnitOfWorks.EntityValidation;
 using Havit.Extensions.DependencyInjection;
 using Havit.Extensions.DependencyInjection.Abstractions;
 using MensaGymnazium.IntranetGen3.DataLayer.DataSources.Common;
-using MensaGymnazium.IntranetGen3.DataLayer.Repositories.Crm;
 using MensaGymnazium.IntranetGen3.DependencyInjection.ConfigrationOptions;
 using MensaGymnazium.IntranetGen3.Entity;
 using MensaGymnazium.IntranetGen3.Services.Infrastructure;
@@ -103,8 +102,7 @@ namespace MensaGymnazium.IntranetGen3.DependencyInjection
 				.AddEntityPatterns()
 				//.AddLocalizationServices<Language>()
 				.AddDbContext<IntranetGen3DbContext>(options)
-				.AddDataLayer(typeof(IApplicationSettingsDataSource).Assembly)
-				.AddLookupService<ICountryByIsoCodeLookupService, CountryByIsoCodeLookupService>();
+				.AddDataLayer(typeof(IApplicationSettingsDataSource).Assembly);
 
 			services.AddSingleton<IEntityValidator<object>, ValidatableObjectEntityValidator>();
 		}
