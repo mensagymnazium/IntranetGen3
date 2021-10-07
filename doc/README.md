@@ -9,4 +9,5 @@
 * **Jako úplný začátek všem doporučuji [onboarding-video](https://www.youtube.com/watch?v=goR55zE-VKM)!**
 
 ### Specifické vývojové úkony
+* [Entity Framework - Migrace](EF-Migrations.md)
 * [Seedování dat](DataSeeds.md)
