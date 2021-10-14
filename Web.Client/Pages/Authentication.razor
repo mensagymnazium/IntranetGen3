@@ -2,8 +2,54 @@
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @attribute [AllowAnonymous]
 
-<RemoteAuthenticatorView Action="@Action" />
+    <div class="align-middle">
+        
+            <RemoteAuthenticatorView Action="@Action">
 
-@code{
-	[Parameter] public string Action { get; set; }
-}
+                <LoggingIn>
+                    <div style="display: inline-block; margin-right: 0.5rem;">
+                        <HxSpinner Color="ThemeColor.Primary" Size="SpinnerSize.Small" />
+                    </div>
+                    Přihlašování
+                </LoggingIn>
+
+                <CompletingLoggingIn>
+                    <div style="display: inline-block; margin-right: 0.5rem;">
+                        <HxSpinner Color="ThemeColor.Primary" Size="SpinnerSize.Small" />
+                    </div>
+                    Dokončování přihlašování
+                </CompletingLoggingIn>
+
+                <LogInFailed>
+                    Litujeme, ale špatně jsi zadal svoje heslo nebo uživatelské jméno. :(
+                </LogInFailed>
+
+                <LogOut>
+                    Odhlašování
+                </LogOut>
+
+                <CompletingLogOut>
+                    Dokončování odhlašování
+                </CompletingLogOut>
+
+                <LogOutFailed>
+                    Nemůžeš se odhlásit :D
+                </LogOutFailed>
+
+                <LogOutSucceeded>
+                    Úspěšně ses odhlásil
+                </LogOutSucceeded>
+
+                <UserProfile>
+                    Zpracovávání uživatelského profilu
+                </UserProfile>
+
+                <Registering>
+                    Registrování
+                </Registering>
+            </RemoteAuthenticatorView>
+    </div>
+
+        @code{
+            [Parameter] public string Action { get; set; }
+        }
