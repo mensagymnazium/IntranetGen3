@@ -26,7 +26,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.Security
 		{
 			this.httpContextAccessor = httpContextAccessor;
 
-			userLazy = new Lazy<User>(() => userRepository.GetObject(GetCurrentUserId()));
+			userLazy = new Lazy<User>(() => GetOrCreateUser());
 		}
 
 		public ClaimsPrincipal GetCurrentClaimsPrincipal()
@@ -36,11 +36,17 @@ namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.Security
 
 		public User GetCurrentUser() => userLazy.Value;
 
-		public int GetCurrentUserId()
+		private int GetCurrentUserAadObjectId()
 		{
 			var principal = GetCurrentClaimsPrincipal();
-			Claim userIdClaim = principal.Claims.Single(claim => (claim.Type == "sub"));
+			Claim userIdClaim = principal.Claims.Single(claim => (claim.Type == "oid"));
 			return Int32.Parse(userIdClaim.Value);
+		}
+
+		private User GetOrCreateUser()
+		{
+			throw new NotImplementedException();
+			/* TODO userRepository.GetByAadObjectId(GetCurrentUserAadObjectId())); */
 		}
 	}
 }

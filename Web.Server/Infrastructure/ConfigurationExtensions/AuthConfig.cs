@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
-using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Identity;
-using MensaGymnazium.IntranetGen3.Model.Security;
 using MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.Security;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Identity.Web;
 using Microsoft.Net.Http.Headers;
 
 namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ConfigurationExtensions
@@ -24,14 +21,15 @@ namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ConfigurationExt
 	{
 		public static void AddCustomizedAuth(this IServiceCollection services, IConfiguration configuration)
 		{
-			// Authentication, Authorization, Identity
-			services.AddAuthentication(options =>
+			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+				.AddMicrosoftIdentityWebApi(configuration.GetSection("AzureAd"));
+
+			services.Configure<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme, options =>
 			{
-				options.DefaultScheme = IdentityConstants.ApplicationScheme;
-				options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-			})
-				.AddIdentityServerJwt()
-				.AddIdentityCookies();
+				options.TokenValidationParameters.NameClaimType = "name";
+			});
+
+			services.AddScoped<IApplicationAuthenticationService, ApplicationAuthenticationService>();
 
 			services.ConfigureApplicationCookie(configuration =>
 			{
@@ -41,38 +39,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ConfigurationExt
 				configuration.Events.OnRedirectToAccessDenied = (context) => RedirectOrApiStatus(context, HttpStatusCode.Forbidden);
 			});
 
-			services.AddIdentityCore<User>(options =>
-			{
-				options.Stores.MaxLengthForKeys = 128;
-				options.SignIn.RequireConfirmedAccount = true;
-			})
-				.AddDefaultUI()
-				.AddDefaultTokenProviders()
-				.AddRoles<Role>()
-				.AddUserStore<UserStore>()
-				.AddRoleStore<RoleStore>();
 
-			services.AddIdentityServer()
-				.AddAspNetIdentity<User>()
-				.AddClients()
-				.AddSigningCredentials()
-				.AddIdentityResources()
-				.AddApiResources()
-				.AddProfileService<IdentityServerProfileService>();
-
-			services.PostConfigure<ApiAuthorizationOptions>(options =>
-			{
-				options.Clients["MensaGymnazium.IntranetGen3.Web.Client"].AlwaysIncludeUserClaimsInIdToken = true;
-				options.IdentityResources["openid"].UserClaims.Add("name");
-				options.ApiResources.Single().UserClaims.Add("name");
-				options.IdentityResources["openid"].UserClaims.Add("role");
-				options.ApiResources.Single().UserClaims.Add("role");
-			});
-
-
-			// server-side support for User.IsInRole(), see https://leastprivilege.com/2016/08/21/why-does-my-authorize-attribute-not-work/
-			// https://docs.microsoft.com/en-us/aspnet/core/blazor/security/webassembly/hosted-with-identity-server?view=aspnetcore-5.0&tabs=visual-studio#api-authorization-options
-			JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 			services.AddScoped<IApplicationAuthenticationService, ApplicationAuthenticationService>();
 		}
 

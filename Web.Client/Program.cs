@@ -39,9 +39,11 @@ namespace MensaGymnazium.IntranetGen3.Web.Client
 
 			builder.RootComponents.Add<App>("app");
 
-			builder.Services.AddSingleton(new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-			builder.Services.AddScoped(typeof(AccountClaimsPrincipalFactory<RemoteUserAccount>), typeof(RolesAccountClaimsPrincipalFactory)); // multiple roles workaround
-			builder.Services.AddApiAuthorization();
+			builder.Services.AddHttpClient("MensaGymnazium.IntranetGen3.Web.Server", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+				.AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+			builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
+				.CreateClient("MensaGymnazium.IntranetGen3.Web.Server"));
+			AddAuth(builder);
 
 			builder.Services.AddValidatorsFromAssemblyContaining<Dto<object>>();
 
@@ -58,6 +60,19 @@ namespace MensaGymnazium.IntranetGen3.Web.Client
 
 			await webAssemblyHost.RunAsync();
 		}
+
+		private static void AddAuth(WebAssemblyHostBuilder builder)
+		{
+			builder.Services.AddMsalAuthentication(options =>
+			{
+				builder.Configuration.Bind("AzureAd", options.ProviderOptions);
+				options.ProviderOptions.LoginMode = "redirect";
+			});
+
+			builder.Services.AddScoped(typeof(AccountClaimsPrincipalFactory<RemoteUserAccount>), typeof(CustomAccountClaimsPrincipalFactory));
+			builder.Services.AddApiAuthorization();
+		}
+
 		private static void SetHxComponents()
 		{
 			// HxProgressIndicator.DefaultDelay = 0;

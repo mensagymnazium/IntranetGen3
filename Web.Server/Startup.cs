@@ -18,9 +18,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ProtoBuf.Grpc.Configuration;
-using ProtoBuf.Grpc.Server;
-using ProtoBuf.Meta;
 
 namespace MensaGymnazium.IntranetGen3.Web.Server
 {
@@ -98,7 +95,6 @@ namespace MensaGymnazium.IntranetGen3.Web.Server
 			app.UseRouting();
 
 			app.UseAuthentication();
-			app.UseIdentityServer();
 			app.UseAuthorization();
 
 			app.UseGrpcWeb(new GrpcWebOptions() { DefaultEnabled = true });
