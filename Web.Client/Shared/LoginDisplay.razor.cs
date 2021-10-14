@@ -16,12 +16,13 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Shared
 		/// <returns>The initials of first and last name.</returns>
 		private string NameToInitials(string name)
 		{
+			// name (User?.Identity?.Name) is currently a name, email to initials functionality is currently not being used for anything.
 			if (name is null)
 			{
 				return "?";
 			}
 
-			if (name.Contains('@'))
+			if (name.Contains('@')) 
 			{
 				var mail = name.Split('@')[0].Split('.');
 				return mail.Length == 1 ? mail[0][0].ToString().ToUpper() : (mail[0][0].ToString() + mail[^1][0].ToString()).ToUpper();
