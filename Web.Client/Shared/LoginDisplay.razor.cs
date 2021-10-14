@@ -1,4 +1,6 @@
-﻿namespace MensaGymnazium.IntranetGen3.Web.Client.Shared
+﻿using System.Threading.Tasks;
+
+namespace MensaGymnazium.IntranetGen3.Web.Client.Shared
 {
 	public partial class LoginDisplay
 	{
