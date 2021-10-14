@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace MensaGymnazium.IntranetGen3.Facades.System
 {
 	[Service]
-	[Authorize(Roles = nameof(Role.Entry.SystemAdministrator))]
+	[Authorize]
 	public class MaintenanceFacade : IMaintenanceFacade
 	{
 		private readonly ICacheService cacheService;
