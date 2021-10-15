@@ -14,7 +14,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Shared
 		/// Takes an email or name of the user and returns the user's initials.
 		/// </summary>
 		/// <returns>The initials of first and last name.</returns>
-		private string NameToInitials(string name)
+		public string NameToInitials(string name)
 		{
 			// name (User?.Identity?.Name) is currently a name, email to initials functionality is currently not being used for anything.
 			if (name is null)
