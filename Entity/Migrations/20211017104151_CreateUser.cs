@@ -26,10 +26,6 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 				table: "User");
 
 			migrationBuilder.DropColumn(
-				name: "Created",
-				table: "User");
-
-			migrationBuilder.DropColumn(
 				name: "Disabled",
 				table: "User");
 
@@ -54,6 +50,10 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 				table: "User");
 
 			migrationBuilder.DropColumn(
+				name: "MigrationId",
+				table: "User");
+
+			migrationBuilder.DropColumn(
 				name: "NormalizedEmail",
 				table: "User");
 
@@ -73,35 +73,18 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 				name: "Username",
 				table: "User");
 
-			migrationBuilder.DropColumn(
-				name: "MigrationId",
-				table: "User");
-
-			migrationBuilder.DropColumn(
-				name: "Deleted",
-				table: "User");
-
-			migrationBuilder.AddColumn<bool>(
-				name: "Deleted",
-				table: "User",
-				type: "bit",
-				nullable: false,
-				defaultValue: false);
-
 			migrationBuilder.AddColumn<string>(
 				name: "Name",
 				table: "User",
 				type: "nvarchar(64)",
 				maxLength: 64,
-				nullable: true,
-				defaultValue: "Peter Parker");
+				nullable: true);
 
 			migrationBuilder.AddColumn<Guid>(
 				name: "Oid",
 				table: "User",
 				type: "uniqueidentifier",
-				nullable: false,
-				defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
+				nullable: true);
 
 			migrationBuilder.AddColumn<int>(
 				name: "StudentId",
@@ -115,18 +98,15 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 				type: "int",
 				nullable: true);
 
-			migrationBuilder.AddUniqueConstraint(
-				name: "AK_User_Oid",
-				table: "User",
-				column: "Oid");
-
 			migrationBuilder.CreateTable(
 				name: "Student",
 				columns: table => new
 				{
 					Id = table.Column<int>(type: "int", nullable: false)
 						.Annotation("SqlServer:Identity", "1, 1"),
-					GradeId = table.Column<int>(type: "int", nullable: false)
+					GradeId = table.Column<int>(type: "int", nullable: false),
+					Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+					Deleted = table.Column<DateTime>(type: "datetime2", nullable: true)
 				},
 				constraints: table =>
 				{
@@ -144,12 +124,21 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 				columns: table => new
 				{
 					Id = table.Column<int>(type: "int", nullable: false)
-						.Annotation("SqlServer:Identity", "1, 1")
+						.Annotation("SqlServer:Identity", "1, 1"),
+					Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+					Deleted = table.Column<DateTime>(type: "datetime2", nullable: true)
 				},
 				constraints: table =>
 				{
 					table.PrimaryKey("PK_Teacher", x => x.Id);
 				});
+
+			migrationBuilder.CreateIndex(
+				name: "IX_User_Oid",
+				table: "User",
+				column: "Oid",
+				unique: true,
+				filter: "[Oid] IS NOT NULL");
 
 			migrationBuilder.CreateIndex(
 				name: "IX_User_StudentId",
@@ -203,8 +192,8 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 			migrationBuilder.DropTable(
 				name: "Teacher");
 
-			migrationBuilder.DropUniqueConstraint(
-				name: "AK_User_Oid",
+			migrationBuilder.DropIndex(
+				name: "IX_User_Oid",
 				table: "User");
 
 			migrationBuilder.DropIndex(
@@ -231,35 +220,12 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 				name: "TeacherId",
 				table: "User");
 
-			migrationBuilder.DropColumn(
-				name: "Deleted",
-				table: "User");
-
-			migrationBuilder.AddColumn<int>(
-				name: "MigrationId",
-				table: "User",
-				type: "int",
-				nullable: true);
-
-			migrationBuilder.AddColumn<DateTime>(
-				name: "Deleted",
-				table: "User",
-				type: "datetime2",
-				nullable: true);
-
 			migrationBuilder.AddColumn<int>(
 				name: "AccessFailedCount",
 				table: "User",
 				type: "int",
 				nullable: false,
 				defaultValue: 0);
-
-			migrationBuilder.AddColumn<DateTime>(
-				name: "Created",
-				table: "User",
-				type: "datetime2",
-				nullable: false,
-				defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
 			migrationBuilder.AddColumn<bool>(
 				name: "Disabled",
@@ -300,6 +266,12 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 				name: "LockoutEnd",
 				table: "User",
 				type: "datetimeoffset",
+				nullable: true);
+
+			migrationBuilder.AddColumn<int>(
+				name: "MigrationId",
+				table: "User",
+				type: "int",
 				nullable: true);
 
 			migrationBuilder.AddColumn<string>(

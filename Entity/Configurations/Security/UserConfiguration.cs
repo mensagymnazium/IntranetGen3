@@ -8,7 +8,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Configurations.Security
 	{
 		public void Configure(EntityTypeBuilder<User> builder)
 		{
-			builder.HasAlternateKey(user => user.Oid);
+			builder.HasIndex(user => user.Oid).IsUnique(true);
 
 			builder
 				.HasOne(user => user.Student)

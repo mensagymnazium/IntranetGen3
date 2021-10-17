@@ -12,5 +12,9 @@ namespace MensaGymnazium.IntranetGen3.Model.Security
 		public int GradeId { get; set; }
 
 		public Grade Grade { get; set; }
+
+		public DateTime Created { get; set; }
+
+		public DateTime? Deleted { get; set; }
 	}
 }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 {
     [DbContext(typeof(IntranetGen3DbContext))]
-    [Migration("20211014181653_CreateUser")]
+    [Migration("20211017104151_CreateUser")]
     partial class CreateUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,6 +69,12 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("Deleted")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("GradeId")
                         .HasColumnType("int");
 
@@ -86,6 +92,12 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("Deleted")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("Teacher");
@@ -98,14 +110,17 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("Deleted")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
-                    b.Property<Guid>("Oid")
+                    b.Property<Guid?>("Oid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int?>("StudentId")
@@ -116,7 +131,9 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAlternateKey("Oid");
+                    b.HasIndex("Oid")
+                        .IsUnique()
+                        .HasFilter("[Oid] IS NOT NULL");
 
                     b.HasIndex("StudentId")
                         .IsUnique()
