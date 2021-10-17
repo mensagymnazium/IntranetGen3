@@ -21,12 +21,11 @@ using Havit.Data.Patterns.Infrastructure;
 namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public abstract class RoleDbRepositoryBase : DbRepository<MensaGymnazium.IntranetGen3.Model.Security.Role>
+	public partial class StudentDbRepository : StudentDbRepositoryBase, IStudentRepository
 	{
-		protected RoleDbRepositoryBase(IDbContext dbContext, MensaGymnazium.IntranetGen3.DataLayer.DataSources.Security.IRoleDataSource dataSource, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.Security.Role, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
+		public StudentDbRepository(IDbContext dbContext, MensaGymnazium.IntranetGen3.DataLayer.DataSources.Security.IStudentDataSource dataSource, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.Security.Student, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
 			: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
 		{
 		}
-
 	}
 }

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MensaGymnazium.IntranetGen3.Model.Security;
 
 namespace MensaGymnazium.IntranetGen3.Model
 {
@@ -13,5 +10,7 @@ namespace MensaGymnazium.IntranetGen3.Model
 
 		[MaxLength(20)]
 		public string Name { get; set; }
+
+		public ICollection<Student> Students { get; set; }
 	}
 }

@@ -18,14 +18,14 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources.Security.Fakes
 {
 	[Fake]
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public class FakeRoleDataSource : FakeDataSource<MensaGymnazium.IntranetGen3.Model.Security.Role>, MensaGymnazium.IntranetGen3.DataLayer.DataSources.Security.IRoleDataSource
+	public class FakeStudentDataSource : FakeDataSource<MensaGymnazium.IntranetGen3.Model.Security.Student>, MensaGymnazium.IntranetGen3.DataLayer.DataSources.Security.IStudentDataSource
 	{
-		public FakeRoleDataSource(params MensaGymnazium.IntranetGen3.Model.Security.Role[] data)
-			: this((IEnumerable<MensaGymnazium.IntranetGen3.Model.Security.Role>)data)
+		public FakeStudentDataSource(params MensaGymnazium.IntranetGen3.Model.Security.Student[] data)
+			: this((IEnumerable<MensaGymnazium.IntranetGen3.Model.Security.Student>)data)
 		{			
 		}
 
-		public FakeRoleDataSource(IEnumerable<MensaGymnazium.IntranetGen3.Model.Security.Role> data, ISoftDeleteManager softDeleteManager = null)
+		public FakeStudentDataSource(IEnumerable<MensaGymnazium.IntranetGen3.Model.Security.Student> data, ISoftDeleteManager softDeleteManager = null)
 			: base(data, softDeleteManager)
 		{
 		}
