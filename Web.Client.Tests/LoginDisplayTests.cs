@@ -21,6 +21,20 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Tests
 			// Assert
 			Assert.AreEqual(expected, actual);
 		}
+		[TestMethod]
+		public void LoginDisplay_NameToInitials_NameIsEmptyString()
+		{
+			// Arrange
+			string name = string.Empty;
+			var ld = new LoginDisplay();
+			var expected = "?";
+
+			// Act
+			var actual = ld.NameToInitials(name);
+
+			// Assert
+			Assert.AreEqual(expected, actual);
+		}
 
 		[TestMethod]
 		public void LoginDisplay_NameToInitials_NameIsOneWord()

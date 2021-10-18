@@ -17,7 +17,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Shared
 		public string NameToInitials(string name)
 		{
 			// name (User?.Identity?.Name) is currently a name, email to initials functionality is currently not being used for anything.
-			if (name is null)
+			if (name is null || name == string.Empty)
 			{
 				return "?";
 			}
