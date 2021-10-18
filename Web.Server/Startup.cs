@@ -54,8 +54,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Server
 			services.AddAuthorization(options =>
 			{
 				options.AddPolicy(PolicyNames.HangfireDashboardAcccessPolicy, policy => policy
-					.RequireAuthenticatedUser()
-					.RequireRole(nameof(Role.Entry.SystemAdministrator)));
+					.RequireAuthenticatedUser());
 			});
 			services.AddCustomizedAuth(configuration);
 

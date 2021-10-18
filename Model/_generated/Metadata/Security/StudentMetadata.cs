@@ -11,10 +11,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MensaGymnazium.IntranetGen3.Model.Metadata.Attrida
+namespace MensaGymnazium.IntranetGen3.Model.Metadata.Security
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public static class AttridaObjectMetadata
+	public static class StudentMetadata
 	{
 	}
 }

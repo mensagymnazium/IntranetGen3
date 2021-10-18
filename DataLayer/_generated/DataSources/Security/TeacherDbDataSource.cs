@@ -10,16 +10,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Havit.Data.Patterns.DataEntries;
+using Havit.Data.EntityFrameworkCore;
+using Havit.Data.EntityFrameworkCore.Patterns.DataSources;
+using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries.Security
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources.Security
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public interface IRoleEntries : IDataEntries
+	public partial class TeacherDbDataSource : DbDataSource<MensaGymnazium.IntranetGen3.Model.Security.Teacher>, ITeacherDataSource
 	{
-		MensaGymnazium.IntranetGen3.Model.Security.Role SystemAdministrator { get; }
-			
-		MensaGymnazium.IntranetGen3.Model.Security.Role UserSettingsAdministrator { get; }
-			
+		public TeacherDbDataSource(IDbContext dbContext, ISoftDeleteManager softDeleteManager)
+			: base(dbContext, softDeleteManager)
+		{
+		}
 	}
 }

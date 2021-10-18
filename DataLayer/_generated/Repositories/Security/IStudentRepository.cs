@@ -10,18 +10,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Havit.Data.Patterns.Repositories;
 
-namespace MensaGymnazium.IntranetGen3.Model.Metadata.Crm
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public static class ContactMetadata
+	public partial interface IStudentRepository : IRepository<MensaGymnazium.IntranetGen3.Model.Security.Student>
 	{
-		public const int CompanyRegistrationNumberMaxLength = 15;
-		public const int EmailMaxLength = 200;
-		public const int MobileMaxLength = 20;
-		public const int NameMaxLength = 200;
-		public const int PhoneMaxLength = 20;
-		public const int TaxRegistrationNumberMaxLength = 15;
-		public const int WebMaxLength = 200;
 	}
 }

@@ -22,7 +22,7 @@ namespace MensaGymnazium.IntranetGen3.Facades.System
 	/// Fasáda k seedování dat.
 	/// </summary>
 	[Service]
-	[Authorize(Roles = nameof(Role.Entry.SystemAdministrator))]
+	[Authorize]
 
 	public class DataSeedFacade : IDataSeedFacade
 	{
