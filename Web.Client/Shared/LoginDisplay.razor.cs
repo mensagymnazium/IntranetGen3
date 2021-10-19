@@ -1,9 +1,14 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Shared
 {
 	public partial class LoginDisplay
 	{
+		[Inject] protected NavigationManager Navigation { get; set; }
+		[Inject] protected SignOutSessionStateManager SignOutManager { get; set; }
 		private async Task BeginSignOut()
 		{
 			await SignOutManager.SetSignOutState();
@@ -22,7 +27,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Shared
 				return "?";
 			}
 
-			if (name.Contains('@')) 
+			if (name.Contains('@'))
 			{
 				var mail = name.Split('@')[0].Split('.');
 				return mail.Length == 1 ? mail[0][0].ToString().ToUpper() : (mail[0][0].ToString() + mail[^1][0].ToString()).ToUpper();
