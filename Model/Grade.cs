@@ -19,18 +19,18 @@ namespace MensaGymnazium.IntranetGen3.Model
 		[MaxLength(20)]
 		public string Symbol { get; set; }
 
-		public ICollection<Student> Students { get; set; }
+		public ICollection<Student> Students { get; } = new List<Student>();
 
 		public enum Entry
 		{
-			Prima,
-			Sekunda,
-			Tercie,
-			Kvarta,
-			Kvinta,
-			Sexta,
-			Septima,
-			Oktava
+			Prima = -1,
+			Sekunda = -2,
+			Tercie = -3,
+			Kvarta = -4,
+			Kvinta = -5,
+			Sexta = -6,
+			Septima = -7,
+			Oktava = -8
 		}
 	}
 }

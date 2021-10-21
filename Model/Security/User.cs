@@ -14,6 +14,9 @@ namespace MensaGymnazium.IntranetGen3.Model.Security
 		[MaxLength(64)] // Same as in AD
 		public string Name { get; set; }
 
+		[MaxLength(320)]
+		public string Email { get; set; }
+
 		public Student Student { get; set; }
 
 		public int? StudentId { get; set; }
