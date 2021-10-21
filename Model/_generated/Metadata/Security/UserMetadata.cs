@@ -16,6 +16,7 @@ namespace MensaGymnazium.IntranetGen3.Model.Metadata.Security
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 	public static class UserMetadata
 	{
+		public const int EmailMaxLength = 320;
 		public const int NameMaxLength = 64;
 	}
 }
