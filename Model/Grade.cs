@@ -17,7 +17,7 @@ namespace MensaGymnazium.IntranetGen3.Model
 		[MaxLength(20)]
 		public string Symbol { get; set; }
 
-		public ICollection<Student> Students { get; set; }
+		public ICollection<Student> Students { get; } = new List<Student>();
 
 		public enum Entry
 		{
