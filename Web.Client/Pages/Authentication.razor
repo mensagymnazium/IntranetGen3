@@ -2,54 +2,51 @@
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @attribute [AllowAnonymous]
 
-    <div class="align-middle">
-        
-            <RemoteAuthenticatorView Action="@Action">
+            
+    <RemoteAuthenticatorView Action="@Action">
 
-                <LoggingIn>
-                    <div style="display: inline-block; margin-right: 0.5rem;">
-                        <HxSpinner Color="ThemeColor.Primary" Size="SpinnerSize.Small" />
-                    </div>
-                    Přihlašování
-                </LoggingIn>
+        <LoggingIn>
+            <HxSpinner Color="ThemeColor.Primary" Size="SpinnerSize.Small" />
+            Přihlašování
+        </LoggingIn>
 
-                <CompletingLoggingIn>
-                    <div style="display: inline-block; margin-right: 0.5rem;">
-                        <HxSpinner Color="ThemeColor.Primary" Size="SpinnerSize.Small" />
-                    </div>
-                    Dokončování přihlašování
-                </CompletingLoggingIn>
+        <CompletingLoggingIn>
+            <HxSpinner Color="ThemeColor.Primary" Size="SpinnerSize.Small" />
+            Dokončování přihlašování
+        </CompletingLoggingIn>
 
-                <LogInFailed>
-                    Litujeme, ale špatně jsi zadal svoje heslo nebo uživatelské jméno. :(
-                </LogInFailed>
+        <LogInFailed>
+            Přihlášení se nezdařilo
+        </LogInFailed>
 
-                <LogOut>
-                    Odhlašování
-                </LogOut>
+        <LogOut>
+            <HxSpinner Color="ThemeColor.Primary" Size="SpinnerSize.Small" />
+            Odhlašování
+        </LogOut>
 
-                <CompletingLogOut>
-                    Dokončování odhlašování
-                </CompletingLogOut>
+        <CompletingLogOut>
+            Dokončování odhlašování
+        </CompletingLogOut>
 
-                <LogOutFailed>
-                    Nemůžeš se odhlásit :D
-                </LogOutFailed>
+        <LogOutFailed>
+            Odhlášení se nezdařilo
+        </LogOutFailed>
 
-                <LogOutSucceeded>
-                    Úspěšně ses odhlásil
-                </LogOutSucceeded>
+        <LogOutSucceeded>
+            Odhlášení bylo úspěšné
+        </LogOutSucceeded>
 
-                <UserProfile>
-                    Zpracovávání uživatelského profilu
-                </UserProfile>
+        <UserProfile>
+            <HxSpinner Color="ThemeColor.Primary" Size="SpinnerSize.Small" />
+            Zpracovávání uživatelského profilu
+        </UserProfile>
 
-                <Registering>
-                    Registrování
-                </Registering>
-            </RemoteAuthenticatorView>
-    </div>
+        <Registering>
+            <HxSpinner Color="ThemeColor.Primary" Size="SpinnerSize.Small" />
+            Registrování
+        </Registering>
+    </RemoteAuthenticatorView>
 
-        @code{
-            [Parameter] public string Action { get; set; }
-        }
+    @code{
+        [Parameter] public string Action { get; set; }
+    }
