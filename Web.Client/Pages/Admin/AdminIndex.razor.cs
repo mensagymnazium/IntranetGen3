@@ -27,5 +27,10 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Admin
 				Messenger.AddInformation("Serverová cache vyčištěna.");
 			}
 		}
+
+		private void SimulateException()
+		{
+			throw new InvalidOperationException("Simulated exception");
+		}
 	}
 }
