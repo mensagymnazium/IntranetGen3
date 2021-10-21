@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MensaGymnazium.IntranetGen3.Model.Security;
+using Havit.Data.EntityFrameworkCore.Attributes;
 
 namespace MensaGymnazium.IntranetGen3.Model
 {
+	[Cache]
 	public class Grade
 	{
 		public int Id { get; set; }

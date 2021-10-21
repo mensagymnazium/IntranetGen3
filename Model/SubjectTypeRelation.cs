@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Havit.Data.EntityFrameworkCore.Attributes;
 
 namespace MensaGymnazium.IntranetGen3.Model
 {
 	/// <summary>
 	/// M:N relation representing Subject.Types
 	/// </summary>
+	[Cache]
 	public class SubjectTypeRelation
 	{
 		public Subject Subject { get; set; }

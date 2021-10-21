@@ -7,9 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Diagnostics.Contracts;
 using MensaGymnazium.IntranetGen3.Model.Security;
+using Havit.Data.EntityFrameworkCore.Attributes;
 
 namespace MensaGymnazium.IntranetGen3.Model
 {
+	[Cache]
 	public class Subject
 	{
 		public int Id { get; set; }
