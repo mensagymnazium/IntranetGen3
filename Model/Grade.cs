@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MensaGymnazium.IntranetGen3.Model.Security;
 
 namespace MensaGymnazium.IntranetGen3.Model
 {
@@ -13,5 +10,25 @@ namespace MensaGymnazium.IntranetGen3.Model
 
 		[MaxLength(20)]
 		public string Name { get; set; }
+
+		/// <summary>
+		/// Mapping to Grade.Entry
+		/// </summary>
+		[MaxLength(20)]
+		public string Symbol { get; set; }
+
+		public ICollection<Student> Students { get; set; }
+
+		public enum Entry
+		{
+			Prima,
+			Sekunda,
+			Tercie,
+			Kvarta,
+			Kvinta,
+			Sexta,
+			Septima,
+			Oktava
+		}
 	}
 }

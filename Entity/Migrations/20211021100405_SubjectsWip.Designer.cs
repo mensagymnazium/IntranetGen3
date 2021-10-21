@@ -4,14 +4,16 @@ using MensaGymnazium.IntranetGen3.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 {
     [DbContext(typeof(IntranetGen3DbContext))]
-    partial class IntranetGen3DbContextModelSnapshot : ModelSnapshot
+    [Migration("20211021100405_SubjectsWip")]
+    partial class SubjectsWip
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -176,6 +178,8 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("TypeId");
+
                     b.ToTable("Subject");
                 });
 
@@ -205,21 +209,6 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SubjectType");
-                });
-
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.SubjectTypeRelation", b =>
-                {
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubjectTypeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SubjectId", "SubjectTypeId");
-
-                    b.HasIndex("SubjectTypeId");
-
-                    b.ToTable("SubjectTypeRelation");
                 });
 
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Security.Student", b =>
@@ -258,26 +247,15 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.SubjectTypeRelation", b =>
-                {
-                    b.HasOne("MensaGymnazium.IntranetGen3.Model.Subject", "Subject")
-                        .WithMany("TypeRelations")
-                        .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("MensaGymnazium.IntranetGen3.Model.SubjectType", "SubjectType")
+                    b.HasOne("MensaGymnazium.IntranetGen3.Model.SubjectType", "Type")
                         .WithMany()
-                        .HasForeignKey("SubjectTypeId")
+                        .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Subject");
+                    b.Navigation("Category");
 
-                    b.Navigation("SubjectType");
+                    b.Navigation("Type");
                 });
 
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Grade", b =>
@@ -293,11 +271,6 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Security.Teacher", b =>
                 {
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Subject", b =>
-                {
-                    b.Navigation("TypeRelations");
                 });
 #pragma warning restore 612, 618
         }

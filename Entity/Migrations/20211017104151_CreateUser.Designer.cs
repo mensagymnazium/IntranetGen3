@@ -4,14 +4,16 @@ using MensaGymnazium.IntranetGen3.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 {
     [DbContext(typeof(IntranetGen3DbContext))]
-    partial class IntranetGen3DbContextModelSnapshot : ModelSnapshot
+    [Migration("20211017104151_CreateUser")]
+    partial class CreateUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,10 +54,6 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("Symbol")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -148,80 +146,6 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Subject", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Capacity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("TypeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Subject");
-                });
-
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.SubjectCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SubjectCategory");
-                });
-
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.SubjectType", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SubjectType");
-                });
-
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.SubjectTypeRelation", b =>
-                {
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubjectTypeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SubjectId", "SubjectTypeId");
-
-                    b.HasIndex("SubjectTypeId");
-
-                    b.ToTable("SubjectTypeRelation");
-                });
-
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Security.Student", b =>
                 {
                     b.HasOne("MensaGymnazium.IntranetGen3.Model.Grade", "Grade")
@@ -250,36 +174,6 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Subject", b =>
-                {
-                    b.HasOne("MensaGymnazium.IntranetGen3.Model.SubjectCategory", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.SubjectTypeRelation", b =>
-                {
-                    b.HasOne("MensaGymnazium.IntranetGen3.Model.Subject", "Subject")
-                        .WithMany("TypeRelations")
-                        .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("MensaGymnazium.IntranetGen3.Model.SubjectType", "SubjectType")
-                        .WithMany()
-                        .HasForeignKey("SubjectTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Subject");
-
-                    b.Navigation("SubjectType");
-                });
-
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Grade", b =>
                 {
                     b.Navigation("Students");
@@ -293,11 +187,6 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Security.Teacher", b =>
                 {
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Subject", b =>
-                {
-                    b.Navigation("TypeRelations");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,7 +12,7 @@ using MensaGymnazium.IntranetGen3.Model.Security;
 
 namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security
 {
-	public partial class UserDbRepository : IUserRepository
+	public partial class TeacherDbRepository : ITeacherRepository
 	{
 
 	}

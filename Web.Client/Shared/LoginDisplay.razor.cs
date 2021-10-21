@@ -1,9 +1,14 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Shared
 {
 	public partial class LoginDisplay
 	{
+		[Inject] protected NavigationManager Navigation { get; set; }
+		[Inject] protected SignOutSessionStateManager SignOutManager { get; set; }
 		private async Task BeginSignOut()
 		{
 			await SignOutManager.SetSignOutState();
@@ -14,9 +19,10 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Shared
 		/// Takes an email or name of the user and returns the user's initials.
 		/// </summary>
 		/// <returns>The initials of first and last name.</returns>
-		private string NameToInitials(string name)
+		public string NameToInitials(string name)
 		{
-			if (name is null)
+			// name (User?.Identity?.Name) is currently a name, email to initials functionality is currently not being used for anything.
+			if (name is null || name == string.Empty)
 			{
 				return "?";
 			}
