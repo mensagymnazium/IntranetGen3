@@ -55,6 +55,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Server
 			{
 				options.AddPolicy(PolicyNames.HangfireDashboardAcccessPolicy, policy => policy
 					.RequireAuthenticatedUser());
+				// TODO Authorization or remove hangfire
 			});
 			services.AddCustomizedAuth(configuration);
 
