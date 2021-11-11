@@ -26,8 +26,4 @@
 		<ProjectReference Include="..\Contracts\Contracts.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Components\Pickers\" />
-	</ItemGroup>
-
 </Project>

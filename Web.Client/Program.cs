@@ -52,7 +52,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client
 			builder.Services.AddHxMessageBoxHost();
 			SetHxComponents();
 
-			builder.Services.AddScoped<IContactReferenceDataStore, ContactReferenceDataStore>();
+			builder.Services.AddScoped<ITeachersDataStore, TeachersDataStore>();
 
 			AddGrpcClient(builder);
 
