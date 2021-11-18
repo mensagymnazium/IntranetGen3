@@ -1,0 +1,10 @@
+﻿@attribute [Route(Routes.Electives.SubjectDetail)]
+
+<h1>TODO Detail předmětu</h1>
+<p>Přehled zapsaných, popř. další provozní údaje.</p>
+
+DEBUG: @SubjectId
+
+<HxButton OnClick="HandleEditClick">Editovat definici předmětu</HxButton>
+
+<SubjectEdit @ref="subjectEditComponent" SubjectId="@SubjectId" />
