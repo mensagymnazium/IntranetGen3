@@ -1,17 +1,25 @@
-﻿<LayoutView Layout="@typeof(MainLayout)">
+﻿@inject NavigationManager Navigation
 
-    <center>
-        <p style="border-radius: 25px;
-                       background: #73AD21;
-                       padding: 20px;
-                       width: fit-content;
-                       height: fit-content;">
-            Chyba 404 <br />
-            Je nám líto, ale hledanou stránku se nepodařilo najít.
-            <br /><br />
-            <HxButton Text="Zpět na hlavní stránku" Color="ThemeColor.Primary" OnClick="Back"></HxButton><br />
-        </p>
-    </center>
+<LayoutView Layout="@typeof(MainLayout)">
+
+	<center>
+		<p style="border-radius: 25px;
+					   background: #73AD21;
+					   padding: 20px;
+					   width: fit-content;
+					   height: fit-content;">
+			Chyba 404 <br />
+			Je nám líto, ale hledanou stránku se nepodařilo najít.
+			<br /><br />
+			<HxButton Text="Zpět na hlavní stránku" Color="ThemeColor.Primary" OnClick="Back"></HxButton><br />
+		</p>
+	</center>
 
 
 </LayoutView>
+
+@code {
+	public void Back() {
+		Navigation.NavigateTo("/");
+	}
+}
