@@ -1,4 +1,4 @@
-﻿@inject NavigationManager Navigation
+﻿@inject NavigationManager NavigationManager
 
 <LayoutView Layout="@typeof(MainLayout)">
 
@@ -10,8 +10,7 @@
 					   height: fit-content;">
 			Chyba 404 <br />
 			Je nám líto, ale hledanou stránku se nepodařilo najít.
-			<br /><br />
-			<HxButton Text="Zpět na hlavní stránku" Color="ThemeColor.Primary" OnClick="Back"></HxButton><br />
+			<HxButton Text="Zpět na hlavní stránku" Color="ThemeColor.Success" Outline="true" OnClick="Back" CssClass="mt-3 mb-2" />
 		</p>
 	</center>
 
@@ -20,6 +19,6 @@
 
 @code {
 	public void Back() {
-		Navigation.NavigateTo("/");
+		NavigationManager.NavigateTo("/");
 	}
 }
