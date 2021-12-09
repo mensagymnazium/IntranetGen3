@@ -25,6 +25,16 @@
       },
       "applicationUrl": "https://localhost:44319;http://localhost:9979",
       "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "launchBrowser": true,
+      "launchUrl": "https://localhost:44319",
+      "environmentVariables": {
+        "ASPNETCORE_URLS": "https://localhost:44319;http://localhost:9979",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "distributionName": ""
     }
   }
 }

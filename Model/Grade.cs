@@ -32,5 +32,7 @@ namespace MensaGymnazium.IntranetGen3.Model
 			Septima = -7,
 			Oktava = -8
 		}
+
+		public SigningRules SigningRules { get; set; }
 	}
 }
