@@ -9,8 +9,8 @@
 					   width: fit-content;
 					   height: fit-content;">
 			Chyba 404 <br />
-			Je nám líto, ale hledanou stránku se nepodařilo najít.
-			<HxButton Text="Zpět na hlavní stránku" Color="ThemeColor.Success" Outline="true" OnClick="Back" CssClass="mt-3 mb-2" />
+			Je nám líto, ale hledanou stránku se nepodařilo najít.<br />
+			<HxButton Text="Zpět na hlavní stránku" Color="ThemeColor.Success" OnClick="HandleBackClick" CssClass="mt-3 mb-2" />
 		</p>
 	</center>
 
@@ -18,7 +18,7 @@
 </LayoutView>
 
 @code {
-	public void Back() {
+	public void HandleBackClick() {
 		NavigationManager.NavigateTo("/");
 	}
 }
