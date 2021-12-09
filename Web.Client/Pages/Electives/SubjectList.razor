@@ -2,7 +2,7 @@
 
 <HxListLayout Title="Předměty" TFilterModel="HxListLayout.NoFilter">
 	<CommandsTemplate>
-		@* TODO <HxButton Text="Nový předmět" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />*@
+		 <HxButton Text="Nový předmět" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />
 	</CommandsTemplate>
 	<DataTemplate>
 		<HxGrid @ref="subjectsGrid"
@@ -24,3 +24,5 @@
 		</HxGrid>
 	</DataTemplate>
 </HxListLayout>
+
+<SubjectEdit @ref="subjectEditComponent" SubjectId="null" OnClosed="HandleSubjectEditClosed" />

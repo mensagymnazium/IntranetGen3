@@ -1,5 +1,10 @@
-﻿<HxOffcanvas @ref="offcanvasComponent" Title="@SubjectId.ToString()">
+﻿<HxOffcanvas @ref="offcanvasComponent" Title="@SubjectId.ToString()" OnClosed="this.OnClosed">
     <BodyTemplate>
-        TODO
+        <EditForm EditContext="editContext">
+            <HxInputText @bind-Value="model.Name" Label="Název" />
+        </EditForm>
     </BodyTemplate>
+    <FooterTemplate>
+		<SaveButton EditContext="editContext" IsNew="(model.Id == default)" OnValidClick="HandleValidSubmit" />
+    </FooterTemplate>
 </HxOffcanvas>

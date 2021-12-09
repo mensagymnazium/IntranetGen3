@@ -9,7 +9,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 {
 	public partial class SubjectDetail
 	{
-		[Parameter] public string SubjectId { get; set; }
+		[Parameter] public int? SubjectId { get; set; }
 
 		private SubjectEdit subjectEditComponent;
 

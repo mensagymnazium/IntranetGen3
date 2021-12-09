@@ -20,6 +20,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 		private SubjectListQueryFilter subjectListFilter = new SubjectListQueryFilter();
 		private HxGrid<SubjectListItemDto> subjectsGrid;
 		private SubjectListItemDto subjectSelected;
+		private SubjectEdit subjectEditComponent;
 
 		private async Task<GridDataProviderResult<SubjectListItemDto>> LoadSubjects(GridDataProviderRequest<SubjectListItemDto> request)
 		{
@@ -51,6 +52,16 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 		{
 			await SubjectFacade.DeleteSubjectAsync(Dto.FromValue(subject.SubjectId));
 			Messenger.AddInformation(subject.Name, "Předmět smazán.");
+			await subjectsGrid.RefreshDataAsync();
+		}
+
+		private async Task HandleNewItemClicked()
+		{
+			await subjectEditComponent.ShowAsync();
+		}
+
+		private async Task HandleSubjectEditClosed()
+		{
 			await subjectsGrid.RefreshDataAsync();
 		}
 	}
