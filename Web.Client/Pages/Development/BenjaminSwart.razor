@@ -21,8 +21,7 @@
     <path d="@(GetPath())" stroke="red" stroke-width="1" fill="none" />
 </svg>
 
-@code{
-    private int vertexCount = 60;
+@code{ private int vertexCount = 60;
     private int stepSize = 26;
 
     private int VertexCount
@@ -82,4 +81,14 @@
 
         return string.Join(" ", elements);
     }
-}
+
+    public DayOfWeek? Day { get; set; }
+    public ScheduleSlotInDay? Slot { get; set; }
+    public string Str { get; set; }
+    }
+
+<HxInputText @bind-Value="Str" Label="Jméno"/>
+<ScheduleTimeSlotPicker @bind-Day="Day" @bind-Slot="Slot" />
+
+<h1>@(Day?.ToString() ?? "null")</h1>
+<h1>@(Slot?.ToString() ?? "null")</h1>
