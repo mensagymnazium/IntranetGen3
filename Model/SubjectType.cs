@@ -15,7 +15,5 @@ namespace MensaGymnazium.IntranetGen3.Model
 
 		[MaxLength(20)]
 		public string Name { get; set; }
-
-		public List<SigningRulesType> SigningRulesRelations { get; set; }
 	}
 }

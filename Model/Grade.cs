@@ -33,6 +33,6 @@ namespace MensaGymnazium.IntranetGen3.Model
 			Oktava = -8
 		}
 
-		public SigningRules SigningRules { get; set; }
+		public List<SigningRule> SigningRules { get; } = new List<SigningRule>();
 	}
 }

@@ -61,7 +61,7 @@ namespace MensaGymnazium.IntranetGen3.Facades
 			Contract.Requires<ArgumentNullException>(subjectDto != null, nameof(SubjectDto));
 			Contract.Requires<ArgumentException>(subjectDto.Id == null, nameof(SubjectDto.Id));
 
-			var subject = new Subject()	// TODO přesunout do mapperu
+			var subject = new Subject() // TODO přesunout do mapperu
 			{
 				Name = subjectDto.Name,
 				CategoryId = 1, // TODO
