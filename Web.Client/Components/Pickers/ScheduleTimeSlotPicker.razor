@@ -24,15 +24,7 @@
                   ValueExpression="@(() => Slot)"
                   ValueChanged="@SlotChanged"
                   Data="Enum.GetValues<ScheduleSlotInDay>().Cast<ScheduleSlotInDay?>()"
-                  TextSelector="@(slot => (
-                              typeof(ScheduleSlotInDay))
-                              .GetMember(slot.ToString())
-                              .Single()
-                              .GetCustomAttributes(typeof(DescriptionAttribute), false)
-                              .Cast<DescriptionAttribute>()
-                              .Single()
-                              .Description
-                        )"
+                  TextSelector="slot => Havit.EnumExt.GetDescription(typeof(ScheduleSlotInDay), slot)"
                   Nullable="true"
                   NullText="- Vyberte -"
                   SortKeySelector="@(slot => (int)slot)" />
