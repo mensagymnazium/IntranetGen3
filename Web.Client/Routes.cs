@@ -10,6 +10,15 @@ namespace MensaGymnazium.IntranetGen3.Web.Client
 	{
 		public const string Home = "/";
 
+		public static class Electives
+		{
+			public const string Registration = "/electives/registration";
+			public const string Subjects = "/electives/subjects";
+			public const string SubjectDetail = "/electives/subjects/{SubjectId:int}";
+			public static string GetSubjectDetail(int subjectId) => $"/electives/subjects/{subjectId}";
+
+		}
+
 		public static class Administration
 		{
 			public const string Index = "/admin/";

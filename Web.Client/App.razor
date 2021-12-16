@@ -17,25 +17,7 @@
 			</AuthorizeRouteView>
 		</Found>
 		<NotFound>
-            <LayoutView Layout="@typeof(MainLayout)">
-                <center>
-                    <p style="color:#888888;">
-
-
-
-                        404 error <br />  Je nám líto ale hledanou stránku jsme neanašli, jestli si chcete na zítřek objednat oběd tak to se píše se Z <br />
-                        <!-- <img src="Kepler.png" alt="Kepler"> -->
-                        <style>
-                            body {
-                                background-image: url('Kepler.png');
-                            }
-                        </style>
-
-                    </p>
-                </center>
-
-
-            </LayoutView>
+			<MensaGymnazium.IntranetGen3.Web.Client.Shared.NotFoundPage.NotFoundPage />
 		</NotFound>
 	</Router>
 </CascadingAuthenticationState>

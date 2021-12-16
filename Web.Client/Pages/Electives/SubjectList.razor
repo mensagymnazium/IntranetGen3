@@ -1,0 +1,28 @@
+﻿@attribute [Route(Routes.Electives.Subjects)]
+
+<HxListLayout Title="Předměty" TFilterModel="HxListLayout.NoFilter">
+	<CommandsTemplate>
+		 <HxButton Text="Nový předmět" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />
+	</CommandsTemplate>
+	<DataTemplate>
+		<HxGrid @ref="subjectsGrid"
+				TItem="SubjectListItemDto"
+				DataProvider="LoadSubjects"
+				SelectedDataItem="subjectSelected"
+				SelectedDataItemChanged="HandleSelectedDataItemChanged"
+				Context="item">
+			<Columns>
+				<HxGridColumn TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" />
+			</Columns>
+			<ContextMenu Context="item">
+				<HxContextMenu>
+					<HxContextMenuItem Text="Smazat"
+										   OnClick="async () => await HandleDeleteItemClicked(item)"
+										   ConfirmationQuestion="@String.Format("Opravdu si přejete předmět '{0}' smazat?", item.Name)" />
+				</HxContextMenu>
+			</ContextMenu>
+		</HxGrid>
+	</DataTemplate>
+</HxListLayout>
+
+<SubjectEdit @ref="subjectEditComponent" SubjectId="null" OnClosed="HandleSubjectEditClosed" />
