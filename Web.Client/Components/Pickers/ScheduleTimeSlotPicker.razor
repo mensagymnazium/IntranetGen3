@@ -11,7 +11,7 @@
                   ValueExpression="@(() => Day)"
                   ValueChanged="@DayChanged"
                   Data="Enum.GetValues<DayOfWeek>().Cast<DayOfWeek?>()"
-                  TextSelector="@(day => dateTimeFormat.DayNames[(int) day])"
+                  TextSelector="@(day => DateTimeFormat.DayNames[(int) day])"
                   Nullable="true"
                   NullText="- Vyberte -"
                   SortKeySelector="@(day => ((int)day + 6) % 7)" />
@@ -40,9 +40,4 @@
     </div>
 </div>
 
-@code{ private static DateTimeFormatInfo dateTimeFormat => new CultureInfo("cs-CZ").DateTimeFormat;
 
-    [Parameter] public DayOfWeek? Day { get; set; }
-    [Parameter] public EventCallback<DayOfWeek?> DayChanged { get; set; }
-    [Parameter] public ScheduleSlotInDay? Slot { get; set; }
-    [Parameter] public EventCallback<ScheduleSlotInDay?> SlotChanged { get; set; } }
