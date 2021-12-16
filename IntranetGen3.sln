@@ -45,6 +45,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Server", "Web.Server\Web.Server.csproj", "{4E82FAD3-DD8C-42DD-9920-817C2B9C98E0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Client", "Web.Client\Web.Client.csproj", "{51D43FAA-0739-49C8-840D-412F0354CB2F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{23EE8862-BBAC-492D-9508-D81DC161DF8A} = {23EE8862-BBAC-492D-9508-D81DC161DF8A}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{CF770CA3-11AC-42A1-9EBF-F62B274FB194}"
 EndProject
@@ -68,7 +71,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{23CCBC57-D2B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Client.Tests", "Web.Client.Tests\Web.Client.Tests.csproj", "{92309126-8562-4FFF-9840-02276010CA46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Primitives", "Primitives\Primitives.csproj", "{23EE8862-BBAC-492D-9508-D81DC161DF8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Primitives", "Primitives\Primitives.csproj", "{23EE8862-BBAC-492D-9508-D81DC161DF8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,48 @@
+﻿@using System.Globalization
+@using System.ComponentModel
+
+<div class="container p-0">
+    <div class="row">
+        <HxSelect CssClass="col-md"
+                  Label="Den"
+                  TValue="DayOfWeek?"
+                  TItem="DayOfWeek?"
+                  Value="@Day"
+                  ValueExpression="@(() => Day)"
+                  ValueChanged="@DayChanged"
+                  Data="Enum.GetValues<DayOfWeek>().Cast<DayOfWeek?>()"
+                  TextSelector="@(day => dateTimeFormat.DayNames[(int) day])"
+                  Nullable="true"
+                  NullText="- Vyberte -"
+                  SortKeySelector="@(day => ((int)day + 6) % 7)" />
+
+        <HxSelect CssClass="col-md"
+                  Label="Čas"
+                  TValue="ScheduleSlotInDay?"
+                  TItem="ScheduleSlotInDay?"
+                  Value="@Slot"
+                  ValueExpression="@(() => Slot)"
+                  ValueChanged="@SlotChanged"
+                  Data="Enum.GetValues<ScheduleSlotInDay>().Cast<ScheduleSlotInDay?>()"
+                  TextSelector="@(slot => (
+                              typeof(ScheduleSlotInDay))
+                              .GetMember(slot.ToString())
+                              .Single()
+                              .GetCustomAttributes(typeof(DescriptionAttribute), false)
+                              .Cast<DescriptionAttribute>()
+                              .Single()
+                              .Description
+                        )"
+                  Nullable="true"
+                  NullText="- Vyberte -"
+                  SortKeySelector="@(slot => (int)slot)" />
+
+    </div>
+</div>
+
+@code{ private static DateTimeFormatInfo dateTimeFormat => new CultureInfo("cs-CZ").DateTimeFormat;
+
+    [Parameter] public DayOfWeek? Day { get; set; }
+    [Parameter] public EventCallback<DayOfWeek?> DayChanged { get; set; }
+    [Parameter] public ScheduleSlotInDay? Slot { get; set; }
+    [Parameter] public EventCallback<ScheduleSlotInDay?> SlotChanged { get; set; } }
