@@ -22,6 +22,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client
 		public static class Administration
 		{
 			public const string Index = "/admin/";
+			public const string Teachers = "/admin/teachers";
 		}
 
 		public static class UserAdministration

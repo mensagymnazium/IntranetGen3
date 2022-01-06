@@ -8,12 +8,15 @@
     </HeaderTemplate>
 
     <ItemsTemplate>
-        <HxSidebarItem Text="Dashboard" Href="@Routes.Home" Icon="@BootstrapIcon.Columns" />
+        <HxSidebarItem Text="Dashboard" Href="@Routes.Home" Icon="@BootstrapIcon.Columns" Match="NavLinkMatch.All" />
         <HxSidebarItem Text="Volitelné předměty" Icon="@BootstrapIcon.CalendarRange">
-            <HxSidebarItem Text="Zápis" Href="@Routes.Electives.Registration" Match="NavLinkMatch.All" />
-            <HxSidebarItem Text="Předměty" Href="@Routes.Electives.Subjects" Match="NavLinkMatch.All" />
+            <HxSidebarItem Text="Zápis" Href="@Routes.Electives.Registration" />
+            <HxSidebarItem Text="Předměty" Href="@Routes.Electives.Subjects" />
         </HxSidebarItem>
-        <HxSidebarItem Text="Administrace" Href="@Routes.Administration.Index" Icon="@BootstrapIcon.Gear" />
+        <HxSidebarItem Text="Nastavení" Icon="@BootstrapIcon.Gear" >
+            <HxSidebarItem Text="Učitelé" Href="@Routes.Administration.Teachers" />
+            <HxSidebarItem Text="Administrace" Href="@Routes.Administration.Index" Match="NavLinkMatch.All" />
+        </HxSidebarItem>
         <HxSidebarItem Text="Development" Icon="@BootstrapIcon.FileCode">
             <HxSidebarItem Text="Richard Dobíšek" Href="/development/richard-dobisek" />
             <HxSidebarItem Text="Vojtěch Procházka" Href="/development/vojtech-prochazka" />
