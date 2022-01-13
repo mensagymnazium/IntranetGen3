@@ -4,14 +4,16 @@ using MensaGymnazium.IntranetGen3.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 {
     [DbContext(typeof(IntranetGen3DbContext))]
-    partial class IntranetGen3DbContextModelSnapshot : ModelSnapshot
+    [Migration("20220113141437_AddedStudentSubjectRegistration")]
+    partial class AddedStudentSubjectRegistration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -199,12 +201,9 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.Property<int>("SubjectCategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SubjectCategoryId1")
-                        .HasColumnType("int");
-
                     b.HasKey("SigningRuleId", "SubjectCategoryId");
 
-                    b.HasIndex("SubjectCategoryId1");
+                    b.HasIndex("SubjectCategoryId");
 
                     b.ToTable("SigningRuleSubjectCategoryRelation");
                 });
@@ -217,12 +216,9 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.Property<int>("SubjectTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SubjectTypeId1")
-                        .HasColumnType("int");
-
                     b.HasKey("SigningRuleId", "SubjectTypeId");
 
-                    b.HasIndex("SubjectTypeId1");
+                    b.HasIndex("SubjectTypeId");
 
                     b.ToTable("SigningRuleSubjectTypeRelation");
                 });
@@ -273,9 +269,6 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CategoryId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
@@ -292,7 +285,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId1");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Subject");
 
@@ -307,8 +300,8 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
@@ -355,8 +348,8 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
@@ -375,12 +368,9 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.Property<int>("SubjectTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SubjectTypeId1")
-                        .HasColumnType("int");
-
                     b.HasKey("SubjectId", "SubjectTypeId");
 
-                    b.HasIndex("SubjectTypeId1");
+                    b.HasIndex("SubjectTypeId");
 
                     b.ToTable("SubjectTypeRelation");
 
@@ -438,8 +428,9 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.HasOne("MensaGymnazium.IntranetGen3.Model.SubjectCategory", "SubjectCategory")
                         .WithMany()
-                        .HasForeignKey("SubjectCategoryId1")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("SubjectCategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("SigningRule");
 
@@ -456,8 +447,9 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.HasOne("MensaGymnazium.IntranetGen3.Model.SubjectType", "SubjectType")
                         .WithMany()
-                        .HasForeignKey("SubjectTypeId1")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("SubjectTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("SigningRule");
 
@@ -493,8 +485,9 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                 {
                     b.HasOne("MensaGymnazium.IntranetGen3.Model.SubjectCategory", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId1")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Category");
                 });
@@ -547,8 +540,9 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.HasOne("MensaGymnazium.IntranetGen3.Model.SubjectType", "SubjectType")
                         .WithMany()
-                        .HasForeignKey("SubjectTypeId1")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("SubjectTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Subject");
 
