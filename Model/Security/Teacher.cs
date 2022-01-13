@@ -10,6 +10,8 @@ namespace MensaGymnazium.IntranetGen3.Model.Security
 
 		public User User { get; set; }
 
+		public string FunFact { get; set; }
+
 		public int? SeededEntityId { get; set; }
 
 		public DateTime Created { get; set; }
