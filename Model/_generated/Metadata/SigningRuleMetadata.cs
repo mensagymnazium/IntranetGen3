@@ -14,8 +14,7 @@ using System.Threading.Tasks;
 namespace MensaGymnazium.IntranetGen3.Model.Metadata
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public static class SubjectTypeMetadata
+	public static class SigningRuleMetadata
 	{
-		public const int NameMaxLength = 50;
 	}
 }
