@@ -86,10 +86,12 @@ namespace MensaGymnazium.IntranetGen3.Facades
 			await unitOfWork.CommitAsync(cancellationToken);
 		}
 
-		public Task DeleteSubjectAsync(Dto<int> subjectIdDto, CancellationToken cancellationToken = default)
+		public async Task DeleteSubjectAsync(Dto<int> subjectIdDto, CancellationToken cancellationToken = default)
 		{
-			// TODO
-			throw new NotImplementedException();
+			var subject = subjectRepository.GetObjectAsync(subjectIdDto.Value, cancellationToken);
+			unitOfWork.AddForDelete(subject);
+
+			await unitOfWork.CommitAsync(cancellationToken);
 		}
 	}
 }
