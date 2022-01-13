@@ -10,12 +10,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Havit.Data.EntityFrameworkCore;
+using Havit.Data.EntityFrameworkCore.Patterns.DataSources;
+using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
 
-namespace MensaGymnazium.IntranetGen3.Model.Metadata
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public static class SubjectTypeMetadata
+	public partial class SubjectTypeRelationDbDataSource : DbDataSource<MensaGymnazium.IntranetGen3.Model.SubjectTypeRelation>, ISubjectTypeRelationDataSource
 	{
-		public const int NameMaxLength = 50;
+		public SubjectTypeRelationDbDataSource(IDbContext dbContext, ISoftDeleteManager softDeleteManager)
+			: base(dbContext, softDeleteManager)
+		{
+		}
 	}
 }

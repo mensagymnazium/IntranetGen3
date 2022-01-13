@@ -10,12 +10,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Havit.Data.Patterns.DataSources;
 
-namespace MensaGymnazium.IntranetGen3.Model.Metadata
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public static class SubjectTypeMetadata
+	public interface ISigningRuleSubjectTypeRelationDataSource : IDataSource<MensaGymnazium.IntranetGen3.Model.SigningRuleSubjectTypeRelation>
 	{
-		public const int NameMaxLength = 50;
 	}
 }
