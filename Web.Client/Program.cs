@@ -53,6 +53,8 @@ namespace MensaGymnazium.IntranetGen3.Web.Client
 			SetHxComponents();
 
 			builder.Services.AddScoped<ITeachersDataStore, TeachersDataStore>();
+			builder.Services.AddScoped<ISubjectTypesDataStore, SubjectTypesDataStore>();
+			builder.Services.AddScoped<ISubjectCategoriesDataStore, SubjectCategoriesDataStore>();
 
 			AddGrpcClient(builder);
 
