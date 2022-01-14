@@ -14,11 +14,11 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core
 		{
 			var data = new[]
 			{
-				new SubjectCategory() { Id = SubjectCategory.Entry.NotDefined, Name = "Neurčeno" },
-				new SubjectCategory() { Id = SubjectCategory.Entry.Graduational, Name = "Maturitní semináře" },
-				new SubjectCategory() { Id = SubjectCategory.Entry.Seminars, Name = "Nadstavbový seminář" },
-				new SubjectCategory() { Id = SubjectCategory.Entry.SpecialSeminars, Name = "Specializační semináře" },
-				new SubjectCategory() { Id = SubjectCategory.Entry.ForeignLanguage, Name = "Cizí jazyk" },
+				new SubjectCategory() { Id = (int)SubjectCategory.Entry.NotDefined, Name = "Neurčeno" },
+				new SubjectCategory() { Id = (int)SubjectCategory.Entry.Graduational, Name = "Maturitní semináře" },
+				new SubjectCategory() { Id = (int)SubjectCategory.Entry.Seminars, Name = "Nadstavbový seminář" },
+				new SubjectCategory() { Id = (int)SubjectCategory.Entry.SpecialSeminars, Name = "Specializační semináře" },
+				new SubjectCategory() { Id = (int)SubjectCategory.Entry.ForeignLanguage, Name = "Cizí jazyk" },
 			};
 
 			Seed(For(data).PairBy(st => st.Id));

@@ -12,7 +12,7 @@ namespace MensaGymnazium.IntranetGen3.Model
 	[Cache]
 	public class SubjectCategory
 	{
-		public SubjectCategory.Entry Id { get; set; }
+		public int Id { get; set; }
 
 		[MaxLength(50)]
 		public string Name { get; set; }
