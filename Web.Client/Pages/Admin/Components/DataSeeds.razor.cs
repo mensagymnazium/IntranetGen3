@@ -34,7 +34,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Admin.Components
 
 		public async Task ShowAsync()
 		{
-			seedProfiles ??= (await DataSeedFacade.GetDataSeedProfiles()).Value;
+			seedProfiles ??= await DataSeedFacade.GetDataSeedProfiles();
 
 			await offcanvasComponent.ShowAsync();
 		}

@@ -16,8 +16,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Development
 
 		protected override async Task OnInitializedAsync()
 		{
-			grades = (await GradeFacade.GetAllGradesAsync()).Value;
+			grades = await GradeFacade.GetAllGradesAsync();
 		}
-
 	}
 }

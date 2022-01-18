@@ -6,13 +6,8 @@ using Havit;
 using Havit.Data.Patterns.DataSeeds;
 using Havit.Data.Patterns.DataSeeds.Profiles;
 using Havit.Extensions.DependencyInjection.Abstractions;
-using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Contracts.System;
 using MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core;
-using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security;
-using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authorization;
-using MensaGymnazium.IntranetGen3.Model.Security;
-using MensaGymnazium.IntranetGen3.Services.Infrastructure;
 using Havit.Services.Caching;
 using Microsoft.AspNetCore.Authorization;
 
@@ -62,12 +57,12 @@ namespace MensaGymnazium.IntranetGen3.Facades.System
 		/// <summary>
 		/// Returns list of available data seed profiles (names are ready for use as parameter to <see cref="SeedDataProfile"/> method).
 		/// </summary>
-		public Task<Dto<string[]>> GetDataSeedProfiles()
+		public Task<List<string>> GetDataSeedProfiles()
 		{
-			return Task.FromResult(Dto.FromValue(GetProfileTypes()
+			return Task.FromResult(GetProfileTypes()
 							.Select(t => t.Name)
-							.ToArray()
-			));
+							.ToList()
+			);
 		}
 
 		private static IEnumerable<Type> GetProfileTypes()
