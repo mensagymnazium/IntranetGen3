@@ -16,5 +16,6 @@ namespace MensaGymnazium.IntranetGen3.Model.Metadata.Security
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 	public static class TeacherMetadata
 	{
+		public const int FunFactMaxLength = 2147483647;
 	}
 }

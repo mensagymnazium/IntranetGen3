@@ -1,9 +1,9 @@
 ﻿@page "/development/robert-haken"
 
-<TeacherPicker @bind-Value="id" />
-
-<p>Test CI/CD deploymentu do Azure</p>
+<TeacherPicker Label="TeacherPicker" @bind-Value="teacherId" />
+<SubjectCategoryPicker Label="SubjectCategoryPicker" @bind-Value="subjectCategoryId" />
+<SubjectTypePicker Label="SubjectTypePicker" @bind-Value="subjectTypeId" />
 
 @code {
-    int? id;
+    int? teacherId, subjectCategoryId, subjectTypeId;
 }

@@ -4,24 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Havit.Blazor.Components.Web.Bootstrap;
+using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Contracts.Security;
 using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 using Microsoft.AspNetCore.Components;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Components.Pickers
 {
-	public class TeacherPicker : HxSelectBase<int?, TeacherReferenceDto>
+	public class SubjectCategoryPicker : HxSelectBase<int?, SubjectCategoryDto>
 	{
 		[Parameter] public string NullText { get => NullTextImpl; set => NullTextImpl = value; }
 
-		[Inject] protected ITeachersDataStore TeachersDataStore { get; set; }
+		[Inject] protected ISubjectCategoriesDataStore SubjectCategoriesDataStore { get; set; }
 
-		public TeacherPicker()
+		public SubjectCategoryPicker()
 		{
 			this.NullableImpl = true;
 			this.NullDataTextImpl = "načítám";
 			this.NullTextImpl = "-vyberte-";
-			this.ValueSelectorImpl = (c => c.TeacherId);
+			this.ValueSelectorImpl = (c => c.Id);
 			this.TextSelectorImpl = (c => c.Name);
 		}
 
@@ -29,7 +30,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Components.Pickers
 		{
 			await base.OnInitializedAsync();
 
-			this.DataImpl = (await TeachersDataStore.GetAllAsync()).Where(t => !t.IsDeleted).ToList();
+			this.DataImpl = (await SubjectCategoriesDataStore.GetAllAsync()).ToList();
 		}
 	}
 }

@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Havit.Extensions.DependencyInjection.Abstractions;
 using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MensaGymnazium.IntranetGen3.Facades
 {
 	[Service]
+	[Authorize]
 	public class GradeFacade : IGradeFacade
 	{
 		private readonly IGradeRepository gradeRepository;
@@ -19,19 +22,18 @@ namespace MensaGymnazium.IntranetGen3.Facades
 			this.gradeRepository = gradeRepository;
 		}
 
-		public async Task<Dto<List<GradeListItemDto>>> GetAllGradesAsync()
+		public async Task<List<GradeListItemDto>> GetAllGradesAsync(CancellationToken cancellationToken = default)
 		{
-			var data = await gradeRepository.GetAllAsync();
+			var data = await gradeRepository.GetAllAsync(cancellationToken);
 
-			var result = data
+
+			return data
 				.Select(g => new GradeListItemDto()
 				{
 					Id = g.Id,
 					Name = g.Name
 				})
 				.ToList();
-
-			return Dto.FromValue(result);
 		}
 	}
 }

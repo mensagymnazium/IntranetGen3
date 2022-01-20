@@ -10,6 +10,6 @@ namespace MensaGymnazium.IntranetGen3.Contracts.System
 	{
 		Task SeedDataProfile(string profileName);
 
-		Task<Dto<string[]>> GetDataSeedProfiles();
+		Task<List<string>> GetDataSeedProfiles();
 	}
 }

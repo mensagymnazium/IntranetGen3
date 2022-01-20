@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Havit.ComponentModel;
+using MensaGymnazium.IntranetGen3.Contracts.Security;
 
 namespace MensaGymnazium.IntranetGen3.Contracts
 {
 	[ApiContract]
-	public interface IGradeFacade
+	public interface ISubjectTypeFacade
 	{
-		Task<List<GradeListItemDto>> GetAllGradesAsync(CancellationToken cancellationToken = default);
+		Task<List<SubjectTypeDto>> GetAllSubjectTypesAsync(CancellationToken cancellationToken = default);
 	}
 }
