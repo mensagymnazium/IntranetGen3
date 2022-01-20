@@ -14,6 +14,8 @@ namespace MensaGymnazium.IntranetGen3.Model
 
 		public Grade Grade { get; set; }
 		public int GradeId { get; set; }
+		public string Name { get; set; }
+		public string Description { get; set; }
 
 		public List<SigningRuleSubjectCategoryRelation> SubjectCategoryRelations { get; } = new List<SigningRuleSubjectCategoryRelation>();
 		[NotMapped] public IEnumerable<SubjectCategory> SubjectCategories => SubjectCategoryRelations.Select(m => m.SubjectCategory);
