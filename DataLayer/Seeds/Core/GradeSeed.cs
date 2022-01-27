@@ -15,14 +15,14 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core
 		{
 			var data = new[]
 			{
-				new Grade() { Symbol = Grade.Entry.Prima.ToString(), Name = "prima" },
-				new Grade() { Symbol = Grade.Entry.Sekunda.ToString(), Name = "sekunda" },
-				new Grade() { Symbol = Grade.Entry.Tercie.ToString(), Name = "tercie" },
-				new Grade() { Symbol = Grade.Entry.Kvarta.ToString(), Name = "kvarta" },
-				new Grade() { Symbol = Grade.Entry.Kvinta.ToString(), Name = "kvinta" },
-				new Grade() { Symbol = Grade.Entry.Sexta.ToString(), Name = "sexta" },
-				new Grade() { Symbol = Grade.Entry.Septima.ToString(), Name = "septima" },
-				new Grade() { Symbol = Grade.Entry.Oktava.ToString(), Name = "oktáva" }
+				new Grade() { Id = (int) Grade.Entry.Prima,  Symbol = Grade.Entry.Prima.ToString(), Name = "prima" },
+				new Grade() { Id = (int) Grade.Entry.Sekunda,  Symbol = Grade.Entry.Sekunda.ToString(), Name = "sekunda" },
+				new Grade() { Id = (int) Grade.Entry.Tercie,  Symbol = Grade.Entry.Tercie.ToString(), Name = "tercie" },
+				new Grade() { Id = (int) Grade.Entry.Kvarta,  Symbol = Grade.Entry.Kvarta.ToString(), Name = "kvarta" },
+				new Grade() { Id = (int) Grade.Entry.Kvinta,  Symbol = Grade.Entry.Kvinta.ToString(), Name = "kvinta" },
+				new Grade() { Id = (int) Grade.Entry.Sexta,  Symbol = Grade.Entry.Sexta.ToString(), Name = "sexta" },
+				new Grade() { Id = (int) Grade.Entry.Septima,  Symbol = Grade.Entry.Septima.ToString(), Name = "septima" },
+				new Grade() { Id = (int) Grade.Entry.Oktava,  Symbol = Grade.Entry.Oktava.ToString(), Name = "oktáva" }
 			};
 
 			Seed(For(data).PairBy(grade => grade.Name)); // TODO později přepojit na grade.Symbol?
