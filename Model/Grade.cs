@@ -13,12 +13,6 @@ namespace MensaGymnazium.IntranetGen3.Model
 		[MaxLength(20)]
 		public string Name { get; set; }
 
-		/// <summary>
-		/// Mapping to Grade.Entry
-		/// </summary>
-		[MaxLength(20)]
-		public string Symbol { get; set; }
-
 		public ICollection<Student> Students { get; } = new List<Student>();
 
 		public enum Entry
