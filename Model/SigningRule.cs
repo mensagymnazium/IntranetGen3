@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,11 @@ namespace MensaGymnazium.IntranetGen3.Model
 
 		public Grade Grade { get; set; }
 		public int GradeId { get; set; }
+
+		[MaxLength(100)]
 		public string Name { get; set; }
+
+		[MaxLength(Int32.MaxValue)]
 		public string Description { get; set; }
 
 		public List<SigningRuleSubjectCategoryRelation> SubjectCategoryRelations { get; } = new List<SigningRuleSubjectCategoryRelation>();
