@@ -16,5 +16,7 @@ namespace MensaGymnazium.IntranetGen3.Model.Metadata
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 	public static class SigningRuleMetadata
 	{
+		public const int DescriptionMaxLength = 0;
+		public const int NameMaxLength = 0;
 	}
 }
