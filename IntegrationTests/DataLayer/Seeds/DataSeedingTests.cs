@@ -17,7 +17,8 @@ namespace MensaGymnazium.IntranetGen3.IntegrationTests.DataLayer.Seeds
 		protected override bool UseLocalDb => true;
 		protected override bool DeleteDbData => true; // default, but to be sure :D
 
-		//[TestMethod]
+#if DEBUG
+		[TestMethod]
 		public void DataSeeds_CoreProfile()
 		{
 			// arrange
@@ -29,5 +30,6 @@ namespace MensaGymnazium.IntranetGen3.IntegrationTests.DataLayer.Seeds
 			// assert
 			// no exception
 		}
+#endif
 	}
 }
