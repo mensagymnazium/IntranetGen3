@@ -10,15 +10,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 {
     [DbContext(typeof(IntranetGen3DbContext))]
-    [Migration("20220114010523_TeacherFunFact")]
-    partial class TeacherFunFact
+    [Migration("20220203123716_InitialScheme")]
+    partial class InitialScheme
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.11")
+                .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Havit.Data.EntityFrameworkCore.Model.DataSeedVersion", b =>
@@ -49,15 +49,9 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Grade", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("Symbol")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -187,8 +181,16 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Description")
+                        .HasMaxLength(2147483647)
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("GradeId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int?>("Quantity")
                         .HasColumnType("int");

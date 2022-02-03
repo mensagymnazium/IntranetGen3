@@ -11,6 +11,7 @@ using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.DataLayer.Queries;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 using MensaGymnazium.IntranetGen3.Model;
+using MensaGymnazium.IntranetGen3.Services;
 using Microsoft.AspNetCore.Authorization;
 
 namespace MensaGymnazium.IntranetGen3.Facades
@@ -22,15 +23,18 @@ namespace MensaGymnazium.IntranetGen3.Facades
 		private readonly ISubjectListQuery subjectListQuery;
 		private readonly ISubjectRepository subjectRepository;
 		private readonly IUnitOfWork unitOfWork;
+		private readonly ISubjectMapper subjectMapper;
 
 		public SubjectFacade(
 			ISubjectListQuery subjectListQuery,
 			ISubjectRepository subjectRepository,
-			IUnitOfWork unitOfWork)
+			IUnitOfWork unitOfWork,
+			ISubjectMapper subjectMapper)
 		{
 			this.subjectListQuery = subjectListQuery;
 			this.subjectRepository = subjectRepository;
 			this.unitOfWork = unitOfWork;
+			this.subjectMapper = subjectMapper;
 		}
 
 		public async Task<DataFragmentResult<SubjectListItemDto>> GetSubjectListAsync(DataFragmentRequest<SubjectListQueryFilter> subjectListRequest, CancellationToken cancellationToken = default)
@@ -49,11 +53,7 @@ namespace MensaGymnazium.IntranetGen3.Facades
 
 			var subject = await subjectRepository.GetObjectAsync(subjectIdDto.Value, cancellationToken);
 
-			return new SubjectDto() // TODO přesunout do mapperu
-			{
-				Id = subject.Id,
-				Name = subject.Name,
-			};
+			return subjectMapper.MapToSubjectDto(subject);
 		}
 
 		public async Task<Dto<int>> CreateSubjectAsync(SubjectDto subjectDto, CancellationToken cancellationToken = default)
@@ -61,11 +61,8 @@ namespace MensaGymnazium.IntranetGen3.Facades
 			Contract.Requires<ArgumentNullException>(subjectDto != null, nameof(SubjectDto));
 			Contract.Requires<ArgumentException>(subjectDto.Id == null, nameof(SubjectDto.Id));
 
-			var subject = new Subject() // TODO přesunout do mapperu
-			{
-				Name = subjectDto.Name,
-				CategoryId = 1, // TODO
-			};
+			var subject = new Subject(); 
+			subjectMapper.MapFromSubjectDto(subjectDto, subject);
 
 			unitOfWork.AddForInsert(subject);
 			await unitOfWork.CommitAsync(cancellationToken);
