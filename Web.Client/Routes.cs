@@ -15,6 +15,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client
 			public const string Registration = "/electives/registration";
 			public const string Subjects = "/electives/subjects";
 			public const string SubjectDetail = "/electives/subjects/{SubjectId:int}";
+			public const string SigningRuleList = "/electives/signingRule";
 			public static string GetSubjectDetail(int subjectId) => $"/electives/subjects/{subjectId}";
 
 		}

@@ -1,0 +1,17 @@
+﻿@attribute [Route(Routes.Electives.SigningRuleList)]
+
+<HxListLayout Title="Přihlašovací pravidla" TFilterModel="HxListLayout.NoFilter">
+	<DataTemplate>
+		<HxGrid @ref="subjectsGrid"
+				TItem="SigningRuleDto"
+				Context="item">
+			<Columns>
+				<HxGridColumn TItem="SigningRuleDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" />
+				<HxGridColumn TItem="SigningRuleDto" HeaderText="Třída" ItemTextSelector="@(item => item.GradeId.ToString())" />
+				<HxGridColumn TItem="SigningRuleDto" HeaderText="Počet" ItemTextSelector="@(item => item.Quantity.ToString())" />
+				<HxGridColumn TItem="SigningRuleDto" HeaderText="Typy" ItemTextSelector="@(item => item.SubjectTypesId.ToString())" />
+				<HxGridColumn TItem="SigningRuleDto" HeaderText="Kategorie" ItemTextSelector="@(item => item.SubjectCategoriesId.ToString())" />
+			</Columns>
+		</HxGrid>
+	</DataTemplate>
+</HxListLayout>
