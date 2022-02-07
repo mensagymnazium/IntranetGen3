@@ -85,13 +85,13 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Demo
 					Name = "ŘímAJ",
 					ScheduleDayOfWeek = DayOfWeek.Monday,
 					Description = "Stejně se to neotevře ;-)",
-					ScheduleSlotInDay = Primitives.ScheduleSlotInDay.Block5
+					ScheduleSlotInDay = Primitives.ScheduleSlotInDay.Block5,
 				},
 			};
 			Seed(For(subjects)
 				.PairBy(subject => subject.Name));
-				//.AndFor(user => user.User, teacher => teacher.PairBy(t => t.Email))
-				//.AfterSave(item => item.SeedEntity.User.TeacherId = item.PersistedEntity.Id));
+			//.AndFor(user => user.User, teacher => teacher.PairBy(t => t.Email))
+			//.AfterSave(item => item.SeedEntity.User.TeacherId = item.PersistedEntity.Id));
 		}
 	}
 }
