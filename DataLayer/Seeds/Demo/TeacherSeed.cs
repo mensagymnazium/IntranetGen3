@@ -47,10 +47,10 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Demo
 				new Teacher() { SeededEntityId=13712422, User=new User() { Email="demo.Jana.Sedlackova@example.com", Name="Mgr. Jana Sedláčková" } }
 			};
 
-			Seed(For(teachers)
-				.PairBy(teacher => teacher.SeededEntityId)
-				.AndFor(user => user.User, teacher => teacher.PairBy(t => t.Email))
-				.AfterSave(item => item.SeedEntity.User.TeacherId = item.PersistedEntity.Id));
+			Seed(For(teachers).PairBy(teacher => teacher.SeededEntityId)
+				.AndFor(teacher => teacher.User, userSeed => userSeed.PairBy(u => u.Email))
+				.AfterSave(item => item.SeedEntity.User.TeacherId = item.PersistedEntity.Id)
+			);
 		}
 	}
 }
