@@ -162,5 +162,12 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core
 							typeRelationSeed => typeRelationSeed.PairBy(tr => tr.SigningRuleId, tr => tr.SubjectTypeId))
 			);
 		}
+
+		public override IEnumerable<Type> GetPrerequisiteDataSeeds()
+		{
+			yield return typeof(GradeSeed);
+			yield return typeof(SubjectCategorySeed);
+			yield return typeof(SubjectTypeSeed);
+		}
 	}
 }
