@@ -15,6 +15,8 @@ namespace MensaGymnazium.IntranetGen3.Model
 
 		public ICollection<Student> Students { get; } = new List<Student>();
 
+		public List<SigningRule> SigningRules { get; } = new List<SigningRule>();
+
 		public enum Entry
 		{
 			Prima = -1,
@@ -26,7 +28,5 @@ namespace MensaGymnazium.IntranetGen3.Model
 			Septima = -7,
 			Oktava = -8
 		}
-
-		public List<SigningRule> SigningRules { get; } = new List<SigningRule>();
 	}
 }
