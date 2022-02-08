@@ -3,6 +3,7 @@ using MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Extensions.DependencyInjection;
 using MensaGymnazium.IntranetGen3.TestHelpers;
+using MensaGymnazium.IntranetGen3.DataLayer.Seeds.Demo;
 
 namespace MensaGymnazium.IntranetGen3.IntegrationTests.DataLayer.Seeds
 {
@@ -12,6 +13,7 @@ namespace MensaGymnazium.IntranetGen3.IntegrationTests.DataLayer.Seeds
 	{
 		protected override bool UseLocalDb => true;
 		protected override bool DeleteDbData => true; // default, but to be sure :D
+		protected override bool SeedData => false;
 
 		[TestMethod]
 		public void DataSeeds_CoreProfile()
@@ -21,6 +23,19 @@ namespace MensaGymnazium.IntranetGen3.IntegrationTests.DataLayer.Seeds
 
 			// act
 			seedRunner.SeedData<CoreProfile>();
+
+			// assert
+			// no exception
+		}
+
+		[TestMethod]
+		public void DataSeeds_DemoProfile()
+		{
+			// arrange
+			var seedRunner = ServiceProvider.GetRequiredService<IDataSeedRunner>();
+
+			// act
+			seedRunner.SeedData<DemoProfile>();
 
 			// assert
 			// no exception
