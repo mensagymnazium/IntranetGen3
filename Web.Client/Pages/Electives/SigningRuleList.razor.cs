@@ -18,10 +18,10 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 		[Inject] protected NavigationManager NavigationManager { get; set; }
 
 		private SigningRuleListQueryFilter signingRuleListFilter = new SigningRuleListQueryFilter();
-		private HxGrid<SigningRuleDto> subjectsGrid;
+		private HxGrid<SigningRuleDto> gridComponent;
 		// private SigningRuleDto subjectSelected;  
 
-		private async Task<GridDataProviderResult<SigningRuleDto>> LoadSubjects(GridDataProviderRequest<SigningRuleDto> request)
+		private async Task<GridDataProviderResult<SigningRuleDto>> LoadSigningRules(GridDataProviderRequest<SigningRuleDto> request)
 		{
 			var SigningRuleRequest = new DataFragmentRequest<SigningRuleListQueryFilter>()
 			{

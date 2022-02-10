@@ -12,11 +12,11 @@ namespace MensaGymnazium.IntranetGen3.Contracts
 
 		public string Name { get; set; }
 
-		public int Quantity { get; set; }
+		public int? Quantity { get; set; }
 
-		public List<int> SubjectTypesId { get; set; }
+		public List<int> SubjectTypeIds { get; set; }
 
-		public List<int> SubjectCategoriesId { get; set; }
+		public List<int> SubjectCategoryIds { get; set; }
 
 		public int GradeId { get; set; }
 
