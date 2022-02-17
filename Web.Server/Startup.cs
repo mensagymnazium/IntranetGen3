@@ -6,9 +6,12 @@ using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Contracts.System;
 using MensaGymnazium.IntranetGen3.DependencyInjection;
 using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security;
+using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
+using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Claims;
 using MensaGymnazium.IntranetGen3.Model.Security;
 using MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ApplicationInsights;
 using MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ConfigurationExtensions;
+using MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.Security;
 using MensaGymnazium.IntranetGen3.Web.Server.Tools;
 using Microsoft.ApplicationInsights.DependencyCollector;
 using Microsoft.ApplicationInsights.Extensibility;
@@ -51,12 +54,6 @@ namespace MensaGymnazium.IntranetGen3.Web.Server
 			services.AddSingleton<ITelemetryInitializer, EnrichmentTelemetryInitializer>();
 			services.ConfigureTelemetryModule<DependencyTrackingTelemetryModule>((module, o) => { module.EnableSqlCommandTextInstrumentation = true; });
 
-			services.AddAuthorization(options =>
-			{
-				options.AddPolicy(PolicyNames.HangfireDashboardAcccessPolicy, policy => policy
-					.RequireAuthenticatedUser());
-				// TODO Authorization or remove hangfire
-			});
 			services.AddCustomizedAuth(configuration);
 
 			// server-side UI

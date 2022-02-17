@@ -1,19 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Data.EntityFrameworkCore;
-using Havit.Data.EntityFrameworkCore.Patterns.Repositories;
-using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
-using Havit.Data.Patterns.DataEntries;
-using Havit.Data.Patterns.DataLoaders;
+﻿using System.Security.Cryptography;
 using MensaGymnazium.IntranetGen3.Model.Security;
 
 namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security
 {
 	public partial class UserDbRepository : IUserRepository
 	{
+		public async Task<User> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
+		{
+			Contract.Requires<ArgumentException>(!String.IsNullOrEmpty(email), nameof(email));
 
+			return await Data.FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
+		}
+
+		public async Task<User> GetByOidAsync(Guid oid, CancellationToken cancellationToken = default)
+		{
+			Contract.Requires<ArgumentException>(oid != default, nameof(oid));
+
+			return await Data.FirstOrDefaultAsync(u => u.Oid == oid, cancellationToken);
+		}
 	}
 }
