@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
-using Havit.Diagnostics.Contracts;
 using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
 using MensaGymnazium.IntranetGen3.Model.Security;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
+using MensaGymnazium.IntranetGen3.Contracts.Infrastructure.Security;
 
 namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.Security
 {
@@ -22,11 +16,13 @@ namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.Security
 
 		private readonly Lazy<User> userLazy;
 
-		public ApplicationAuthenticationService(IHttpContextAccessor httpContextAccessor, IUserRepository userRepository)
+		public ApplicationAuthenticationService(
+			IHttpContextAccessor httpContextAccessor,
+			IUserRepository userRepository)
 		{
 			this.httpContextAccessor = httpContextAccessor;
 
-			userLazy = new Lazy<User>(() => GetOrCreateUser());
+			userLazy = new Lazy<User>(() => userRepository.GetObject(GetCurrentUserId()));
 		}
 
 		public ClaimsPrincipal GetCurrentClaimsPrincipal()
@@ -36,17 +32,11 @@ namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.Security
 
 		public User GetCurrentUser() => userLazy.Value;
 
-		private int GetCurrentUserAadObjectId()
+		private int GetCurrentUserId()
 		{
 			var principal = GetCurrentClaimsPrincipal();
-			Claim userIdClaim = principal.Claims.Single(claim => (claim.Type == "oid"));
+			Claim userIdClaim = principal.Claims.Single(claim => (claim.Type == ClaimConstants.UserIdClaim));
 			return Int32.Parse(userIdClaim.Value);
-		}
-
-		private User GetOrCreateUser()
-		{
-			throw new NotImplementedException();
-			/* TODO userRepository.GetByAadObjectId(GetCurrentUserAadObjectId())); */
 		}
 	}
 }

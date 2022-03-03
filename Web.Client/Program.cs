@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using BlazorApplicationInsights;
@@ -39,10 +40,11 @@ namespace MensaGymnazium.IntranetGen3.Web.Client
 
 			builder.RootComponents.Add<App>("app");
 
-			builder.Services.AddHttpClient("MensaGymnazium.IntranetGen3.Web.Server", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
-				.AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
-			builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
-				.CreateClient("MensaGymnazium.IntranetGen3.Web.Server"));
+			//builder.Services.AddHttpClient("MensaGymnazium.IntranetGen3.Web.Server", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+			//	.AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+			builder.Services.AddSingleton(new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+			//builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
+			//	.CreateClient("MensaGymnazium.IntranetGen3.Web.Server"));
 			AddAuth(builder);
 
 			builder.Services.AddValidatorsFromAssemblyContaining<Dto<object>>();
@@ -69,10 +71,12 @@ namespace MensaGymnazium.IntranetGen3.Web.Client
 			{
 				builder.Configuration.Bind("AzureAd", options.ProviderOptions);
 				options.ProviderOptions.LoginMode = "redirect";
+				options.UserOptions.RoleClaim = "role";
 			});
 
 			builder.Services.AddScoped(typeof(AccountClaimsPrincipalFactory<RemoteUserAccount>), typeof(CustomAccountClaimsPrincipalFactory));
 			builder.Services.AddApiAuthorization();
+			builder.Services.AddScoped<IUserClientService, UserClientService>();
 		}
 
 		private static void SetHxComponents()

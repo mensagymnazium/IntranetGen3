@@ -21,5 +21,10 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security
 		{
 			return await DataIncludingDeleted.Include(t => t.User).ToListAsync(cancellationToken);
 		}
+
+		protected override IEnumerable<Expression<Func<Teacher, object>>> GetLoadReferences()
+		{
+			yield return t => t.User;
+		}
 	}
 }

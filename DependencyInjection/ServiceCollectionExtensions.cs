@@ -94,14 +94,21 @@ namespace MensaGymnazium.IntranetGen3.DependencyInjection
 
 		private static void InstallHavitEntityFramework(IServiceCollection services, InstallConfiguration configuration)
 		{
-			DbContextOptions options = configuration.UseInMemoryDb
-				? new DbContextOptionsBuilder<IntranetGen3DbContext>().UseInMemoryDatabase(nameof(IntranetGen3DbContext)).Options
-				: new DbContextOptionsBuilder<IntranetGen3DbContext>().UseSqlServer(configuration.DatabaseConnectionString, c => c.MaxBatchSize(30)).Options;
-
 			services.WithEntityPatternsInstaller()
 				.AddEntityPatterns()
 				//.AddLocalizationServices<Language>()
-				.AddDbContext<IntranetGen3DbContext>(options)
+				.AddDbContext<IntranetGen3DbContext>(optionsBuilder =>
+				{
+					if (configuration.UseInMemoryDb)
+					{
+						optionsBuilder.UseInMemoryDatabase(nameof(IntranetGen3DbContext));
+					}
+					else
+					{
+
+						optionsBuilder.UseSqlServer(configuration.DatabaseConnectionString, c => c.MaxBatchSize(30));
+					}
+				})
 				.AddDataLayer(typeof(IApplicationSettingsDataSource).Assembly);
 
 			services.AddSingleton<IEntityValidator<object>, ValidatableObjectEntityValidator>();

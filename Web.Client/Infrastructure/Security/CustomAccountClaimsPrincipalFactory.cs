@@ -12,8 +12,14 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Infrastructure.Security
 {
 	public class CustomAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<RemoteUserAccount>
 	{
-		public CustomAccountClaimsPrincipalFactory(IAccessTokenProviderAccessor accessor) : base(accessor)
+		private readonly IUserClientService userClientService;
+
+		public CustomAccountClaimsPrincipalFactory(
+			IAccessTokenProviderAccessor accessor,
+			IUserClientService userClientService)
+			: base(accessor)
 		{
+			this.userClientService = userClientService;
 			// NOOP
 		}
 
@@ -21,11 +27,24 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Infrastructure.Security
 		{
 			var user = await base.CreateUserAsync(account, options);
 
-			// TODO role student/učitel/...?
-			//if (user.Identity.IsAuthenticated)
-			//{
-			//	var identity = (ClaimsIdentity)user.Identity;
-			//}
+			if (user.Identity.IsAuthenticated)
+			{
+				var identity = (ClaimsIdentity)user.Identity;
+
+				var claims = await userClientService.FetchAdditionalUserClaimsAsync(this.TokenProvider);
+
+				foreach (var claim in claims)
+				{
+					if (claim.Type.Equals(ClaimTypes.Role))
+					{
+						identity.AddClaim(new Claim(options.RoleClaim, claim.Value));
+					}
+					else
+					{
+						identity.AddClaim(claim);
+					}
+				}
+			}
 
 			return user;
 		}

@@ -28,7 +28,7 @@ namespace MensaGymnazium.IntranetGen3.Model
 		public int Capacity { get; set; }
 
 
-		public List<SubjectTeacherRelation> TeacherRelations { get; set; }
+		public List<SubjectTeacherRelation> TeacherRelations { get; } = new List<SubjectTeacherRelation>();
 
 		[NotMapped]
 		public IEnumerable<Teacher> Teachers
@@ -41,7 +41,7 @@ namespace MensaGymnazium.IntranetGen3.Model
 		}
 
 
-		public List<SubjectGradeRelation> GradeRelations { get; set; }
+		public List<SubjectGradeRelation> GradeRelations { get; } = new List<SubjectGradeRelation>();
 
 		[NotMapped]
 		public IEnumerable<Grade> Grades

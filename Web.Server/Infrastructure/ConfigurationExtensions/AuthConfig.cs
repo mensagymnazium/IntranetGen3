@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security;
 using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
+using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Claims;
 using MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.Security;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -24,12 +27,15 @@ namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ConfigurationExt
 			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 				.AddMicrosoftIdentityWebApi(configuration.GetSection("AzureAd"));
 
+			JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
 			services.Configure<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme, options =>
 			{
 				options.TokenValidationParameters.NameClaimType = "name";
 			});
 
 			services.AddScoped<IApplicationAuthenticationService, ApplicationAuthenticationService>();
+			services.AddScoped<IUserContextInfoBuilder, UserContextInfoBuilder>();
 
 			services.ConfigureApplicationCookie(configuration =>
 			{
@@ -39,8 +45,14 @@ namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ConfigurationExt
 				configuration.Events.OnRedirectToAccessDenied = (context) => RedirectOrApiStatus(context, HttpStatusCode.Forbidden);
 			});
 
+			services.AddAuthorization(options =>
+			{
+				options.AddPolicy(PolicyNames.HangfireDashboardAcccessPolicy, policy => policy
+					.RequireAuthenticatedUser());
+				// TODO Authorization or remove hangfire
+			});
 
-			services.AddScoped<IApplicationAuthenticationService, ApplicationAuthenticationService>();
+
 		}
 
 		private static Task RedirectOrApiStatus(RedirectContext<CookieAuthenticationOptions> context, HttpStatusCode apiStatus)
