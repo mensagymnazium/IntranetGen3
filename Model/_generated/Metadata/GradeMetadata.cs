@@ -17,6 +17,5 @@ namespace MensaGymnazium.IntranetGen3.Model.Metadata
 	public static class GradeMetadata
 	{
 		public const int NameMaxLength = 20;
-		public const int SymbolMaxLength = 20;
 	}
 }

@@ -15,7 +15,6 @@ using Havit.Hangfire.Extensions.Filters;
 using Havit.Hangfire.Extensions.RecurringJobs;
 using MensaGymnazium.IntranetGen3.DependencyInjection;
 using MensaGymnazium.IntranetGen3.Services.Jobs;
-using MensaGymnazium.IntranetGen3.Utility.Hangfire;
 using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.WebJobs;
@@ -109,7 +108,7 @@ namespace MensaGymnazium.IntranetGen3.Utility
 					.UseSimpleAssemblyNameTypeSerializer()
 					.UseFilter(new AutomaticRetryAttribute { Attempts = 0 }) // do not retry failed jobs
 					.UseFilter(new ApplicationInsightAttribute(serviceProvider.GetRequiredService<TelemetryClient>()))
-					.UseFilter(new ExceptionMonitoringAttribute(serviceProvider))
+					.UseFilter(new ExceptionMonitoringAttribute(serviceProvider.GetRequiredService<IExceptionMonitoringService>()))
 					.UseFilter(new CancelRecurringJobWhenAlreadyInQueueOrCurrentlyRunningFilter())
 					.UseActivator(new AspNetCoreJobActivator(serviceProvider.GetRequiredService<IServiceScopeFactory>()))
 					.UseSqlServerStorage(() => new Microsoft.Data.SqlClient.SqlConnection(connectionString), new SqlServerStorageOptions
