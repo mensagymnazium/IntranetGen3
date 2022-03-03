@@ -10,7 +10,7 @@ namespace MensaGymnazium.IntranetGen3.Services.Security;
 [Service]
 public class UserOnboarder : IUserOnboarder
 {
-	private const string EmailClaimType = "email";
+	private const string EmailClaimType = "unique_name";
 
 	/// <summary>
 	/// Claim type string used to extract display name from ClaimsPrincipal
