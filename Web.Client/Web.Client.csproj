@@ -15,11 +15,11 @@
 		<PackageReference Include="BlazorApplicationInsights" Version="1.6.0" />
 		<PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.6" />
-		<PackageReference Include="Havit.Blazor.Components.Web.Bootstrap" Version="2.1.2" />
-		<PackageReference Include="Havit.Blazor.Grpc.Client.WebAssembly" Version="1.0.11" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.1" PrivateAssets="all" />
-		<PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="6.0.1" />
+		<PackageReference Include="Havit.Blazor.Components.Web.Bootstrap" Version="2.2.3" />
+		<PackageReference Include="Havit.Blazor.Grpc.Client.WebAssembly" Version="1.0.12" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.2" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="6.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>
