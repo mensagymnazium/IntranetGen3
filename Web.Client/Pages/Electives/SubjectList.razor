@@ -1,37 +1,43 @@
 ﻿@attribute [Route(Routes.Electives.Subjects)]
 
-<HxListLayout Title="Předměty" TFilterModel="HxListLayout.NoFilter">
-	<CommandsTemplate>
-		 <HxButton Text="Nový předmět" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />
-		 <HxButton Text="Filtr" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />
-	</CommandsTemplate>
+<HxListLayout Title="Předměty"
+              TFilterModel="SubjectListQueryFilter"
+              FilterModel="subjectListFilter"
+              FilterModelChanged="HandleFilterModelChanged">
+    <CommandsTemplate>
+        <HxButton Text="Nový předmět" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />
+        @*<HxButton Text="Filtr" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />*@
+    </CommandsTemplate>
+    <FilterTemplate>
+        <HxInputText @bind-Value="@context.Name" Label="Název" />
+        <SubjectTypePicker @bind-Value="@context.SubjectTypeId" Label="Typ předmětu" />
+    </FilterTemplate>
+    <DataTemplate>
+        <HxGrid @ref="subjectsGrid"
+                TItem="SubjectListItemDto"
+                DataProvider="LoadSubjects"
+                SelectedDataItem="subjectSelected"
+                SelectedDataItemChanged="HandleSelectedDataItemChanged"
+                Context="item">
+            <Columns>
+                <HxGridColumn TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" />
+                <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vyučovací blok" ItemTextSelector="@(item=> Convert.ToString(item.CategoryId))" />
+                <HxGridColumn TItem="SubjectListItemDto" HeaderText="Typ" ItemTextSelector="@(item=> Convert.ToString(item.subjectTypeId) )" />
+                <HxGridColumn TItem="SubjectListItemDto" HeaderText="Celková Kapacita" ItemTextSelector="@(item=> Convert.ToString(item.Capacity))" />
+                <HxGridColumn TItem="SubjectListItemDto" HeaderText="Kategorie" ItemTextSelector="@(item => item.Name)" />
+            </Columns>
 
-	<DataTemplate>
-		<HxGrid @ref="subjectsGrid"
-				TItem="SubjectListItemDto"
-				DataProvider="LoadSubjects"
-				SelectedDataItem="subjectSelected"
-				SelectedDataItemChanged="HandleSelectedDataItemChanged"
-				Context="item">
-			<Columns>
-				<HxGridColumn TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" />
-					<HxGridColumn TItem="SubjectListItemDto" HeaderText="Vyučovací blok"  ItemTextSelector="@(item=> Convert.ToString(item.CategoryId))"/>
-						<HxGridColumn TItem="SubjectListItemDto" HeaderText="Typ"  ItemTextSelector="@(item=> Convert.ToString(item.subjectTypeId) )"/>
-							<HxGridColumn TItem="SubjectListItemDto" HeaderText="Celková Kapacita"  ItemTextSelector="@(item=> Convert.ToString(item.Capacity))"/>
-						<HxGridColumn TItem="SubjectListItemDto" HeaderText="Kategorie" ItemTextSelector="@(item => item.Name)" />
-			</Columns>
-			
-			
-			<ContextMenu Context="item">
-				<HxContextMenu>
-					<HxContextMenuItem Text="Smazat"
-										   OnClick="async () => await HandleDeleteItemClicked(item)"
-										   ConfirmationQuestion="@String.Format("Opravdu si přejete předmět '{0}' smazat?", item.Name)" />
-				</HxContextMenu>
-			</ContextMenu>
-		</HxGrid>
-		
-	</DataTemplate>
+
+            <ContextMenu Context="item">
+                <HxContextMenu>
+                    <HxContextMenuItem Text="Smazat"
+                                       OnClick="async () => await HandleDeleteItemClicked(item)"
+                                       ConfirmationQuestion="@String.Format("Opravdu si přejete předmět '{0}' smazat?", item.Name)" />
+                </HxContextMenu>
+            </ContextMenu>
+        </HxGrid>
+
+    </DataTemplate>
 </HxListLayout>
 
 <SubjectEdit @ref="subjectEditComponent" SubjectId="null" OnClosed="HandleSubjectEditClosed" />

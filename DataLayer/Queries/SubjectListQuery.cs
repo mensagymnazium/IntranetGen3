@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Havit.Data.EntityFrameworkCore.Patterns.QueryServices;
 using Havit.Extensions.DependencyInjection.Abstractions;
+using Havit.Linq;
 using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.DataLayer.DataSources;
 using Microsoft.EntityFrameworkCore;
@@ -29,16 +30,27 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Queries
 			// TODO Filter
 			// TODO Richer DTO?
 
-			return subjectDataSource.Data
-				.Select(s => new SubjectListItemDto()
-				{
-					SubjectId = s.Id,
-					Name = s.Name,
-					CategoryId = s.CategoryId,
-					subjectTypeId = s.subjectTypeId,
-					Capacity = s.Capacity,
-					
-				}); ;
+			var data = subjectDataSource.Data;
+
+			if (!String.IsNullOrWhiteSpace(Filter.Name))
+			{
+				data = data.Where(s => s.Name.Contains(Filter.Name));
+			}
+
+			data = data.WhereIf(Filter.SubjectTypeId != null,
+				s => s.TypeRelations.Any(r => r.SubjectTypeId == Filter.SubjectTypeId));
+
+			var result = data.Select(s => new SubjectListItemDto()
+			{
+				SubjectId = s.Id,
+				Name = s.Name,
+				CategoryId = s.CategoryId,
+				subjectTypeId = s.subjectTypeId,
+				Capacity = s.Capacity,
+
+			});
+
+			return result;
 		}
 
 		public async Task<DataFragmentResult<SubjectListItemDto>> GetDataFragmentAsync(int startIndex, int? count, CancellationToken cancellationToken = default)
