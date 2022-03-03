@@ -19,7 +19,6 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 
 		private SigningRuleListQueryFilter signingRuleListFilter = new SigningRuleListQueryFilter();
 		private HxGrid<SigningRuleDto> gridComponent;
-		// private SigningRuleDto subjectSelected;  
 
 		private async Task<GridDataProviderResult<SigningRuleDto>> LoadSigningRules(GridDataProviderRequest<SigningRuleDto> request)
 		{
