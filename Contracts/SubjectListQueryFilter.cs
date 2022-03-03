@@ -8,6 +8,7 @@ namespace MensaGymnazium.IntranetGen3.Contracts
 {
 	public class SubjectListQueryFilter
 	{
-		// TODO
+		public string Name { get; set; }
+		public int? SubjectTypeId { get; set; }
 	}
 }

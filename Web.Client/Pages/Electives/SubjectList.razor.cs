@@ -55,6 +55,12 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 			await subjectsGrid.RefreshDataAsync();
 		}
 
+		private async Task HandleFilterModelChanged(SubjectListQueryFilter newFilterModel)
+		{
+			subjectListFilter = newFilterModel;
+			await subjectsGrid.RefreshDataAsync();
+		}
+
 		private async Task HandleNewItemClicked()
 		{
 			await subjectEditComponent.ShowAsync();
