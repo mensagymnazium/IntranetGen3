@@ -20,12 +20,12 @@
                 SelectedDataItemChanged="HandleSelectedDataItemChanged"
                 Context="item">
             <Columns>
-                <HxGridColumn TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" />
-                <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vyučovací blok" ItemTextSelector="@(item=> Convert.ToString(item.CategoryId))" />
-                <HxGridColumn TItem="SubjectListItemDto" HeaderText="Typ" ItemTextSelector="@(item=> Convert.ToString(item.subjectTypeId) )" />
-                <HxGridColumn TItem="SubjectListItemDto" HeaderText="Celková Kapacita" ItemTextSelector="@(item=> Convert.ToString(item.Capacity))" />
-                <HxGridColumn TItem="SubjectListItemDto" HeaderText="Kategorie" ItemTextSelector="@(item => item.Name)" />
-            </Columns>
+			    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" />
+			    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vyučovací blok" ItemTextSelector="@(item=> Convert.ToString(item.ScheduleSlotInDay))" />
+			    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Typ" ItemTextSelector="@(item=> Convert.ToString(item.subjectTypeId) )" />
+			    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Celková Kapacita" ItemTextSelector="@(item=> Convert.ToString(item.Capacity))" />
+			    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Kategorie" ItemTextSelector="@(item => Convert.ToString(item.CategoryId))" />
+			</Columns>
 
 
             <ContextMenu Context="item">
