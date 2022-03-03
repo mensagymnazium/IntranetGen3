@@ -8,7 +8,7 @@ namespace MensaGymnazium.IntranetGen3.Contracts
 {
 	public class SigningRuleDto
 	{
-		public int SigningRuleId { get; set; }
+		public int? SigningRuleId { get; set; }
 
 		public string Name { get; set; }
 
