@@ -34,7 +34,11 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Queries
 				{
 					SubjectId = s.Id,
 					Name = s.Name,
-				});
+					CategoryId = s.CategoryId,
+					subjectTypeId = s.subjectTypeId,
+					Capacity = s.Capacity,
+					
+				}); ;
 		}
 
 		public async Task<DataFragmentResult<SubjectListItemDto>> GetDataFragmentAsync(int startIndex, int? count, CancellationToken cancellationToken = default)
