@@ -21,10 +21,10 @@ namespace MensaGymnazium.IntranetGen3.Facades
 	[Authorize]
 	public class SigningRuleFacade : ISigningRuleFacade
 	{
-		private readonly ISigningRuleListQuery SigningRuleListQuery;
-		private readonly ISigningRuleRepository SigningRuleRepository;
+		private readonly ISigningRuleListQuery signingRuleListQuery;
+		private readonly ISigningRuleRepository signingRuleRepository;
 		private readonly IUnitOfWork unitOfWork;
-		private readonly ISigningRuleMapper SigningRuleMapper;
+		private readonly ISigningRuleMapper signingRuleMapper;
 
 		public SigningRuleFacade(
 			ISigningRuleListQuery SigningRuleListQuery,
@@ -32,29 +32,29 @@ namespace MensaGymnazium.IntranetGen3.Facades
 			IUnitOfWork unitOfWork,
 			ISigningRuleMapper SigningRuleMapper)
 		{
-			this.SigningRuleListQuery = SigningRuleListQuery;
-			this.SigningRuleRepository = SigningRuleRepository;
+			this.signingRuleListQuery = SigningRuleListQuery;
+			this.signingRuleRepository = SigningRuleRepository;
 			this.unitOfWork = unitOfWork;
-			this.SigningRuleMapper = SigningRuleMapper;
+			this.signingRuleMapper = SigningRuleMapper;
 		}
 
 		public async Task<DataFragmentResult<SigningRuleDto>> GetSigningRuleListAsync(DataFragmentRequest<SigningRuleListQueryFilter> SigningRuleListRequest, CancellationToken cancellationToken = default)
 		{
 			Contract.Requires<ArgumentNullException>(SigningRuleListRequest is not null, nameof(SigningRuleListRequest));
 
-			SigningRuleListQuery.Filter = SigningRuleListRequest.Filter;
+			signingRuleListQuery.Filter = SigningRuleListRequest.Filter;
 			//SigningRuleListQuery.Sorting = SigningRuleListRequest.Sorting;
 
-			return await SigningRuleListQuery.GetDataFragmentAsync(SigningRuleListRequest.StartIndex, SigningRuleListRequest.Count, cancellationToken);
+			return await signingRuleListQuery.GetDataFragmentAsync(SigningRuleListRequest.StartIndex, SigningRuleListRequest.Count, cancellationToken);
 		}
 
 		public async Task<SigningRuleDto> GetSigningRuleDetailAsync(Dto<int> SigningRuleIdDto, CancellationToken cancellationToken = default)
 		{
 			Contract.Requires<ArgumentException>(SigningRuleIdDto.Value != default, nameof(SigningRuleIdDto));
 
-			var SigningRule = await SigningRuleRepository.GetObjectAsync(SigningRuleIdDto.Value, cancellationToken);
+			var SigningRule = await signingRuleRepository.GetObjectAsync(SigningRuleIdDto.Value, cancellationToken);
 
-			return SigningRuleMapper.MapToSigningRuleDto(SigningRule);
+			return signingRuleMapper.MapToSigningRuleDto(SigningRule);
 		}
 
 		public async Task<Dto<int>> CreateSigningRuleAsync(SigningRuleDto SigningRuleDto, CancellationToken cancellationToken = default)
@@ -63,7 +63,7 @@ namespace MensaGymnazium.IntranetGen3.Facades
 			Contract.Requires<ArgumentException>(SigningRuleDto.SigningRuleId == null, nameof(SigningRuleDto.SigningRuleId));
 
 			var SigningRule = new SigningRule();
-			SigningRuleMapper.MapFromSigningRuleDto(SigningRuleDto, SigningRule);
+			signingRuleMapper.MapFromSigningRuleDto(SigningRuleDto, SigningRule);
 
 			unitOfWork.AddForInsert(SigningRule);
 			await unitOfWork.CommitAsync(cancellationToken);
@@ -76,7 +76,7 @@ namespace MensaGymnazium.IntranetGen3.Facades
 			Contract.Requires<ArgumentNullException>(SigningRuleDto != null, nameof(SigningRuleDto));
 			Contract.Requires<ArgumentException>(SigningRuleDto.SigningRuleId != null, nameof(SigningRuleDto.SigningRuleId));
 
-			var SigningRule = await SigningRuleRepository.GetObjectAsync(SigningRuleDto.SigningRuleId.Value, cancellationToken);
+			var SigningRule = await signingRuleRepository.GetObjectAsync(SigningRuleDto.SigningRuleId.Value, cancellationToken);
 
 			SigningRule.Name = SigningRuleDto.Name;
 
@@ -86,7 +86,7 @@ namespace MensaGymnazium.IntranetGen3.Facades
 
 		public async Task DeleteSigningRuleAsync(Dto<int> SigningRuleIdDto, CancellationToken cancellationToken = default)
 		{
-			var SigningRule = SigningRuleRepository.GetObjectAsync(SigningRuleIdDto.Value, cancellationToken);
+			var SigningRule = signingRuleRepository.GetObjectAsync(SigningRuleIdDto.Value, cancellationToken);
 			unitOfWork.AddForDelete(SigningRule);
 
 			await unitOfWork.CommitAsync(cancellationToken);

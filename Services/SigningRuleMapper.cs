@@ -14,7 +14,7 @@ namespace MensaGymnazium.IntranetGen3.Services
 	[Service]
 	public class SigningRuleMapper : ISigningRuleMapper
 	{
-		public SigningRuleDto MapToSigningRule(SigningRule signingRule)
+		public SigningRuleDto MapToSigningRuleDto(SigningRule signingRule)
 		{
 			Contract.Requires(signingRule != null);
 
@@ -29,7 +29,7 @@ namespace MensaGymnazium.IntranetGen3.Services
 			};
 		}
 
-		public void MapFromSigningRule(SigningRuleDto signingRuleDto, SigningRule signingRule)
+		public void MapFromSigningRuleDto(SigningRuleDto signingRuleDto, SigningRule signingRule)
 		{
 			Contract.Requires<ArgumentNullException>(signingRuleDto is not null);
 			Contract.Requires<ArgumentNullException>(signingRule is not null);

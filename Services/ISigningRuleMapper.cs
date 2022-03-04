@@ -10,9 +10,9 @@ namespace MensaGymnazium.IntranetGen3.Services
 {
 	public interface ISigningRuleMapper
 	{
-		SigningRuleDto MapToSigningRule(SigningRule signingRule);
+		SigningRuleDto MapToSigningRuleDto(SigningRule signingRule);
 
-		void MapFromSigningRule(SigningRuleDto signingRuleDto, SigningRule signingRule)
+		void MapFromSigningRuleDto(SigningRuleDto signingRuleDto, SigningRule signingRule);
 
 	}
 }
