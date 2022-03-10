@@ -38,9 +38,8 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Queries
 				SubjectId = s.Id,
 				Name = s.Name,
 				CategoryId = s.CategoryId,
-				SubjectTypeId = s.subjectTypeId,
+				SubjectTypeIds = s.TypeRelations.Select(tr => tr.SubjectTypeId).ToList(),
 				Capacity = s.Capacity,
-
 			});
 
 			return result;
