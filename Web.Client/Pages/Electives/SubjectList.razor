@@ -1,45 +1,47 @@
 ﻿@attribute [Route(Routes.Electives.Subjects)]
 
-<HxListLayout Title="Předměty"
+@if (SubjectCategoriesDataStore.IsLoaded && SubjectTypesDataStore.IsLoaded)
+{
+    <HxListLayout Title="Předměty"
               TFilterModel="SubjectListQueryFilter"
               FilterModel="subjectListFilter"
               FilterModelChanged="HandleFilterModelChanged">
-    <CommandsTemplate>
-        <HxButton Text="Nový předmět" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />
-        @*<HxButton Text="Filtr" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />*@
-    </CommandsTemplate>
-    <FilterTemplate>
-        <HxInputText @bind-Value="@context.Name" Label="Název" />
-        <SubjectTypePicker @bind-Value="@context.SubjectTypeId" Label="Typ předmětu" />
-        <SubjectCategoryPicker @bind-Value="context.SubjectCategoryId" Label="Kategorie předmětu"/>
-    </FilterTemplate>
-    <DataTemplate>
-        <HxGrid @ref="subjectsGrid"
+        <CommandsTemplate>
+            <HxButton Text="Nový předmět" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />
+            @*<HxButton Text="Filtr" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />*@
+        </CommandsTemplate>
+        <FilterTemplate>
+            <HxInputText @bind-Value="@context.Name" Label="Název" />
+            <SubjectTypePicker @bind-Value="@context.SubjectTypeId" Label="Typ předmětu" />
+            <SubjectCategoryPicker @bind-Value="context.SubjectCategoryId" Label="Kategorie předmětu" />
+        </FilterTemplate>
+        <DataTemplate>
+            <HxGrid @ref="subjectsGrid"
                 TItem="SubjectListItemDto"
                 DataProvider="LoadSubjects"
                 SelectedDataItem="subjectSelected"
                 SelectedDataItemChanged="HandleSelectedDataItemChanged"
                 Context="item">
-            <Columns>
-			    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" />
-			    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vyučovací blok" ItemTextSelector="@(item => Convert.ToString(item.ScheduleSlotInDay))" />
-			    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Typ" ItemTextSelector="@(item => GetSubjectTypes(item.SubjectTypeIds))" />
-			    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Celková Kapacita" ItemTextSelector="@(item => Convert.ToString(item.Capacity))" />
-			    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Kategorie" ItemTextSelector="@(item => SubjectCategoriesDataStore.GetByKey(item.CategoryId)?.Name)" />
-                <HxGridColumn TItem="SubjectListItemDto" HeaderText="Ročník" ItemTextSelector="@(item => GetSubjectTypes(item.SubjectTypeIds))" />
-			</Columns>
+                <Columns>
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vyučovací blok" ItemTextSelector="@(item => Convert.ToString(item.ScheduleSlotInDay))" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Typ" ItemTextSelector="@(item => GetSubjectTypes(item.SubjectTypeIds))" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Celková Kapacita" ItemTextSelector="@(item => Convert.ToString(item.Capacity))" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Kategorie" ItemTextSelector="@(item => SubjectCategoriesDataStore.GetByKey(item.CategoryId)?.Name)" />
+                </Columns>
 
 
-            <ContextMenu Context="item">
-                <HxContextMenu>
-                    <HxContextMenuItem Text="Smazat"
+                <ContextMenu Context="item">
+                    <HxContextMenu>
+                        <HxContextMenuItem Text="Smazat"
                                        OnClick="async () => await HandleDeleteItemClicked(item)"
                                        ConfirmationQuestion="@String.Format("Opravdu si přejete předmět '{0}' smazat?", item.Name)" />
-                </HxContextMenu>
-            </ContextMenu>
-        </HxGrid>
+                    </HxContextMenu>
+                </ContextMenu>
+            </HxGrid>
 
-    </DataTemplate>
-</HxListLayout>
+        </DataTemplate>
+    </HxListLayout>
+}
 
 <SubjectEdit @ref="subjectEditComponent" SubjectId="null" OnClosed="HandleSubjectEditClosed" />

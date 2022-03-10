@@ -18,11 +18,5 @@ namespace MensaGymnazium.IntranetGen3.Model
 
 		public SubjectType SubjectType { get; set; }
 		public int SubjectTypeId { get; set; }
-
-		public SubjectType SubjectGrades { get; set; }
-		public int SubjectGradesId { get; set; }
-
-		public SubjectCategory SubjectCategory { get; set; }
-		public int SubjectCategoryId { get; set; }
 	}
 }

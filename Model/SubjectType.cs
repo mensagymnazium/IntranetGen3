@@ -19,7 +19,6 @@ namespace MensaGymnazium.IntranetGen3.Model
 
 		public enum Entry
 		{
-			NotDefined = 0,
 			LanguageCommunication = 1,
 			MathApplication = 2,
 			Informatics = 4,

@@ -26,7 +26,6 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core
 					},
 					SubjectTypeRelations =
 					{
-						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.NotDefined },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
@@ -48,7 +47,6 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core
 					},
 					SubjectTypeRelations =
 					{
-						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.NotDefined },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
@@ -87,7 +85,6 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core
 					},
 					SubjectTypeRelations =
 					{
-						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.NotDefined },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
@@ -111,7 +108,6 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core
 					},
 					SubjectTypeRelations =
 					{
-						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.NotDefined },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
@@ -135,7 +131,6 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core
 					},
 					SubjectTypeRelations =
 					{
-						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.NotDefined },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
@@ -159,7 +154,6 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core
 					},
 					SubjectTypeRelations =
 					{
-						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.NotDefined },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
@@ -184,7 +178,6 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core
 					},
 					SubjectTypeRelations =
 					{
-						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.NotDefined },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
 						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },

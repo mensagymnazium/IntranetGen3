@@ -33,7 +33,5 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries
 			
 		MensaGymnazium.IntranetGen3.Model.SubjectType MathApplication { get; }
 			
-		MensaGymnazium.IntranetGen3.Model.SubjectType NotDefined { get; }
-			
 	}
 }
