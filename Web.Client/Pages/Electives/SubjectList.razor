@@ -26,6 +26,7 @@
 			    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Typ" ItemTextSelector="@(item => GetSubjectTypes(item.SubjectTypeIds))" />
 			    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Celková Kapacita" ItemTextSelector="@(item => Convert.ToString(item.Capacity))" />
 			    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Kategorie" ItemTextSelector="@(item => SubjectCategoriesDataStore.GetByKey(item.CategoryId)?.Name)" />
+                <HxGridColumn TItem="SubjectListItemDto" HeaderText="Ročník" ItemTextSelector="@(item => GetSubjectTypes(item.SubjectTypeIds))" />
 			</Columns>
 
 
