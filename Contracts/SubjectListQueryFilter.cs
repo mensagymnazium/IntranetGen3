@@ -10,5 +10,6 @@ namespace MensaGymnazium.IntranetGen3.Contracts
 	{
 		public string Name { get; set; }
 		public int? SubjectTypeId { get; set; }
+		public int? SubjectCategoryId { get; set; }
 	}
 }

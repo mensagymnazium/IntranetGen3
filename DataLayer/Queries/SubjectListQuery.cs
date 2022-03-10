@@ -40,12 +40,15 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Queries
 			data = data.WhereIf(Filter.SubjectTypeId != null,
 				s => s.TypeRelations.Any(r => r.SubjectTypeId == Filter.SubjectTypeId));
 
+			data = data.WhereIf(Filter.SubjectCategoryId != null,
+				s => s.SubjectCategory.Any(r => r. == Filter.SubjectCategoryId));
+
 			var result = data.Select(s => new SubjectListItemDto()
 			{
 				SubjectId = s.Id,
 				Name = s.Name,
 				CategoryId = s.CategoryId,
-				subjectTypeId = s.subjectTypeId,
+				SubjectTypeId = s.subjectTypeId,
 				Capacity = s.Capacity,
 
 			});

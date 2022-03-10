@@ -55,6 +55,7 @@ namespace MensaGymnazium.IntranetGen3.Model
 
 
 		public List<SubjectTypeRelation> TypeRelations { get; } = new List<SubjectTypeRelation>();
+		public List<SubjectCategory> SubjectCategory { get; } = new List<SubjectCategory>(); 
 
 		[NotMapped]
 		public IEnumerable<SubjectType> Types
