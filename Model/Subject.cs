@@ -15,8 +15,6 @@ namespace MensaGymnazium.IntranetGen3.Model
 	[Cache]
 	public class Subject
 	{
-		public int subjectTypeId;
-
 		public int Id { get; set; }
 
 		[MaxLength(50)]

@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Havit.Data.EntityFrameworkCore.Patterns.QueryServices;
+﻿using Havit.Data.EntityFrameworkCore.Patterns.QueryServices;
 using Havit.Extensions.DependencyInjection.Abstractions;
 using Havit.Linq;
 using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.DataLayer.DataSources;
-using Microsoft.EntityFrameworkCore;
 
 namespace MensaGymnazium.IntranetGen3.DataLayer.Queries
 {
@@ -48,9 +41,8 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Queries
 				SubjectId = s.Id,
 				Name = s.Name,
 				CategoryId = s.CategoryId,
-				SubjectTypeId = s.subjectTypeId,
+				SubjectTypeIds = s.TypeRelations.Select(tr => tr.SubjectTypeId).ToList(),
 				Capacity = s.Capacity,
-
 			});
 
 			return result;

@@ -103,50 +103,97 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core
 				{
 					Name = "Kvinta - Nadstavbový seminář",
 					Description = "Je potřeba si zvolit jeden nadstavbový seminář",
-					GradeId = (int) Grade.Entry.Kvarta,
+					GradeId = (int) Grade.Entry.Kvinta,
 					Quantity = 1,
 					SubjectCategoryRelations =
 					{
 						new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.Seminars },
 					},
-					// TODO
-					//SubjectTypeRelations =
-					//{
-					//	new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.NotDefined },
-					//	new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
-					//	new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
-					//	new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
-					//	new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanWork },
-					//	new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.ArtCulture },
-					//	new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.Informatics },
-					//	new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.MathApplication },
-					//	new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.LanguageCommunication },
-					//}
+					SubjectTypeRelations =
+					{
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.NotDefined },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanWork },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.ArtCulture },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.Informatics },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.MathApplication },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.LanguageCommunication },
+					}
 				},
 				new SigningRule()
 				{
 					Name = "Kvinta - Druhý seminář",
 					Description = "Je potřeba si zvolit jeden specializační nebo nadstavbový seminář",
-					GradeId = (int) Grade.Entry.Kvarta,
+					GradeId = (int) Grade.Entry.Kvinta,
 					Quantity = 1,
 					SubjectCategoryRelations =
 					{
 						new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.SpecialSeminars },
 						new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.Seminars },
 					},
-					// TODO
-					//SubjectTypeRelations =
-					//{
-					//	new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.NotDefined },
-					//	new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
-					//	new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
-					//	new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
-					//	new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanWork },
-					//	new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.ArtCulture },
-					//	new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.Informatics },
-					//	new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.MathApplication },
-					//	new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.LanguageCommunication },
-					//}
+					SubjectTypeRelations =
+					{
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.NotDefined },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanWork },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.ArtCulture },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.Informatics },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.MathApplication },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.LanguageCommunication },
+					}
+				},
+				new SigningRule()
+				{
+					Name = "Sexta - Druhý seminář",
+					Description = "Je potřeba si zvolit jeden specializační nebo nadstavbový seminář",
+					GradeId = (int) Grade.Entry.Sexta,
+					Quantity = 1,
+					SubjectCategoryRelations =
+					{
+						new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.SpecialSeminars },
+						new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.Seminars },
+					},
+					SubjectTypeRelations =
+					{
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.NotDefined },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanWork },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.ArtCulture },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.Informatics },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.MathApplication },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.LanguageCommunication },
+					}
+				},
+				new SigningRule()
+				{
+					Name = "Septima - dva semináře",
+					Description = "Je potřeba si zvolit dva semináře",
+					GradeId = (int) Grade.Entry.Septima,
+					Quantity = 2,
+					SubjectCategoryRelations =
+					{
+						new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.SpecialSeminars },
+						new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.Seminars },
+						new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.Graduational },
+					},
+					SubjectTypeRelations =
+					{
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.NotDefined },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanWork },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.ArtCulture },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.Informatics },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.MathApplication },
+						new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.LanguageCommunication },
+					}
 				},
 			};
 

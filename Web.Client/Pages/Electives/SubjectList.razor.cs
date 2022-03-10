@@ -8,6 +8,7 @@ using Havit.Blazor.Components.Web;
 using MensaGymnazium.IntranetGen3.Contracts;
 using Microsoft.AspNetCore.Components;
 using Havit.Collections;
+using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 {
@@ -16,11 +17,19 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 		[Inject] protected IHxMessengerService Messenger { get; set; }
 		[Inject] protected ISubjectFacade SubjectFacade { get; set; }
 		[Inject] protected NavigationManager NavigationManager { get; set; }
+		[Inject] protected ISubjectCategoriesDataStore SubjectCategoriesDataStore { get; set; }
+		[Inject] protected ISubjectTypesDataStore SubjectTypesDataStore { get; set; }
 
 		private SubjectListQueryFilter subjectListFilter = new SubjectListQueryFilter();
 		private HxGrid<SubjectListItemDto> subjectsGrid;
 		private SubjectListItemDto subjectSelected;
 		private SubjectEdit subjectEditComponent;
+
+		protected override async Task OnInitializedAsync()
+		{
+			await SubjectCategoriesDataStore.EnsureDataAsync();
+			await SubjectTypesDataStore.EnsureDataAsync();
+		}
 
 		private async Task<GridDataProviderResult<SubjectListItemDto>> LoadSubjects(GridDataProviderRequest<SubjectListItemDto> request)
 		{
@@ -69,6 +78,12 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 		private async Task HandleSubjectEditClosed()
 		{
 			await subjectsGrid.RefreshDataAsync();
+		}
+
+		private string GetSubjectTypes(List<int> subjectTypesIds)
+		{
+			return String.Join(", ", subjectTypesIds.Select(id => SubjectTypesDataStore.GetByKey(id)?.Name))
+				.Trim(',', ' ');
 		}
 	}
 }

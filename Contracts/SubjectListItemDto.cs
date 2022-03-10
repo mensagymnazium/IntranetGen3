@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.Contracts
 {
@@ -12,7 +9,7 @@ namespace MensaGymnazium.IntranetGen3.Contracts
 		public string Name { get; set; }
 		public int CategoryId { get; set; }
 		public int Capacity { get; set; }
-		public int SubjectTypeId { get; set; }
-		public int SubjectLearningBlock { get; set; }
+		public ScheduleSlotInDay ScheduleSlotInDay { get; set; }
+		public List<int> SubjectTypeIds { get; set; } = new List<int>();
 	}
 }

@@ -29,7 +29,6 @@ namespace MensaGymnazium.IntranetGen3.Services
 			{
 				Id = subject.Id,
 				Name = subject.Name
-
 			};
 		}
 	}
