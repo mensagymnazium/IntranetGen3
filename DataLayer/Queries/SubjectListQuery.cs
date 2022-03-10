@@ -45,7 +45,7 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Queries
 				SubjectId = s.Id,
 				Name = s.Name,
 				CategoryId = s.CategoryId,
-				subjectTypeId = s.subjectTypeId,
+				SubjectTypeId = s.subjectTypeId,
 				Capacity = s.Capacity,
 
 			});
