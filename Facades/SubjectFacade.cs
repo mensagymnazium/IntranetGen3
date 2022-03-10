@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Havit.Data.Patterns.UnitOfWorks;
-using Havit.Diagnostics.Contracts;
-using Havit.Extensions.DependencyInjection.Abstractions;
+﻿using System.Security;
 using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.DataLayer.Queries;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
+using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
 using MensaGymnazium.IntranetGen3.Model;
+using MensaGymnazium.IntranetGen3.Primitives;
 using MensaGymnazium.IntranetGen3.Services;
-using Microsoft.AspNetCore.Authorization;
+using MensaGymnazium.IntranetGen3.Services.Security;
 
 namespace MensaGymnazium.IntranetGen3.Facades
 {
@@ -23,17 +17,23 @@ namespace MensaGymnazium.IntranetGen3.Facades
 		private readonly ISubjectListQuery subjectListQuery;
 		private readonly ISubjectRepository subjectRepository;
 		private readonly IUnitOfWork unitOfWork;
+		private readonly IApplicationAuthenticationService applicationAuthenticationService;
+		private readonly IUserManager userManager;
 		private readonly ISubjectMapper subjectMapper;
 
 		public SubjectFacade(
 			ISubjectListQuery subjectListQuery,
 			ISubjectRepository subjectRepository,
 			IUnitOfWork unitOfWork,
+			IApplicationAuthenticationService applicationAuthenticationService,
+			IUserManager userManager,
 			ISubjectMapper subjectMapper)
 		{
 			this.subjectListQuery = subjectListQuery;
 			this.subjectRepository = subjectRepository;
 			this.unitOfWork = unitOfWork;
+			this.applicationAuthenticationService = applicationAuthenticationService;
+			this.userManager = userManager;
 			this.subjectMapper = subjectMapper;
 		}
 
@@ -56,6 +56,7 @@ namespace MensaGymnazium.IntranetGen3.Facades
 			return subjectMapper.MapToSubjectDto(subject);
 		}
 
+		//[Authorize(Roles = nameof(Role.Administrator))]
 		public async Task<Dto<int>> CreateSubjectAsync(SubjectDto subjectDto, CancellationToken cancellationToken = default)
 		{
 			Contract.Requires<ArgumentNullException>(subjectDto != null, nameof(SubjectDto));
@@ -70,12 +71,22 @@ namespace MensaGymnazium.IntranetGen3.Facades
 			return Dto.FromValue(subject.Id);
 		}
 
+		//[Authorize(Roles = $"{nameof(Role.Administrator)}, {nameof(Role.Teacher)}")]
 		public async Task UpdateSubjectAsync(SubjectDto subjectDto, CancellationToken cancellationToken = default)
 		{
 			Contract.Requires<ArgumentNullException>(subjectDto != null, nameof(SubjectDto));
 			Contract.Requires<ArgumentException>(subjectDto.Id != null, nameof(SubjectDto.Id));
 
 			var subject = await subjectRepository.GetObjectAsync(subjectDto.Id.Value, cancellationToken);
+
+			//var currentUser = applicationAuthenticationService.GetCurrentUser();
+			//if (!await userManager.IsInRolesAsync(currentUser, Role.Administrator))
+			//{
+			//	if (!subject.Teachers.Any(t => t.Id == currentUser.TeacherId))
+			//	{
+			//		throw new SecurityException("Access Denied. Not your subject.");
+			//	}
+			//}
 
 			subject.Name = subjectDto.Name;
 
