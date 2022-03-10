@@ -14,7 +14,6 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core
 		{
 			var data = new[]
 			{
-				new SubjectCategory() { Id = (int)SubjectCategory.Entry.NotDefined, Name = "Neurčeno" },
 				new SubjectCategory() { Id = (int)SubjectCategory.Entry.Graduational, Name = "Maturitní semináře" },
 				new SubjectCategory() { Id = (int)SubjectCategory.Entry.Seminars, Name = "Nadstavbový seminář" },
 				new SubjectCategory() { Id = (int)SubjectCategory.Entry.SpecialSeminars, Name = "Specializační semináře" },

@@ -86,10 +86,10 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Demo
 					ScheduleDayOfWeek = DayOfWeek.Monday,
 					Description = "Kepler je odpad",
 					ScheduleSlotInDay = Primitives.ScheduleSlotInDay.Block4,
-					CategoryId = (int)SubjectCategory.Entry.NotDefined,
+					CategoryId = (int)SubjectCategory.Entry.Seminars,
 					TypeRelations =
 					{
-						new SubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.NotDefined },
+						new SubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.ArtCulture },
 					},
 					TeacherRelations =
 					{

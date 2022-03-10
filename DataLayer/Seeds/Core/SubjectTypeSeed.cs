@@ -15,7 +15,6 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core
 		{
 			var data = new[]
 			{
-				new SubjectType() { Name = "Neurčeno", Id = (int)SubjectType.Entry.NotDefined },
 				new SubjectType() { Name = "Jazyk a jazyková komunikace", Id = (int)SubjectType.Entry.LanguageCommunication },
 				new SubjectType() { Name = "Matematika a její aplikace", Id= (int)SubjectType.Entry.MathApplication },
 				new SubjectType() { Name = "Informační a komunikační technologie", Id = (int)SubjectType.Entry.Informatics },

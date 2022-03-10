@@ -45,19 +45,6 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries
         }
 		private MensaGymnazium.IntranetGen3.Model.SubjectCategory graduational;
 
-		public MensaGymnazium.IntranetGen3.Model.SubjectCategory NotDefined
-        {
-            get
-            {
-				if (notDefined == null)
-				{
-					notDefined = GetEntry(MensaGymnazium.IntranetGen3.Model.SubjectCategory.Entry.NotDefined);
-				}
-				return notDefined;
-            }
-        }
-		private MensaGymnazium.IntranetGen3.Model.SubjectCategory notDefined;
-
 		public MensaGymnazium.IntranetGen3.Model.SubjectCategory Seminars
         {
             get

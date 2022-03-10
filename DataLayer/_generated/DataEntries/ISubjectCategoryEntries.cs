@@ -21,8 +21,6 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries
 			
 		MensaGymnazium.IntranetGen3.Model.SubjectCategory Graduational { get; }
 			
-		MensaGymnazium.IntranetGen3.Model.SubjectCategory NotDefined { get; }
-			
 		MensaGymnazium.IntranetGen3.Model.SubjectCategory Seminars { get; }
 			
 		MensaGymnazium.IntranetGen3.Model.SubjectCategory SpecialSeminars { get; }

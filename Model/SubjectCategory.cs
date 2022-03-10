@@ -19,7 +19,6 @@ namespace MensaGymnazium.IntranetGen3.Model
 
 		public enum Entry
 		{
-			NotDefined = 0,
 			Graduational = 1,
 			Seminars = 2,
 			SpecialSeminars = 4,

@@ -123,19 +123,6 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries
         }
 		private MensaGymnazium.IntranetGen3.Model.SubjectType mathApplication;
 
-		public MensaGymnazium.IntranetGen3.Model.SubjectType NotDefined
-        {
-            get
-            {
-				if (notDefined == null)
-				{
-					notDefined = GetEntry(MensaGymnazium.IntranetGen3.Model.SubjectType.Entry.NotDefined);
-				}
-				return notDefined;
-            }
-        }
-		private MensaGymnazium.IntranetGen3.Model.SubjectType notDefined;
-
 		public SubjectTypeEntries(MensaGymnazium.IntranetGen3.DataLayer.Repositories.ISubjectTypeRepository repository)
 			: base(repository)
 		{
