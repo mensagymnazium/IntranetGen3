@@ -22,10 +22,10 @@
                 Context="item">
             <Columns>
                 <HxGridColumn TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" />
-                <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vyučovací blok" ItemTextSelector="@(item=> Convert.ToString(item.CategoryId))" />
+                <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vyučovací blok" ItemTextSelector="@(item=> Convert.ToString(item.SubjectLearningBlock))" />
                 <HxGridColumn TItem="SubjectListItemDto" HeaderText="Typ" ItemTextSelector="@(item=> Convert.ToString(item.SubjectTypeId) )" />
                 <HxGridColumn TItem="SubjectListItemDto" HeaderText="Celková Kapacita" ItemTextSelector="@(item=> Convert.ToString(item.Capacity))" />
-                <HxGridColumn TItem="SubjectListItemDto" HeaderText="Kategorie" ItemTextSelector="@(item => item.Name)" />
+                <HxGridColumn TItem="SubjectListItemDto" HeaderText="Kategorie" ItemTextSelector="@(item => Convert.ToString(item.CategoryId))" />
             </Columns>
 
 
