@@ -25,6 +25,7 @@
 		<ProjectReference Include="..\DependencyInjection\DependencyInjection.csproj" />
 		<ProjectReference Include="..\Facades\Facades.csproj" />
 		<ProjectReference Include="..\Model\Model.csproj" />
+		<ProjectReference Include="..\Primitives\Primitives.csproj" />
 		<ProjectReference Include="..\Web.Client\Web.Client.csproj" />
 	</ItemGroup>
 

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security;
 using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
 using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Claims;
+using MensaGymnazium.IntranetGen3.Primitives;
 using MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.Security;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -48,11 +49,9 @@ namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ConfigurationExt
 			services.AddAuthorization(options =>
 			{
 				options.AddPolicy(PolicyNames.HangfireDashboardAcccessPolicy, policy => policy
-					.RequireAuthenticatedUser());
-				// TODO Authorization or remove hangfire
+					.RequireAuthenticatedUser()
+					.RequireRole(nameof(Role.Administrator)));
 			});
-
-
 		}
 
 		private static Task RedirectOrApiStatus(RedirectContext<CookieAuthenticationOptions> context, HttpStatusCode apiStatus)
