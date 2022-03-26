@@ -14,6 +14,7 @@
             <HxInputText @bind-Value="@context.Name" Label="Název" />
             <SubjectTypePicker @bind-Value="@context.SubjectTypeId" Label="Typ předmětu" />
             <SubjectCategoryPicker @bind-Value="context.SubjectCategoryId" Label="Kategorie předmětu" />
+            <TeacherPicker @bind-Value="context.TeacherId" Label="Učitel" />
         </FilterTemplate>
         <DataTemplate>
             <HxGrid @ref="subjectsGrid"
@@ -23,13 +24,13 @@
                 SelectedDataItemChanged="HandleSelectedDataItemChanged"
                 Context="item">
                 <Columns>
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vyučovací blok" ItemTextSelector="@(item => Convert.ToString(item.ScheduleSlotInDay))" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Typ" ItemTextSelector="@(item => GetSubjectTypes(item.SubjectTypeIds))" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Celková Kapacita" ItemTextSelector="@(item => Convert.ToString(item.Capacity))" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Kategorie" ItemTextSelector="@(item => SubjectCategoriesDataStore.GetByKey(item.CategoryId)?.Name)" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" SortString="@nameof(SubjectListItemDto.Name)" IsDefaultSortColumn="true" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Učitel(é)" ItemTextSelector="@(item => GetTeachers(item.TeacherIds))" SortString="@nameof(SubjectListItemDto.TeacherIds)" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vyučovací blok" ItemTextSelector="@(item => ValueFormatter.GetScheduleTimeSlot(item.ScheduleDayOfWeek, item.ScheduleSlotInDay))" SortString="@nameof(SubjectListItemDto.ScheduleSlotInDay)" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Celková Kapacita" ItemTextSelector="@(item => Convert.ToString(item.Capacity))" SortString="@nameof(SubjectListItemDto.Capacity)" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Kategorie" ItemTextSelector="@(item => SubjectCategoriesDataStore.GetByKey(item.CategoryId)?.Name)" SortString="@nameof(SubjectListItemDto.CategoryId)" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Typ" ItemTextSelector="@(item => GetSubjectTypes(item.SubjectTypeIds))" SortString="@nameof(SubjectListItemDto.SubjectTypeIds)" />
                 </Columns>
-
 
                 <ContextMenu Context="item">
                     <HxContextMenu>

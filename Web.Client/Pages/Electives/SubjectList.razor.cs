@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Blazor.Components.Web.Bootstrap;
-using Havit.Blazor.Components.Web;
+﻿using Havit.Collections;
 using MensaGymnazium.IntranetGen3.Contracts;
-using Microsoft.AspNetCore.Components;
-using Havit.Collections;
 using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
+using Microsoft.AspNetCore.Components;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 {
@@ -19,6 +12,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 		[Inject] protected NavigationManager NavigationManager { get; set; }
 		[Inject] protected ISubjectCategoriesDataStore SubjectCategoriesDataStore { get; set; }
 		[Inject] protected ISubjectTypesDataStore SubjectTypesDataStore { get; set; }
+		[Inject] protected ITeachersDataStore TeachersDataStore { get; set; }
 
 		private SubjectListQueryFilter subjectListFilter = new SubjectListQueryFilter();
 		private HxGrid<SubjectListItemDto> subjectsGrid;
@@ -29,6 +23,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 		{
 			await SubjectCategoriesDataStore.EnsureDataAsync();
 			await SubjectTypesDataStore.EnsureDataAsync();
+			await TeachersDataStore.EnsureDataAsync();
 		}
 
 		private async Task<GridDataProviderResult<SubjectListItemDto>> LoadSubjects(GridDataProviderRequest<SubjectListItemDto> request)
@@ -83,6 +78,12 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 		private string GetSubjectTypes(List<int> subjectTypesIds)
 		{
 			return String.Join(", ", subjectTypesIds.Select(id => SubjectTypesDataStore.GetByKey(id)?.Name))
+				.Trim(',', ' ');
+		}
+
+		private string GetTeachers(List<int> teacherIds)
+		{
+			return String.Join(", ", teacherIds.Select(id => TeachersDataStore.GetByKey(id)?.Name))
 				.Trim(',', ' ');
 		}
 	}

@@ -42,7 +42,7 @@ namespace MensaGymnazium.IntranetGen3.Facades
 			Contract.Requires<ArgumentNullException>(subjectListRequest is not null, nameof(subjectListRequest));
 
 			subjectListQuery.Filter = subjectListRequest.Filter;
-			//subjectListQuery.Sorting = subjectListRequest.Sorting;
+			subjectListQuery.Sorting = subjectListRequest.Sorting;
 
 			return await subjectListQuery.GetDataFragmentAsync(subjectListRequest.StartIndex, subjectListRequest.Count, cancellationToken);
 		}

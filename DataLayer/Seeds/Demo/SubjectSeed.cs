@@ -29,8 +29,8 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Demo
 				{
 					Capacity = 12,
 					Name = "Tohle je stoprocentně reálnej předmět...",
-					ScheduleDayOfWeek = DayOfWeek.Monday,
 					Description = "Reálnej seminář",
+					ScheduleDayOfWeek = DayOfWeek.Monday,
 					ScheduleSlotInDay = Primitives.ScheduleSlotInDay.Block5,
 					CategoryId = (int)SubjectCategory.Entry.Seminars,
 					TypeRelations =
@@ -56,8 +56,8 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Demo
 				{
 					Capacity = 13,
 					Name = "Brdek je bůh.",
-					ScheduleDayOfWeek = DayOfWeek.Monday,
 					Description = "Seminář pravdy",
+					ScheduleDayOfWeek = DayOfWeek.Tuesday,
 					ScheduleSlotInDay = Primitives.ScheduleSlotInDay.Block1,
 					CategoryId = (int)SubjectCategory.Entry.SpecialSeminars,
 					TypeRelations =
@@ -179,8 +179,8 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Demo
 				{
 					Capacity = 12,
 					Name = "ArdPrg",
-					ScheduleDayOfWeek = DayOfWeek.Monday,
 					Description = "Kočí > Šebestík",
+					ScheduleDayOfWeek = DayOfWeek.Thursday,
 					ScheduleSlotInDay = Primitives.ScheduleSlotInDay.Block4,
 					CategoryId = (int)SubjectCategory.Entry.SpecialSeminars,
 					TypeRelations =
@@ -204,8 +204,8 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Demo
 				{
 					Capacity = 12,
 					Name = "SemPrg II",
-					ScheduleDayOfWeek = DayOfWeek.Monday,
 					Description = "Student = Levná pracovní síla",
+					ScheduleDayOfWeek = DayOfWeek.Thursday,
 					ScheduleSlotInDay = Primitives.ScheduleSlotInDay.Block5,
 					CategoryId = (int)SubjectCategory.Entry.SpecialSeminars,
 					TypeRelations =
@@ -231,8 +231,8 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Demo
 				{
 					Capacity = 12,
 					Name = "ŘímAJ",
-					ScheduleDayOfWeek = DayOfWeek.Monday,
 					Description = "Stejně se to neotevře ;-)",
+					ScheduleDayOfWeek = DayOfWeek.Wednesday,
 					ScheduleSlotInDay = Primitives.ScheduleSlotInDay.Block5,
 					CategoryId = (int)SubjectCategory.Entry.ForeignLanguage,
 					TypeRelations =
