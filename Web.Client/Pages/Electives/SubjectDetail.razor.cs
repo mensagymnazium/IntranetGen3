@@ -33,7 +33,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 				if (SubjectId.HasValue)
 				{
 					loadedSubjectId = SubjectId;
-					subject = await SubjectFacade.GetSubjectDetailAsync(Dto.FromValue(SubjectId.Value));
+					await LoadSubjectAsync();
 				}
 				else
 				{
@@ -42,9 +42,19 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 			}
 		}
 
+		private async Task LoadSubjectAsync()
+		{
+			subject = await SubjectFacade.GetSubjectDetailAsync(Dto.FromValue(SubjectId.Value));
+		}
+
 		private async Task HandleEditClick()
 		{
 			await subjectEditComponent.ShowAsync();
+		}
+
+		private async Task HandleEditSaved(int subjectId)
+		{
+			await LoadSubjectAsync();
 		}
 
 		private string GetSubjectTypes(List<int> subjectTypesIds)

@@ -14,13 +14,14 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 	public partial class SubjectEdit
 	{
 		[Parameter] public int? SubjectId { get; set; }
-		[Parameter] public EventCallback OnClosed { get; set; }
+		[Parameter] public EventCallback<int> OnSaved { get; set; }
 
 		[Inject] protected ISubjectFacade SubjectFacade { get; set; }
 
 		private HxOffcanvas offcanvasComponent;
 		private SubjectDto model = new();
 		private EditContext editContext;
+		private string title;
 
 		protected override async Task OnParametersSetAsync()
 		{
@@ -28,11 +29,13 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 			{
 				model = new();
 				editContext = new EditContext(model);
+				title = "Nový předmět";
 			}
 			else if (SubjectId != model.SubjectId)
 			{
 				model = await SubjectFacade.GetSubjectDetailAsync(Dto.FromValue(SubjectId.Value));
 				editContext = new EditContext(model);
+				title = model.Name;
 			}
 		}
 
@@ -41,7 +44,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 			await offcanvasComponent.ShowAsync();
 		}
 
-		public async Task HandleValidSubmit()
+		private async Task HandleValidSubmit()
 		{
 			try
 			{
@@ -55,6 +58,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 				}
 
 				await offcanvasComponent.HideAsync();
+				await OnSaved.InvokeAsync(model.SubjectId);
 			}
 			catch (OperationFailedException)
 			{

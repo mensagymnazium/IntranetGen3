@@ -1,7 +1,15 @@
-﻿<HxOffcanvas @ref="offcanvasComponent" Title="@SubjectId.ToString()" OnClosed="this.OnClosed">
+﻿<HxOffcanvas @ref="offcanvasComponent" Title="@title">
     <BodyTemplate>
         <EditForm EditContext="editContext">
+            <FluentValidationValidator />
             <HxInputText @bind-Value="model.Name" Label="Název" />
+            <HxInputTextArea @bind-Value="model.Description" Label="Popis" />
+            <HxInputNumber @bind-Value="model.Capacity" Label="Kapacita" />
+            TODO TeacherMultiPicker - HxMultiSelect
+            <ScheduleTimeSlotPicker @bind-Day="model.ScheduleDayOfWeek" @bind-Slot="model.ScheduleSlotInDay" />
+            TODO GradesMultiPicker - HxMultiSelect
+            <SubjectCategoryPicker @bind-Value="model.CategoryId" Label="Kategorie" />
+            TODO SubjectTypesMultiPicker - HxMultiSelect
         </EditForm>
     </BodyTemplate>
     <FooterTemplate>

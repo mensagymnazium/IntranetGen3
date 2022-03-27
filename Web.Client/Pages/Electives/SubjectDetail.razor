@@ -31,16 +31,16 @@
         <BodyTemplate>
             <HxCardText>
                 <TextValue Label="Učitel(é)" Value="@GetTeachers(subject.TeacherIds)" />
-                <TextValue Label="Vyučovací blok" Value="@ValueFormatter.GetScheduleTimeSlot(subject.ScheduleDayOfWeek, subject.ScheduleSlotInDay)" />
+                <TextValue Label="Rozvrh" Value="@ValueFormatter.GetScheduleTimeSlot(subject.ScheduleDayOfWeek, subject.ScheduleSlotInDay)" />
                 <TextValue Label="Kapacita" Value="@subject.Capacity.ToString("n0")" />
                 <TextValue Label="Ročník(y)" Value="@GetGrades(subject.GradeIds)" />
-                <TextValue Label="Kategorie" Value="@SubjectCategoriesDataStore.GetByKey(subject.CategoryId)?.Name" />
+                <TextValue Label="Kategorie" Value="@SubjectCategoriesDataStore.GetByKey(subject.CategoryId.Value)?.Name" />
                 <TextValue Label="Typ(y)" Value="@GetSubjectTypes(subject.SubjectTypeIds)" />
             </HxCardText>
         </BodyTemplate>
     </HxCard>
 
-    <SubjectEdit @ref="subjectEditComponent" SubjectId="@SubjectId" />
+    <SubjectEdit @ref="subjectEditComponent" SubjectId="@SubjectId" OnSaved="HandleEditSaved" />
 }
 else
 {

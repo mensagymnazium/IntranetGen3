@@ -19,6 +19,11 @@ namespace MensaGymnazium.IntranetGen3.Services
 			Contract.Requires<ArgumentNullException>(subject is not null);
 
 			subject.Name = subjectDto.Name;
+			subject.Description = subjectDto.Description;
+			subject.CategoryId = subjectDto.CategoryId.Value;
+			subject.Capacity = subjectDto.Capacity;
+			subject.ScheduleDayOfWeek = subjectDto.ScheduleDayOfWeek.Value;
+			subject.ScheduleSlotInDay = subjectDto.ScheduleSlotInDay.Value;
 		}
 
 		public async Task<SubjectDto> MapToSubjectDtoAsync(Subject subject, CancellationToken cancellationToken = default)

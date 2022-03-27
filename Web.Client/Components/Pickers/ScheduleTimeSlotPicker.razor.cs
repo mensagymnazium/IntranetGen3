@@ -21,19 +21,19 @@ using Havit.Blazor.Components.Web;
 using Havit.Blazor.Components.Web.Bootstrap;
 using System.Globalization;
 using System.ComponentModel;
+using System.Linq.Expressions;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Components.Pickers
 {
 	public partial class ScheduleTimeSlotPicker
 	{
 		[Parameter] public DayOfWeek? Day { get; set; }
-
 		[Parameter] public EventCallback<DayOfWeek?> DayChanged { get; set; }
+		[Parameter] public Expression<Func<DayOfWeek?>> DayExpression { get; set; }
+
 
 		[Parameter] public ScheduleSlotInDay? Slot { get; set; }
-
 		[Parameter] public EventCallback<ScheduleSlotInDay?> SlotChanged { get; set; }
-
-		private static DateTimeFormatInfo DateTimeFormat => new CultureInfo("cs-CZ").DateTimeFormat;
+		[Parameter] public Expression<Func<ScheduleSlotInDay?>> SlotExpression { get; set; }
 	}
 }

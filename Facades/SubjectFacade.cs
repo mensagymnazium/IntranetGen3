@@ -88,7 +88,7 @@ namespace MensaGymnazium.IntranetGen3.Facades
 			//	}
 			//}
 
-			subject.Name = subjectDto.Name;
+			subjectMapper.MapFromSubjectDto(subjectDto, subject);
 
 			unitOfWork.AddForUpdate(subject);
 			await unitOfWork.CommitAsync(cancellationToken);

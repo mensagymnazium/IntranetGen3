@@ -72,7 +72,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 			await subjectEditComponent.ShowAsync();
 		}
 
-		private async Task HandleSubjectEditClosed()
+		private async Task HandleSubjectEditSaved()
 		{
 			await subjectsGrid.RefreshDataAsync();
 		}
