@@ -156,7 +156,7 @@ public static class ValueFormatter
 	/// <summary>
 	/// Vrátí MarkupString pro renderování HTML, kde jsou znaky zalomení řádku nahrazeny za &lt;br /&gt;
 	/// </summary>
-	public static MarkupString GetMarkupWithNewLineAsHtmlBreak(string inputString)
+	public static MarkupString WithNewLinesAsHtmlBreak(this string inputString)
 	{
 		if (string.IsNullOrWhiteSpace(inputString))
 		{

@@ -53,14 +53,14 @@ namespace MensaGymnazium.IntranetGen3.Facades
 
 			var subject = await subjectRepository.GetObjectAsync(subjectIdDto.Value, cancellationToken);
 
-			return subjectMapper.MapToSubjectDto(subject);
+			return await subjectMapper.MapToSubjectDtoAsync(subject);
 		}
 
 		//[Authorize(Roles = nameof(Role.Administrator))]
 		public async Task<Dto<int>> CreateSubjectAsync(SubjectDto subjectDto, CancellationToken cancellationToken = default)
 		{
 			Contract.Requires<ArgumentNullException>(subjectDto != null, nameof(SubjectDto));
-			Contract.Requires<ArgumentException>(subjectDto.Id == null, nameof(SubjectDto.Id));
+			Contract.Requires<ArgumentException>(subjectDto.SubjectId == default, nameof(SubjectDto.SubjectId));
 
 			var subject = new Subject();
 			subjectMapper.MapFromSubjectDto(subjectDto, subject);
@@ -75,9 +75,9 @@ namespace MensaGymnazium.IntranetGen3.Facades
 		public async Task UpdateSubjectAsync(SubjectDto subjectDto, CancellationToken cancellationToken = default)
 		{
 			Contract.Requires<ArgumentNullException>(subjectDto != null, nameof(SubjectDto));
-			Contract.Requires<ArgumentException>(subjectDto.Id != null, nameof(SubjectDto.Id));
+			Contract.Requires<ArgumentException>(subjectDto.SubjectId != default, nameof(SubjectDto.SubjectId));
 
-			var subject = await subjectRepository.GetObjectAsync(subjectDto.Id.Value, cancellationToken);
+			var subject = await subjectRepository.GetObjectAsync(subjectDto.SubjectId, cancellationToken);
 
 			//var currentUser = applicationAuthenticationService.GetCurrentUser();
 			//if (!await userManager.IsInRolesAsync(currentUser, Role.Administrator))

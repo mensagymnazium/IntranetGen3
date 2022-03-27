@@ -29,7 +29,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 				model = new();
 				editContext = new EditContext(model);
 			}
-			else if (SubjectId != model.Id)
+			else if (SubjectId != model.SubjectId)
 			{
 				model = await SubjectFacade.GetSubjectDetailAsync(Dto.FromValue(SubjectId.Value));
 				editContext = new EditContext(model);
@@ -45,9 +45,9 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 		{
 			try
 			{
-				if (model.Id == default)
+				if (model.SubjectId == default)
 				{
-					model.Id = (await SubjectFacade.CreateSubjectAsync(model)).Value;
+					model.SubjectId = (await SubjectFacade.CreateSubjectAsync(model)).Value;
 				}
 				else
 				{
