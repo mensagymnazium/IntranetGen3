@@ -12,7 +12,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Development
 	{
 		[Inject] protected IGradeFacade GradeFacade { get; set; }
 
-		private List<GradeListItemDto> grades;
+		private List<GradeDto> grades;
 
 		protected override async Task OnInitializedAsync()
 		{

@@ -13,6 +13,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 		[Inject] protected ISubjectCategoriesDataStore SubjectCategoriesDataStore { get; set; }
 		[Inject] protected ISubjectTypesDataStore SubjectTypesDataStore { get; set; }
 		[Inject] protected ITeachersDataStore TeachersDataStore { get; set; }
+		[Inject] protected IGradesDataStore GradesDataStore { get; set; }
 
 		private SubjectListQueryFilter subjectListFilter = new SubjectListQueryFilter();
 		private HxGrid<SubjectListItemDto> subjectsGrid;
@@ -24,6 +25,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 			await SubjectCategoriesDataStore.EnsureDataAsync();
 			await SubjectTypesDataStore.EnsureDataAsync();
 			await TeachersDataStore.EnsureDataAsync();
+			await GradesDataStore.EnsureDataAsync();
 		}
 
 		private async Task<GridDataProviderResult<SubjectListItemDto>> LoadSubjects(GridDataProviderRequest<SubjectListItemDto> request)
@@ -78,6 +80,12 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
 		private string GetSubjectTypes(List<int> subjectTypesIds)
 		{
 			return String.Join(", ", subjectTypesIds.Select(id => SubjectTypesDataStore.GetByKey(id)?.Name))
+				.Trim(',', ' ');
+		}
+
+		private string GetGrades(List<int> gradeIds)
+		{
+			return String.Join(", ", gradeIds.OrderBy(id => -id).Select(id => GradesDataStore.GetByKey(id)?.Name))
 				.Trim(',', ' ');
 		}
 

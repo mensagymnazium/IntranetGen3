@@ -5,7 +5,7 @@
 <h2>Grades</h2>
 @if (grades is not null)
 {
-	foreach (MensaGymnazium.IntranetGen3.Contracts.GradeListItemDto grade in grades)
+	foreach (MensaGymnazium.IntranetGen3.Contracts.GradeDto grade in grades)
 	{
 		<div>@grade.Id : @grade.Name</div>
 	}

@@ -34,6 +34,7 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Queries
 					 nameof(SubjectListItemDto.Capacity) => new() { s => s.Capacity },
 					 nameof(SubjectListItemDto.ScheduleSlotInDay) => new() { s => s.ScheduleDayOfWeek, s => s.ScheduleSlotInDay },
 					 nameof(SubjectListItemDto.CategoryId) => new() { s => s.Category.Name },
+					 nameof(SubjectListItemDto.GradeIds) => new() { s => s.GradeRelations.FirstOrDefault().GradeId },
 					 nameof(SubjectListItemDto.SubjectTypeIds) => new() { s => s.TypeRelations.FirstOrDefault().SubjectType.Name },
 					 _ => throw new InvalidOperationException($"Unknown SortingItem.Expression {sortingExpression}.")
 				 });

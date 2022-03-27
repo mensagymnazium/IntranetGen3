@@ -11,6 +11,6 @@ namespace MensaGymnazium.IntranetGen3.Contracts
 	[ApiContract]
 	public interface IGradeFacade
 	{
-		Task<List<GradeListItemDto>> GetAllGradesAsync(CancellationToken cancellationToken = default);
+		Task<List<GradeDto>> GetAllGradesAsync(CancellationToken cancellationToken = default);
 	}
 }

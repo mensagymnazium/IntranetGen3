@@ -27,17 +27,20 @@
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" SortString="@nameof(SubjectListItemDto.Name)" IsDefaultSortColumn="true" />
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Učitel(é)" ItemTextSelector="@(item => GetTeachers(item.TeacherIds))" SortString="@nameof(SubjectListItemDto.TeacherIds)" />
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vyučovací blok" ItemTextSelector="@(item => ValueFormatter.GetScheduleTimeSlot(item.ScheduleDayOfWeek, item.ScheduleSlotInDay))" SortString="@nameof(SubjectListItemDto.ScheduleSlotInDay)" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Kapacita" ItemTextSelector="@(item => Convert.ToString(item.Capacity))" SortString="@nameof(SubjectListItemDto.Capacity)" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Kapacita" ItemTextSelector="@(item => item.Capacity.ToString("n0"))" SortString="@nameof(SubjectListItemDto.Capacity)" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Ročník(y)" ItemTextSelector="@(item => GetGrades(item.GradeIds))" SortString="@nameof(SubjectListItemDto.GradeIds)" />
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Kategorie" ItemTextSelector="@(item => SubjectCategoriesDataStore.GetByKey(item.CategoryId)?.Name)" SortString="@nameof(SubjectListItemDto.CategoryId)" />
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Typ(y)" ItemTextSelector="@(item => GetSubjectTypes(item.SubjectTypeIds))" SortString="@nameof(SubjectListItemDto.SubjectTypeIds)" />
                 </Columns>
 
                 <ContextMenu Context="item">
-                    <HxContextMenu>
-                        <HxContextMenuItem Text="Smazat"
-                                       OnClick="async () => await HandleDeleteItemClicked(item)"
-                                       ConfirmationQuestion="@String.Format("Opravdu si přejete předmět '{0}' smazat?", item.Name)" />
-                    </HxContextMenu>
+                    <AuthorizeView Roles="@nameof(Role.Administrator)">
+                        <HxContextMenu>
+                            <HxContextMenuItem Text="Smazat"
+                                           OnClick="async () => await HandleDeleteItemClicked(item)"
+                                           ConfirmationQuestion="@String.Format("Opravdu si přejete předmět '{0}' smazat?", item.Name)" />
+                        </HxContextMenu>
+                    </AuthorizeView>
                 </ContextMenu>
             </HxGrid>
 

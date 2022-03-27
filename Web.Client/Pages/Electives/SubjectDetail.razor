@@ -2,22 +2,44 @@
 
 @if (subject is not null)
 {
-    <h1>@subject.Name</h1>
-    <HxCard>
-        <HeaderTemplate>Základní údaje</HeaderTemplate>
+    <div class="row">
+        <div class="col">
+            <h1>@subject.Name</h1>
+        </div>
+
+        <AuthorizeView Roles="@($"{nameof(Role.Administrator)}, {nameof(Role.Teacher)}")">
+            <div class="col text-end">
+                <HxButton Color="ThemeColor.Secondary" OnClick="HandleEditClick" CssClass="mb-4">Editovat definici předmětu</HxButton>
+            </div>
+        </AuthorizeView>
+    </div>
+
+
+    <HxCard CssClass="mb-4">
+        <HeaderTemplate>
+            <HxCardTitle>Popis</HxCardTitle>
+        </HeaderTemplate>
+        <BodyTemplate>
+            <HxCardText>@subject.Description.WithNewLinesAsHtmlBreak()</HxCardText>
+        </BodyTemplate>
+    </HxCard>
+
+    <HxCard CssClass="mb-4">
+        <HeaderTemplate>
+            <HxCardTitle>Základní údaje</HxCardTitle>
+        </HeaderTemplate>
         <BodyTemplate>
             <HxCardText>
-                <TextValue Label="Popis" Value="@subject.Description" />
                 <TextValue Label="Učitel(é)" Value="@GetTeachers(subject.TeacherIds)" />
-
-
+                <TextValue Label="Vyučovací blok" Value="@ValueFormatter.GetScheduleTimeSlot(subject.ScheduleDayOfWeek, subject.ScheduleSlotInDay)" />
+                <TextValue Label="Kapacita" Value="@subject.Capacity.ToString("n0")" />
+                <TextValue Label="Ročník(y)" Value="@GetGrades(subject.GradeIds)" />
+                <TextValue Label="Kategorie" Value="@SubjectCategoriesDataStore.GetByKey(subject.CategoryId)?.Name" />
+                <TextValue Label="Typ(y)" Value="@GetSubjectTypes(subject.SubjectTypeIds)" />
             </HxCardText>
         </BodyTemplate>
-        <FooterTemplate>
-            <HxButton Color="ThemeColor.Secondary" OnClick="HandleEditClick">Editovat definici předmětu</HxButton>
-        </FooterTemplate>
     </HxCard>
-    
+
     <SubjectEdit @ref="subjectEditComponent" SubjectId="@SubjectId" />
 }
 else

@@ -22,13 +22,13 @@ namespace MensaGymnazium.IntranetGen3.Facades
 			this.gradeRepository = gradeRepository;
 		}
 
-		public async Task<List<GradeListItemDto>> GetAllGradesAsync(CancellationToken cancellationToken = default)
+		public async Task<List<GradeDto>> GetAllGradesAsync(CancellationToken cancellationToken = default)
 		{
 			var data = await gradeRepository.GetAllAsync(cancellationToken);
 
 
 			return data
-				.Select(g => new GradeListItemDto()
+				.Select(g => new GradeDto()
 				{
 					Id = g.Id,
 					Name = g.Name
