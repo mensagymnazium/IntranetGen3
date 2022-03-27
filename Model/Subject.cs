@@ -69,5 +69,8 @@ namespace MensaGymnazium.IntranetGen3.Model
 
 		public DayOfWeek ScheduleDayOfWeek { get; set; }
 		public ScheduleSlotInDay ScheduleSlotInDay { get; set; }
+
+		public DateTime Created { get; set; } = DateTime.Now;
+		public DateTime? Deleted { get; set; }
 	}
 }

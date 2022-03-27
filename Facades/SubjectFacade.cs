@@ -96,7 +96,7 @@ namespace MensaGymnazium.IntranetGen3.Facades
 
 		public async Task DeleteSubjectAsync(Dto<int> subjectIdDto, CancellationToken cancellationToken = default)
 		{
-			var subject = subjectRepository.GetObjectAsync(subjectIdDto.Value, cancellationToken);
+			var subject = await subjectRepository.GetObjectAsync(subjectIdDto.Value, cancellationToken);
 			unitOfWork.AddForDelete(subject);
 
 			await unitOfWork.CommitAsync(cancellationToken);
