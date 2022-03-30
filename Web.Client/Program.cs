@@ -13,7 +13,7 @@ using Havit.Blazor.Grpc.Client;
 using Havit.Blazor.Grpc.Client.ServerExceptions;
 using Havit.Blazor.Grpc.Client.WebAssembly;
 using MensaGymnazium.IntranetGen3.Contracts;
-using MensaGymnazium.IntranetGen3.Contracts.System;
+using MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
 using MensaGymnazium.IntranetGen3.Web.Client.Infrastructure.Grpc;
 using MensaGymnazium.IntranetGen3.Web.Client.Infrastructure.Security;
 using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;

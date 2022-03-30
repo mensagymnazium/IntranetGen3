@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Havit.Extensions.DependencyInjection.Abstractions;
-using MensaGymnazium.IntranetGen3.Contracts.System;
-using MensaGymnazium.IntranetGen3.Model.Security;
-using Havit.Services.Caching;
-using Microsoft.AspNetCore.Authorization;
+﻿using Havit.Services.Caching;
+using MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
 
-namespace MensaGymnazium.IntranetGen3.Facades.System
+namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure
 {
 	[Service]
 	[Authorize]

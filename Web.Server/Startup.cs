@@ -3,7 +3,7 @@ using Hangfire;
 using Hangfire.Dashboard;
 using Havit.Blazor.Grpc.Server;
 using MensaGymnazium.IntranetGen3.Contracts;
-using MensaGymnazium.IntranetGen3.Contracts.System;
+using MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
 using MensaGymnazium.IntranetGen3.DependencyInjection;
 using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security;
 using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;

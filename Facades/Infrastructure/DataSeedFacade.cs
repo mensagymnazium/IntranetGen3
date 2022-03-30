@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Havit;
+﻿using Havit;
 using Havit.Data.Patterns.DataSeeds;
 using Havit.Data.Patterns.DataSeeds.Profiles;
-using Havit.Extensions.DependencyInjection.Abstractions;
-using MensaGymnazium.IntranetGen3.Contracts.System;
-using MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core;
 using Havit.Services.Caching;
-using Microsoft.AspNetCore.Authorization;
+using MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
+using MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core;
 
-namespace MensaGymnazium.IntranetGen3.Facades.System
+namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure
 {
 	/// <summary>
 	/// Fasáda k seedování dat.
@@ -40,7 +34,7 @@ namespace MensaGymnazium.IntranetGen3.Facades.System
 		{
 			// applicationAuthorizationService.VerifyCurrentUserAuthorization(Operations.SystemAdministration); // TODO alternative authorization approach
 
-			Type type = GetProfileTypes().FirstOrDefault(item => String.Equals(item.Name, profileName, StringComparison.InvariantCultureIgnoreCase));
+			Type type = GetProfileTypes().FirstOrDefault(item => string.Equals(item.Name, profileName, StringComparison.InvariantCultureIgnoreCase));
 
 			if (type == null)
 			{
