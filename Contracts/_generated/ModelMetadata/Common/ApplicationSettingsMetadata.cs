@@ -11,11 +11,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MensaGymnazium.IntranetGen3.Model.Metadata.Security
+namespace MensaGymnazium.IntranetGen3.Contracts.ModelMetadata.Common
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public static class TeacherMetadata
+	public static class ApplicationSettingsMetadata
 	{
-		public const int FunFactMaxLength = 2147483647;
 	}
 }

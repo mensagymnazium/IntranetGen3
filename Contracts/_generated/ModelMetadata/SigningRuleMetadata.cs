@@ -11,11 +11,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MensaGymnazium.IntranetGen3.Model.Metadata
+namespace MensaGymnazium.IntranetGen3.Contracts.ModelMetadata
 {
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public static class SubjectCategoryMetadata
+	public static class SigningRuleMetadata
 	{
-		public const int NameMaxLength = 50;
+		public const int DescriptionMaxLength = 2147483647;
+		public const int NameMaxLength = 100;
 	}
 }

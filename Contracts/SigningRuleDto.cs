@@ -20,5 +20,7 @@ namespace MensaGymnazium.IntranetGen3.Contracts
 
 		public int GradeId { get; set; }
 
+		// TODO SigningRuleDtoValidator
+
 	}
 }
