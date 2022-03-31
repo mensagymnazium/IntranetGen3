@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MensaGymnazium.IntranetGen3.Contracts
+namespace MensaGymnazium.IntranetGen3.Contracts;
+
+public class SigningRuleListQueryFilter
 {
-	public class SigningRuleListQueryFilter
-	{
-		// TODO
-	}
+	// TODO
 }

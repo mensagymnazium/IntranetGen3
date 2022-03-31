@@ -10,10 +10,9 @@ using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.DataLoaders;
 using MensaGymnazium.IntranetGen3.Model.Common;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Common
-{
-	public partial class ApplicationSettingsDbRepository : IApplicationSettingsRepository
-	{
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Common;
 
-	}
+public partial class ApplicationSettingsDbRepository : IApplicationSettingsRepository
+{
+
 }

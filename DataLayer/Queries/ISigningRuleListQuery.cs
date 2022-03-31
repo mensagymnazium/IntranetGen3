@@ -5,12 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using MensaGymnazium.IntranetGen3.Contracts;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.Queries
-{
-	public interface ISigningRuleListQuery
-	{
-		SigningRuleListQueryFilter Filter { get; set; }
+namespace MensaGymnazium.IntranetGen3.DataLayer.Queries;
 
-		Task<DataFragmentResult<SigningRuleDto>> GetDataFragmentAsync(int startIndex, int? count, CancellationToken cancellationToken = default);
-	}
+public interface ISigningRuleListQuery
+{
+	SigningRuleListQueryFilter Filter { get; set; }
+
+	Task<DataFragmentResult<SigningRuleDto>> GetDataFragmentAsync(int startIndex, int? count, CancellationToken cancellationToken = default);
 }

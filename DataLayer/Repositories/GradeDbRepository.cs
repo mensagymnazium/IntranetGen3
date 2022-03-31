@@ -10,10 +10,9 @@ using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.DataLoaders;
 using MensaGymnazium.IntranetGen3.Model;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories
-{
-	public partial class GradeDbRepository : IGradeRepository
-	{
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 
-	}
+public partial class GradeDbRepository : IGradeRepository
+{
+
 }

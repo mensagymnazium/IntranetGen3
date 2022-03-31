@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 using Havit.Data.Patterns.DataSeeds.Profiles;
 using MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Demo
+namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Demo;
+
+public class DemoProfile : DataSeedProfile
 {
-	public class DemoProfile : DataSeedProfile
+	public override IEnumerable<Type> GetPrerequisiteProfiles()
 	{
-		public override IEnumerable<Type> GetPrerequisiteProfiles()
-		{
-			yield return typeof(CoreProfile);
-		}
+		yield return typeof(CoreProfile);
 	}
 }

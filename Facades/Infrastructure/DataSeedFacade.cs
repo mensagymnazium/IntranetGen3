@@ -5,64 +5,63 @@ using Havit.Services.Caching;
 using MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
 using MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core;
 
-namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure
+namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure;
+
+/// <summary>
+/// Fasáda k seedování dat.
+/// </summary>
+[Service]
+[Authorize]
+
+public class DataSeedFacade : IDataSeedFacade
 {
-	/// <summary>
-	/// Fasáda k seedování dat.
-	/// </summary>
-	[Service]
-	[Authorize]
+	private readonly IDataSeedRunner dataSeedRunner;
+	private readonly ICacheService cacheService;
 
-	public class DataSeedFacade : IDataSeedFacade
+	public DataSeedFacade(
+		IDataSeedRunner dataSeedRunner,
+		ICacheService cacheService)
 	{
-		private readonly IDataSeedRunner dataSeedRunner;
-		private readonly ICacheService cacheService;
+		this.dataSeedRunner = dataSeedRunner;
+		this.cacheService = cacheService;
+	}
 
-		public DataSeedFacade(
-			IDataSeedRunner dataSeedRunner,
-			ICacheService cacheService)
+	/// <summary>
+	/// Provede seedování dat daného profilu.
+	/// Pokud jde produkční prostředí a profil není pro produkční prostředí povolen, vrací BadRequest.
+	/// </summary>
+	public Task SeedDataProfile(string profileName)
+	{
+		// applicationAuthorizationService.VerifyCurrentUserAuthorization(Operations.SystemAdministration); // TODO alternative authorization approach
+
+		Type type = GetProfileTypes().FirstOrDefault(item => string.Equals(item.Name, profileName, StringComparison.InvariantCultureIgnoreCase));
+
+		if (type == null)
 		{
-			this.dataSeedRunner = dataSeedRunner;
-			this.cacheService = cacheService;
+			throw new OperationFailedException($"Profil {profileName} nebyl nalezen.");
 		}
 
-		/// <summary>
-		/// Provede seedování dat daného profilu.
-		/// Pokud jde produkční prostředí a profil není pro produkční prostředí povolen, vrací BadRequest.
-		/// </summary>
-		public Task SeedDataProfile(string profileName)
-		{
-			// applicationAuthorizationService.VerifyCurrentUserAuthorization(Operations.SystemAdministration); // TODO alternative authorization approach
+		dataSeedRunner.SeedData(type, forceRun: true);
 
-			Type type = GetProfileTypes().FirstOrDefault(item => string.Equals(item.Name, profileName, StringComparison.InvariantCultureIgnoreCase));
+		cacheService.Clear();
 
-			if (type == null)
-			{
-				throw new OperationFailedException($"Profil {profileName} nebyl nalezen.");
-			}
+		return Task.CompletedTask;
+	}
 
-			dataSeedRunner.SeedData(type, forceRun: true);
+	/// <summary>
+	/// Returns list of available data seed profiles (names are ready for use as parameter to <see cref="SeedDataProfile"/> method).
+	/// </summary>
+	public Task<List<string>> GetDataSeedProfiles()
+	{
+		return Task.FromResult(GetProfileTypes()
+						.Select(t => t.Name)
+						.ToList()
+		);
+	}
 
-			cacheService.Clear();
-
-			return Task.CompletedTask;
-		}
-
-		/// <summary>
-		/// Returns list of available data seed profiles (names are ready for use as parameter to <see cref="SeedDataProfile"/> method).
-		/// </summary>
-		public Task<List<string>> GetDataSeedProfiles()
-		{
-			return Task.FromResult(GetProfileTypes()
-							.Select(t => t.Name)
-							.ToList()
-			);
-		}
-
-		private static IEnumerable<Type> GetProfileTypes()
-		{
-			return typeof(CoreProfile).Assembly.GetTypes()
-				.Where(t => t.GetInterfaces().Contains(typeof(IDataSeedProfile)));
-		}
+	private static IEnumerable<Type> GetProfileTypes()
+	{
+		return typeof(CoreProfile).Assembly.GetTypes()
+			.Where(t => t.GetInterfaces().Contains(typeof(IDataSeedProfile)));
 	}
 }

@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MensaGymnazium.IntranetGen3.DependencyInjection.ConfigrationOptions
-{
-	public class FileStorageOptions
-	{
-		public const string FileStorageOptionsKey = "AppSettings:FileStorage";
+namespace MensaGymnazium.IntranetGen3.DependencyInjection.ConfigrationOptions;
 
-		public string PathOrContainerName { get; set; }
-	}
+public class FileStorageOptions
+{
+	public const string FileStorageOptionsKey = "AppSettings:FileStorage";
+
+	public string PathOrContainerName { get; set; }
 }

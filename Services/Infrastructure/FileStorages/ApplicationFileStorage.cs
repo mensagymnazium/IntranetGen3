@@ -5,9 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Havit.Services.FileStorage;
 
-namespace MensaGymnazium.IntranetGen3.Services.Infrastructure.FileStorages
+namespace MensaGymnazium.IntranetGen3.Services.Infrastructure.FileStorages;
+
+public class ApplicationFileStorage : FileStorageContext
 {
-	public class ApplicationFileStorage : FileStorageContext
-	{
-	}
 }

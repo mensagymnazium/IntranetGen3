@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MensaGymnazium.IntranetGen3.Services.Infrastructure
+namespace MensaGymnazium.IntranetGen3.Services.Infrastructure;
+
+public static class ServiceProfiles
 {
-	public static class ServiceProfiles
-	{
-		public const string WebServer = "WebServer";
-	}
+	public const string WebServer = "WebServer";
 }

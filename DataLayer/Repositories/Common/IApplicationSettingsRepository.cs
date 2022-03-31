@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 using Havit.Data.Patterns.Repositories;
 using MensaGymnazium.IntranetGen3.Model.Common;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Common
-{
-	public partial interface IApplicationSettingsRepository
-	{
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Common;
 
-	}
+public partial interface IApplicationSettingsRepository
+{
+
 }

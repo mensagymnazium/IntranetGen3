@@ -1,8 +1,7 @@
-﻿namespace MensaGymnazium.IntranetGen3.Model
+﻿namespace MensaGymnazium.IntranetGen3.Model;
+
+public enum StudentRegistrationType
 {
-	public enum StudentRegistrationType
-	{
-		Main = 1,
-		Secondary = 2
-	}
+	Main = 1,
+	Secondary = 2
 }

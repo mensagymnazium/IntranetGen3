@@ -5,16 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MensaGymnazium.IntranetGen3.Model.Common
-{
-	public class ApplicationSettings
-	{
-		[DatabaseGenerated(DatabaseGeneratedOption.None)]
-		public int Id { get; set; }
+namespace MensaGymnazium.IntranetGen3.Model.Common;
 
-		public enum Entry
-		{
-			Current = -1
-		}
+public class ApplicationSettings
+{
+	[DatabaseGenerated(DatabaseGeneratedOption.None)]
+	public int Id { get; set; }
+
+	public enum Entry
+	{
+		Current = -1
 	}
 }

@@ -6,11 +6,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Havit.ComponentModel;
 
-namespace MensaGymnazium.IntranetGen3.Contracts.Security
+namespace MensaGymnazium.IntranetGen3.Contracts.Security;
+
+[ApiContract]
+public interface ITeacherFacade
 {
-	[ApiContract]
-	public interface ITeacherFacade
-	{
-		Task<List<TeacherReferenceDto>> GetAllTeacherReferencesAsync(CancellationToken cancellationToken = default);
-	}
+	Task<List<TeacherReferenceDto>> GetAllTeacherReferencesAsync(CancellationToken cancellationToken = default);
 }

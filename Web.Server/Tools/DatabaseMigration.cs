@@ -11,20 +11,19 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MensaGymnazium.IntranetGen3.Web.Server.Tools
-{
-	public static class DatabaseMigration
-	{
-		public static void UpgradeDatabaseSchemaAndData(this IApplicationBuilder app)
-		{
-			using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-			{
-				var context = serviceScope.ServiceProvider.GetService<IDbContext>();
-				context.Database.Migrate();
+namespace MensaGymnazium.IntranetGen3.Web.Server.Tools;
 
-				var dataSeedRunner = serviceScope.ServiceProvider.GetService<IDataSeedRunner>();
-				dataSeedRunner.SeedData<CoreProfile>();
-			}
+public static class DatabaseMigration
+{
+	public static void UpgradeDatabaseSchemaAndData(this IApplicationBuilder app)
+	{
+		using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+		{
+			var context = serviceScope.ServiceProvider.GetService<IDbContext>();
+			context.Database.Migrate();
+
+			var dataSeedRunner = serviceScope.ServiceProvider.GetService<IDataSeedRunner>();
+			dataSeedRunner.SeedData<CoreProfile>();
 		}
 	}
 }

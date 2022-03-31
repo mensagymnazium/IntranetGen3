@@ -5,15 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using ProtoBuf;
 
-namespace MensaGymnazium.IntranetGen3.Contracts
-{
-	[ProtoContract]
-	public class DataFragmentResult<TItem>
-	{
-		[ProtoMember(1)]
-		public List<TItem> Data { get; init; }
+namespace MensaGymnazium.IntranetGen3.Contracts;
 
-		[ProtoMember(2)]
-		public int TotalCount { get; init; }
-	}
+[ProtoContract]
+public class DataFragmentResult<TItem>
+{
+	[ProtoMember(1)]
+	public List<TItem> Data { get; init; }
+
+	[ProtoMember(2)]
+	public int TotalCount { get; init; }
 }

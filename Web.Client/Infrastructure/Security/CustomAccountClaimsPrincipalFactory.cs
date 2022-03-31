@@ -8,45 +8,44 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace MensaGymnazium.IntranetGen3.Web.Client.Infrastructure.Security
+namespace MensaGymnazium.IntranetGen3.Web.Client.Infrastructure.Security;
+
+public class CustomAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<RemoteUserAccount>
 {
-	public class CustomAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<RemoteUserAccount>
+	private readonly IUserClientService userClientService;
+
+	public CustomAccountClaimsPrincipalFactory(
+		IAccessTokenProviderAccessor accessor,
+		IUserClientService userClientService)
+		: base(accessor)
 	{
-		private readonly IUserClientService userClientService;
+		this.userClientService = userClientService;
+		// NOOP
+	}
 
-		public CustomAccountClaimsPrincipalFactory(
-			IAccessTokenProviderAccessor accessor,
-			IUserClientService userClientService)
-			: base(accessor)
+	public override async ValueTask<ClaimsPrincipal> CreateUserAsync(RemoteUserAccount account, RemoteAuthenticationUserOptions options)
+	{
+		var user = await base.CreateUserAsync(account, options);
+
+		if (user.Identity.IsAuthenticated)
 		{
-			this.userClientService = userClientService;
-			// NOOP
-		}
+			var identity = (ClaimsIdentity)user.Identity;
 
-		public override async ValueTask<ClaimsPrincipal> CreateUserAsync(RemoteUserAccount account, RemoteAuthenticationUserOptions options)
-		{
-			var user = await base.CreateUserAsync(account, options);
+			var claims = await userClientService.FetchAdditionalUserClaimsAsync(this.TokenProvider);
 
-			if (user.Identity.IsAuthenticated)
+			foreach (var claim in claims)
 			{
-				var identity = (ClaimsIdentity)user.Identity;
-
-				var claims = await userClientService.FetchAdditionalUserClaimsAsync(this.TokenProvider);
-
-				foreach (var claim in claims)
+				if (claim.Type.Equals(ClaimTypes.Role))
 				{
-					if (claim.Type.Equals(ClaimTypes.Role))
-					{
-						identity.AddClaim(new Claim(options.RoleClaim, claim.Value));
-					}
-					else
-					{
-						identity.AddClaim(claim);
-					}
+					identity.AddClaim(new Claim(options.RoleClaim, claim.Value));
+				}
+				else
+				{
+					identity.AddClaim(claim);
 				}
 			}
-
-			return user;
 		}
+
+		return user;
 	}
 }

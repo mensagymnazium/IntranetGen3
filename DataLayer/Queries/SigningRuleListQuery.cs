@@ -10,40 +10,39 @@ using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.DataLayer.DataSources;
 using Microsoft.EntityFrameworkCore;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.Queries
+namespace MensaGymnazium.IntranetGen3.DataLayer.Queries;
+
+[Service]
+public class SigningRuleListQuery : QueryBase<SigningRuleDto>, ISigningRuleListQuery
 {
-	[Service]
-	public class SigningRuleListQuery : QueryBase<SigningRuleDto>, ISigningRuleListQuery
+	private readonly ISigningRuleDataSource SigningRuleDataSource;
+
+	public SigningRuleListQuery(ISigningRuleDataSource SigningRuleDataSource)
 	{
-		private readonly ISigningRuleDataSource SigningRuleDataSource;
+		this.SigningRuleDataSource = SigningRuleDataSource;
+	}
 
-		public SigningRuleListQuery(ISigningRuleDataSource SigningRuleDataSource)
-		{
-			this.SigningRuleDataSource = SigningRuleDataSource;
-		}
+	public SigningRuleListQueryFilter Filter { get; set; }
 
-		public SigningRuleListQueryFilter Filter { get; set; }
+	protected override IQueryable<SigningRuleDto> Query()
+	{
+		// TODO Filter
+		// TODO Richer DTO?
 
-		protected override IQueryable<SigningRuleDto> Query()
-		{
-			// TODO Filter
-			// TODO Richer DTO?
-
-			return SigningRuleDataSource.Data
-				.Select(s => new SigningRuleDto()
-				{
-					SigningRuleId = s.Id,
-					Name = s.Name,
-				});
-		}
-
-		public async Task<DataFragmentResult<SigningRuleDto>> GetDataFragmentAsync(int startIndex, int? count, CancellationToken cancellationToken = default)
-		{
-			return new()
+		return SigningRuleDataSource.Data
+			.Select(s => new SigningRuleDto()
 			{
-				Data = await SelectDataFragmentAsync(startIndex, count, cancellationToken),
-				TotalCount = await CountAsync(cancellationToken)
-			};
-		}
+				SigningRuleId = s.Id,
+				Name = s.Name,
+			});
+	}
+
+	public async Task<DataFragmentResult<SigningRuleDto>> GetDataFragmentAsync(int startIndex, int? count, CancellationToken cancellationToken = default)
+	{
+		return new()
+		{
+			Data = await SelectDataFragmentAsync(startIndex, count, cancellationToken),
+			TotalCount = await CountAsync(cancellationToken)
+		};
 	}
 }

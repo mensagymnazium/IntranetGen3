@@ -1,6 +1,5 @@
-﻿namespace MensaGymnazium.IntranetGen3.Services.Jobs
+﻿namespace MensaGymnazium.IntranetGen3.Services.Jobs;
+
+public interface IEmptyJob : IRunnableJob
 {
-	public interface IEmptyJob : IRunnableJob
-	{
-	}
 }

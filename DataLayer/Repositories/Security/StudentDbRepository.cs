@@ -10,10 +10,9 @@ using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.DataLoaders;
 using MensaGymnazium.IntranetGen3.Model.Security;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security
-{
-	public partial class StudentDbRepository : IStudentRepository
-	{
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
 
-	}
+public partial class StudentDbRepository : IStudentRepository
+{
+
 }

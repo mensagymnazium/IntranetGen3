@@ -2,9 +2,8 @@
 using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Contracts.Security;
 
-namespace MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores
+namespace MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
+
+public interface ISubjectCategoriesDataStore : IDictionaryStaticDataStore<int, SubjectCategoryDto>
 {
-	public interface ISubjectCategoriesDataStore : IDictionaryStaticDataStore<int, SubjectCategoryDto>
-	{
-	}
 }

@@ -13,18 +13,17 @@ using Havit.Data.Patterns.DataLoaders;
 using MensaGymnazium.IntranetGen3.Model.Security;
 using Microsoft.EntityFrameworkCore;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security
-{
-	public partial class TeacherDbRepository : ITeacherRepository
-	{
-		public async Task<List<Teacher>> GetAllIncludingDeletedAsync(CancellationToken cancellationToken = default)
-		{
-			return await DataIncludingDeleted.Include(t => t.User).ToListAsync(cancellationToken);
-		}
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
 
-		protected override IEnumerable<Expression<Func<Teacher, object>>> GetLoadReferences()
-		{
-			yield return t => t.User;
-		}
+public partial class TeacherDbRepository : ITeacherRepository
+{
+	public async Task<List<Teacher>> GetAllIncludingDeletedAsync(CancellationToken cancellationToken = default)
+	{
+		return await DataIncludingDeleted.Include(t => t.User).ToListAsync(cancellationToken);
+	}
+
+	protected override IEnumerable<Expression<Func<Teacher, object>>> GetLoadReferences()
+	{
+		yield return t => t.User;
 	}
 }

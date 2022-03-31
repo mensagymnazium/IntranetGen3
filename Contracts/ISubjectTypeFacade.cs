@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 using Havit.ComponentModel;
 using MensaGymnazium.IntranetGen3.Contracts.Security;
 
-namespace MensaGymnazium.IntranetGen3.Contracts
+namespace MensaGymnazium.IntranetGen3.Contracts;
+
+[ApiContract]
+public interface ISubjectTypeFacade
 {
-	[ApiContract]
-	public interface ISubjectTypeFacade
-	{
-		Task<List<SubjectTypeDto>> GetAllSubjectTypesAsync(CancellationToken cancellationToken = default);
-	}
+	Task<List<SubjectTypeDto>> GetAllSubjectTypesAsync(CancellationToken cancellationToken = default);
 }

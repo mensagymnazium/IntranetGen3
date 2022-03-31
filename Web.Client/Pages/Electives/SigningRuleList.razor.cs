@@ -9,34 +9,33 @@ using MensaGymnazium.IntranetGen3.Contracts;
 using Microsoft.AspNetCore.Components;
 using Havit.Collections;
 
-namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives
+namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
+
+public partial class SigningRuleList
 {
-	public partial class SigningRuleList
+	[Inject] protected IHxMessengerService Messenger { get; set; }
+	[Inject] protected ISigningRuleFacade SigningRuleFacade { get; set; }
+	[Inject] protected NavigationManager NavigationManager { get; set; }
+
+	private SigningRuleListQueryFilter signingRuleListFilter = new SigningRuleListQueryFilter();
+	private HxGrid<SigningRuleDto> gridComponent;
+
+	private async Task<GridDataProviderResult<SigningRuleDto>> LoadSigningRules(GridDataProviderRequest<SigningRuleDto> request)
 	{
-		[Inject] protected IHxMessengerService Messenger { get; set; }
-		[Inject] protected ISigningRuleFacade SigningRuleFacade { get; set; }
-		[Inject] protected NavigationManager NavigationManager { get; set; }
-
-		private SigningRuleListQueryFilter signingRuleListFilter = new SigningRuleListQueryFilter();
-		private HxGrid<SigningRuleDto> gridComponent;
-
-		private async Task<GridDataProviderResult<SigningRuleDto>> LoadSigningRules(GridDataProviderRequest<SigningRuleDto> request)
+		var SigningRuleRequest = new DataFragmentRequest<SigningRuleListQueryFilter>()
 		{
-			var SigningRuleRequest = new DataFragmentRequest<SigningRuleListQueryFilter>()
-			{
-				Filter = signingRuleListFilter,
-				StartIndex = request.StartIndex,
-				Count = request.Count,
-				Sorting = request.Sorting?.Select(s => new SortItem(s.SortString, s.SortDirection)).ToArray()
-			};
+			Filter = signingRuleListFilter,
+			StartIndex = request.StartIndex,
+			Count = request.Count,
+			Sorting = request.Sorting?.Select(s => new SortItem(s.SortString, s.SortDirection)).ToArray()
+		};
 
-			var signingRuleListResult = await SigningRuleFacade.GetSigningRuleListAsync(SigningRuleRequest, request.CancellationToken);
+		var signingRuleListResult = await SigningRuleFacade.GetSigningRuleListAsync(SigningRuleRequest, request.CancellationToken);
 
-			return new()
-			{
-				Data = signingRuleListResult.Data ?? new(),
-				TotalCount = signingRuleListResult.TotalCount
-			};
-		}
+		return new()
+		{
+			Data = signingRuleListResult.Data ?? new(),
+			TotalCount = signingRuleListResult.TotalCount
+		};
 	}
 }
