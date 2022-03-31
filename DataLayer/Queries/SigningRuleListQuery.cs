@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Havit.Data.EntityFrameworkCore.Patterns.QueryServices;
+﻿using Havit.Data.EntityFrameworkCore.Patterns.QueryServices;
 using Havit.Extensions.DependencyInjection.Abstractions;
 using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.DataLayer.DataSources;
-using Microsoft.EntityFrameworkCore;
 
 namespace MensaGymnazium.IntranetGen3.DataLayer.Queries;
 

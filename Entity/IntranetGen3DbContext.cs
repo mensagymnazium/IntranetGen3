@@ -1,7 +1,4 @@
-﻿using System;
-using Havit.Data.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+﻿using Havit.Data.EntityFrameworkCore;
 
 namespace MensaGymnazium.IntranetGen3.Entity;
 

@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit;
-using Havit.Blazor.Components.Web.Bootstrap;
+﻿using Havit;
 using MensaGymnazium.IntranetGen3.Contracts;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
 

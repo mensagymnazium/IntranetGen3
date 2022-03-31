@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MensaGymnazium.IntranetGen3.Primitives;
+﻿namespace MensaGymnazium.IntranetGen3.Primitives;
 
 [Flags]
 public enum Role

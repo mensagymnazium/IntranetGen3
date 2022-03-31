@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Havit.Collections;
+﻿using Havit.Collections;
 using MensaGymnazium.IntranetGen3.Contracts;
 
 namespace MensaGymnazium.IntranetGen3.DataLayer.Queries;

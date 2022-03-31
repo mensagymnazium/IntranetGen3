@@ -2,8 +2,6 @@
 using System.Security.Claims;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
 using MensaGymnazium.IntranetGen3.Model.Security;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace MensaGymnazium.IntranetGen3.Services.Security;
 

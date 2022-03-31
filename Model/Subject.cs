@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Diagnostics.Contracts;
 using MensaGymnazium.IntranetGen3.Model.Security;
 using Havit.Data.EntityFrameworkCore.Attributes;
 using MensaGymnazium.IntranetGen3.Primitives;

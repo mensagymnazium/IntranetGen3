@@ -1,6 +1,5 @@
 ﻿using System.Security.Claims;
 using Havit.Data.Patterns.Attributes;
-using Microsoft.AspNetCore.Authorization;
 
 namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authorization.Fakes;
 

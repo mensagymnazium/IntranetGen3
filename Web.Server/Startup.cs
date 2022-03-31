@@ -1,26 +1,15 @@
-﻿using System.Collections.Generic;
-using Hangfire;
+﻿using Hangfire;
 using Hangfire.Dashboard;
 using Havit.Blazor.Grpc.Server;
 using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
 using MensaGymnazium.IntranetGen3.DependencyInjection;
 using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security;
-using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
-using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Claims;
-using MensaGymnazium.IntranetGen3.Model.Security;
 using MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ApplicationInsights;
 using MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ConfigurationExtensions;
-using MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.Security;
 using MensaGymnazium.IntranetGen3.Web.Server.Tools;
 using Microsoft.ApplicationInsights.DependencyCollector;
 using Microsoft.ApplicationInsights.Extensibility;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace MensaGymnazium.IntranetGen3.Web.Server;
 

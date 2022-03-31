@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MensaGymnazium.IntranetGen3.DependencyInjection;
+﻿namespace MensaGymnazium.IntranetGen3.DependencyInjection;
 
 internal class InstallConfiguration
 {

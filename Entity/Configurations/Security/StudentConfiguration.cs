@@ -1,5 +1,4 @@
 ﻿using MensaGymnazium.IntranetGen3.Model.Security;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MensaGymnazium.IntranetGen3.Entity.Configurations.Security;

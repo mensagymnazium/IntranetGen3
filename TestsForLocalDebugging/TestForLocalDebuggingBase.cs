@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MensaGymnazium.IntranetGen3.TestHelpers;
+﻿using MensaGymnazium.IntranetGen3.TestHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MensaGymnazium.IntranetGen3.TestsForLocalDebugging;

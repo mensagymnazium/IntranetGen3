@@ -1,6 +1,4 @@
-﻿using System;
-using MensaGymnazium.IntranetGen3.Entity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MensaGymnazium.IntranetGen3.Entity.Tests;

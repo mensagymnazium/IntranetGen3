@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using MensaGymnazium.IntranetGen3.Primitives;
+﻿using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.Contracts;
 

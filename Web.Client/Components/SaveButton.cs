@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Havit.Blazor.Components.Web.Bootstrap;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Components;
 

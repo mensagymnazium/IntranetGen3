@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
+﻿namespace MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
 
 public class MailingOptions
 {

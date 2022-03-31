@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Blazor.Components.Web;
-using Havit.Blazor.Components.Web.Bootstrap;
-using MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
+﻿using MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
 using MensaGymnazium.IntranetGen3.Web.Client.Pages.Admin.Components;
 using Microsoft.AspNetCore.Components;
 

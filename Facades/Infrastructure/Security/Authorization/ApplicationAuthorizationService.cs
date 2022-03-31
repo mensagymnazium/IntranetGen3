@@ -1,10 +1,6 @@
-﻿using System;
-using System.Security;
+﻿using System.Security;
 using System.Security.Claims;
-using Havit.Diagnostics.Contracts;
-using Havit.Extensions.DependencyInjection.Abstractions;
 using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
-using Microsoft.AspNetCore.Authorization;
 
 namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authorization;
 

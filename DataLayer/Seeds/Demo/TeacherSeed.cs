@@ -1,5 +1,4 @@
-﻿using Havit.Data.Patterns.DataSeeds;
-using MensaGymnazium.IntranetGen3.Model.Security;
+﻿using MensaGymnazium.IntranetGen3.Model.Security;
 
 namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Demo;
 

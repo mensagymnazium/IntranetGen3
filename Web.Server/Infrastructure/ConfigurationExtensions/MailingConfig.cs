@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
 
 namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ConfigurationExtensions;
 

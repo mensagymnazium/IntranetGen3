@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Havit.Extensions.DependencyInjection.Abstractions;
-using MensaGymnazium.IntranetGen3.Contracts.Security;
+﻿using MensaGymnazium.IntranetGen3.Contracts.Security;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
-using Microsoft.AspNetCore.Authorization;
 
 namespace MensaGymnazium.IntranetGen3.Facades.Security;
 

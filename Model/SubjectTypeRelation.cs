@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Data.EntityFrameworkCore.Attributes;
+﻿using Havit.Data.EntityFrameworkCore.Attributes;
 
 namespace MensaGymnazium.IntranetGen3.Model;
 

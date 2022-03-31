@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Blazor.Components.Web.Services.DataStores;
+﻿using Havit.Blazor.Components.Web.Services.DataStores;
 using MensaGymnazium.IntranetGen3.Contracts;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;

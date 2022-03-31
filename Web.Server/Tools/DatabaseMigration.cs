@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Havit.Data.EntityFrameworkCore;
-using Havit.Data.EntityFrameworkCore.Metadata.Conventions;
+﻿using Havit.Data.EntityFrameworkCore;
 using Havit.Data.Patterns.DataSeeds;
 using MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace MensaGymnazium.IntranetGen3.Web.Server.Tools;
 

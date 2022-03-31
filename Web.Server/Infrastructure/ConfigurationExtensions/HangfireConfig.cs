@@ -1,10 +1,7 @@
-﻿using System;
-using Hangfire;
+﻿using Hangfire;
 using Hangfire.Console;
 using Hangfire.SqlServer;
 using Havit.Hangfire.Extensions.Filters;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ConfigurationExtensions;
 

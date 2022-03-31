@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Net.Http;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 using BlazorApplicationInsights;
 using FluentValidation;
-using Havit.Blazor.Components.Web;
-using Havit.Blazor.Components.Web.Bootstrap;
 using Havit.Blazor.Grpc.Client;
 using Havit.Blazor.Grpc.Client.ServerExceptions;
 using Havit.Blazor.Grpc.Client.WebAssembly;
@@ -20,9 +12,6 @@ using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client;
 
