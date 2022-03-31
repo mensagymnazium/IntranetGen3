@@ -16,7 +16,7 @@
 		<PackageReference Include="BlazorApplicationInsights" Version="1.6.0" />
 		<PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.4.0" />
-		<PackageReference Include="Havit.Blazor.Components.Web.Bootstrap" Version="2.2.8" />
+		<PackageReference Include="Havit.Blazor.Components.Web.Bootstrap" Version="2.3.0-pre4" />
 		<PackageReference Include="Havit.Blazor.Grpc.Client.WebAssembly" Version="1.1.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.3" PrivateAssets="all" />

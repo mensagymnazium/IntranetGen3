@@ -5,11 +5,11 @@
             <HxInputText @bind-Value="model.Name" Label="Název" />
             <HxInputTextArea @bind-Value="model.Description" Label="Popis" />
             <HxInputNumber @bind-Value="model.Capacity" Label="Kapacita" />
-            TODO TeacherMultiPicker - HxMultiSelect
+            <TeacherMultiPicker @bind-Value="model.TeacherIds" Label="Učitel(é)" />
             <ScheduleTimeSlotPicker @bind-Day="model.ScheduleDayOfWeek" @bind-Slot="model.ScheduleSlotInDay" />
-            TODO GradesMultiPicker - HxMultiSelect
+            <GradeMultiPicker @bind-Value="model.GradeIds" Label="Ročník(y)" />
             <SubjectCategoryPicker @bind-Value="model.CategoryId" Label="Kategorie" />
-            TODO SubjectTypesMultiPicker - HxMultiSelect
+            <SubjectTypeMultiPicker @bind-Value="model.SubjectTypeIds" Label="Typ(y) předmětu" />
         </EditForm>
     </BodyTemplate>
     <FooterTemplate>

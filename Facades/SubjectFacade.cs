@@ -61,7 +61,7 @@ public class SubjectFacade : ISubjectFacade
 		Contract.Requires<ArgumentException>(subjectDto.SubjectId == default, nameof(SubjectDto.SubjectId));
 
 		var subject = new Subject();
-		subjectMapper.MapFromSubjectDto(subjectDto, subject);
+		await subjectMapper.MapFromSubjectDtoAsync(subjectDto, subject, cancellationToken);
 
 		unitOfWork.AddForInsert(subject);
 		await unitOfWork.CommitAsync(cancellationToken);
@@ -86,7 +86,7 @@ public class SubjectFacade : ISubjectFacade
 		//	}
 		//}
 
-		subjectMapper.MapFromSubjectDto(subjectDto, subject);
+		await subjectMapper.MapFromSubjectDtoAsync(subjectDto, subject, cancellationToken);
 
 		unitOfWork.AddForUpdate(subject);
 		await unitOfWork.CommitAsync(cancellationToken);

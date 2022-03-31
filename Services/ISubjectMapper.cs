@@ -6,5 +6,5 @@ namespace MensaGymnazium.IntranetGen3.Services;
 public interface ISubjectMapper
 {
 	Task<SubjectDto> MapToSubjectDtoAsync(Subject subject, CancellationToken cancellationToken = default);
-	void MapFromSubjectDto(SubjectDto subjectDto, Subject subject);
+	Task MapFromSubjectDtoAsync(SubjectDto subjectDto, Subject subject, CancellationToken cancellationToken = default);
 }
