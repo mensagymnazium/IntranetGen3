@@ -2,6 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
 		<AssemblyName>MensaGymnazium.IntranetGen3.Contracts</AssemblyName>
 		<RootNamespace>MensaGymnazium.IntranetGen3.Contracts</RootNamespace>
 	</PropertyGroup>
