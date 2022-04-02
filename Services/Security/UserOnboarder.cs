@@ -29,7 +29,7 @@ public class UserOnboarder : IUserOnboarder
 	/// <inheritdoc />
 	public async Task<User> TryOnboardUserAsync(Guid oid, ClaimsPrincipal principal, CancellationToken cancellationToken = default)
 	{
-		Contract.Requires<ArgumentException>(principal != null, nameof(principal));
+		Contract.Requires<ArgumentException>(principal != null);
 
 		string email = principal.FindFirst(x => x.Type == EmailClaimType)?.Value;
 
@@ -60,7 +60,7 @@ public class UserOnboarder : IUserOnboarder
 
 	private User SetUserFromClaimsPrincipal(User user, Guid oid, ClaimsPrincipal principal)
 	{
-		Contract.Requires<ArgumentException>(user != null, nameof(user));
+		Contract.Requires<ArgumentException>(user != null);
 
 		user.Oid = oid;
 		user.Email = principal.FindFirst(x => x.Type == EmailClaimType)?.Value;

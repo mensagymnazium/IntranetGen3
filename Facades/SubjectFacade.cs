@@ -37,7 +37,7 @@ public class SubjectFacade : ISubjectFacade
 
 	public async Task<DataFragmentResult<SubjectListItemDto>> GetSubjectListAsync(DataFragmentRequest<SubjectListQueryFilter> subjectListRequest, CancellationToken cancellationToken = default)
 	{
-		Contract.Requires<ArgumentNullException>(subjectListRequest is not null, nameof(subjectListRequest));
+		Contract.Requires<ArgumentNullException>(subjectListRequest is not null);
 
 		subjectListQuery.Filter = subjectListRequest.Filter;
 		subjectListQuery.Sorting = subjectListRequest.Sorting;
@@ -47,7 +47,7 @@ public class SubjectFacade : ISubjectFacade
 
 	public async Task<SubjectDto> GetSubjectDetailAsync(Dto<int> subjectIdDto, CancellationToken cancellationToken = default)
 	{
-		Contract.Requires<ArgumentException>(subjectIdDto.Value != default, nameof(subjectIdDto));
+		Contract.Requires<ArgumentException>(subjectIdDto.Value != default);
 
 		var subject = await subjectRepository.GetObjectAsync(subjectIdDto.Value, cancellationToken);
 
@@ -57,8 +57,8 @@ public class SubjectFacade : ISubjectFacade
 	//[Authorize(Roles = nameof(Role.Administrator))]
 	public async Task<Dto<int>> CreateSubjectAsync(SubjectDto subjectDto, CancellationToken cancellationToken = default)
 	{
-		Contract.Requires<ArgumentNullException>(subjectDto != null, nameof(SubjectDto));
-		Contract.Requires<ArgumentException>(subjectDto.Id == default, nameof(SubjectDto.Id));
+		Contract.Requires<ArgumentNullException>(subjectDto != null);
+		Contract.Requires<ArgumentException>(subjectDto.Id == default);
 
 		var subject = new Subject();
 		await subjectMapper.MapFromSubjectDtoAsync(subjectDto, subject, cancellationToken);
@@ -72,8 +72,8 @@ public class SubjectFacade : ISubjectFacade
 	//[Authorize(Roles = $"{nameof(Role.Administrator)}, {nameof(Role.Teacher)}")]
 	public async Task UpdateSubjectAsync(SubjectDto subjectDto, CancellationToken cancellationToken = default)
 	{
-		Contract.Requires<ArgumentNullException>(subjectDto != null, nameof(SubjectDto));
-		Contract.Requires<ArgumentException>(subjectDto.Id != default, nameof(SubjectDto.Id));
+		Contract.Requires<ArgumentNullException>(subjectDto != null);
+		Contract.Requires<ArgumentException>(subjectDto.Id != default);
 
 		var subject = await subjectRepository.GetObjectAsync(subjectDto.Id, cancellationToken);
 

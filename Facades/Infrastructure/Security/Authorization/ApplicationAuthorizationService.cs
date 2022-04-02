@@ -18,8 +18,8 @@ public class ApplicationAuthorizationService : IApplicationAuthorizationService
 
 	public bool IsAuthorized(ClaimsPrincipal user, IAuthorizationRequirement requirement, object resource = null)
 	{
-		Contract.Requires<ArgumentNullException>(user != null, nameof(user));
-		Contract.Requires<ArgumentNullException>(requirement != null, nameof(requirement));
+		Contract.Requires<ArgumentNullException>(user != null);
+		Contract.Requires<ArgumentNullException>(requirement != null);
 
 		return authorizationService.AuthorizeAsync(user, resource, requirement).GetAwaiter().GetResult().Succeeded;
 	}

@@ -8,7 +8,7 @@ public class UserManager : IUserManager
 {
 	public Task<IList<Role>> GetRolesAsync(User user, CancellationToken cancellationToken = default)
 	{
-		Contract.Requires<ArgumentNullException>(user != null, nameof(user));
+		Contract.Requires<ArgumentNullException>(user != null);
 
 		var roles = new List<Role>();
 

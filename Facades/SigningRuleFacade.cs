@@ -31,7 +31,7 @@ public class SigningRuleFacade : ISigningRuleFacade
 
 	public async Task<DataFragmentResult<SigningRuleDto>> GetSigningRuleListAsync(DataFragmentRequest<SigningRuleListQueryFilter> SigningRuleListRequest, CancellationToken cancellationToken = default)
 	{
-		Contract.Requires<ArgumentNullException>(SigningRuleListRequest is not null, nameof(SigningRuleListRequest));
+		Contract.Requires<ArgumentNullException>(SigningRuleListRequest is not null);
 
 		signingRuleListQuery.Filter = SigningRuleListRequest.Filter;
 		//SigningRuleListQuery.Sorting = SigningRuleListRequest.Sorting;
@@ -41,7 +41,7 @@ public class SigningRuleFacade : ISigningRuleFacade
 
 	public async Task<SigningRuleDto> GetSigningRuleDetailAsync(Dto<int> SigningRuleIdDto, CancellationToken cancellationToken = default)
 	{
-		Contract.Requires<ArgumentException>(SigningRuleIdDto.Value != default, nameof(SigningRuleIdDto));
+		Contract.Requires<ArgumentException>(SigningRuleIdDto.Value != default);
 
 		var SigningRule = await signingRuleRepository.GetObjectAsync(SigningRuleIdDto.Value, cancellationToken);
 
