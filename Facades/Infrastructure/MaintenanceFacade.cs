@@ -1,10 +1,11 @@
 ﻿using Havit.Services.Caching;
 using MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
+using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure;
 
 [Service]
-[Authorize]
+[Authorize(Roles = nameof(Role.Administrator))]
 public class MaintenanceFacade : IMaintenanceFacade
 {
 	private readonly ICacheService cacheService;

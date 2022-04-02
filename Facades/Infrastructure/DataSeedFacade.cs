@@ -4,6 +4,7 @@ using Havit.Data.Patterns.DataSeeds.Profiles;
 using Havit.Services.Caching;
 using MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
 using MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core;
+using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure;
 
@@ -11,7 +12,7 @@ namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure;
 /// Fasáda k seedování dat.
 /// </summary>
 [Service]
-[Authorize]
+[Authorize(Roles = nameof(Role.Administrator))]
 
 public class DataSeedFacade : IDataSeedFacade
 {
