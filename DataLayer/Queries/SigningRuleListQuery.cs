@@ -25,7 +25,7 @@ public class SigningRuleListQuery : QueryBase<SigningRuleDto>, ISigningRuleListQ
 		return SigningRuleDataSource.Data
 			.Select(s => new SigningRuleDto()
 			{
-				SigningRuleId = s.Id,
+				Id = s.Id,
 				Name = s.Name,
 			});
 	}

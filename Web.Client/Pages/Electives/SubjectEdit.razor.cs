@@ -16,7 +16,7 @@ public partial class SubjectEdit
 	private EditContext editContext;
 	private string title;
 
-	protected override async Task OnParametersSetAsync()
+	public async Task ShowAsync()
 	{
 		if (SubjectId is null)
 		{
@@ -24,16 +24,13 @@ public partial class SubjectEdit
 			editContext = new EditContext(model);
 			title = "Nový předmět";
 		}
-		else if (SubjectId != model.SubjectId)
+		else if (SubjectId != model.Id)
 		{
 			model = await SubjectFacade.GetSubjectDetailAsync(Dto.FromValue(SubjectId.Value));
 			editContext = new EditContext(model);
 			title = model.Name;
 		}
-	}
 
-	public async Task ShowAsync()
-	{
 		await offcanvasComponent.ShowAsync();
 	}
 
@@ -41,9 +38,9 @@ public partial class SubjectEdit
 	{
 		try
 		{
-			if (model.SubjectId == default)
+			if (model.Id == default)
 			{
-				model.SubjectId = (await SubjectFacade.CreateSubjectAsync(model)).Value;
+				model.Id = (await SubjectFacade.CreateSubjectAsync(model)).Value;
 			}
 			else
 			{
@@ -51,7 +48,7 @@ public partial class SubjectEdit
 			}
 
 			await offcanvasComponent.HideAsync();
-			await OnSaved.InvokeAsync(model.SubjectId);
+			await OnSaved.InvokeAsync(model.Id);
 		}
 		catch (OperationFailedException)
 		{

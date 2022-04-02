@@ -1,2 +1,4 @@
-﻿global using Havit.Diagnostics.Contracts;
+﻿global using System.ComponentModel;
+
+global using Havit.Diagnostics.Contracts;
 

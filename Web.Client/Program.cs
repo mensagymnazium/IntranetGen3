@@ -9,7 +9,6 @@ using MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
 using MensaGymnazium.IntranetGen3.Web.Client.Infrastructure.Grpc;
 using MensaGymnazium.IntranetGen3.Web.Client.Infrastructure.Security;
 using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -47,6 +46,9 @@ public class Program
 		builder.Services.AddScoped<ISubjectTypesDataStore, SubjectTypesDataStore>();
 		builder.Services.AddScoped<ISubjectCategoriesDataStore, SubjectCategoriesDataStore>();
 		builder.Services.AddScoped<IGradesDataStore, GradesDataStore>();
+		builder.Services.AddScoped<IStudentsDataStore, StudentsDataStore>();
+		builder.Services.AddScoped<ISubjectsDataStore, SubjectsDataStore>();
+		builder.Services.AddScoped<ISigningRulesDataStore, SigningRulesDataStore>();
 
 		AddGrpcClient(builder);
 

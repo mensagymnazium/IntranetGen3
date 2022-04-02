@@ -34,9 +34,18 @@
                 <TextValue Label="Rozvrh" Value="@ValueFormatter.GetScheduleTimeSlot(subject.ScheduleDayOfWeek, subject.ScheduleSlotInDay)" />
                 <TextValue Label="Kapacita" Value="@subject.Capacity.ToString("n0")" />
                 <TextValue Label="Ročník(y)" Value="@GetGrades(subject.GradeIds)" />
-                <TextValue Label="Kategorie" Value="@SubjectCategoriesDataStore.GetByKey(subject.CategoryId.Value)?.Name" />
-                <TextValue Label="Typ(y)" Value="@GetSubjectTypes(subject.SubjectTypeIds)" />
+                <TextValue Label="Kategorie předmětu" Value="@SubjectCategoriesDataStore.GetByKey(subject.CategoryId.Value)?.Name" />
+                <TextValue Label="Typ(y) předmětu" Value="@GetSubjectTypes(subject.SubjectTypeIds)" />
             </HxCardText>
+        </BodyTemplate>
+    </HxCard>
+
+    <HxCard CssClass="mb-4">
+        <HeaderTemplate>
+            <HxCardTitle>Zapsaní studenti</HxCardTitle>
+        </HeaderTemplate>
+        <BodyTemplate>
+            <StudentSubjectRegistrationsGrid DataProvider="GetStudentRegistrations" ShowSubjectColumn="false" />
         </BodyTemplate>
     </HxCard>
 

@@ -1,0 +1,7 @@
+﻿namespace MensaGymnazium.IntranetGen3.Contracts;
+
+[ApiContract]
+public interface IStudentSubjectRegistrationFacade
+{
+	Task<DataFragmentResult<StudentSubjectRegistrationDto>> GetStudentSubjectRegistrationListAsync(DataFragmentRequest<StudentSubjectRegistrationListQueryFilter> studentSubjectRegistrationListRequest, CancellationToken cancellationToken = default);
+}

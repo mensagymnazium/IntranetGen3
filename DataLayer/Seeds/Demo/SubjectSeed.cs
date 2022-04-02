@@ -49,7 +49,7 @@ public class SubjectSeed : DataSeed<DemoProfile>
 			new Subject()
 			{
 				Capacity = 13,
-				Name = "Brdek je bůh.",
+				Name = "Brdek je bůh",
 				Description = "Seminář pravdy",
 				ScheduleDayOfWeek = DayOfWeek.Tuesday,
 				ScheduleSlotInDay = Primitives.ScheduleSlotInDay.Block1,

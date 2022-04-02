@@ -12,7 +12,7 @@ public class SigningRuleMapper : ISigningRuleMapper
 
 		return new SigningRuleDto
 		{
-			SigningRuleId = signingRule.Id,
+			Id = signingRule.Id,
 			Name = signingRule.Name,
 			Quantity = signingRule.Quantity,
 			GradeId = signingRule.GradeId,

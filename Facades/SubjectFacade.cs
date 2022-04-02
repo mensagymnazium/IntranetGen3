@@ -58,7 +58,7 @@ public class SubjectFacade : ISubjectFacade
 	public async Task<Dto<int>> CreateSubjectAsync(SubjectDto subjectDto, CancellationToken cancellationToken = default)
 	{
 		Contract.Requires<ArgumentNullException>(subjectDto != null, nameof(SubjectDto));
-		Contract.Requires<ArgumentException>(subjectDto.SubjectId == default, nameof(SubjectDto.SubjectId));
+		Contract.Requires<ArgumentException>(subjectDto.Id == default, nameof(SubjectDto.Id));
 
 		var subject = new Subject();
 		await subjectMapper.MapFromSubjectDtoAsync(subjectDto, subject, cancellationToken);
@@ -73,9 +73,9 @@ public class SubjectFacade : ISubjectFacade
 	public async Task UpdateSubjectAsync(SubjectDto subjectDto, CancellationToken cancellationToken = default)
 	{
 		Contract.Requires<ArgumentNullException>(subjectDto != null, nameof(SubjectDto));
-		Contract.Requires<ArgumentException>(subjectDto.SubjectId != default, nameof(SubjectDto.SubjectId));
+		Contract.Requires<ArgumentException>(subjectDto.Id != default, nameof(SubjectDto.Id));
 
-		var subject = await subjectRepository.GetObjectAsync(subjectDto.SubjectId, cancellationToken);
+		var subject = await subjectRepository.GetObjectAsync(subjectDto.Id, cancellationToken);
 
 		//var currentUser = applicationAuthenticationService.GetCurrentUser();
 		//if (!await userManager.IsInRolesAsync(currentUser, Role.Administrator))
@@ -98,5 +98,12 @@ public class SubjectFacade : ISubjectFacade
 		unitOfWork.AddForDelete(subject);
 
 		await unitOfWork.CommitAsync(cancellationToken);
+	}
+
+	public async Task<List<SubjectReferenceDto>> GetAllSubjectReferencesAsync(CancellationToken cancellationToken = default)
+	{
+		return (await subjectRepository.GetAllIncludingDeletedAsync(cancellationToken))
+			.Select(s => new SubjectReferenceDto() { Id = s.Id, Name = s.Name })
+			.ToList();
 	}
 }

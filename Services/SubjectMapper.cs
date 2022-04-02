@@ -72,7 +72,7 @@ public class SubjectMapper : ISubjectMapper
 
 		return new SubjectDto
 		{
-			SubjectId = subject.Id,
+			Id = subject.Id,
 			Name = subject.Name,
 			Description = subject.Description,
 			CategoryId = subject.CategoryId,

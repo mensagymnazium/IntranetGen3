@@ -5,6 +5,7 @@ namespace MensaGymnazium.IntranetGen3.Contracts;
 [ApiContract]
 public interface ISubjectFacade
 {
+	Task<List<SubjectReferenceDto>> GetAllSubjectReferencesAsync(CancellationToken cancellationToken = default);
 	Task<DataFragmentResult<SubjectListItemDto>> GetSubjectListAsync(DataFragmentRequest<SubjectListQueryFilter> subjectListRequest, CancellationToken cancellationToken = default);
 	Task DeleteSubjectAsync(Dto<int> subjectId, CancellationToken cancellationToken = default);
 	Task<Dto<int>> CreateSubjectAsync(SubjectDto subjectEditDto, CancellationToken cancellationToken = default);

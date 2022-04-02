@@ -50,13 +50,13 @@ public partial class SubjectList
 	private Task HandleSelectedDataItemChanged(SubjectListItemDto selection)
 	{
 		subjectSelected = selection;
-		NavigationManager.NavigateTo(Routes.Electives.GetSubjectDetail(selection.SubjectId));
+		NavigationManager.NavigateTo(Routes.Electives.GetSubjectDetail(selection.Id));
 		return Task.CompletedTask;
 	}
 
 	private async Task HandleDeleteItemClicked(SubjectListItemDto subject)
 	{
-		await SubjectFacade.DeleteSubjectAsync(Dto.FromValue(subject.SubjectId));
+		await SubjectFacade.DeleteSubjectAsync(Dto.FromValue(subject.Id));
 		Messenger.AddInformation(subject.Name, "Předmět smazán.");
 		await subjectsGrid.RefreshDataAsync();
 	}

@@ -9,9 +9,10 @@ public class Student
 
 	public User User { get; set; }
 
+	public Grade Grade { get; set; }
 	public int GradeId { get; set; }
 
-	public Grade Grade { get; set; }
+	public int? SeedEntityId { get; set; }
 
 	public DateTime Created { get; set; }
 

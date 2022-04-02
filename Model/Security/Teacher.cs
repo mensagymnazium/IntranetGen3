@@ -9,7 +9,6 @@ public class Teacher
 	public int Id { get; set; }
 
 	public User User { get; set; }
-	public int UserId { get; set; }
 
 	[MaxLength(Int32.MaxValue)]
 	public string FunFact { get; set; }

@@ -2,6 +2,7 @@
 using MensaGymnazium.IntranetGen3.DataLayer.Queries;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 using MensaGymnazium.IntranetGen3.Model;
+using MensaGymnazium.IntranetGen3.Primitives;
 using MensaGymnazium.IntranetGen3.Services;
 
 
@@ -47,10 +48,11 @@ public class SigningRuleFacade : ISigningRuleFacade
 		return signingRuleMapper.MapToSigningRuleDto(SigningRule);
 	}
 
+	[Authorize(Roles = nameof(Role.Administrator))]
 	public async Task<Dto<int>> CreateSigningRuleAsync(SigningRuleDto SigningRuleDto, CancellationToken cancellationToken = default)
 	{
-		Contract.Requires<ArgumentNullException>(SigningRuleDto != null, nameof(SigningRuleDto));
-		Contract.Requires<ArgumentException>(SigningRuleDto.SigningRuleId == null, nameof(SigningRuleDto.SigningRuleId));
+		Contract.Requires<ArgumentNullException>(SigningRuleDto != null);
+		Contract.Requires<ArgumentException>(SigningRuleDto.Id == default);
 
 		var SigningRule = new SigningRule();
 		signingRuleMapper.MapFromSigningRuleDto(SigningRuleDto, SigningRule);
@@ -61,12 +63,13 @@ public class SigningRuleFacade : ISigningRuleFacade
 		return Dto.FromValue(SigningRule.Id);
 	}
 
+	[Authorize(Roles = nameof(Role.Administrator))]
 	public async Task UpdateSigningRuleAsync(SigningRuleDto SigningRuleDto, CancellationToken cancellationToken = default)
 	{
-		Contract.Requires<ArgumentNullException>(SigningRuleDto != null, nameof(SigningRuleDto));
-		Contract.Requires<ArgumentException>(SigningRuleDto.SigningRuleId != null, nameof(SigningRuleDto.SigningRuleId));
+		Contract.Requires<ArgumentNullException>(SigningRuleDto != null);
+		Contract.Requires<ArgumentException>(SigningRuleDto.Id != default);
 
-		var SigningRule = await signingRuleRepository.GetObjectAsync(SigningRuleDto.SigningRuleId.Value, cancellationToken);
+		var SigningRule = await signingRuleRepository.GetObjectAsync(SigningRuleDto.Id, cancellationToken);
 
 		SigningRule.Name = SigningRuleDto.Name;
 
@@ -74,11 +77,19 @@ public class SigningRuleFacade : ISigningRuleFacade
 		await unitOfWork.CommitAsync(cancellationToken);
 	}
 
+	[Authorize(Roles = nameof(Role.Administrator))]
 	public async Task DeleteSigningRuleAsync(Dto<int> SigningRuleIdDto, CancellationToken cancellationToken = default)
 	{
 		var SigningRule = signingRuleRepository.GetObjectAsync(SigningRuleIdDto.Value, cancellationToken);
 		unitOfWork.AddForDelete(SigningRule);
 
 		await unitOfWork.CommitAsync(cancellationToken);
+	}
+
+	public async Task<List<SigningRuleReferenceDto>> GetAllSigningRuleReferencesAsync(CancellationToken cancellationToken = default)
+	{
+		return (await signingRuleRepository.GetAllAsync(cancellationToken))
+			.Select(sr => new SigningRuleReferenceDto() { Id = sr.Id, Name = sr.Name })
+			.ToList();
 	}
 }

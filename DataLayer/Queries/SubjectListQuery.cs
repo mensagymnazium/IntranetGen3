@@ -1,8 +1,4 @@
-﻿using Havit.Collections;
-using Havit.Data.EntityFrameworkCore.Patterns.QueryServices;
-using Havit.Extensions.DependencyInjection.Abstractions;
-using Havit.Linq;
-using MensaGymnazium.IntranetGen3.Contracts;
+﻿using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.DataLayer.DataSources;
 
 namespace MensaGymnazium.IntranetGen3.DataLayer.Queries;
@@ -41,7 +37,7 @@ public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 
 		var result = data.Select(s => new SubjectListItemDto()
 		{
-			SubjectId = s.Id,
+			Id = s.Id,
 			Name = s.Name,
 			CategoryId = s.CategoryId,
 			SubjectTypeIds = s.TypeRelations.Select(tr => tr.SubjectTypeId).ToList(),
@@ -63,5 +59,4 @@ public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 			TotalCount = await CountAsync(cancellationToken)
 		};
 	}
-
 }

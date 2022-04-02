@@ -1,11 +1,7 @@
 ﻿namespace MensaGymnazium.IntranetGen3.Contracts;
 
-public class SigningRuleDto
+public class SigningRuleDto : SigningRuleReferenceDto
 {
-	public int? SigningRuleId { get; set; }
-
-	public string Name { get; set; }
-
 	public int? Quantity { get; set; }
 
 	public List<int> SubjectTypeIds { get; set; }

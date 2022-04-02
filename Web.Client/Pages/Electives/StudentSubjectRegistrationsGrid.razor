@@ -1,0 +1,25 @@
+﻿@if (SubjectsDataStore.IsLoaded && StudentsDataStore.IsLoaded && SigningRulesDataStore.IsLoaded)
+{
+    <HxGrid TItem="StudentSubjectRegistrationDto"
+        DataProvider="this.DataProvider">
+        <Columns>
+            <HxGridColumn HeaderText="Předmět"
+                      ItemTextSelector="i => SubjectsDataStore.GetByKey(i.SubjectId.Value)?.Name"
+                      SortString="@nameof(StudentSubjectRegistrationDto.SubjectId)"
+                      Visible="this.ShowSubjectColumn"
+                      TItem="StudentSubjectRegistrationDto" />
+            <HxGridColumn HeaderText="Student"
+                      ItemTextSelector="i => StudentsDataStore.GetByKey(i.StudentId.Value)?.Name"
+                      SortString="@nameof(StudentSubjectRegistrationDto.StudentId)"
+                      TItem="StudentSubjectRegistrationDto" />
+            <HxGridColumn HeaderText="Typ zápisu"
+                      ItemTextSelector="i => i.RegistrationType.AsEnumValueDescription()"
+                      SortString="@nameof(StudentSubjectRegistrationDto.RegistrationType)"
+                      TItem="StudentSubjectRegistrationDto" />
+            <HxGridColumn HeaderText="Pravidlo"
+                      ItemTextSelector="i => SigningRulesDataStore.GetByKey(i.SigningRuleId.Value)?.Name"
+                      SortString="@nameof(StudentSubjectRegistrationDto.SigningRuleId)"
+                      TItem="StudentSubjectRegistrationDto" />
+        </Columns>
+    </HxGrid>
+}

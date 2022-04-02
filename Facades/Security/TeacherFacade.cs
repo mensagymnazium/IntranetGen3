@@ -9,8 +9,7 @@ public class TeacherFacade : ITeacherFacade
 {
 	private readonly ITeacherRepository teacherRepository;
 
-	public TeacherFacade(
-		ITeacherRepository teacherRepository)
+	public TeacherFacade(ITeacherRepository teacherRepository)
 	{
 		this.teacherRepository = teacherRepository;
 	}

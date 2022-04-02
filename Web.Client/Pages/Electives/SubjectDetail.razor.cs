@@ -9,6 +9,7 @@ public partial class SubjectDetail
 	[Parameter] public int? SubjectId { get; set; }
 
 	[Inject] protected ISubjectFacade SubjectFacade { get; set; }
+	[Inject] protected IStudentSubjectRegistrationFacade StudentSubjectRegistrationFacade { get; set; }
 	[Inject] protected ISubjectCategoriesDataStore SubjectCategoriesDataStore { get; set; }
 	[Inject] protected ISubjectTypesDataStore SubjectTypesDataStore { get; set; }
 	[Inject] protected ITeachersDataStore TeachersDataStore { get; set; }
@@ -28,6 +29,8 @@ public partial class SubjectDetail
 
 	protected override async Task OnParametersSetAsync()
 	{
+		Console.WriteLine($"OnParametersSetAsync_{SubjectId}_{loadedSubjectId}");
+		
 		if (SubjectId != loadedSubjectId)
 		{
 			if (SubjectId.HasValue)
@@ -40,6 +43,24 @@ public partial class SubjectDetail
 				loadedSubjectId = null;
 			}
 		}
+	}
+
+	private async Task<GridDataProviderResult<StudentSubjectRegistrationDto>> GetStudentRegistrations(GridDataProviderRequest<StudentSubjectRegistrationDto> request)
+	{
+		var response = await StudentSubjectRegistrationFacade.GetStudentSubjectRegistrationListAsync(
+			new DataFragmentRequest<StudentSubjectRegistrationListQueryFilter>()
+			{
+				Filter = new StudentSubjectRegistrationListQueryFilter() { SubjectId = SubjectId },
+				Count = request.Count,
+				StartIndex = request.StartIndex,
+				// TODO Sorting = 
+			});
+
+		return new()
+		{
+			Data = response.Data,
+			TotalCount = response.TotalCount,
+		};
 	}
 
 	private async Task LoadSubjectAsync()
