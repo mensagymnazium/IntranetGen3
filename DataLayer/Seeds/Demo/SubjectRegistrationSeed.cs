@@ -33,7 +33,14 @@ public class SubjectRegistrationSeed : DataSeed<DemoProfile>
 			new StudentSubjectRegistration()
 			{
 				UsedSigningRuleId = signingRules.First(sr => sr.Name.Equals("Sekunda - Specializovaný seminář nebo jazyk")).Id,
-				StudentId = users.First(s => s.Email.StartsWith("petr.primovic")).StudentId.Value,
+				StudentId = users.First(s => s.Email.StartsWith("sara.sekundova")).StudentId.Value,
+				SubjectId = subjects.First(s => s.Name.Equals("Brdek je bůh")).Id,
+				RegistrationType = StudentRegistrationType.Main
+			},
+			new StudentSubjectRegistration()
+			{
+				UsedSigningRuleId = signingRules.First(sr => sr.Name.Equals("Tercie - Specializovaný seminář")).Id,
+				StudentId = users.First(s => s.Email.StartsWith("tereza.tercianova")).StudentId.Value,
 				SubjectId = subjects.First(s => s.Name.Equals("Brdek je bůh")).Id,
 				RegistrationType = StudentRegistrationType.Main
 			}

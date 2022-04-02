@@ -1,4 +1,5 @@
-﻿using MensaGymnazium.IntranetGen3.Contracts;
+﻿using Havit.Collections;
+using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 using Microsoft.AspNetCore.Components;
 
@@ -53,7 +54,7 @@ public partial class SubjectDetail
 				Filter = new StudentSubjectRegistrationListQueryFilter() { SubjectId = SubjectId },
 				Count = request.Count,
 				StartIndex = request.StartIndex,
-				// TODO Sorting = 
+				Sorting = request.Sorting.Select(s => new SortItem(s.SortString, s.SortDirection)).ToArray()
 			});
 
 		return new()

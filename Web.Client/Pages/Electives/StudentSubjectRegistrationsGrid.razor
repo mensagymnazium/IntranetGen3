@@ -12,6 +12,10 @@
                       ItemTextSelector="i => StudentsDataStore.GetByKey(i.StudentId.Value)?.Name"
                       SortString="@nameof(StudentSubjectRegistrationDto.StudentId)"
                       TItem="StudentSubjectRegistrationDto" />
+            <HxGridColumn HeaderText="Ročník"
+                      ItemTextSelector="i => GradesDataStore.GetByKey(StudentsDataStore.GetByKey(i.StudentId.Value).GradeId)?.Name"
+                      SortString="StudentGradeId"
+                      TItem="StudentSubjectRegistrationDto" />
             <HxGridColumn HeaderText="Typ zápisu"
                       ItemTextSelector="i => i.RegistrationType.AsEnumValueDescription()"
                       SortString="@nameof(StudentSubjectRegistrationDto.RegistrationType)"

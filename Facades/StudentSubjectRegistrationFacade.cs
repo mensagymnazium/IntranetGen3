@@ -22,7 +22,7 @@ public class StudentSubjectRegistrationFacade : IStudentSubjectRegistrationFacad
 		Contract.Requires<ArgumentNullException>(studentSubjectRegistrationListRequest is not null);
 
 		studentSubjectRegistrationListQuery.Filter = studentSubjectRegistrationListRequest.Filter;
-		//studentSubjectRegistrationListQuery.Sorting = studentSubjectRegistrationListRequest.Sorting;
+		studentSubjectRegistrationListQuery.Sorting = studentSubjectRegistrationListRequest.Sorting;
 
 		return await studentSubjectRegistrationListQuery.GetDataFragmentAsync(studentSubjectRegistrationListRequest.StartIndex, studentSubjectRegistrationListRequest.Count, cancellationToken);
 	}

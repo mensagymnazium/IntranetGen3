@@ -14,6 +14,7 @@ public class StudentSubjectRegistrationListQuery : QueryBase<StudentSubjectRegis
 	}
 
 	public StudentSubjectRegistrationListQueryFilter Filter { get; set; }
+	public SortItem[] Sorting { get; set; }
 
 	protected override IQueryable<StudentSubjectRegistrationDto> Query()
 	{
@@ -21,6 +22,15 @@ public class StudentSubjectRegistrationListQuery : QueryBase<StudentSubjectRegis
 
 		return studentSubjectRegistrationDataSource.Data
 			.WhereIf(Filter.SubjectId is not null, ssr => ssr.SubjectId == Filter.SubjectId)
+			.OrderByMultiple(Sorting, sortingExpression => sortingExpression switch
+			{
+				nameof(StudentSubjectRegistrationDto.SubjectId) => new() { s => s.Subject.Name, s => s.Student.User.Name },
+				nameof(StudentSubjectRegistrationDto.StudentId) => new() { s => s.Student.User.Name, s => s.Subject.Name },
+				nameof(StudentSubjectRegistrationDto.RegistrationType) => new() { s => s.RegistrationType, s => s.Subject.Name, s => s.Student.User.Name },
+				nameof(StudentSubjectRegistrationDto.SigningRuleId) => new() { s => s.UsedSigningRule.Name, s => s.Subject.Name, s => s.Student.User.Name },
+				"StudentGradeId" => new() { s => -s.Student.GradeId },
+				_ => throw new InvalidOperationException($"Unknown SortingItem.Expression {sortingExpression}.")
+			})
 			.Select(ssr => new StudentSubjectRegistrationDto()
 			{
 				Id = ssr.Id,
