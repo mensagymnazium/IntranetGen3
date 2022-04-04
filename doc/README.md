@@ -11,3 +11,7 @@
 ### Specifické vývojové úkony
 * [Entity Framework - Migrace](EF-Migrations.md)
 * [Seedování dat](DataSeeds.md)
+
+### Authentizace, autorizace
+* https://docs.microsoft.com/en-us/aspnet/core/blazor/security/webassembly/hosted-with-azure-active-directory
+* https://docs.microsoft.com/en-us/aspnet/core/blazor/security/webassembly/azure-active-directory-groups-and-roles
