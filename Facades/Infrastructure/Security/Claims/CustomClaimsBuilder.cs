@@ -1,6 +1,6 @@
 ﻿using System.Security;
 using System.Security.Claims;
-using MensaGymnazium.IntranetGen3.Contracts.Infrastructure.Security;
+using MensaGymnazium.IntranetGen3.Contracts.Security;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
 using MensaGymnazium.IntranetGen3.Model.Security;
 using MensaGymnazium.IntranetGen3.Services.Infrastructure;
@@ -49,12 +49,16 @@ public class CustomClaimsBuilder : ICustomClaimsBuilder
 				throw new SecurityException("Onboarding uživatele nebyl úspěšný.");
 			}
 		}
+		else
+		{
+			await userOnboarder.UpdateUserAsync(user, principal);
+		}
 
 		// user.Id
 		result.Add(new Claim(ClaimConstants.UserIdClaim, user.Id.ToString(), null, ClaimConstants.ApplicationIssuer));
 
 		// role
-		var roles = await userManager.GetRolesAsync(user);
+		var roles = await userManager.GetRolesAsync(user, principal);
 		foreach (var role in roles)
 		{
 			result.Add(new Claim(ClaimTypes.Role, role.ToString("g"), null, ClaimConstants.ApplicationIssuer));

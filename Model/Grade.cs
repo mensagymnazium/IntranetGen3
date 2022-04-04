@@ -9,8 +9,11 @@ public class Grade
 {
 	public int Id { get; set; }
 
-	[MaxLength(20)]
+	[Required, MaxLength(20)]
 	public string Name { get; set; }
+
+	[MaxLength(36)]
+	public string AadGroupId { get; set; }
 
 	public ICollection<Student> Students { get; } = new List<Student>();
 

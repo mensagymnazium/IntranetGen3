@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using MensaGymnazium.IntranetGen3.Contracts.Infrastructure.Security;
+using MensaGymnazium.IntranetGen3.Contracts.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

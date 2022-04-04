@@ -1,8 +1,8 @@
 ﻿using System.Security.Claims;
-using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
 using MensaGymnazium.IntranetGen3.Model.Security;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
-using MensaGymnazium.IntranetGen3.Contracts.Infrastructure.Security;
+using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
+using MensaGymnazium.IntranetGen3.Contracts.Security;
 
 namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.Security;
 

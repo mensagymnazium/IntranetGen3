@@ -9,4 +9,9 @@ public interface IUserOnboarder
 	/// Pokusí se založit nového uživatele, který přichází authentizovaný, ale nemáme ho dosud v DB.
 	/// </summary>
 	Task<User> TryOnboardUserAsync(Guid oid, ClaimsPrincipal principal, CancellationToken cancelationToken = default);
+
+	/// <summary>
+	/// Aktualizuje existujícího uživatele dle informací z AAD.
+	/// </summary>
+	Task UpdateUserAsync(User user, ClaimsPrincipal principal);
 }
