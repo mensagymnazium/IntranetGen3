@@ -5,11 +5,11 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 
 public class TeachersDataStore : DictionaryStaticDataStore<int, TeacherReferenceDto>, ITeachersDataStore
 {
-	private readonly ITeacherFacade TeacherFacade;
+	private readonly Func<ITeacherFacade> teacherFacade;
 
-	public TeachersDataStore(ITeacherFacade TeacherFacade)
+	public TeachersDataStore(Func<ITeacherFacade> teacherFacade)
 	{
-		this.TeacherFacade = TeacherFacade;
+		this.teacherFacade = teacherFacade;
 	}
 
 	protected override Func<TeacherReferenceDto, int> KeySelector => (Teacher) => Teacher.TeacherId;
@@ -17,7 +17,7 @@ public class TeachersDataStore : DictionaryStaticDataStore<int, TeacherReference
 
 	protected async override Task<IEnumerable<TeacherReferenceDto>> LoadDataAsync()
 	{
-		var dto = await TeacherFacade.GetAllTeacherReferencesAsync();
+		var dto = await teacherFacade().GetAllTeacherReferencesAsync();
 		return dto ?? new List<TeacherReferenceDto>();
 	}
 }

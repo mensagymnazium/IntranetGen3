@@ -5,11 +5,11 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 
 public class SubjectCategoriesDataStore : DictionaryStaticDataStore<int, SubjectCategoryDto>, ISubjectCategoriesDataStore
 {
-	private readonly ISubjectCategoryFacade SubjectCategoryFacade;
+	private readonly Func<ISubjectCategoryFacade> subjectCategoryFacade;
 
-	public SubjectCategoriesDataStore(ISubjectCategoryFacade SubjectCategoryFacade)
+	public SubjectCategoriesDataStore(Func<ISubjectCategoryFacade> subjectCategoryFacade)
 	{
-		this.SubjectCategoryFacade = SubjectCategoryFacade;
+		this.subjectCategoryFacade = subjectCategoryFacade;
 	}
 
 	protected override Func<SubjectCategoryDto, int> KeySelector => (SubjectCategory) => SubjectCategory.Id;
@@ -17,7 +17,7 @@ public class SubjectCategoriesDataStore : DictionaryStaticDataStore<int, Subject
 
 	protected async override Task<IEnumerable<SubjectCategoryDto>> LoadDataAsync()
 	{
-		var dto = await SubjectCategoryFacade.GetAllSubjectCategoriesAsync();
+		var dto = await subjectCategoryFacade().GetAllSubjectCategoriesAsync();
 		return dto ?? new List<SubjectCategoryDto>();
 	}
 }

@@ -5,12 +5,12 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Development;
 
 public partial class Placeholder1
 {
-	[Inject] protected IGradeFacade GradeFacade { get; set; }
+	[Inject] protected Func<IGradeFacade> GradeFacade { get; set; }
 
 	private List<GradeDto> grades;
 
 	protected override async Task OnInitializedAsync()
 	{
-		grades = await GradeFacade.GetAllGradesAsync();
+		grades = await GradeFacade().GetAllGradesAsync();
 	}
 }

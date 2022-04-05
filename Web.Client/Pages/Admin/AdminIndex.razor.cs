@@ -6,7 +6,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Admin;
 
 public partial class AdminIndex : ComponentBase
 {
-	[Inject] protected IMaintenanceFacade MaintenanceFacade { get; set; }
+	[Inject] protected Func<IMaintenanceFacade> MaintenanceFacade { get; set; }
 	[Inject] protected IHxMessengerService Messenger { get; set; }
 	[Inject] protected IHxMessageBoxService MessageBox { get; set; }
 
@@ -16,7 +16,7 @@ public partial class AdminIndex : ComponentBase
 	{
 		if (await MessageBox.ConfirmAsync("Opravdu chcete smazat cache serverové části aplikace?"))
 		{
-			await MaintenanceFacade.ClearCache();
+			await MaintenanceFacade().ClearCache();
 			Messenger.AddInformation("Serverová cache vyčištěna.");
 		}
 	}
