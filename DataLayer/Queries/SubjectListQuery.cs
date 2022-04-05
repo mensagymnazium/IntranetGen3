@@ -1,5 +1,6 @@
 ﻿using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.DataLayer.DataSources;
+using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 
 namespace MensaGymnazium.IntranetGen3.DataLayer.Queries;
 
@@ -7,10 +8,14 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Queries;
 public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 {
 	private readonly ISubjectDataSource subjectDataSource;
+	private readonly ISigningRuleRepository signingRuleRepository;
 
-	public SubjectListQuery(ISubjectDataSource subjectDataSource)
+	public SubjectListQuery(
+		ISubjectDataSource subjectDataSource,
+		ISigningRuleRepository signingRuleRepository)
 	{
 		this.subjectDataSource = subjectDataSource;
+		this.signingRuleRepository = signingRuleRepository;
 	}
 
 	public SubjectListQueryFilter Filter { get; set; }
@@ -22,7 +27,28 @@ public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 			.WhereIf(!String.IsNullOrWhiteSpace(Filter.Name), s => s.Name.Contains(Filter.Name))
 			.WhereIf(Filter.SubjectTypeId != null, s => s.TypeRelations.Any(r => r.SubjectTypeId == Filter.SubjectTypeId))
 			.WhereIf(Filter.SubjectCategoryId != null, s => s.CategoryId == Filter.SubjectCategoryId)
-			.WhereIf(Filter.TeacherId != null, s => s.TeacherRelations.Any(tr => tr.TeacherId == Filter.TeacherId))
+			.WhereIf(Filter.TeacherId != null, s => s.TeacherRelations.Any(tr => tr.TeacherId == Filter.TeacherId));
+
+		if (Filter.SigningRuleId is not null)
+		{
+			var signingRule = signingRuleRepository.GetObject(Filter.SigningRuleId.Value);
+
+			data = data.Where(s => s.GradeRelations.Any(gr => gr.GradeId == signingRule.GradeId));
+
+			var subjectTypesIds = signingRule.SubjectTypeRelations.Select(str => str.SubjectTypeId);
+			if (subjectTypesIds.Any())
+			{
+				data = data.Where(s => s.TypeRelations.Any(tr => subjectTypesIds.Contains(tr.SubjectTypeId)));
+			}
+
+			var subjectCategoriesIds = signingRule.SubjectCategoryRelations.Select(str => str.SubjectCategoryId);
+			if (subjectCategoriesIds.Any())
+			{
+				data = data.Where(s => subjectCategoriesIds.Contains(s.CategoryId));
+			}
+		}
+
+		data = data
 			.OrderByMultiple(Sorting, sortingExpression => sortingExpression switch
 			 {
 				 nameof(SubjectListItemDto.Name) => new() { s => s.Name },

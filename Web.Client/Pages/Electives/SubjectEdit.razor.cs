@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
 
-public partial class SubjectEdit
+public partial class SubjectEdit : ComponentBase
 {
 	[Parameter] public int? SubjectId { get; set; }
 	[Parameter] public EventCallback<int> OnSaved { get; set; }

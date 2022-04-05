@@ -47,6 +47,12 @@ public partial class SubjectList
 		};
 	}
 
+	private async Task HandleSigningRuleFilterChanged(int? newSigningRuleFilterValue)
+	{
+		subjectListFilter.SigningRuleId = newSigningRuleFilterValue;
+		await subjectsGrid.RefreshDataAsync();
+	}
+
 	private Task HandleSelectedDataItemChanged(SubjectListItemDto selection)
 	{
 		subjectSelected = selection;

@@ -6,4 +6,5 @@ public record SubjectListQueryFilter
 	public int? SubjectTypeId { get; set; }
 	public int? SubjectCategoryId { get; set; }
 	public int? TeacherId { get; set; }
+	public int? SigningRuleId { get; set; }
 }
