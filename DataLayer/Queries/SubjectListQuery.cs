@@ -1,6 +1,7 @@
 ﻿using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.DataLayer.DataSources;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
+using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.DataLayer.Queries;
 
@@ -9,13 +10,16 @@ public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 {
 	private readonly ISubjectDataSource subjectDataSource;
 	private readonly ISigningRuleRepository signingRuleRepository;
+	private readonly IStudentSubjectRegistrationDataSource studentSubjectRegistrationDataSource;
 
 	public SubjectListQuery(
 		ISubjectDataSource subjectDataSource,
-		ISigningRuleRepository signingRuleRepository)
+		ISigningRuleRepository signingRuleRepository,
+		IStudentSubjectRegistrationDataSource studentSubjectRegistrationDataSource)
 	{
 		this.subjectDataSource = subjectDataSource;
 		this.signingRuleRepository = signingRuleRepository;
+		this.studentSubjectRegistrationDataSource = studentSubjectRegistrationDataSource;
 	}
 
 	public SubjectListQueryFilter Filter { get; set; }
@@ -68,6 +72,8 @@ public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 			CategoryId = s.CategoryId,
 			SubjectTypeIds = s.TypeRelations.Select(tr => tr.SubjectTypeId).ToList(),
 			Capacity = s.Capacity,
+			StudentRegistrationsCountMain = studentSubjectRegistrationDataSource.Data.Count(ssr => ssr.SubjectId == s.Id && ssr.RegistrationType == StudentRegistrationType.Main),
+			StudentRegistrationsCountSecondary = studentSubjectRegistrationDataSource.Data.Count(ssr => ssr.SubjectId == s.Id && ssr.RegistrationType == StudentRegistrationType.Secondary),
 			GradeIds = s.GradeRelations.Select(tr => tr.GradeId).ToList(),
 			TeacherIds = s.TeacherRelations.Select(tr => tr.TeacherId).ToList(),
 			ScheduleSlotInDay = s.ScheduleSlotInDay,

@@ -11,4 +11,6 @@ public record SubjectListItemDto : SubjectReferenceDto
 	public List<int> SubjectTypeIds { get; set; } = new List<int>();
 	public List<int> GradeIds { get; set; } = new List<int>();
 	public List<int> TeacherIds { get; set; } = new List<int>();
+	public int StudentRegistrationsCountMain { get; set; }
+	public int StudentRegistrationsCountSecondary { get; set; }
 }

@@ -1,5 +1,7 @@
 ﻿using MensaGymnazium.IntranetGen3.Contracts;
+using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 using MensaGymnazium.IntranetGen3.Model;
+using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.Services;
 
@@ -8,13 +10,16 @@ public class SubjectMapper : ISubjectMapper
 {
 	private readonly IDataLoader dataLoader;
 	private readonly IUnitOfWork unitOfWork;
+	private readonly IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository;
 
 	public SubjectMapper(
 		IDataLoader dataLoader,
-		IUnitOfWork unitOfWork)
+		IUnitOfWork unitOfWork,
+		IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository)
 	{
 		this.dataLoader = dataLoader;
 		this.unitOfWork = unitOfWork;
+		this.studentSubjectRegistrationRepository = studentSubjectRegistrationRepository;
 	}
 
 	public async Task MapFromSubjectDtoAsync(SubjectDto subjectDto, Subject subject, CancellationToken cancellationToken = default)
@@ -70,6 +75,8 @@ public class SubjectMapper : ISubjectMapper
 		await dataLoader.LoadAsync(subject, s => s.GradeRelations, cancellationToken);
 		await dataLoader.LoadAsync(subject, s => s.TypeRelations, cancellationToken);
 
+		var studentRegistrations = await studentSubjectRegistrationRepository.GetBySubjectAsync(subject.Id, cancellationToken);
+
 		return new SubjectDto
 		{
 			Id = subject.Id,
@@ -78,6 +85,8 @@ public class SubjectMapper : ISubjectMapper
 			CategoryId = subject.CategoryId,
 			SubjectTypeIds = subject.TypeRelations.Select(tr => tr.SubjectTypeId).ToList(),
 			Capacity = subject.Capacity,
+			StudentRegistrationsCountMain = studentRegistrations.Count(ssr => ssr.RegistrationType == StudentRegistrationType.Main),
+			StudentRegistrationsCountSecondary = studentRegistrations.Count(ssr => ssr.RegistrationType == StudentRegistrationType.Secondary),
 			GradeIds = subject.GradeRelations.Select(tr => tr.GradeId).ToList(),
 			TeacherIds = subject.TeacherRelations.Select(tr => tr.TeacherId).ToList(),
 			ScheduleSlotInDay = subject.ScheduleSlotInDay,

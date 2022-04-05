@@ -32,7 +32,7 @@
             <HxCardText>
                 <TextValue Label="Vyučující" Value="@GetTeachers(subject.TeacherIds)" />
                 <TextValue Label="Rozvrh" Value="@ValueFormatter.GetScheduleTimeSlot(subject.ScheduleDayOfWeek, subject.ScheduleSlotInDay)" />
-                <TextValue Label="Kapacita" Value="@subject.Capacity.ToString("n0")" />
+                <TextValue Label="Kapacita (celkem/primární zápisy/náhradní zápisy)" Value="@($"{subject.Capacity:n0}/{subject.StudentRegistrationsCountMain}/{subject.StudentRegistrationsCountSecondary}")" />
                 <TextValue Label="Ročník(y)" Value="@GetGrades(subject.GradeIds)" />
                 <TextValue Label="Skupina" Value="@SubjectCategoriesDataStore.GetByKey(subject.CategoryId.Value)?.Name" />
                 <TextValue Label="Vzdělávací oblasti" Value="@GetSubjectTypes(subject.SubjectTypeIds)" />
