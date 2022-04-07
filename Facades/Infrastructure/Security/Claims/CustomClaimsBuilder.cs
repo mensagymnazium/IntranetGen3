@@ -55,7 +55,13 @@ public class CustomClaimsBuilder : ICustomClaimsBuilder
 		}
 
 		// user.Id
-		result.Add(new Claim(ClaimConstants.UserIdClaim, user.Id.ToString(), null, ClaimConstants.ApplicationIssuer));
+		result.Add(new Claim(ClaimConstants.UserIdClaimType, user.Id.ToString(), null, ClaimConstants.ApplicationIssuer));
+
+		// StudentGradeId
+		if (user.Student != null)
+		{
+			result.Add(new Claim(ClaimConstants.StudentGradeIdClaimType, user.Student.GradeId.ToString(), null, ClaimConstants.ApplicationIssuer));
+		}
 
 		// role
 		var roles = await userManager.GetRolesAsync(user, principal);

@@ -89,7 +89,12 @@ public class SigningRuleFacade : ISigningRuleFacade
 	public async Task<List<SigningRuleReferenceDto>> GetAllSigningRuleReferencesAsync(CancellationToken cancellationToken = default)
 	{
 		return (await signingRuleRepository.GetAllAsync(cancellationToken))
-			.Select(sr => new SigningRuleReferenceDto() { Id = sr.Id, Name = sr.Name })
+			.Select(sr => new SigningRuleReferenceDto()
+			{
+				Id = sr.Id,
+				Name = sr.Name,
+				GradeId = sr.GradeId
+			})
 			.ToList();
 	}
 }

@@ -5,11 +5,12 @@ public static class ClaimConstants
 	public const string EmailClaimType = "unique_name";
 	public const string NameClaimType = "name";
 	public const string GroupClaimType = "groups";
+	public const string StudentGradeIdClaimType = "StudentGradeId";
 
 	/// <summary>
 	/// Název claim pro uložení User.Id
 	/// </summary>
-	public const string UserIdClaim = "UserId";
+	public const string UserIdClaimType = "UserId";
 
 	/// <summary>
 	/// Název vystavitele claimů, vystavených aplikací.

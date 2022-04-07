@@ -34,7 +34,7 @@ public class ApplicationAuthenticationService : IApplicationAuthenticationServic
 	private int GetCurrentUserId()
 	{
 		var principal = GetCurrentClaimsPrincipal();
-		Claim userIdClaim = principal.Claims.Single(claim => (claim.Type == ClaimConstants.UserIdClaim));
+		Claim userIdClaim = principal.Claims.Single(claim => (claim.Type == ClaimConstants.UserIdClaimType));
 		return Int32.Parse(userIdClaim.Value);
 	}
 }

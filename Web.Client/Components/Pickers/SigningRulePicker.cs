@@ -1,4 +1,5 @@
 ﻿using MensaGymnazium.IntranetGen3.Contracts;
+using MensaGymnazium.IntranetGen3.Web.Client.Services;
 using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Components.Pickers;
@@ -6,8 +7,10 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Components.Pickers;
 public class SigningRulePicker : HxSelectBase<int?, SigningRuleReferenceDto>
 {
 	[Parameter] public string NullText { get => NullTextImpl; set => NullTextImpl = value; }
+	[Parameter] public bool RestrictStudentGrade { get; set; } = false;
 
 	[Inject] protected ISigningRulesDataStore SigningRulesDataStore { get; set; }
+	[Inject] protected IClientAuthService ClientAuthService { get; set; }
 
 	public SigningRulePicker()
 	{
@@ -23,6 +26,17 @@ public class SigningRulePicker : HxSelectBase<int?, SigningRuleReferenceDto>
 	{
 		await base.OnInitializedAsync();
 
-		this.DataImpl = (await SigningRulesDataStore.GetAllAsync()).ToList();
+		var data = (await SigningRulesDataStore.GetAllAsync());
+
+		if (RestrictStudentGrade) // not expected to change during component lifecycle
+		{
+			var gradeId = await ClientAuthService.GetCurrentStudentGradeIdAsync();
+			if (gradeId is not null)
+			{
+				data = data.Where(c => c.GradeId == gradeId);
+			}
+		}
+
+		DataImpl = data.ToList();
 	}
 }

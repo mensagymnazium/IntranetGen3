@@ -7,7 +7,12 @@
               FilterModel="subjectListFilter"
               FilterModelChanged="HandleFilterModelChanged">
         <SearchTemplate>
-            Zápisové pravidlo: <SigningRulePicker Value="subjectListFilter.SigningRuleId" ValueChanged="HandleSigningRuleFilterChanged" ValueExpression="() => subjectListFilter.SigningRuleId" />
+            Zápisové pravidlo:
+            <SigningRulePicker Value="subjectListFilter.SigningRuleId"
+                           ValueChanged="HandleSigningRuleFilterChanged"
+                           ValueExpression="() => subjectListFilter.SigningRuleId"
+                           RestrictStudentGrade="true"
+                           NullText="-neurčeno-" />
         </SearchTemplate>
         <CommandsTemplate>
             <AuthorizeView Roles="@nameof(Role.Administrator)">
@@ -21,7 +26,7 @@
             <TeacherPicker @bind-Value="context.TeacherId" Label="Vyučující" />
         </FilterTemplate>
         <DataTemplate>
-            <HxGrid @ref="subjectsGrid"     
+            <HxGrid @ref="subjectsGrid"
                 TItem="SubjectListItemDto"
                 DataProvider="LoadSubjects"
                 SelectedDataItem="subjectSelected"
