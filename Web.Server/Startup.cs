@@ -90,7 +90,7 @@ public class Startup
 			endpoints.MapRazorPages();
 			endpoints.MapControllers();
 			endpoints.MapFallbackToPage("/_Host");
-			
+
 			endpoints.MapGrpcServicesByApiContractAttributes(
 				typeof(IDataSeedFacade).Assembly,
 				configureEndpointWithAuthorization: endpoint =>
