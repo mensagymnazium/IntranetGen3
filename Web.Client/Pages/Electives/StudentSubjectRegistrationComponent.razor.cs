@@ -14,24 +14,13 @@ public partial class StudentSubjectRegistrationComponent
 	[Inject] protected IHxMessageBoxService MessageBox { get; set; }
 	[Inject] protected Func<ISubjectRegistrationsManagerFacade> SubjectRegistrationsManagerFacade { get; set; }
 
-	private HxGrid<StudentSubjectRegistrationComponentDataItem> gridComponent;
+	private HxGrid<SigningRuleStudentRegistrationsDto> gridComponent;
 
-	private async Task<GridDataProviderResult<StudentSubjectRegistrationComponentDataItem>> GetGridData(GridDataProviderRequest<StudentSubjectRegistrationComponentDataItem> request)
+	private async Task<GridDataProviderResult<SigningRuleStudentRegistrationsDto>> GetGridData(GridDataProviderRequest<SigningRuleStudentRegistrationsDto> request)
 	{
-		var signingRulesWithRegistrations = await SubjectRegistrationsManagerFacade().GetCurrentUserSigningRulesWithRegistrationsAsync(Dto.FromValue(SubjectId));
-		Console.WriteLine(JsonSerializer.Serialize(signingRulesWithRegistrations));
-
-		var data = signingRulesWithRegistrations.Select(sr => new StudentSubjectRegistrationComponentDataItem()
-		{
-			Id = sr.Id,
-			Name = sr.Name,
-			MainRegistration = sr.Registrations.FirstOrDefault(r => (r.SubjectId == this.SubjectId)
-																&& (r.RegistrationType == StudentRegistrationType.Main)),
-			SecondaryRegistration = sr.Registrations.FirstOrDefault(r => (r.SubjectId == this.SubjectId)
-																&& (r.RegistrationType == StudentRegistrationType.Secondary)),
-			MainRegistrationAllowed = (sr.Registrations.Count(r => r.RegistrationType == StudentRegistrationType.Main) < sr.Quantity),
-			SecondaryRegistrationAllowed = (sr.Registrations.Count(r => r.RegistrationType == StudentRegistrationType.Secondary) < sr.Quantity),
-		});
+		Contract.Assert<InvalidOperationException>(SubjectId is not null);
+		
+		var data = await SubjectRegistrationsManagerFacade().GetCurrentUserSubjectSigningRulesForRegistrationAsync(Dto.FromValue(SubjectId.Value));
 
 		return request.ApplyTo(data);
 	}
@@ -75,15 +64,5 @@ public partial class StudentSubjectRegistrationComponent
 
 		await gridComponent.RefreshDataAsync();
 		await OnRegistrationChanged.InvokeAsync();
-	}
-
-	protected record StudentSubjectRegistrationComponentDataItem
-	{
-		public int Id { get; internal set; }
-		public string Name { get; internal set; }
-		public StudentSubjectRegistrationDto MainRegistration { get; internal set; }
-		public StudentSubjectRegistrationDto SecondaryRegistration { get; internal set; }
-		public bool MainRegistrationAllowed { get; internal set; }
-		public bool SecondaryRegistrationAllowed { get; internal set; }
 	}
 }

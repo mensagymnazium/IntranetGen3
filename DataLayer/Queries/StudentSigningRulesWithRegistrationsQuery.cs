@@ -42,7 +42,7 @@ public class StudentSigningRulesWithRegistrationsQuery : QueryBase<SigningRuleWi
 			Quantity = sr.Quantity,
 			SubjectCategoryIds = sr.SubjectCategoryRelations.Select(scr => scr.SubjectCategoryId).ToList(),
 			SubjectTypeIds = sr.SubjectTypeRelations.Select(str => str.SubjectTypeId).ToList(),
-			Registrations = sr.Registrations.Where(r => r.StudentId == this.Student.Id)
+			Registrations = sr.Registrations.Where(r => (r.StudentId == this.Student.Id) && (r.Deleted == null))
 								.Select(ssr => new StudentSubjectRegistrationDto()
 								{
 									Id = ssr.Id,

@@ -1,7 +1,7 @@
-﻿<HxGrid @ref="gridComponent" TItem="StudentSubjectRegistrationComponentDataItem" DataProvider="GetGridData" ShowFooterWhenEmptyData="false">
+﻿<HxGrid @ref="gridComponent" TItem="SigningRuleStudentRegistrationsDto" DataProvider="GetGridData" ShowFooterWhenEmptyData="false">
     <Columns>
-        <HxGridColumn HeaderText="Zápisové pravidlo" ItemTextSelector="i => i.Name" TItem="StudentSubjectRegistrationComponentDataItem" />
-        <HxGridColumn HeaderText="Primární zápis" TItem="StudentSubjectRegistrationComponentDataItem">
+        <HxGridColumn HeaderText="Zápisové pravidlo" ItemTextSelector="i => i.Name" TItem="SigningRuleStudentRegistrationsDto" />
+        <HxGridColumn HeaderText="Primární zápis" TItem="SigningRuleStudentRegistrationsDto">
             <ItemTemplate>
                 @if (context.MainRegistration is not null)
                 {
@@ -16,11 +16,11 @@
                 }
                 else
                 {
-                    <text>Nelze zapsat.</text>
+                    <text>@context.MainRegistrationNotAllowedReason</text>
                 }
             </ItemTemplate>
         </HxGridColumn>
-        <HxGridColumn HeaderText="Náhradní zápis" TItem="StudentSubjectRegistrationComponentDataItem">
+        <HxGridColumn HeaderText="Náhradní zápis" TItem="SigningRuleStudentRegistrationsDto">
             <ItemTemplate>
                 @if (context.SecondaryRegistration is not null)
                 {
@@ -29,13 +29,13 @@
                         <HxButton Text="Zrušit náhradní zápis" OnClick="() => HandleCancelRegistrationClicked(context.SecondaryRegistration.Id)" Color="ThemeColor.Secondary" Outline="true" Size="ButtonSize.Small"  Icon="BootstrapIcon.Trash" />
                     </div>
                 }
-                else if (context.MainRegistrationAllowed)
+                else if (context.SecondaryRegistrationAllowed)
                 {
                     <HxButton Text="Zapsat jako náhradní" OnClick="() => HandleCreateRegistrationClicked(context.Id, StudentRegistrationType.Secondary)" Color="ThemeColor.Secondary" Size="ButtonSize.Small" Icon="BootstrapIcon.Basket" />
                 }
                 else
                 {
-                    <text>Nelze zapsat.</text>
+                    <text>@context.SecondaryRegistrationNotAllowedReason</text>
                 }
             </ItemTemplate>
         </HxGridColumn>
