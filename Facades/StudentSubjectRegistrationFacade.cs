@@ -16,7 +16,7 @@ public class StudentSubjectRegistrationFacade : IStudentSubjectRegistrationFacad
 		this.studentSubjectRegistrationListQuery = studentSubjectRegistrationListQuery;
 	}
 
-	[Authorize(Roles = $"{nameof(Role.Teacher)}, {nameof(Role.Administrator)}")]
+	//[Authorize(Roles = $"{nameof(Role.Teacher)}, {nameof(Role.Administrator)}")]
 	public async Task<DataFragmentResult<StudentSubjectRegistrationDto>> GetStudentSubjectRegistrationListAsync(DataFragmentRequest<StudentSubjectRegistrationListQueryFilter> studentSubjectRegistrationListRequest, CancellationToken cancellationToken = default)
 	{
 		Contract.Requires<ArgumentNullException>(studentSubjectRegistrationListRequest is not null);

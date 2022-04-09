@@ -23,4 +23,6 @@ public class SigningRule
 	[NotMapped] public IEnumerable<SubjectType> SubjectTypes => SubjectTypeRelations.Select(m => m.SubjectType);
 
 	public int? Quantity { get; set; }
+
+	public List<StudentSubjectRegistration> Registrations { get; } = new List<StudentSubjectRegistration>();
 }

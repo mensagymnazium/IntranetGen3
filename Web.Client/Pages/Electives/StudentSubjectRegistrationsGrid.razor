@@ -4,7 +4,7 @@
         DataProvider="this.DataProvider">
         <Columns>
             <HxGridColumn HeaderText="Předmět"
-                      ItemTextSelector="i => SubjectsDataStore.GetByKey(i.SubjectId.Value)?.Name"
+                      ItemTextSelector="i => SubjectsDataStore.GetByKey(i.SubjectId)?.Name"
                       SortString="@nameof(StudentSubjectRegistrationDto.SubjectId)"
                       Visible="this.ShowSubjectColumn"
                       TItem="StudentSubjectRegistrationDto" />
@@ -21,7 +21,7 @@
                       SortString="@nameof(StudentSubjectRegistrationDto.RegistrationType)"
                       TItem="StudentSubjectRegistrationDto" />
             <HxGridColumn HeaderText="Pravidlo"
-                      ItemTextSelector="i => SigningRulesDataStore.GetByKey(i.SigningRuleId.Value)?.Name"
+                      ItemTextSelector="i => SigningRulesDataStore.GetByKey(i.SigningRuleId)?.Name"
                       SortString="@nameof(StudentSubjectRegistrationDto.SigningRuleId)"
                       TItem="StudentSubjectRegistrationDto" />
         </Columns>

@@ -13,6 +13,12 @@ public class ClientAuthService : IClientAuthService
 		this.authenticationStateProvider = authenticationStateProvider;
 	}
 
+	public async Task<ClaimsPrincipal> GetCurrentClaimsPrincipal()
+	{
+		var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
+		return authState.User;
+	}
+
 	public async Task<int?> GetCurrentStudentGradeIdAsync()
 	{
 		var user = await GetCurrentClaimsPrincipal();
@@ -24,9 +30,14 @@ public class ClientAuthService : IClientAuthService
 		return null;
 	}
 
-	public async Task<ClaimsPrincipal> GetCurrentClaimsPrincipal()
+	public async Task<int?> GetCurrentUserIdAsync()
 	{
-		var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
-		return authState.User;
+		var user = await GetCurrentClaimsPrincipal();
+		var claim = user.FindFirst(ClaimConstants.UserIdClaimType);
+		if (claim is not null)
+		{
+			return int.Parse(claim.Value);
+		}
+		return null;
 	}
 }

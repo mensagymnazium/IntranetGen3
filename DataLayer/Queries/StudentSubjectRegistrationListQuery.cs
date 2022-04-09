@@ -37,7 +37,8 @@ public class StudentSubjectRegistrationListQuery : QueryBase<StudentSubjectRegis
 				StudentId = ssr.StudentId,
 				SubjectId = ssr.SubjectId,
 				RegistrationType = ssr.RegistrationType,
-				SigningRuleId = ssr.UsedSigningRuleId
+				SigningRuleId = ssr.UsedSigningRuleId,
+				Created = ssr.Created,
 			});
 	}
 

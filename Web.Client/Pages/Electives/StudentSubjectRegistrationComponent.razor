@@ -1,0 +1,46 @@
+﻿<HxGrid @ref="gridComponent" TItem="StudentSubjectRegistrationComponentDataItem" DataProvider="GetGridData" ShowFooterWhenEmptyData="false">
+    <Columns>
+        <HxGridColumn HeaderText="Zápisové pravidlo" ItemTextSelector="i => i.Name" TItem="StudentSubjectRegistrationComponentDataItem" />
+        <HxGridColumn HeaderText="Primární zápis" TItem="StudentSubjectRegistrationComponentDataItem">
+            <ItemTemplate>
+                @if (context.MainRegistration is not null)
+                {
+                    <div>
+                        Zapsáno @context.MainRegistration.Created
+                        <HxButton Text="Zrušit primární zápis" OnClick="() => HandleCancelRegistrationClicked(context.MainRegistration.Id)" Color="ThemeColor.Primary" Outline="true" Size="ButtonSize.Small" Icon="BootstrapIcon.Trash" />
+                    </div>
+                }
+                else if (context.MainRegistrationAllowed)
+                {
+                    <HxButton Text="Zapsat jako primární" OnClick="() => HandleCreateRegistrationClicked(context.Id, StudentRegistrationType.Main)" Color="ThemeColor.Primary" Size="ButtonSize.Small" Icon="BootstrapIcon.Basket" />
+                }
+                else
+                {
+                    <text>Nelze zapsat.</text>
+                }
+            </ItemTemplate>
+        </HxGridColumn>
+        <HxGridColumn HeaderText="Náhradní zápis" TItem="StudentSubjectRegistrationComponentDataItem">
+            <ItemTemplate>
+                @if (context.SecondaryRegistration is not null)
+                {
+                    <div>
+                        Zapsáno @context.SecondaryRegistration.Created
+                        <HxButton Text="Zrušit náhradní zápis" OnClick="() => HandleCancelRegistrationClicked(context.SecondaryRegistration.Id)" Color="ThemeColor.Secondary" Outline="true" Size="ButtonSize.Small"  Icon="BootstrapIcon.Trash" />
+                    </div>
+                }
+                else if (context.MainRegistrationAllowed)
+                {
+                    <HxButton Text="Zapsat jako náhradní" OnClick="() => HandleCreateRegistrationClicked(context.Id, StudentRegistrationType.Secondary)" Color="ThemeColor.Secondary" Size="ButtonSize.Small" Icon="BootstrapIcon.Basket" />
+                }
+                else
+                {
+                    <text>Nelze zapsat.</text>
+                }
+            </ItemTemplate>
+        </HxGridColumn>
+    </Columns>
+    <EmptyDataTemplate>
+        Tento předmět neodpovídá žádnému vašemu zápisovému pravidlu.
+    </EmptyDataTemplate>
+</HxGrid>

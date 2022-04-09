@@ -6,4 +6,5 @@ public interface IClientAuthService
 {
 	Task<ClaimsPrincipal> GetCurrentClaimsPrincipal();
 	Task<int?> GetCurrentStudentGradeIdAsync();
+	Task<int?> GetCurrentUserIdAsync();
 }

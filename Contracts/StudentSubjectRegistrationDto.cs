@@ -2,11 +2,9 @@
 
 namespace MensaGymnazium.IntranetGen3.Contracts;
 
-public record StudentSubjectRegistrationDto
+public record StudentSubjectRegistrationDto : StudentSubjectRegistrationCreateDto
 {
 	public int Id { get; set; }
 	public int? StudentId { get; set; }
-	public int? SubjectId { get; set; }
-	public int? SigningRuleId { get; set; }
-	public StudentRegistrationType RegistrationType { get; set; }
+	public DateTime Created { get; set; }
 }
