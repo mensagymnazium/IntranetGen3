@@ -6,10 +6,6 @@ public static class ClaimConstants
 	public const string NameClaimType = "name";
 	public const string GroupClaimType = "groups";
 	public const string StudentGradeIdClaimType = "StudentGradeId";
-
-	/// <summary>
-	/// Název claim pro uložení User.Id
-	/// </summary>
 	public const string UserIdClaimType = "UserId";
 
 	/// <summary>
