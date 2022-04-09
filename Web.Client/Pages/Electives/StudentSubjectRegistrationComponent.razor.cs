@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using Havit;
+﻿using Havit;
 using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Primitives;
 
@@ -19,7 +18,7 @@ public partial class StudentSubjectRegistrationComponent
 	private async Task<GridDataProviderResult<SigningRuleStudentRegistrationsDto>> GetGridData(GridDataProviderRequest<SigningRuleStudentRegistrationsDto> request)
 	{
 		Contract.Assert<InvalidOperationException>(SubjectId is not null);
-		
+
 		var data = await SubjectRegistrationsManagerFacade().GetCurrentUserSubjectSigningRulesForRegistrationAsync(Dto.FromValue(SubjectId.Value));
 
 		return request.ApplyTo(data);
