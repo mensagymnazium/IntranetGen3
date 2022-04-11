@@ -25,4 +25,7 @@ public class SigningRule
 	public int? Quantity { get; set; }
 
 	public List<StudentSubjectRegistration> Registrations { get; } = new List<StudentSubjectRegistration>();
+
+	[MaxLength(50)]
+	public string SeedItemIdentifier { get; set; }
 }

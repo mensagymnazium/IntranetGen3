@@ -26,7 +26,7 @@ public class SubjectSeed : DataSeed<DemoProfile>
 				Description = "Reálnej seminář",
 				ScheduleDayOfWeek = DayOfWeek.Monday,
 				ScheduleSlotInDay = Primitives.ScheduleSlotInDay.Block5,
-				CategoryId = (int)SubjectCategory.Entry.Seminars,
+				CategoryId = (int)SubjectCategory.Entry.ExtensionSeminar,
 				TypeRelations =
 				{
 					new SubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.ArtCulture },
@@ -53,7 +53,7 @@ public class SubjectSeed : DataSeed<DemoProfile>
 				Description = "Seminář pravdy",
 				ScheduleDayOfWeek = DayOfWeek.Tuesday,
 				ScheduleSlotInDay = Primitives.ScheduleSlotInDay.Block1,
-				CategoryId = (int)SubjectCategory.Entry.SpecialSeminars,
+				CategoryId = (int)SubjectCategory.Entry.SpecialisationSeminar,
 				TypeRelations =
 				{
 					new SubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
@@ -80,7 +80,7 @@ public class SubjectSeed : DataSeed<DemoProfile>
 				ScheduleDayOfWeek = DayOfWeek.Monday,
 				Description = "Kepler je odpad",
 				ScheduleSlotInDay = Primitives.ScheduleSlotInDay.Block4,
-				CategoryId = (int)SubjectCategory.Entry.Seminars,
+				CategoryId = (int)SubjectCategory.Entry.ExtensionSeminar,
 				TypeRelations =
 				{
 					new SubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.ArtCulture },
@@ -107,7 +107,7 @@ public class SubjectSeed : DataSeed<DemoProfile>
 				ScheduleDayOfWeek = DayOfWeek.Monday,
 				Description = "Stovky zdarma :-)",
 				ScheduleSlotInDay = Primitives.ScheduleSlotInDay.Block3,
-				CategoryId = (int)SubjectCategory.Entry.Graduational,
+				CategoryId = (int)SubjectCategory.Entry.GraduationSeminar,
 				TypeRelations =
 				{
 					new SubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
@@ -129,7 +129,7 @@ public class SubjectSeed : DataSeed<DemoProfile>
 				ScheduleDayOfWeek = DayOfWeek.Monday,
 				Description = "Kdo by nechtěl předmět s Jurčákovou?",
 				ScheduleSlotInDay = Primitives.ScheduleSlotInDay.Block2,
-				CategoryId = (int)SubjectCategory.Entry.Graduational,
+				CategoryId = (int)SubjectCategory.Entry.GraduationSeminar,
 				TypeRelations =
 				{
 					new SubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
@@ -176,7 +176,7 @@ public class SubjectSeed : DataSeed<DemoProfile>
 				Description = "Kočí > Šebestík",
 				ScheduleDayOfWeek = DayOfWeek.Thursday,
 				ScheduleSlotInDay = Primitives.ScheduleSlotInDay.Block4,
-				CategoryId = (int)SubjectCategory.Entry.SpecialSeminars,
+				CategoryId = (int)SubjectCategory.Entry.SpecialisationSeminar,
 				TypeRelations =
 				{
 					new SubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.Informatics },
@@ -201,7 +201,7 @@ public class SubjectSeed : DataSeed<DemoProfile>
 				Description = "Student = Levná pracovní síla",
 				ScheduleDayOfWeek = DayOfWeek.Thursday,
 				ScheduleSlotInDay = Primitives.ScheduleSlotInDay.Block5,
-				CategoryId = (int)SubjectCategory.Entry.SpecialSeminars,
+				CategoryId = (int)SubjectCategory.Entry.SpecialisationSeminar,
 				TypeRelations =
 				{
 					new SubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.Informatics },

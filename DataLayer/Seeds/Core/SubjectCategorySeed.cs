@@ -8,9 +8,9 @@ public class SubjectCategorySeed : DataSeed<CoreProfile>
 	{
 		var data = new[]
 		{
-			new SubjectCategory() { Id = (int)SubjectCategory.Entry.Graduational, Name = "Maturitní semináře" },
-			new SubjectCategory() { Id = (int)SubjectCategory.Entry.Seminars, Name = "Nadstavbový seminář" },
-			new SubjectCategory() { Id = (int)SubjectCategory.Entry.SpecialSeminars, Name = "Specializační semináře" },
+			new SubjectCategory() { Id = (int)SubjectCategory.Entry.GraduationSeminar, Name = "Maturitní semináře" },
+			new SubjectCategory() { Id = (int)SubjectCategory.Entry.ExtensionSeminar, Name = "Nadstavbový seminář" },
+			new SubjectCategory() { Id = (int)SubjectCategory.Entry.SpecialisationSeminar, Name = "Specializační semináře" },
 			new SubjectCategory() { Id = (int)SubjectCategory.Entry.ForeignLanguage, Name = "Cizí jazyk" },
 		};
 

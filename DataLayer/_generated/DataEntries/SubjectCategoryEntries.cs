@@ -38,7 +38,7 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries
             {
 				if (graduational == null)
 				{
-					graduational = GetEntry(MensaGymnazium.IntranetGen3.Model.SubjectCategory.Entry.Graduational);
+					graduational = GetEntry(MensaGymnazium.IntranetGen3.Model.SubjectCategory.Entry.GraduationSeminar);
 				}
 				return graduational;
             }
@@ -51,7 +51,7 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries
             {
 				if (seminars == null)
 				{
-					seminars = GetEntry(MensaGymnazium.IntranetGen3.Model.SubjectCategory.Entry.Seminars);
+					seminars = GetEntry(MensaGymnazium.IntranetGen3.Model.SubjectCategory.Entry.ExtensionSeminar);
 				}
 				return seminars;
             }
@@ -64,7 +64,7 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries
             {
 				if (specialSeminars == null)
 				{
-					specialSeminars = GetEntry(MensaGymnazium.IntranetGen3.Model.SubjectCategory.Entry.SpecialSeminars);
+					specialSeminars = GetEntry(MensaGymnazium.IntranetGen3.Model.SubjectCategory.Entry.SpecialisationSeminar);
 				}
 				return specialSeminars;
             }

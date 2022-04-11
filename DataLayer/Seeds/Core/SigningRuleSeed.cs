@@ -9,13 +9,14 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 		var data = new[]
 		{
 			new SigningRule() {
-				Name = "Sekunda - Specializovaný seminář nebo jazyk",
-				Description = "Je potřeba si zvolit jeden specializační seminář nebo jazyk",
+				SeedItemIdentifier = "Sekunda",
+				Name = "sekunda - specializační seminář nebo jazyk",
+				Description = "Je potřeba si zvolit jeden specializační seminář nebo jazyk.",
 				GradeId = (int) Grade.Entry.Sekunda,
 				Quantity = 1,
 				SubjectCategoryRelations =
 				{
-					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.SpecialSeminars },
+					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.SpecialisationSeminar },
 					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.ForeignLanguage },
 				},
 				SubjectTypeRelations =
@@ -31,13 +32,14 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				}
 			},
 			new SigningRule() {
-				Name = "Tercie - Specializovaný seminář",
-				Description = "Je potřeba si zvolit jeden specializační seminář",
+				SeedItemIdentifier = "TercieSpecSem",
+				Name = "tercie - specializační seminář",
+				Description = "Je potřeba si zvolit jeden specializační seminář.",
 				GradeId = (int) Grade.Entry.Tercie,
 				Quantity = 1,
 				SubjectCategoryRelations =
 				{
-					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.SpecialSeminars },
+					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.SpecialisationSeminar },
 				},
 				SubjectTypeRelations =
 				{
@@ -53,8 +55,9 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 			},
 			new SigningRule()
 			{
-				Name = "Tercie - Jazyk",
-				Description = "Je potřeba si zvolit jeden jazyk (pokud již nebyl zvolen v Sekundě)",
+				SeedItemIdentifier = "TercieJazyk",
+				Name = "tercie - jazyk",
+				Description = "Je potřeba si zvolit jeden jazyk (pokud již nebyl zvolen v sekundě).",
 				GradeId = (int) Grade.Entry.Tercie,
 				Quantity = 1,
 				SubjectCategoryRelations =
@@ -69,13 +72,14 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 
 			new SigningRule()
 			{
-				Name = "Kvarta - Specializovaný seminář",
-				Description = "Je potřeba si zvolit jeden specializační seminář",
+				SeedItemIdentifier = "KvartaSpecSem",
+				Name = "kvarta - specializační seminář",
+				Description = "Je potřeba si zvolit jeden specializační seminář.",
 				GradeId = (int) Grade.Entry.Kvarta,
 				Quantity = 1,
 				SubjectCategoryRelations =
 				{
-					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.SpecialSeminars },
+					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.SpecialisationSeminar },
 				},
 				SubjectTypeRelations =
 				{
@@ -92,13 +96,14 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 
 			new SigningRule()
 			{
-				Name = "Kvinta - Nadstavbový seminář",
-				Description = "Je potřeba si zvolit jeden nadstavbový seminář",
+				SeedItemIdentifier = "KvintaExtSem",
+				Name = "kvinta - nadstavbový seminář",
+				Description = "Je potřeba si zvolit jeden nadstavbový seminář.",
 				GradeId = (int) Grade.Entry.Kvinta,
 				Quantity = 1,
 				SubjectCategoryRelations =
 				{
-					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.Seminars },
+					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.ExtensionSeminar },
 				},
 				SubjectTypeRelations =
 				{
@@ -114,14 +119,15 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 			},
 			new SigningRule()
 			{
-				Name = "Kvinta - Druhý seminář",
-				Description = "Je potřeba si zvolit jeden specializační nebo nadstavbový seminář",
+				SeedItemIdentifier = "KvintaSpecExtSem",
+				Name = "kvinta - specializační/nadstavbový seminář",
+				Description = "Je potřeba si zvolit jeden specializační nebo nadstavbový seminář.",
 				GradeId = (int) Grade.Entry.Kvinta,
 				Quantity = 1,
 				SubjectCategoryRelations =
 				{
-					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.SpecialSeminars },
-					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.Seminars },
+					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.SpecialisationSeminar },
+					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.ExtensionSeminar },
 				},
 				SubjectTypeRelations =
 				{
@@ -137,14 +143,14 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 			},
 			new SigningRule()
 			{
-				Name = "Sexta - Druhý seminář",
-				Description = "Je potřeba si zvolit jeden specializační nebo nadstavbový seminář",
+				SeedItemIdentifier = "SextaExtSem",
+				Name = "sexta - nadstavbový seminář",
+				Description = "Je potřeba si zvolit jeden nadstavbový seminář.",
 				GradeId = (int) Grade.Entry.Sexta,
 				Quantity = 1,
 				SubjectCategoryRelations =
 				{
-					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.SpecialSeminars },
-					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.Seminars },
+					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.ExtensionSeminar },
 				},
 				SubjectTypeRelations =
 				{
@@ -160,15 +166,111 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 			},
 			new SigningRule()
 			{
-				Name = "Septima - dva semináře",
-				Description = "Je potřeba si zvolit dva semináře",
+				SeedItemIdentifier = "SextaSpecExtSem",
+				Name = "sexta - specializační/nadstavbový seminář",
+				Description = "Je potřeba si zvolit jeden specializační nebo nadstavbový seminář.",
+				GradeId = (int) Grade.Entry.Sexta,
+				Quantity = 1,
+				SubjectCategoryRelations =
+				{
+					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.SpecialisationSeminar },
+					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.ExtensionSeminar },
+				},
+				SubjectTypeRelations =
+				{
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanWork },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.ArtCulture },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.Informatics },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.MathApplication },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.LanguageCommunication },
+				}
+			},
+			new SigningRule()
+			{
+				SeedItemIdentifier = "SeptimaGradSem",
+				Name = "septima - dva maturitní semináře",
+				Description = "Je potřeba si zvolit dva maturitní semináře z oblastí Člověk a společnost nebo Člověk a příroda.",
 				GradeId = (int) Grade.Entry.Septima,
 				Quantity = 2,
 				SubjectCategoryRelations =
 				{
-					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.SpecialSeminars },
-					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.Seminars },
-					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.Graduational },
+					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.GraduationSeminar },
+				},
+				SubjectTypeRelations =
+				{
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanWork },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.ArtCulture },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.Informatics },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.MathApplication },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.LanguageCommunication },
+				},
+			},
+			new SigningRule()
+			{
+				SeedItemIdentifier = "SeptimaOther",
+				Name = "septima - další tři semináře",
+				Description = "Je potřeba si zvolit další tři specializační/nadstavbonvé/maturitní semináře.",
+				GradeId = (int) Grade.Entry.Septima,
+				Quantity = 3,
+				SubjectCategoryRelations =
+				{
+					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.SpecialisationSeminar },
+					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.ExtensionSeminar },
+					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.GraduationSeminar },
+				},
+				SubjectTypeRelations =
+				{
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanWork },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.ArtCulture },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.Informatics },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.MathApplication },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.LanguageCommunication },
+				}
+			},
+			new SigningRule()
+			{
+				SeedItemIdentifier = "OktavaGradSem",
+				Name = "oktáva - dva maturitní semináře",
+				Description = "Je potřeba si zvolit dva maturitní semináře z oblastí Člověk a společnost nebo Člověk a příroda.",
+				GradeId = (int) Grade.Entry.Oktava,
+				Quantity = 2,
+				SubjectCategoryRelations =
+				{
+					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.GraduationSeminar },
+				},
+				SubjectTypeRelations =
+				{
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanWork },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.ArtCulture },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.Informatics },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.MathApplication },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.LanguageCommunication },
+				},
+			},
+			new SigningRule()
+			{
+				SeedItemIdentifier = "OktavaOther",
+				Name = "oktáva - další čtyři semináře",
+				Description = "Je potřeba si zvolit další čtyři specializační/nadstavbonvé/maturitní semináře.",
+				GradeId = (int) Grade.Entry.Oktava,
+				Quantity = 4,
+				SubjectCategoryRelations =
+				{
+					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.SpecialisationSeminar },
+					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.ExtensionSeminar },
+					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.GraduationSeminar },
 				},
 				SubjectTypeRelations =
 				{
@@ -184,7 +286,8 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 			},
 		};
 
-		Seed(For(data).PairBy(sr => sr.Name)
+		Seed(For(data).PairBy(sr => sr.SeedItemIdentifier)
+			// TODO .WithoutUpdate() + relations
 			.AfterSave(item =>
 			{
 				item.SeedEntity.SubjectCategoryRelations.ForEach(cr => cr.SigningRuleId = item.PersistedEntity.Id);
