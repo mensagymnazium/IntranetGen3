@@ -24,4 +24,14 @@ public partial class StudentSubjectRegistrationsGrid
 	}
 
 	public Task RefreshDataAsync() => gridComponent.RefreshDataAsync();
+
+	private string GetStudentGradeName(StudentSubjectRegistrationDto item)
+	{
+		var gradeId = StudentsDataStore.GetByKey(item.StudentId.Value)?.GradeId;
+		if (gradeId is not null)
+		{
+			return GradesDataStore.GetByKey(gradeId.Value)?.Name;
+		}
+		return null;
+	}
 }

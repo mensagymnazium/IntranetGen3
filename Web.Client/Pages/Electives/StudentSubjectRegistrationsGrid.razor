@@ -1,30 +1,27 @@
-﻿@if (SubjectsDataStore.IsLoaded && StudentsDataStore.IsLoaded && SigningRulesDataStore.IsLoaded)
-{
-    <HxGrid @ref="gridComponent"
+﻿<HxGrid @ref="gridComponent"
         TItem="StudentSubjectRegistrationDto"
         DataProvider="this.DataProvider">
-        <Columns>
-            <HxGridColumn HeaderText="Předmět"
+    <Columns>
+        <HxGridColumn HeaderText="Předmět"
                       ItemTextSelector="i => SubjectsDataStore.GetByKey(i.SubjectId)?.Name"
                       SortString="@nameof(StudentSubjectRegistrationDto.SubjectId)"
                       Visible="this.ShowSubjectColumn"
                       TItem="StudentSubjectRegistrationDto" />
-            <HxGridColumn HeaderText="Student"
+        <HxGridColumn HeaderText="Student"
                       ItemTextSelector="i => StudentsDataStore.GetByKey(i.StudentId.Value)?.Name"
                       SortString="@nameof(StudentSubjectRegistrationDto.StudentId)"
                       TItem="StudentSubjectRegistrationDto" />
-            <HxGridColumn HeaderText="Ročník"
-                      ItemTextSelector="i => GradesDataStore.GetByKey(StudentsDataStore.GetByKey(i.StudentId.Value).GradeId)?.Name"
+        <HxGridColumn HeaderText="Ročník"
+                      ItemTextSelector="i => GetStudentGradeName(i)"
                       SortString="StudentGradeId"
                       TItem="StudentSubjectRegistrationDto" />
-            <HxGridColumn HeaderText="Typ zápisu"
+        <HxGridColumn HeaderText="Typ zápisu"
                       ItemTextSelector="i => i.RegistrationType.AsEnumValueDescription()"
                       SortString="@nameof(StudentSubjectRegistrationDto.RegistrationType)"
                       TItem="StudentSubjectRegistrationDto" />
-            <HxGridColumn HeaderText="Zápisové pravidlo"
+        <HxGridColumn HeaderText="Zápisové pravidlo"
                       ItemTextSelector="i => SigningRulesDataStore.GetByKey(i.SigningRuleId)?.Name"
                       SortString="@nameof(StudentSubjectRegistrationDto.SigningRuleId)"
                       TItem="StudentSubjectRegistrationDto" />
-        </Columns>
-    </HxGrid>
-}
+    </Columns>
+</HxGrid>
