@@ -13,6 +13,8 @@ public partial class StudentSubjectRegistrationsGrid
 	[Inject] protected ISigningRulesDataStore SigningRulesDataStore { get; set; }
 	[Inject] protected IGradesDataStore GradesDataStore { get; set; }
 
+	private HxGrid<StudentSubjectRegistrationDto> gridComponent;
+
 	protected override async Task OnInitializedAsync()
 	{
 		await StudentsDataStore.EnsureDataAsync();
@@ -20,4 +22,6 @@ public partial class StudentSubjectRegistrationsGrid
 		await SigningRulesDataStore.EnsureDataAsync();
 		await GradesDataStore.EnsureDataAsync();
 	}
+
+	public Task RefreshDataAsync() => gridComponent.RefreshDataAsync();
 }

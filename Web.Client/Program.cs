@@ -76,7 +76,7 @@ public class Program
 
 	private static void SetHxComponents()
 	{
-		// HxProgressIndicator.DefaultDelay = 0;
+		HxGrid.Defaults.ContentNavigationMode = GridContentNavigationMode.InfiniteScroll;
 	}
 
 	private static void AddGrpcClient(WebAssemblyHostBuilder builder)

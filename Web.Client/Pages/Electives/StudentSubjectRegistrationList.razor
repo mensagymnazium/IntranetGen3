@@ -1,0 +1,16 @@
+﻿@attribute [Route(Routes.Electives.StudentSubjectRegistrationList)]
+
+<HxListLayout Title="Zapsaní studenti"
+              TFilterModel="StudentSubjectRegistrationListQueryFilter"
+              FilterModel="filterModel"
+              FilterModelChanged="HandleFilterModelChanged">
+    <FilterTemplate>
+        <GradePicker Label="Ročník" @bind-Value="context.GradeId" />
+        <SigningRulePicker Label="Zápisové pravidlo" @bind-Value="context.SigningRuleId" />
+        @*<TeacherPicker @bind-Value="context.TeacherId" Label="Vyučující" />*@
+    </FilterTemplate>
+    <DataTemplate>
+        <StudentSubjectRegistrationsGrid @ref="gridComponent" DataProvider="GetStudentRegistrations" />
+    </DataTemplate>
+</HxListLayout>
+

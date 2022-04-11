@@ -10,30 +10,32 @@
     <ItemsTemplate>
         <HxSidebarItem Text="Dashboard" Href="@Routes.Home" Icon="@BootstrapIcon.Columns" Match="NavLinkMatch.All" />
         <HxSidebarItem Text="Volitelné předměty" Icon="@BootstrapIcon.CalendarRange">
-            <HxSidebarItem Text="Zápis" Href="@Routes.Electives.Registration" />
             <HxSidebarItem Text="Předměty" Href="@Routes.Electives.Subjects" />
-            <HxSidebarItem Text="Pravidla" Href="@Routes.Electives.SigningRuleList" />@* TODO Authorization *@
+            <HxSidebarItem Text="Zapsaní" Href="@Routes.Electives.StudentSubjectRegistrationList" />
+            <HxSidebarItem Text="Pravidla" Href="@Routes.Electives.SigningRuleList" />
         </HxSidebarItem>
-        <HxSidebarItem Text="Nastavení" Icon="@BootstrapIcon.Gear" >
+        <HxSidebarItem Text="Nastavení" Icon="@BootstrapIcon.Gear">
             <HxSidebarItem Text="Učitelé" Href="@Routes.Administration.Teachers" />
             <HxSidebarItem Text="Administrace" Href="@Routes.Administration.Index" Match="NavLinkMatch.All" />
         </HxSidebarItem>
-        <HxSidebarItem Text="Development" Icon="@BootstrapIcon.FileCode">
-            <HxSidebarItem Text="Richard Dobíšek" Href="/development/richard-dobisek" />
-            <HxSidebarItem Text="Vojtěch Procházka" Href="/development/vojtech-prochazka" />
-            <HxSidebarItem Text="Zbyněk Vávra" Href="/development/zbynek-vavra" />
-            <HxSidebarItem Text="Jan Slíva" Href="/development/jan-sliva" />
-            <HxSidebarItem Text="Lukáš Říha" Href="/development/lukas-riha" />
-            <HxSidebarItem Text="Benjamin Swart" Href="/development/benjamin-swart" />
-            <HxSidebarItem Text="Martin Truksa" Href="/development/martin-truksa" />
-            <HxSidebarItem Text="Vojtěch Tvrdík" Href="/development/vojtech-tvrdik" />
-            <HxSidebarItem Text="Veronika Jůzková" Href="/development/veronika-juzkova" />
-            <HxSidebarItem Text="Vladimír Táborovec" Href="/development/vladimir-taborovec" />
-            <HxSidebarItem Text="Robert Haken" Href="/development/robert-haken" />
-            <HxSidebarItem Text="Placeholder 1" Href="/development/placeholder1" />
-            <HxSidebarItem Text="Placeholder 2" Href="/development/placeholder2" />
-            <HxSidebarItem Text="Ostatní" Href="/development" Match="NavLinkMatch.All" />
-        </HxSidebarItem>
+        <DebugView>
+            <HxSidebarItem Text="Development" Icon="@BootstrapIcon.FileCode">
+                <HxSidebarItem Text="Richard Dobíšek" Href="/development/richard-dobisek" />
+                <HxSidebarItem Text="Vojtěch Procházka" Href="/development/vojtech-prochazka" />
+                <HxSidebarItem Text="Zbyněk Vávra" Href="/development/zbynek-vavra" />
+                <HxSidebarItem Text="Jan Slíva" Href="/development/jan-sliva" />
+                <HxSidebarItem Text="Lukáš Říha" Href="/development/lukas-riha" />
+                <HxSidebarItem Text="Benjamin Swart" Href="/development/benjamin-swart" />
+                <HxSidebarItem Text="Martin Truksa" Href="/development/martin-truksa" />
+                <HxSidebarItem Text="Vojtěch Tvrdík" Href="/development/vojtech-tvrdik" />
+                <HxSidebarItem Text="Veronika Jůzková" Href="/development/veronika-juzkova" />
+                <HxSidebarItem Text="Vladimír Táborovec" Href="/development/vladimir-taborovec" />
+                <HxSidebarItem Text="Robert Haken" Href="/development/robert-haken" />
+                <HxSidebarItem Text="Placeholder 1" Href="/development/placeholder1" />
+                <HxSidebarItem Text="Placeholder 2" Href="/development/placeholder2" />
+                <HxSidebarItem Text="Ostatní" Href="/development" Match="NavLinkMatch.All" />
+            </HxSidebarItem>
+        </DebugView>
     </ItemsTemplate>
 
     <FooterTemplate>

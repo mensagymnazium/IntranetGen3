@@ -1,6 +1,7 @@
 ﻿@if (SubjectsDataStore.IsLoaded && StudentsDataStore.IsLoaded && SigningRulesDataStore.IsLoaded)
 {
-    <HxGrid TItem="StudentSubjectRegistrationDto"
+    <HxGrid @ref="gridComponent"
+        TItem="StudentSubjectRegistrationDto"
         DataProvider="this.DataProvider">
         <Columns>
             <HxGridColumn HeaderText="Předmět"
@@ -20,7 +21,7 @@
                       ItemTextSelector="i => i.RegistrationType.AsEnumValueDescription()"
                       SortString="@nameof(StudentSubjectRegistrationDto.RegistrationType)"
                       TItem="StudentSubjectRegistrationDto" />
-            <HxGridColumn HeaderText="Pravidlo"
+            <HxGridColumn HeaderText="Zápisové pravidlo"
                       ItemTextSelector="i => SigningRulesDataStore.GetByKey(i.SigningRuleId)?.Name"
                       SortString="@nameof(StudentSubjectRegistrationDto.SigningRuleId)"
                       TItem="StudentSubjectRegistrationDto" />
