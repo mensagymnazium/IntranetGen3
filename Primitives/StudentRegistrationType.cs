@@ -2,9 +2,9 @@
 
 public enum StudentRegistrationType
 {
-	[Description("Primární")]
+	[Description("primární")]
 	Main = 1,
 
-	[Description("Náhradní")]
+	[Description("náhradní")]
 	Secondary = 2
 }

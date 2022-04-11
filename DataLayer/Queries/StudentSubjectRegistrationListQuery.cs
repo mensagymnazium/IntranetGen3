@@ -24,6 +24,8 @@ public class StudentSubjectRegistrationListQuery : QueryBase<StudentSubjectRegis
 			.WhereIf(Filter.SubjectId is not null, ssr => ssr.SubjectId == Filter.SubjectId)
 			.WhereIf(Filter.GradeId is not null, ssr => ssr.Student.GradeId == Filter.GradeId)
 			.WhereIf(Filter.SigningRuleId is not null, ssr => ssr.UsedSigningRuleId == Filter.SigningRuleId)
+			.WhereIf(Filter.StudentId is not null, ssr => ssr.StudentId == Filter.StudentId)
+			.WhereIf(Filter.RegistrationType is not null, ssr => ssr.RegistrationType == Filter.RegistrationType)
 			.OrderByMultiple(Sorting, sortingExpression => sortingExpression switch
 			{
 				nameof(StudentSubjectRegistrationDto.SubjectId) => new() { s => s.Subject.Name, s => s.Student.User.Name },

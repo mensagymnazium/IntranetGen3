@@ -103,7 +103,12 @@ public class SubjectFacade : ISubjectFacade
 	public async Task<List<SubjectReferenceDto>> GetAllSubjectReferencesAsync(CancellationToken cancellationToken = default)
 	{
 		return (await subjectRepository.GetAllIncludingDeletedAsync(cancellationToken))
-			.Select(s => new SubjectReferenceDto() { Id = s.Id, Name = s.Name })
+			.Select(s => new SubjectReferenceDto()
+			{
+				Id = s.Id,
+				Name = s.Name,
+				IsDeleted = s.Deleted is not null
+			})
 			.ToList();
 	}
 }

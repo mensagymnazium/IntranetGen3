@@ -6,8 +6,10 @@
               FilterModelChanged="HandleFilterModelChanged">
     <FilterTemplate>
         <GradePicker Label="Ročník" @bind-Value="context.GradeId" />
+        <StudentPicker Label="Student" @bind-Value="context.StudentId" />
+        <SubjectPicker Label="Předmět"@bind-Value="context.SubjectId" />
         <SigningRulePicker Label="Zápisové pravidlo" @bind-Value="context.SigningRuleId" />
-        @*<TeacherPicker @bind-Value="context.TeacherId" Label="Vyučující" />*@
+        <StudentRegistrationTypePicker Label="Typ zápisu" @bind-Value="context.RegistrationType" />
     </FilterTemplate>
     <DataTemplate>
         <StudentSubjectRegistrationsGrid @ref="gridComponent" DataProvider="GetStudentRegistrations" />
