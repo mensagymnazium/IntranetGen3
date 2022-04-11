@@ -1,5 +1,7 @@
 ﻿using Havit.Collections;
 using MensaGymnazium.IntranetGen3.Contracts;
+using MensaGymnazium.IntranetGen3.Primitives;
+using MensaGymnazium.IntranetGen3.Web.Client.Services;
 using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 using Microsoft.AspNetCore.Components;
 
@@ -9,16 +11,19 @@ public partial class SubjectList
 {
 	[Inject] protected IHxMessengerService Messenger { get; set; }
 	[Inject] protected Func<ISubjectFacade> SubjectFacade { get; set; }
+	[Inject] protected Func<ISubjectRegistrationsManagerFacade> SubjectRegistrationsManagerFacade { get; set; }
 	[Inject] protected NavigationManager NavigationManager { get; set; }
 	[Inject] protected ISubjectCategoriesDataStore SubjectCategoriesDataStore { get; set; }
 	[Inject] protected ISubjectTypesDataStore SubjectTypesDataStore { get; set; }
 	[Inject] protected ITeachersDataStore TeachersDataStore { get; set; }
 	[Inject] protected IGradesDataStore GradesDataStore { get; set; }
+	[Inject] protected IClientAuthService ClientAuthService { get; set; }
 
 	private SubjectListQueryFilter subjectListFilter = new SubjectListQueryFilter();
 	private HxGrid<SubjectListItemDto> subjectsGrid;
 	private SubjectListItemDto subjectSelected;
 	private SubjectEdit subjectEditComponent;
+	private List<SigningRuleWithRegistrationsDto> studentRegistrations;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -26,6 +31,36 @@ public partial class SubjectList
 		await SubjectTypesDataStore.EnsureDataAsync();
 		await TeachersDataStore.EnsureDataAsync();
 		await GradesDataStore.EnsureDataAsync();
+
+		if ((await ClientAuthService.GetCurrentClaimsPrincipal()).IsInRole(nameof(Role.Student)))
+		{
+			studentRegistrations = await SubjectRegistrationsManagerFacade().GetCurrentUserSigningRulesWithRegistrationsAsync(Dto.FromValue((int?)null));
+		}
+	}
+
+	protected bool IsStudentRegistered(int subjectId, StudentRegistrationType registrationType)
+	{
+		if (studentRegistrations == null)
+		{
+			return false;
+		}
+		return studentRegistrations
+			.Where(ssr => (this.subjectListFilter.SigningRuleId is null) || (ssr.Id == this.subjectListFilter.SigningRuleId))
+			.SelectMany(sr => sr.Registrations)
+			.Any(r => (r.SubjectId == subjectId) && (r.RegistrationType == registrationType));
+	}
+
+	protected string GetRowCssClass(SubjectListItemDto item)
+	{
+		if (IsStudentRegistered(item.Id, StudentRegistrationType.Main))
+		{
+			return "reg-main";
+		}
+		else if (IsStudentRegistered(item.Id, StudentRegistrationType.Secondary))
+		{
+			return "reg-secondary";
+		}
+		return null;
 	}
 
 	private async Task<GridDataProviderResult<SubjectListItemDto>> LoadSubjects(GridDataProviderRequest<SubjectListItemDto> request)

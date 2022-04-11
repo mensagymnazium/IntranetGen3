@@ -34,7 +34,7 @@
                 <TextValue Label="Kapacita (celkem/primární zápisy/náhradní zápisy)" Value="@($"{subject.Capacity:n0}/{subject.StudentRegistrationsCountMain}/{subject.StudentRegistrationsCountSecondary}")" />
                 <TextValue Label="Ročník(y)" Value="@GetGrades(subject.GradeIds)" />
                 <TextValue Label="Skupina" Value="@SubjectCategoriesDataStore.GetByKey(subject.CategoryId.Value)?.Name" />
-                <TextValue Label="Vzdělávací oblasti" Value="@GetSubjectTypes(subject.SubjectTypeIds)" />
+                <TextValue Label="Vzdělávací oblast(i)" Value="@GetSubjectTypes(subject.SubjectTypeIds)" />
             </HxCardText>
         </BodyTemplate>
     </HxCard>

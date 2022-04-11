@@ -1,0 +1,7 @@
+﻿::deep .reg-main {
+	background-color: rgba(var(--bs-success-rgb), 0.3);
+}
+
+::deep .reg-secondary {
+	background-color: rgba(var(--bs-success-rgb), 0.1);
+}
