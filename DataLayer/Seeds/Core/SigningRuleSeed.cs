@@ -1,4 +1,5 @@
 ﻿using MensaGymnazium.IntranetGen3.Model;
+using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core;
 
@@ -12,7 +13,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				SeedItemIdentifier = "Sekunda",
 				Name = "sekunda - specializační seminář nebo jazyk",
 				Description = "Je potřeba si zvolit jeden specializační seminář nebo jazyk.",
-				GradeId = (int) Grade.Entry.Sekunda,
+				GradeId = (int) GradeEntry.Sekunda,
 				Quantity = 1,
 				SubjectCategoryRelations =
 				{
@@ -35,7 +36,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				SeedItemIdentifier = "TercieSpecSem",
 				Name = "tercie - specializační seminář",
 				Description = "Je potřeba si zvolit jeden specializační seminář.",
-				GradeId = (int) Grade.Entry.Tercie,
+				GradeId = (int) GradeEntry.Tercie,
 				Quantity = 1,
 				SubjectCategoryRelations =
 				{
@@ -58,7 +59,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				SeedItemIdentifier = "TercieJazyk",
 				Name = "tercie - jazyk",
 				Description = "Je potřeba si zvolit jeden jazyk (pokud již nebyl zvolen v sekundě).",
-				GradeId = (int) Grade.Entry.Tercie,
+				GradeId = (int) GradeEntry.Tercie,
 				Quantity = 1,
 				SubjectCategoryRelations =
 				{
@@ -75,7 +76,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				SeedItemIdentifier = "KvartaSpecSem",
 				Name = "kvarta - specializační seminář",
 				Description = "Je potřeba si zvolit jeden specializační seminář.",
-				GradeId = (int) Grade.Entry.Kvarta,
+				GradeId = (int) GradeEntry.Kvarta,
 				Quantity = 1,
 				SubjectCategoryRelations =
 				{
@@ -99,7 +100,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				SeedItemIdentifier = "KvintaExtSem",
 				Name = "kvinta - nadstavbový seminář",
 				Description = "Je potřeba si zvolit jeden nadstavbový seminář.",
-				GradeId = (int) Grade.Entry.Kvinta,
+				GradeId = (int) GradeEntry.Kvinta,
 				Quantity = 1,
 				SubjectCategoryRelations =
 				{
@@ -122,7 +123,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				SeedItemIdentifier = "KvintaSpecExtSem",
 				Name = "kvinta - specializační/nadstavbový seminář",
 				Description = "Je potřeba si zvolit jeden specializační nebo nadstavbový seminář.",
-				GradeId = (int) Grade.Entry.Kvinta,
+				GradeId = (int) GradeEntry.Kvinta,
 				Quantity = 1,
 				SubjectCategoryRelations =
 				{
@@ -146,7 +147,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				SeedItemIdentifier = "SextaExtSem",
 				Name = "sexta - nadstavbový seminář",
 				Description = "Je potřeba si zvolit jeden nadstavbový seminář.",
-				GradeId = (int) Grade.Entry.Sexta,
+				GradeId = (int) GradeEntry.Sexta,
 				Quantity = 1,
 				SubjectCategoryRelations =
 				{
@@ -169,7 +170,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				SeedItemIdentifier = "SextaSpecExtSem",
 				Name = "sexta - specializační/nadstavbový seminář",
 				Description = "Je potřeba si zvolit jeden specializační nebo nadstavbový seminář.",
-				GradeId = (int) Grade.Entry.Sexta,
+				GradeId = (int) GradeEntry.Sexta,
 				Quantity = 1,
 				SubjectCategoryRelations =
 				{
@@ -193,7 +194,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				SeedItemIdentifier = "SeptimaGradSem",
 				Name = "septima - dva maturitní semináře",
 				Description = "Je potřeba si zvolit dva maturitní semináře z oblastí Člověk a společnost nebo Člověk a příroda.",
-				GradeId = (int) Grade.Entry.Septima,
+				GradeId = (int) GradeEntry.Septima,
 				Quantity = 2,
 				SubjectCategoryRelations =
 				{
@@ -216,7 +217,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				SeedItemIdentifier = "SeptimaOther",
 				Name = "septima - další tři semináře",
 				Description = "Je potřeba si zvolit další tři specializační/nadstavbonvé/maturitní semináře.",
-				GradeId = (int) Grade.Entry.Septima,
+				GradeId = (int) GradeEntry.Septima,
 				Quantity = 3,
 				SubjectCategoryRelations =
 				{
@@ -241,7 +242,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				SeedItemIdentifier = "OktavaGradSem",
 				Name = "oktáva - dva maturitní semináře",
 				Description = "Je potřeba si zvolit dva maturitní semináře z oblastí Člověk a společnost nebo Člověk a příroda.",
-				GradeId = (int) Grade.Entry.Oktava,
+				GradeId = (int) GradeEntry.Oktava,
 				Quantity = 2,
 				SubjectCategoryRelations =
 				{
@@ -264,7 +265,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				SeedItemIdentifier = "OktavaOther",
 				Name = "oktáva - další čtyři semináře",
 				Description = "Je potřeba si zvolit další čtyři specializační/nadstavbonvé/maturitní semináře.",
-				GradeId = (int) Grade.Entry.Oktava,
+				GradeId = (int) GradeEntry.Oktava,
 				Quantity = 4,
 				SubjectCategoryRelations =
 				{

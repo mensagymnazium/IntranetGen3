@@ -1,6 +1,6 @@
 ﻿using MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
 using MensaGymnazium.IntranetGen3.Model;
-
+using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Demo;
 
@@ -39,11 +39,11 @@ public class SubjectSeed : DataSeed<DemoProfile>
 				},
 				GradeRelations =
 				{
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Kvarta },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Kvinta },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Sexta },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Septima },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Oktava },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Kvarta },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Kvinta },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Sexta },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Septima },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Oktava },
 				}
 			},
 			new Subject()
@@ -64,13 +64,13 @@ public class SubjectSeed : DataSeed<DemoProfile>
 				},
 				GradeRelations =
 				{
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Sekunda },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Tercie },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Kvarta },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Kvinta },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Sexta },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Septima },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Oktava },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Sekunda },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Tercie },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Kvarta },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Kvinta },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Sexta },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Septima },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Oktava },
 				}
 			},
 			new Subject()
@@ -92,12 +92,12 @@ public class SubjectSeed : DataSeed<DemoProfile>
 				},
 				GradeRelations =
 				{
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Sekunda },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Tercie },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Kvarta },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Kvinta },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Sexta },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Septima },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Sekunda },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Tercie },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Kvarta },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Kvinta },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Sexta },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Septima },
 				}
 			},
 			new Subject()
@@ -118,8 +118,8 @@ public class SubjectSeed : DataSeed<DemoProfile>
 				},
 				GradeRelations =
 				{
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Septima },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Oktava },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Septima },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Oktava },
 				}
 			},
 			new Subject()
@@ -140,8 +140,8 @@ public class SubjectSeed : DataSeed<DemoProfile>
 				},
 				GradeRelations =
 				{
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Septima },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Oktava },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Septima },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Oktava },
 				}
 			},
 			new Subject()
@@ -163,10 +163,10 @@ public class SubjectSeed : DataSeed<DemoProfile>
 				},
 				GradeRelations =
 				{
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Kvinta },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Sexta },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Septima },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Oktava },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Kvinta },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Sexta },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Septima },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Oktava },
 				}
 			},
 			new Subject()
@@ -188,10 +188,10 @@ public class SubjectSeed : DataSeed<DemoProfile>
 				},
 				GradeRelations =
 				{
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Kvinta },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Sexta },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Septima },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Oktava },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Kvinta },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Sexta },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Septima },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Oktava },
 				}
 			},
 			new Subject()
@@ -213,12 +213,12 @@ public class SubjectSeed : DataSeed<DemoProfile>
 				},
 				GradeRelations =
 				{
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Tercie },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Kvarta },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Kvinta },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Sexta },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Septima },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Oktava },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Tercie },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Kvarta },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Kvinta },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Sexta },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Septima },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Oktava },
 				}
 			},
 			new Subject()
@@ -240,10 +240,10 @@ public class SubjectSeed : DataSeed<DemoProfile>
 				},
 				GradeRelations =
 				{
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Kvinta },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Sexta },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Septima },
-					new SubjectGradeRelation() { GradeId = (int)Grade.Entry.Oktava },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Kvinta },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Sexta },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Septima },
+					new SubjectGradeRelation() { GradeId = (int)GradeEntry.Oktava },
 				}
 			},
 		};

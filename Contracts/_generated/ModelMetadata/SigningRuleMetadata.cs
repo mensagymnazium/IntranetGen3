@@ -18,5 +18,6 @@ namespace MensaGymnazium.IntranetGen3.Contracts.ModelMetadata
 	{
 		public const int DescriptionMaxLength = Int32.MaxValue;
 		public const int NameMaxLength = 100;
+		public const int SeedItemIdentifierMaxLength = 50;
 	}
 }
