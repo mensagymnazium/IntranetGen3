@@ -1,3 +1,4 @@
 ﻿@attribute [Route(Routes.Administration.Teachers)]
+@attribute [Authorize(Roles = nameof(Role.Administrator))]
 
 TODO: Tady bude správa učitelů (grid, editace, přidávání, mazání)

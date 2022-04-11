@@ -11,13 +11,15 @@
         <HxSidebarItem Text="Dashboard" Href="@Routes.Home" Icon="@BootstrapIcon.Columns" Match="NavLinkMatch.All" />
         <HxSidebarItem Text="Volitelné předměty" Icon="@BootstrapIcon.CalendarRange">
             <HxSidebarItem Text="Předměty" Href="@Routes.Electives.Subjects" />
-            <HxSidebarItem Text="Zapsaní" Href="@Routes.Electives.StudentSubjectRegistrationList" />
-            <HxSidebarItem Text="Pravidla" Href="@Routes.Electives.SigningRuleList" />
+            <HxSidebarItem Text="Zapsaní studenti" Href="@Routes.Electives.StudentSubjectRegistrationList" />
+            <HxSidebarItem Text="Zápisová pravidla" Href="@Routes.Electives.SigningRuleList" />
         </HxSidebarItem>
-        <HxSidebarItem Text="Nastavení" Icon="@BootstrapIcon.Gear">
-            <HxSidebarItem Text="Učitelé" Href="@Routes.Administration.Teachers" />
-            <HxSidebarItem Text="Administrace" Href="@Routes.Administration.Index" Match="NavLinkMatch.All" />
-        </HxSidebarItem>
+        <AuthorizeView Roles="@nameof(Role.Administrator)">
+            <HxSidebarItem Text="Nastavení" Icon="@BootstrapIcon.Gear">
+                <HxSidebarItem Text="Učitelé" Href="@Routes.Administration.Teachers" />
+                <HxSidebarItem Text="Administrace" Href="@Routes.Administration.Index" Match="NavLinkMatch.All" />
+            </HxSidebarItem>
+        </AuthorizeView>
         <DebugView>
             <HxSidebarItem Text="Development" Icon="@BootstrapIcon.FileCode">
                 <HxSidebarItem Text="Richard Dobíšek" Href="/development/richard-dobisek" />

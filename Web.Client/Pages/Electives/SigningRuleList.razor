@@ -1,18 +1,18 @@
 ﻿@attribute [Route(Routes.Electives.SigningRuleList)]
 
 <HxListLayout Title="Zápisová pravidla" TFilterModel="SigningRuleListQueryFilter">
-	<DataTemplate>
-		<HxGrid @ref="gridComponent"
-				TItem="SigningRuleDto"
+    <DataTemplate>
+        <HxGrid @ref="gridComponent"
+                TItem="SigningRuleDto"
                 DataProvider="LoadSigningRules"
-				Context="item">
-			<Columns>
-				<HxGridColumn TItem="SigningRuleDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" />
-				<HxGridColumn TItem="SigningRuleDto" HeaderText="Třída" ItemTextSelector="@(item => item.GradeId.ToString())" />
-				<HxGridColumn TItem="SigningRuleDto" HeaderText="Počet" ItemTextSelector="@(item => item.Quantity?.ToString())" />
-				<HxGridColumn TItem="SigningRuleDto" HeaderText="Skupiny" ItemTextSelector="@(item => item.SubjectCategoryIds?.ToString())" />
-				<HxGridColumn TItem="SigningRuleDto" HeaderText="Vzdělávací oblasti" ItemTextSelector="@(item => item.SubjectTypeIds?.ToString())" />
-			</Columns>
-		</HxGrid>
-	</DataTemplate>
+                Context="item">
+            <Columns>
+                <HxGridColumn TItem="SigningRuleDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" />
+                <HxGridColumn TItem="SigningRuleDto" HeaderText="Ročník" ItemTextSelector="@(item => GradesDataStore.GetByKey((int)item.GradeId)?.Name)" SortString="@nameof(SubjectListItemDto.GradeIds)" />
+                <HxGridColumn TItem="SigningRuleDto" HeaderText="Počet" ItemTextSelector="@(item => item.Quantity?.ToString())" />
+                <HxGridColumn TItem="SigningRuleDto" HeaderText="Skupiny" ItemTextSelector="@(item => GetSubjectCategories(item.SubjectCategoryIds))" />
+                <HxGridColumn TItem="SigningRuleDto" HeaderText="Vzdělávací oblasti" ItemTextSelector="@(item => GetSubjectTypes(item.SubjectTypeIds))" />
+            </Columns>
+        </HxGrid>
+    </DataTemplate>
 </HxListLayout>

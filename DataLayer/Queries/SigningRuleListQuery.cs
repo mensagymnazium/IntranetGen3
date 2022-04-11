@@ -2,6 +2,7 @@
 using Havit.Extensions.DependencyInjection.Abstractions;
 using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.DataLayer.DataSources;
+using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.DataLayer.Queries;
 
@@ -19,14 +20,15 @@ public class SigningRuleListQuery : QueryBase<SigningRuleDto>, ISigningRuleListQ
 
 	protected override IQueryable<SigningRuleDto> Query()
 	{
-		// TODO Filter
-		// TODO Richer DTO?
-
 		return SigningRuleDataSource.Data
-			.Select(s => new SigningRuleDto()
+			.Select(sr => new SigningRuleDto()
 			{
-				Id = s.Id,
-				Name = s.Name,
+				Id = sr.Id,
+				Name = sr.Name,
+				GradeId = (GradeEntry)sr.GradeId,
+				Quantity = sr.Quantity,
+				SubjectCategoryIds = sr.SubjectCategoryRelations.Select(scr => scr.SubjectCategoryId).ToList(),
+				SubjectTypeIds = sr.SubjectTypeRelations.Select(str => str.SubjectTypeId).ToList(),
 			});
 	}
 
