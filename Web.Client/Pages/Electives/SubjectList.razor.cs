@@ -19,11 +19,16 @@ public partial class SubjectList
 	[Inject] protected IGradesDataStore GradesDataStore { get; set; }
 	[Inject] protected IClientAuthService ClientAuthService { get; set; }
 
-	private SubjectListQueryFilter subjectListFilter = new SubjectListQueryFilter();
+	private SubjectListQueryFilter subjectListFilter = new SubjectListQueryFilter()
+	{
+		SigningRuleId = LastSigningRuleId
+	};
 	private HxGrid<SubjectListItemDto> subjectsGrid;
 	private SubjectListItemDto subjectSelected;
 	private SubjectEdit subjectEditComponent;
 	private List<SigningRuleWithRegistrationsDto> studentRegistrations;
+
+	private static int? LastSigningRuleId { get; set; }
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -85,6 +90,7 @@ public partial class SubjectList
 	private async Task HandleSigningRuleFilterChanged(int? newSigningRuleFilterValue)
 	{
 		subjectListFilter.SigningRuleId = newSigningRuleFilterValue;
+		LastSigningRuleId = newSigningRuleFilterValue;
 		await subjectsGrid.RefreshDataAsync();
 	}
 

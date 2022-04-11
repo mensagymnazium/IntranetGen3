@@ -5,10 +5,9 @@
             <ItemTemplate>
                 @if (context.MainRegistration is not null)
                 {
-                    <div>
-                        Zapsáno @context.MainRegistration.Created
-                        <HxButton Text="Zrušit primární zápis" OnClick="() => HandleCancelRegistrationClicked(context.MainRegistration.Id)" Color="ThemeColor.Primary" Outline="true" Size="ButtonSize.Small" Icon="BootstrapIcon.Trash" />
-                    </div>
+                    <div class="me-2">Zapsáno @context.MainRegistration.Created</div>
+                    <HxButton Text="Zrušit primární zápis" OnClick="() => HandleCancelRegistrationClicked(context.MainRegistration.Id)" Color="ThemeColor.Primary" Outline="true" Size="ButtonSize.Small" Icon="BootstrapIcon.Trash" />
+
                 }
                 else if (context.MainRegistrationAllowed)
                 {
@@ -24,10 +23,8 @@
             <ItemTemplate>
                 @if (context.SecondaryRegistration is not null)
                 {
-                    <div>
-                        Zapsáno @context.SecondaryRegistration.Created
-                        <HxButton Text="Zrušit náhradní zápis" OnClick="() => HandleCancelRegistrationClicked(context.SecondaryRegistration.Id)" Color="ThemeColor.Secondary" Outline="true" Size="ButtonSize.Small"  Icon="BootstrapIcon.Trash" />
-                    </div>
+                    <div class="me-2">Zapsáno @context.SecondaryRegistration.Created</div>
+                    <HxButton Text="Zrušit náhradní zápis" OnClick="() => HandleCancelRegistrationClicked(context.SecondaryRegistration.Id)" Color="ThemeColor.Secondary" Outline="true" Size="ButtonSize.Small" Icon="BootstrapIcon.Trash" />
                 }
                 else if (context.SecondaryRegistrationAllowed)
                 {
