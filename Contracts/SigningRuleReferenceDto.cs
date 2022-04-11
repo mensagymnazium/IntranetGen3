@@ -1,4 +1,6 @@
-﻿namespace MensaGymnazium.IntranetGen3.Contracts;
+﻿using MensaGymnazium.IntranetGen3.Primitives;
+
+namespace MensaGymnazium.IntranetGen3.Contracts;
 
 public record SigningRuleReferenceDto
 {
@@ -6,5 +8,5 @@ public record SigningRuleReferenceDto
 
 	public string Name { get; set; }
 
-	public int GradeId { get; set; }
+	public GradeEntry GradeId { get; set; }
 }

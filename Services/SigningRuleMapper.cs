@@ -1,5 +1,6 @@
 ﻿using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Model;
+using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.Services;
 
@@ -15,7 +16,7 @@ public class SigningRuleMapper : ISigningRuleMapper
 			Id = signingRule.Id,
 			Name = signingRule.Name,
 			Quantity = signingRule.Quantity,
-			GradeId = signingRule.GradeId,
+			GradeId = (GradeEntry)signingRule.GradeId,
 			SubjectTypeIds = new List<int>(signingRule.SubjectTypes.Select(x => x.Id)),
 			SubjectCategoryIds = new List<int>(signingRule.SubjectCategories.Select(x => x.Id))
 		};
@@ -28,7 +29,7 @@ public class SigningRuleMapper : ISigningRuleMapper
 
 		signingRule.Name = signingRuleDto.Name;
 		signingRule.Quantity = signingRuleDto.Quantity;
-		signingRule.GradeId = signingRuleDto.GradeId;
+		signingRule.GradeId = (int)signingRuleDto.GradeId;
 
 		// TODO
 		// SubjectCategories, SubjectTypes

@@ -93,7 +93,7 @@ public class SigningRuleFacade : ISigningRuleFacade
 			{
 				Id = sr.Id,
 				Name = sr.Name,
-				GradeId = sr.GradeId
+				GradeId = (GradeEntry)sr.GradeId
 			})
 			.ToList();
 	}

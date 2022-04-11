@@ -3,6 +3,7 @@ using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.DataLayer.DataSources;
 using MensaGymnazium.IntranetGen3.Model;
 using MensaGymnazium.IntranetGen3.Model.Security;
+using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.DataLayer.Queries;
 
@@ -24,8 +25,10 @@ public class StudentSigningRulesWithRegistrationsQuery : QueryBase<SigningRuleWi
 	{
 		Contract.Requires<ArgumentException>(Student is not null);
 
+		var studentNextGrade = ((GradeEntry)this.Student.GradeId).NextGrade();
+
 		var data = signingRuleDataSource.Data
-			.Where(x => x.GradeId == this.Student.GradeId);
+			.Where(x => x.GradeId == (int)studentNextGrade);
 
 		if (this.SubjectFilter is not null)
 		{
@@ -37,7 +40,7 @@ public class StudentSigningRulesWithRegistrationsQuery : QueryBase<SigningRuleWi
 		return data.Select(sr => new SigningRuleWithRegistrationsDto()
 		{
 			Id = sr.Id,
-			GradeId = sr.GradeId,
+			GradeId = (GradeEntry)sr.GradeId,
 			Name = sr.Name,
 			Quantity = sr.Quantity,
 			SubjectCategoryIds = sr.SubjectCategoryRelations.Select(scr => scr.SubjectCategoryId).ToList(),

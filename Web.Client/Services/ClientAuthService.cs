@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using MensaGymnazium.IntranetGen3.Contracts.Security;
+using MensaGymnazium.IntranetGen3.Primitives;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Services;
@@ -19,13 +20,13 @@ public class ClientAuthService : IClientAuthService
 		return authState.User;
 	}
 
-	public async Task<int?> GetCurrentStudentGradeIdAsync()
+	public async Task<GradeEntry?> GetCurrentStudentGradeIdAsync()
 	{
 		var user = await GetCurrentClaimsPrincipal();
 		var claim = user.FindFirst(ClaimConstants.StudentGradeIdClaimType);
 		if (claim is not null)
 		{
-			return int.Parse(claim.Value);
+			return Enum.Parse<GradeEntry>(claim.Value);
 		}
 		return null;
 	}

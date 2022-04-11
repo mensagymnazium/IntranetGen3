@@ -1,4 +1,5 @@
 ﻿using MensaGymnazium.IntranetGen3.Contracts;
+using MensaGymnazium.IntranetGen3.Primitives;
 using MensaGymnazium.IntranetGen3.Web.Client.Services;
 using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 
@@ -33,7 +34,7 @@ public class SigningRulePicker : HxSelectBase<int?, SigningRuleReferenceDto>
 			var gradeId = await ClientAuthService.GetCurrentStudentGradeIdAsync();
 			if (gradeId is not null)
 			{
-				data = data.Where(c => c.GradeId == gradeId);
+				data = data.Where(c => c.GradeId == gradeId.Value.NextGrade());
 			}
 		}
 
