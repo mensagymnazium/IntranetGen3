@@ -11,10 +11,10 @@ public class Subject
 {
 	public int Id { get; set; }
 
-	[MaxLength(50)]
+	[MaxLength(100)]
 	public string Name { get; set; }
 
-	[MaxLength(2000)]
+	[MaxLength]
 	public string Description { get; set; }
 
 	public int Capacity { get; set; }
@@ -63,6 +63,9 @@ public class Subject
 
 	public DayOfWeek ScheduleDayOfWeek { get; set; }
 	public ScheduleSlotInDay ScheduleSlotInDay { get; set; }
+
+	[MaxLength(50)]
+	public string SeedIdentifier { get; set; }
 
 	public DateTime Created { get; set; } = DateTime.Now;
 	public DateTime? Deleted { get; set; }

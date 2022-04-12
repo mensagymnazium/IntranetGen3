@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Extensions.DependencyInjection;
 using MensaGymnazium.IntranetGen3.TestHelpers;
 using MensaGymnazium.IntranetGen3.DataLayer.Seeds.Demo;
+using MensaGymnazium.IntranetGen3.DataLayer.Seeds.Subjects2022;
 
 namespace MensaGymnazium.IntranetGen3.IntegrationTests.DataLayer.Seeds;
 
@@ -35,7 +36,7 @@ public class DataSeedingTests : IntegrationTestBase
 		var seedRunner = ServiceProvider.GetRequiredService<IDataSeedRunner>();
 
 		// act
-		seedRunner.SeedData<DemoProfile>();
+		seedRunner.SeedData<Subjects2022Profile>();
 
 		// assert
 		// no exception
