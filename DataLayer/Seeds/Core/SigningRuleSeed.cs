@@ -202,14 +202,8 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				},
 				SubjectTypeRelations =
 				{
-					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
-					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
 					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
 					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanWork },
-					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.ArtCulture },
-					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.Informatics },
-					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.MathApplication },
-					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.LanguageCommunication },
 				},
 			},
 			new SigningRule()
@@ -250,14 +244,8 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				},
 				SubjectTypeRelations =
 				{
-					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanHealth },
-					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
 					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
 					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanWork },
-					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.ArtCulture },
-					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.Informatics },
-					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.MathApplication },
-					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.LanguageCommunication },
 				},
 			},
 			new SigningRule()
