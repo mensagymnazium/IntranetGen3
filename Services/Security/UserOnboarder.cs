@@ -78,6 +78,17 @@ public class UserOnboarder : IUserOnboarder
 
 	private async Task UpdateStudentAsync(User user, ClaimsPrincipal principal)
 	{
+		// If user is a teacher or global-admin, we cannot user grade-groups. It is not a student.
+		if ((user.Teacher is not null)
+			|| principal.HasClaim(ClaimConstants.GroupClaimType, AadGroupIds.Administrators))
+		{
+			if (user.StudentId != default)
+			{
+				unitOfWork.AddForDelete(user.Student);
+			}
+			return;
+		}
+
 		var grades = await gradeRepository.GetAllAsync();
 		var grade = grades.FirstOrDefault(g => principal.HasClaim(ClaimConstants.GroupClaimType, g.AadGroupId));
 
