@@ -1,4 +1,8 @@
-﻿<HxGrid @ref="gridComponent" TItem="SigningRuleStudentRegistrationsDto" DataProvider="GetGridData" ShowFooterWhenEmptyData="false">
+﻿<HxGrid @ref="gridComponent"
+        TItem="SigningRuleStudentRegistrationsDto"
+        DataProvider="GetGridData"
+        SelectionEnabled="false"
+        ShowFooterWhenEmptyData="false">
     <Columns>
         <HxGridColumn HeaderText="Zápisové pravidlo" ItemTextSelector="i => i.Name" TItem="SigningRuleStudentRegistrationsDto" />
         <HxGridColumn HeaderText="Primární zápis" TItem="SigningRuleStudentRegistrationsDto">
