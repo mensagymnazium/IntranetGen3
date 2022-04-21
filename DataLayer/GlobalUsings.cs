@@ -1,11 +1,8 @@
-﻿global using System;
-global using System.Collections.Generic;
-global using System.Linq;
-global using System.Text;
-global using System.Threading;
-global using System.Threading.Tasks;
-
+﻿global using Havit.Collections;
+global using Havit.Data.EntityFrameworkCore.Patterns.QueryServices;
 global using Havit.Data.Patterns.DataSeeds;
 global using Havit.Diagnostics.Contracts;
+global using Havit.Extensions.DependencyInjection.Abstractions;
+global using Havit.Linq;
 
 global using Microsoft.EntityFrameworkCore;

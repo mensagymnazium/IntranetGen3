@@ -1,26 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Data.Patterns.DataSeeds;
-using MensaGymnazium.IntranetGen3.Model;
+﻿using MensaGymnazium.IntranetGen3.Model;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core
+namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core;
+
+public class SubjectCategorySeed : DataSeed<CoreProfile>
 {
-	public class SubjectCategorySeed : DataSeed<CoreProfile>
+	public override void SeedData()
 	{
-		public override void SeedData()
+		var data = new[]
 		{
-			var data = new[]
-			{
-				new SubjectCategory() { Id = (int)SubjectCategory.Entry.Graduational, Name = "Maturitní semináře" },
-				new SubjectCategory() { Id = (int)SubjectCategory.Entry.Seminars, Name = "Nadstavbový seminář" },
-				new SubjectCategory() { Id = (int)SubjectCategory.Entry.SpecialSeminars, Name = "Specializační semináře" },
-				new SubjectCategory() { Id = (int)SubjectCategory.Entry.ForeignLanguage, Name = "Cizí jazyk" },
-			};
+			new SubjectCategory() { Id = (int)SubjectCategory.Entry.GraduationSeminar, Name = "maturitní seminář" },
+			new SubjectCategory() { Id = (int)SubjectCategory.Entry.ExtensionSeminar, Name = "nadstavbový seminář" },
+			new SubjectCategory() { Id = (int)SubjectCategory.Entry.SpecialisationSeminar, Name = "specializační seminář" },
+			new SubjectCategory() { Id = (int)SubjectCategory.Entry.ForeignLanguage, Name = "cizí jazyk" },
+		};
 
-			Seed(For(data).PairBy(st => st.Id));
-		}
+		Seed(For(data).PairBy(st => st.Id));
 	}
 }

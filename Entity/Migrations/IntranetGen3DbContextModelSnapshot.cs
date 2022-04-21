@@ -17,7 +17,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.2")
+                .HasAnnotation("ProductVersion", "6.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -52,7 +52,12 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.Property<int>("Id")
                         .HasColumnType("int");
 
+                    b.Property<string>("AadGroupId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -80,6 +85,9 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("GradeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SeedEntityId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -112,9 +120,6 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("SeededEntityId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -199,6 +204,10 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.Property<int?>("Quantity")
                         .HasColumnType("int");
+
+                    b.Property<string>("SeedItemIdentifier")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -288,19 +297,30 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Created")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<DateTime?>("Deleted")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("ScheduleDayOfWeek")
                         .HasColumnType("int");
 
                     b.Property<int>("ScheduleSlotInDay")
                         .HasColumnType("int");
+
+                    b.Property<string>("SeedIdentifier")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -490,7 +510,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .IsRequired();
 
                     b.HasOne("MensaGymnazium.IntranetGen3.Model.SigningRule", "UsedSigningRule")
-                        .WithMany()
+                        .WithMany("Registrations")
                         .HasForeignKey("UsedSigningRuleId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -589,6 +609,8 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.SigningRule", b =>
                 {
+                    b.Navigation("Registrations");
+
                     b.Navigation("SubjectCategoryRelations");
 
                     b.Navigation("SubjectTypeRelations");

@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Data.EntityFrameworkCore;
-using Havit.Data.EntityFrameworkCore.Patterns.Repositories;
-using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
-using Havit.Data.Patterns.DataEntries;
-using Havit.Data.Patterns.DataLoaders;
+﻿using System.Linq.Expressions;
 using MensaGymnazium.IntranetGen3.Model;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories
-{
-	public partial class SigningRuleDbRepository : ISigningRuleRepository
-	{
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 
+public partial class SigningRuleDbRepository : ISigningRuleRepository
+{
+	protected override IEnumerable<Expression<Func<SigningRule, object>>> GetLoadReferences()
+	{
+		yield return sr => sr.SubjectTypeRelations;
+		yield return sr => sr.SubjectCategoryRelations;
 	}
 }

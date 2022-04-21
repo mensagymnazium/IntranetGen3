@@ -1,9 +1,7 @@
-﻿using System.Net.Http;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-using Microsoft.Extensions.Configuration;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Infrastructure.Security;
 

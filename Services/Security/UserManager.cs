@@ -1,4 +1,7 @@
-﻿using MensaGymnazium.IntranetGen3.Model.Security;
+﻿using System.Security.Claims;
+using MensaGymnazium.IntranetGen3.Contracts.Security;
+using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
+using MensaGymnazium.IntranetGen3.Model.Security;
 using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.Services.Security;
@@ -6,25 +9,38 @@ namespace MensaGymnazium.IntranetGen3.Services.Security;
 [Service]
 public class UserManager : IUserManager
 {
-	public Task<IList<Role>> GetRolesAsync(User user, CancellationToken cancellationToken = default)
+	private readonly IApplicationAuthenticationService applicationAuthenticationService;
+
+	public UserManager(IApplicationAuthenticationService applicationAuthenticationService)
 	{
-		Contract.Requires<ArgumentNullException>(user != null, nameof(user));
+		this.applicationAuthenticationService = applicationAuthenticationService;
+	}
+
+	public Task<IList<Role>> GetRolesAsync(User user, ClaimsPrincipal principal = null, CancellationToken cancellationToken = default)
+	{
+		Contract.Requires<ArgumentNullException>(user != null);
 
 		var roles = new List<Role>();
 
-		if (user.StudentId != null)
+		if ((user.Student != null) && (user.Student.Deleted is null))
 		{
 			roles.Add(Role.Student);
 		}
 
-		if (user.TeacherId != null)
+		if ((user.TeacherId != null) && (user.Teacher.Deleted is null))
 		{
 			roles.Add(Role.Teacher);
 		}
 
-#if DEBUG
-		roles = Enum.GetValues<Role>().ToList();
-#endif
+		principal ??= applicationAuthenticationService.GetCurrentClaimsPrincipal();
+		if (principal.HasClaim(ClaimConstants.GroupClaimType, AadGroupIds.Administrators))
+		{
+			roles.Add(Role.Administrator);
+		}
+
+		//#if DEBUG
+		//		roles = Enum.GetValues<Role>().ToList();
+		//#endif
 
 		return Task.FromResult<IList<Role>>(roles);
 	}

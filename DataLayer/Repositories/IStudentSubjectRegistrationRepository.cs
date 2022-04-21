@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Data.Patterns.Repositories;
-using MensaGymnazium.IntranetGen3.Model;
+﻿using MensaGymnazium.IntranetGen3.Model;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
+
+public partial interface IStudentSubjectRegistrationRepository
 {
-	public partial interface IStudentSubjectRegistrationRepository
-	{
-
-	}
+	Task<List<StudentSubjectRegistration>> GetBySubjectAsync(int id, CancellationToken cancellationToken = default);
 }

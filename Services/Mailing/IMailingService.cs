@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.Mail;
 
-namespace MensaGymnazium.IntranetGen3.Services.Mailing
+namespace MensaGymnazium.IntranetGen3.Services.Mailing;
+
+public interface IMailingService
 {
-	public interface IMailingService
-	{
-		void Send(MailMessage mailMessage);
-	}
+	void Send(MailMessage mailMessage);
 }

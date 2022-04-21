@@ -19,6 +19,19 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 	public class SubjectCategoryEntries : DataEntries<MensaGymnazium.IntranetGen3.Model.SubjectCategory>, ISubjectCategoryEntries 
 	{
+		public MensaGymnazium.IntranetGen3.Model.SubjectCategory ExtensionSeminar
+        {
+            get
+            {
+				if (extensionSeminar == null)
+				{
+					extensionSeminar = GetEntry(MensaGymnazium.IntranetGen3.Model.SubjectCategory.Entry.ExtensionSeminar);
+				}
+				return extensionSeminar;
+            }
+        }
+		private MensaGymnazium.IntranetGen3.Model.SubjectCategory extensionSeminar;
+
 		public MensaGymnazium.IntranetGen3.Model.SubjectCategory ForeignLanguage
         {
             get
@@ -32,44 +45,31 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries
         }
 		private MensaGymnazium.IntranetGen3.Model.SubjectCategory foreignLanguage;
 
-		public MensaGymnazium.IntranetGen3.Model.SubjectCategory Graduational
+		public MensaGymnazium.IntranetGen3.Model.SubjectCategory GraduationSeminar
         {
             get
             {
-				if (graduational == null)
+				if (graduationSeminar == null)
 				{
-					graduational = GetEntry(MensaGymnazium.IntranetGen3.Model.SubjectCategory.Entry.Graduational);
+					graduationSeminar = GetEntry(MensaGymnazium.IntranetGen3.Model.SubjectCategory.Entry.GraduationSeminar);
 				}
-				return graduational;
+				return graduationSeminar;
             }
         }
-		private MensaGymnazium.IntranetGen3.Model.SubjectCategory graduational;
+		private MensaGymnazium.IntranetGen3.Model.SubjectCategory graduationSeminar;
 
-		public MensaGymnazium.IntranetGen3.Model.SubjectCategory Seminars
+		public MensaGymnazium.IntranetGen3.Model.SubjectCategory SpecialisationSeminar
         {
             get
             {
-				if (seminars == null)
+				if (specialisationSeminar == null)
 				{
-					seminars = GetEntry(MensaGymnazium.IntranetGen3.Model.SubjectCategory.Entry.Seminars);
+					specialisationSeminar = GetEntry(MensaGymnazium.IntranetGen3.Model.SubjectCategory.Entry.SpecialisationSeminar);
 				}
-				return seminars;
+				return specialisationSeminar;
             }
         }
-		private MensaGymnazium.IntranetGen3.Model.SubjectCategory seminars;
-
-		public MensaGymnazium.IntranetGen3.Model.SubjectCategory SpecialSeminars
-        {
-            get
-            {
-				if (specialSeminars == null)
-				{
-					specialSeminars = GetEntry(MensaGymnazium.IntranetGen3.Model.SubjectCategory.Entry.SpecialSeminars);
-				}
-				return specialSeminars;
-            }
-        }
-		private MensaGymnazium.IntranetGen3.Model.SubjectCategory specialSeminars;
+		private MensaGymnazium.IntranetGen3.Model.SubjectCategory specialisationSeminar;
 
 		public SubjectCategoryEntries(MensaGymnazium.IntranetGen3.DataLayer.Repositories.ISubjectCategoryRepository repository)
 			: base(repository)

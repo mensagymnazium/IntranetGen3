@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using MensaGymnazium.IntranetGen3.Contracts.Infrastructure.Security;
+using MensaGymnazium.IntranetGen3.Contracts.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,7 +13,9 @@ public class UserProfileController : ControllerBase
 	{
 		return HttpContext.User
 			.FindAll(c => c.Type.Equals(ClaimTypes.Role)
-						|| c.Type.Equals(ClaimConstants.UserIdClaim))
+						|| c.Type.Equals(ClaimConstants.UserIdClaimType)
+						|| c.Type.Equals(ClaimConstants.StudentGradeIdClaimType)
+					)
 			.Select(c => new KeyValuePair<string, string>(c.Type, c.Value ?? String.Empty));
 	}
 }

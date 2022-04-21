@@ -1,13 +1,5 @@
 ﻿@attribute [Route(Routes.Administration.Index)]
-
-<h5>Uživatelská nastavení</h5>
-<div class="row row-cols-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-6 g-3 mb-4">
-	<div class="col">
-		<NavPanel Title="Panel" Icon="BootstrapIcon.CashStack">
-			<NavCard Href="#" Title="TODO" />
-		</NavPanel>
-	</div>
-</div>
+@attribute [Authorize(Roles = nameof(Role.Administrator))]
 
 <h5>Administrace systému</h5>
 <div class="row row-cols-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-6 g-3 mb-4">
@@ -15,7 +7,7 @@
 		<NavPanel Title="Server" Icon="BootstrapIcon.HddNetwork">
 			<NavCard OnClick="dataSeedsComponent.ShowAsync" Title="Seedování dat" />
 			<NavCard OnClick="HandleClearCache" Title="Vyčistit cache serveru" />
-			<NavCard Href="/hangfire/" Title="Hangfire" />
+			@*<NavCard Href="/hangfire/" Title="Hangfire" />*@
 		</NavPanel>
 	</div>
 	<div class="col">

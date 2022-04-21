@@ -1,10 +1,71 @@
 ﻿@attribute [Route(Routes.Electives.SubjectDetail)]
 
-<h1>TODO Detail předmětu</h1>
-<p>Přehled zapsaných, popř. další provozní údaje.</p>
+@if (subject is not null)
+{
+    <div class="row">
+        <div class="col">
+            <h1>@subject.Name</h1>
+        </div>
 
-DEBUG: @SubjectId
+        <AuthorizeView Roles="@($"{nameof(Role.Administrator)}, {nameof(Role.Teacher)}")">
+            <div class="col text-end">
+                <HxButton Color="ThemeColor.Secondary" OnClick="HandleEditClick" CssClass="mb-4">Editovat definici předmětu</HxButton>
+            </div>
+        </AuthorizeView>
+    </div>
 
-<HxButton Color="ThemeColor.Secondary" OnClick="HandleEditClick">Editovat definici předmětu</HxButton>
+    <HxCard CssClass="mb-4">
+        <HeaderTemplate>
+            <HxCardTitle>Popis</HxCardTitle>
+        </HeaderTemplate>
+        <BodyTemplate>
+            <HxCardText>@subject.Description.WithNewLinesAsHtmlBreak()</HxCardText>
+        </BodyTemplate>
+    </HxCard>
 
-<SubjectEdit @ref="subjectEditComponent" SubjectId="@SubjectId" />
+    <HxCard CssClass="mb-4">
+        <HeaderTemplate>
+            <HxCardTitle>Základní údaje</HxCardTitle>
+        </HeaderTemplate>
+        <BodyTemplate>
+            <HxCardText>
+                <TextValue Label="Vyučující" Value="@GetTeachers(subject.TeacherIds)" />
+                <TextValue Label="Rozvrh" Value="@ValueFormatter.GetScheduleTimeSlot(subject.ScheduleDayOfWeek, subject.ScheduleSlotInDay)" />
+                <TextValue Label="Kapacita (celkem/primární zápisy/náhradní zápisy)" Value="@($"{subject.Capacity:n0}/{subject.StudentRegistrationsCountMain}/{subject.StudentRegistrationsCountSecondary}")" />
+                <TextValue Label="Ročník(y)" Value="@GetGrades(subject.GradeIds)" />
+                <TextValue Label="Skupina" Value="@SubjectCategoriesDataStore.GetByKey(subject.CategoryId.Value)?.Name" />
+                <TextValue Label="Vzdělávací oblast(i)" Value="@GetSubjectTypes(subject.SubjectTypeIds)" />
+            </HxCardText>
+        </BodyTemplate>
+    </HxCard>
+
+    <AuthorizeView Roles="@nameof(Role.Student)">
+        <HxCard CssClass="mb-4">
+            <HeaderTemplate>
+                <HxCardTitle>Zápis předmětu</HxCardTitle>
+            </HeaderTemplate>
+            <BodyTemplate>
+                <StudentSubjectRegistrationComponent SubjectId="@SubjectId" />
+            </BodyTemplate>
+        </HxCard>
+    </AuthorizeView>
+
+    <HxCard CssClass="mb-4">
+        <HeaderTemplate>
+            <HxCardTitle>Zapsaní studenti</HxCardTitle>
+        </HeaderTemplate>
+        <BodyTemplate>
+            <StudentSubjectRegistrationsGrid DataProvider="GetStudentRegistrations" ShowSubjectColumn="false" />
+        </BodyTemplate>
+    </HxCard>
+
+    <SubjectEdit @ref="subjectEditComponent" SubjectId="@SubjectId" OnSaved="HandleEditSaved" />
+}
+else
+{
+    <HxPlaceholderContainer Animation="PlaceholderAnimation.Glow">
+        <h1><HxPlaceholder Columns="4" /></h1>
+
+        <HxPlaceholderButton Color="ThemeColor.Secondary" />
+    </HxPlaceholderContainer>
+}

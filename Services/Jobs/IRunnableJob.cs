@@ -1,10 +1,6 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿namespace MensaGymnazium.IntranetGen3.Services.Jobs;
 
-namespace MensaGymnazium.IntranetGen3.Services.Jobs
+public interface IRunnableJob
 {
-	public interface IRunnableJob
-	{
-		Task ExecuteAsync(CancellationToken cancellationToken);
-	}
+	Task ExecuteAsync(CancellationToken cancellationToken);
 }

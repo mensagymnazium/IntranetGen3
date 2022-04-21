@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MensaGymnazium.IntranetGen3.Contracts;
+﻿using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Model;
 
-namespace MensaGymnazium.IntranetGen3.Services
+namespace MensaGymnazium.IntranetGen3.Services;
+
+public interface ISubjectMapper
 {
-	public interface ISubjectMapper
-	{
-		SubjectDto MapToSubjectDto(Subject subject);
-		void MapFromSubjectDto(SubjectDto subjectDto, Subject subject);
-	}
+	Task<SubjectDto> MapToSubjectDtoAsync(Subject subject, CancellationToken cancellationToken = default);
+	Task MapFromSubjectDtoAsync(SubjectDto subjectDto, Subject subject, CancellationToken cancellationToken = default);
 }
