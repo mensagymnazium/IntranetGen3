@@ -9,6 +9,9 @@ public partial class StudentSubjectRegistrationList
 
 	private StudentSubjectRegistrationsGrid gridComponent;
 	private StudentSubjectRegistrationListQueryFilter filterModel = new StudentSubjectRegistrationListQueryFilter();
+	private StudentSubjectRegistrationEdit editComponent;
+	private StudentSubjectRegistrationDto registrationInEdit = new();
+	private StudentSubjectRegistrationDto registrationSelected;
 
 	private async Task<GridDataProviderResult<StudentSubjectRegistrationDto>> GetStudentRegistrations(GridDataProviderRequest<StudentSubjectRegistrationDto> request)
 	{
@@ -34,4 +37,23 @@ public partial class StudentSubjectRegistrationList
 		await gridComponent.RefreshDataAsync();
 	}
 
+	private async Task HandleSelectedDataItemChanged(StudentSubjectRegistrationDto selection)
+	{
+		registrationSelected = selection;
+		registrationInEdit = selection ?? new();
+		await editComponent.ShowAsync();
+	}
+
+	private async Task HandleNewItemClicked()
+	{
+		registrationInEdit = new StudentSubjectRegistrationDto();
+		await editComponent.ShowAsync();
+	}
+
+	private async Task HandleRegistrationEditClosed()
+	{
+		registrationSelected = null;
+		registrationInEdit = new StudentSubjectRegistrationDto();
+		await gridComponent.RefreshDataAsync();
+	}
 }

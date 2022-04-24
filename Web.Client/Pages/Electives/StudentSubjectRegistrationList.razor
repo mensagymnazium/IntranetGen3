@@ -4,15 +4,31 @@
               TFilterModel="StudentSubjectRegistrationListQueryFilter"
               FilterModel="filterModel"
               FilterModelChanged="HandleFilterModelChanged">
+    <CommandsTemplate>
+        <AuthorizeView Roles="@nameof(Role.Administrator)">
+            <HxButton Text="Nový zápis" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />
+        </AuthorizeView>
+    </CommandsTemplate>
     <FilterTemplate>
         <GradePicker Label="Ročník" @bind-Value="context.GradeId" />
         <StudentPicker Label="Student" @bind-Value="context.StudentId" />
-        <SubjectPicker Label="Předmět"@bind-Value="context.SubjectId" />
+        <SubjectPicker Label="Předmět" @bind-Value="context.SubjectId" />
         <SigningRulePicker Label="Zápisové pravidlo" @bind-Value="context.SigningRuleId" />
         <StudentRegistrationTypePicker Label="Typ zápisu" @bind-Value="context.RegistrationType" />
     </FilterTemplate>
     <DataTemplate>
-        <StudentSubjectRegistrationsGrid @ref="gridComponent" DataProvider="GetStudentRegistrations" />
+        <AuthorizeView Context="authenticationState">
+            <StudentSubjectRegistrationsGrid @ref="gridComponent"
+                                             DataProvider="GetStudentRegistrations"
+                                             SelectionEnabled="authenticationState.User.IsInRole(nameof(Role.Administrator))"
+                                             SelectedDataItem="this.registrationSelected"
+                                             SelectedDataItemChanged="HandleSelectedDataItemChanged" />
+        </AuthorizeView>
     </DataTemplate>
+    <DetailTemplate>
+        <StudentSubjectRegistrationEdit @ref="editComponent"
+                                        @bind-Value="registrationInEdit"
+                                        OnClosed="HandleRegistrationEditClosed" />
+    </DetailTemplate>
 </HxListLayout>
 

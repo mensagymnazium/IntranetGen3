@@ -60,7 +60,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.RegistrationType != default);
 
 		// Verify registration requirements
-		var signingRulesForRegistration = await GetCurrentUserSubjectSigningRulesForRegistrationAsync(Dto.FromValue(studentSubjectRegistrationCreateDto.SubjectId), cancellationToken);
+		var signingRulesForRegistration = await GetCurrentUserSubjectSigningRulesForRegistrationAsync(Dto.FromValue(studentSubjectRegistrationCreateDto.SubjectId.Value), cancellationToken);
 		var signingRuleForRegistrationDto = signingRulesForRegistration.Single(sr => sr.Id == studentSubjectRegistrationCreateDto.SigningRuleId);
 		Contract.Requires<ArgumentException>(signingRuleForRegistrationDto is not null);
 
@@ -83,9 +83,9 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		var studentSubjectRegistration = new StudentSubjectRegistration
 		{
 			StudentId = currentUser.StudentId.Value,
-			UsedSigningRuleId = studentSubjectRegistrationCreateDto.SigningRuleId,
-			SubjectId = studentSubjectRegistrationCreateDto.SubjectId,
-			RegistrationType = studentSubjectRegistrationCreateDto.RegistrationType
+			UsedSigningRuleId = studentSubjectRegistrationCreateDto.SigningRuleId.Value,
+			SubjectId = studentSubjectRegistrationCreateDto.SubjectId.Value,
+			RegistrationType = studentSubjectRegistrationCreateDto.RegistrationType.Value
 		};
 
 		unitOfWork.AddForInsert(studentSubjectRegistration);

@@ -1,9 +1,12 @@
 ﻿<HxGrid @ref="gridComponent"
         TItem="StudentSubjectRegistrationDto"
+        SelectionEnabled="this.SelectionEnabled"
+        SelectedDataItem="this.SelectedDataItem"
+        SelectedDataItemChanged="HandleSelectedDataItemChanged"
         DataProvider="this.DataProvider">
     <Columns>
         <HxGridColumn HeaderText="Předmět"
-                      ItemTextSelector="i => SubjectsDataStore.GetByKey(i.SubjectId)?.Name"
+                      ItemTextSelector="i => SubjectsDataStore.GetByKey(i.SubjectId.Value)?.Name"
                       SortString="@nameof(StudentSubjectRegistrationDto.SubjectId)"
                       Visible="this.ShowSubjectColumn"
                       TItem="StudentSubjectRegistrationDto" />
@@ -20,7 +23,7 @@
                       SortString="@nameof(StudentSubjectRegistrationDto.RegistrationType)"
                       TItem="StudentSubjectRegistrationDto" />
         <HxGridColumn HeaderText="Zápisové pravidlo"
-                      ItemTextSelector="i => SigningRulesDataStore.GetByKey(i.SigningRuleId)?.Name"
+                      ItemTextSelector="i => SigningRulesDataStore.GetByKey(i.SigningRuleId.Value)?.Name"
                       SortString="@nameof(StudentSubjectRegistrationDto.SigningRuleId)"
                       TItem="StudentSubjectRegistrationDto" />
     </Columns>

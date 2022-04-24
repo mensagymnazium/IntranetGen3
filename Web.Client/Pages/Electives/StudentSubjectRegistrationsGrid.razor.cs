@@ -7,6 +7,9 @@ public partial class StudentSubjectRegistrationsGrid
 {
 	[Parameter] public GridDataProviderDelegate<StudentSubjectRegistrationDto> DataProvider { get; set; }
 	[Parameter] public bool ShowSubjectColumn { get; set; } = true;
+	[Parameter] public StudentSubjectRegistrationDto SelectedDataItem { get; set; }
+	[Parameter] public EventCallback<StudentSubjectRegistrationDto> SelectedDataItemChanged { get; set; }
+	[Parameter] public bool SelectionEnabled { get; set; } = true;
 
 	[Inject] protected IStudentsDataStore StudentsDataStore { get; set; }
 	[Inject] protected ISubjectsDataStore SubjectsDataStore { get; set; }
@@ -33,5 +36,11 @@ public partial class StudentSubjectRegistrationsGrid
 			return GradesDataStore.GetByKey(gradeId.Value)?.Name;
 		}
 		return null;
+	}
+
+	private async Task HandleSelectedDataItemChanged(StudentSubjectRegistrationDto selection)
+	{
+		SelectedDataItem = selection;
+		await SelectedDataItemChanged.InvokeAsync(selection);
 	}
 }

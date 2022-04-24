@@ -1,0 +1,27 @@
+﻿<HxOffcanvas @ref="hxOffcanvas" Title="Zápis na volitelný předmět" OnClosed="this.OnClosed">
+    <BodyTemplate>
+		
+        <EditForm EditContext="editContext">
+            <FluentValidationValidator />
+            <SubjectPicker Label="Předmět" @bind-Value="@model.SubjectId" />
+            <StudentPicker Label="Student" @bind-Value="@model.StudentId" />
+            <StudentRegistrationTypePicker Label="Typ zápisu" @bind-Value="@model.RegistrationType" />
+            <SigningRulePicker Label="Zápisové pravidlo" @bind-Value="@model.SigningRuleId" />
+        </EditForm>
+
+		<HxAlert Color="ThemeColor.Danger" CssClass="mt-4">
+            POZOR! Přímé zakládání a editace zápisů jsou určeny pro administrátory systému a záměrně
+            <strong>se nekontrolují podmínky.</strong> Například:
+            <ul>
+                <li>Je možné zapsat studenta na předmět, který není pro jeho ročník.</li>
+                <li>Nekontroluje se, zda zápis odpovídá zvolenému pravidlu.</li>
+                <li>Je možné vytvořit zápis přes limit kapacity předmětu.</li>
+                <li>Studentovi je možné zapsat více předmětů, než odpovídá pravidlům.</li>
+            </ul>
+        </HxAlert>
+
+    </BodyTemplate>
+    <FooterTemplate>
+		<SaveButton EditContext="editContext" IsNew="(model.Id == default)" OnValidClick="HandleValidSubmit" />
+    </FooterTemplate>
+</HxOffcanvas>
