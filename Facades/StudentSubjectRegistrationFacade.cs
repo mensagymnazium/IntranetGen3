@@ -71,4 +71,13 @@ public class StudentSubjectRegistrationFacade : IStudentSubjectRegistrationFacad
 		registration.RegistrationType = registrationDto.RegistrationType.Value;
 		registration.UsedSigningRuleId = registrationDto.SigningRuleId.Value;
 	}
+
+	[Authorize(Roles = nameof(Role.Administrator))]
+	public async Task DeleteRegistrationAsync(Dto<int> registrationIdDto, CancellationToken cancellationToken = default)
+	{
+		var registration = await studentSubjectRegistrationRepository.GetObjectAsync(registrationIdDto.Value, cancellationToken);
+		unitOfWork.AddForDelete(registration);
+
+		await unitOfWork.CommitAsync(cancellationToken);
+	}
 }

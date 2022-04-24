@@ -1,4 +1,5 @@
-﻿using MensaGymnazium.IntranetGen3.Contracts;
+﻿using Havit.Blazor.Components.Web.Bootstrap;
+using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
@@ -11,10 +12,12 @@ public partial class StudentSubjectRegistrationsGrid
 	[Parameter] public EventCallback<StudentSubjectRegistrationDto> SelectedDataItemChanged { get; set; }
 	[Parameter] public bool SelectionEnabled { get; set; } = true;
 
+	[Inject] protected Func<IStudentSubjectRegistrationFacade> StudentSubjectRegistrationFacade { get; set; }
 	[Inject] protected IStudentsDataStore StudentsDataStore { get; set; }
 	[Inject] protected ISubjectsDataStore SubjectsDataStore { get; set; }
 	[Inject] protected ISigningRulesDataStore SigningRulesDataStore { get; set; }
 	[Inject] protected IGradesDataStore GradesDataStore { get; set; }
+	[Inject] protected IHxMessengerService Messenger { get; set; }
 
 	private HxGrid<StudentSubjectRegistrationDto> gridComponent;
 
@@ -42,5 +45,12 @@ public partial class StudentSubjectRegistrationsGrid
 	{
 		SelectedDataItem = selection;
 		await SelectedDataItemChanged.InvokeAsync(selection);
+	}
+
+	private async Task HandleDeleteItemClicked(StudentSubjectRegistrationDto item)
+	{
+		await StudentSubjectRegistrationFacade().DeleteRegistrationAsync(Dto.FromValue(item.Id));
+		Messenger.AddInformation("Zápis smazán.");
+		await gridComponent.RefreshDataAsync();
 	}
 }

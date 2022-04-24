@@ -27,4 +27,13 @@
                       SortString="@nameof(StudentSubjectRegistrationDto.SigningRuleId)"
                       TItem="StudentSubjectRegistrationDto" />
     </Columns>
+    <ContextMenu Context="item">
+        <AuthorizeView Roles="@nameof(Role.Administrator)">
+            <HxContextMenu>
+                <HxContextMenuItem Text="Smazat"
+                                   OnClick="async () => await HandleDeleteItemClicked(item)"
+                                   ConfirmationQuestion="Opravdu si přejete zápis smazat?" />
+            </HxContextMenu>
+        </AuthorizeView>
+    </ContextMenu>
 </HxGrid>
