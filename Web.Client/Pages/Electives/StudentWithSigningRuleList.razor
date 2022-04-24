@@ -1,0 +1,47 @@
+﻿@attribute [Route(Routes.Electives.StudentWithSigningRuleList)]
+
+<HxListLayout Title="Zapsaní studenti"
+              TFilterModel="StudentWithSigningRuleListQueryFilter"
+              FilterModel="filterModel"
+              FilterModelChanged="HandleFilterModelChanged">
+    <FilterTemplate>
+        <GradePicker Label="Ročník" @bind-Value="context.GradeId" />
+        <StudentPicker Label="Student" @bind-Value="context.StudentId" />
+        <SigningRulePicker Label="Zápisové pravidlo" @bind-Value="context.SigningRuleId" />
+    </FilterTemplate>
+    <DataTemplate>
+        <HxGrid @ref="gridComponent"
+                TItem="StudentWithSigningRuleListItemDto"
+                DataProvider="GetGridData"
+                Context="item">
+            <Columns>
+                <HxGridColumn HeaderText="Student"
+                              ItemTextSelector="i => StudentsDataStore.GetByKey(i.StudentId)?.Name"
+                              SortString="@nameof(StudentWithSigningRuleListItemDto.StudentId)"
+                              TItem="StudentWithSigningRuleListItemDto" />
+                <HxGridColumn HeaderText="Zápisové pravidlo"
+                              ItemTextSelector="i => SigningRulesDataStore.GetByKey(i.SigningRuleId)?.Name"
+                              SortString="@nameof(StudentWithSigningRuleListItemDto.SigningRuleId)"
+                              TItem="StudentWithSigningRuleListItemDto" />
+                <HxGridColumn HeaderText="Primární zápisy"
+                              TItem="StudentWithSigningRuleListItemDto">
+                    <ItemTemplate Context="item">
+                        @if (item.SigningRuleQuantity > item.MainRegistrationsCount)
+                        {
+                            <HxIcon Icon="BootstrapIcon.ExclamationCircleFill" CssClass="me-2 text-danger" />
+                        }
+                        else
+                        {
+                            <HxIcon Icon="BootstrapIcon.CheckCircleFill" CssClass="me-2 text-success" />
+                        }
+                        @item.MainRegistrationsCount / @item.SigningRuleQuantity
+                    </ItemTemplate>
+                </HxGridColumn>
+                <HxGridColumn HeaderText="Náhradní zápisy"
+                              ItemTextSelector="i => i.SecondaryRegistrationsCount.ToString()"
+                              TItem="StudentWithSigningRuleListItemDto" />
+            </Columns>
+        </HxGrid>
+    </DataTemplate>
+</HxListLayout>
+

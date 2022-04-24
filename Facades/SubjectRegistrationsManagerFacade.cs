@@ -14,6 +14,7 @@ namespace MensaGymnazium.IntranetGen3.Facades;
 public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFacade
 {
 	private readonly IStudentSigningRulesWithRegistrationsQuery studentSigningRulesWithRegistrationsQuery;
+	private readonly IStudentWithSigningRuleListQuery studentWithSigningRuleListQuery;
 	private readonly IApplicationAuthenticationService applicationAuthenticationService;
 	private readonly ISubjectRepository subjectRepository;
 	private readonly IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository;
@@ -22,6 +23,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 
 	public SubjectRegistrationsManagerFacade(
 		IStudentSigningRulesWithRegistrationsQuery studentSigningRulesWithRegistrationsQuery,
+		IStudentWithSigningRuleListQuery studentWithSigningRuleListQuery,
 		IApplicationAuthenticationService applicationAuthenticationService,
 		ISubjectRepository subjectRepository,
 		IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository,
@@ -29,6 +31,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		IDataLoader dataLoader)
 	{
 		this.studentSigningRulesWithRegistrationsQuery = studentSigningRulesWithRegistrationsQuery;
+		this.studentWithSigningRuleListQuery = studentWithSigningRuleListQuery;
 		this.applicationAuthenticationService = applicationAuthenticationService;
 		this.subjectRepository = subjectRepository;
 		this.studentSubjectRegistrationRepository = studentSubjectRegistrationRepository;
@@ -174,5 +177,13 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		}
 
 		return await studentSigningRulesWithRegistrationsQuery.GetDataAsync(user.Student, subjectFilter, cancellationToken);
+	}
+
+	public async Task<DataFragmentResult<StudentWithSigningRuleListItemDto>> GetStudentWithSigningRuleListAsync(DataFragmentRequest<StudentWithSigningRuleListQueryFilter> facadeRequest, CancellationToken cancellationToken)
+	{
+		studentWithSigningRuleListQuery.Filter = facadeRequest.Filter;
+		studentWithSigningRuleListQuery.Sorting = facadeRequest.Sorting;
+
+		return await studentWithSigningRuleListQuery.GetDataFragmentAsync(facadeRequest.StartIndex, facadeRequest.Count, cancellationToken);
 	}
 }
