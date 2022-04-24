@@ -103,6 +103,8 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		List<SigningRuleStudentRegistrationsDto> result = new();
 
 		var subjectRegistered = signingRulesWithRegistrations.SelectMany(x => x.Registrations).Any(ssr => ssr.SubjectId == subjectId.Value);
+		var subject = await subjectRepository.GetObjectAsync(subjectId.Value, cancellationToken);
+		var subjectStudentRegistrations = await studentSubjectRegistrationRepository.GetBySubjectAsync(subjectId.Value, cancellationToken);
 
 		foreach (var item in signingRulesWithRegistrations)
 		{
@@ -116,17 +118,22 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 			if (resultItem.MainRegistration is not null)
 			{
 				resultItem.MainRegistrationAllowed = false;
-				resultItem.MainRegistrationNotAllowedReason = "Primární registrace tohoto předmětu k tomu pravidlu již existuje";
+				resultItem.MainRegistrationNotAllowedReason = "Primární registrace tohoto předmětu k tomu pravidlu již existuje.";
 			}
 			else if (item.Registrations.Count(r => r.RegistrationType == StudentRegistrationType.Main) >= item.Quantity)
 			{
 				resultItem.MainRegistrationAllowed = false;
-				resultItem.MainRegistrationNotAllowedReason = "Počet primárních registrací tohoto pravidla vyčerpán";
+				resultItem.MainRegistrationNotAllowedReason = "Počet primárních registrací tohoto pravidla vyčerpán.";
 			}
 			else if (subjectRegistered)
 			{
 				resultItem.MainRegistrationAllowed = false;
-				resultItem.MainRegistrationNotAllowedReason = "Předmět je již registrován";
+				resultItem.MainRegistrationNotAllowedReason = "Předmět je již registrován.";
+			}
+			else if (subjectStudentRegistrations.Count(r => r.RegistrationType == StudentRegistrationType.Main) >= subject.Capacity)
+			{
+				resultItem.MainRegistrationAllowed = false;
+				resultItem.MainRegistrationNotAllowedReason = "Kapacita předmětu je naplněna.";
 			}
 			else
 			{
@@ -139,17 +146,17 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 			if (resultItem.SecondaryRegistration is not null)
 			{
 				resultItem.SecondaryRegistrationAllowed = false;
-				resultItem.SecondaryRegistrationNotAllowedReason = "Náhradní registrace tohoto předmětu k tomu pravidlu již existuje";
+				resultItem.SecondaryRegistrationNotAllowedReason = "Náhradní registrace tohoto předmětu k tomu pravidlu již existuje.";
 			}
 			else if (item.Registrations.Count(r => r.RegistrationType == StudentRegistrationType.Secondary) >= item.Quantity)
 			{
 				resultItem.SecondaryRegistrationAllowed = false;
-				resultItem.SecondaryRegistrationNotAllowedReason = "Počet náhradních registrací tohoto pravidla vyčerpán";
+				resultItem.SecondaryRegistrationNotAllowedReason = "Počet náhradních registrací tohoto pravidla vyčerpán.";
 			}
 			else if (subjectRegistered)
 			{
 				resultItem.SecondaryRegistrationAllowed = false;
-				resultItem.SecondaryRegistrationNotAllowedReason = "Předmět je již registrován";
+				resultItem.SecondaryRegistrationNotAllowedReason = "Předmět je již registrován.";
 			}
 			else
 			{
