@@ -3,6 +3,7 @@ using MensaGymnazium.IntranetGen3.DataLayer.Queries;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
 using MensaGymnazium.IntranetGen3.Model;
+using MensaGymnazium.IntranetGen3.Primitives;
 using MensaGymnazium.IntranetGen3.Services;
 using MensaGymnazium.IntranetGen3.Services.Security;
 
@@ -54,7 +55,7 @@ public class SubjectFacade : ISubjectFacade
 		return await subjectMapper.MapToSubjectDtoAsync(subject);
 	}
 
-	//[Authorize(Roles = nameof(Role.Administrator))]
+	[Authorize(Roles = nameof(Role.Administrator))]
 	public async Task<Dto<int>> CreateSubjectAsync(SubjectDto subjectDto, CancellationToken cancellationToken = default)
 	{
 		Contract.Requires<ArgumentNullException>(subjectDto != null);
@@ -69,7 +70,7 @@ public class SubjectFacade : ISubjectFacade
 		return Dto.FromValue(subject.Id);
 	}
 
-	//[Authorize(Roles = $"{nameof(Role.Administrator)}, {nameof(Role.Teacher)}")]
+	[Authorize(Roles = nameof(Role.Administrator))]
 	public async Task UpdateSubjectAsync(SubjectDto subjectDto, CancellationToken cancellationToken = default)
 	{
 		Contract.Requires<ArgumentNullException>(subjectDto != null);
@@ -77,6 +78,7 @@ public class SubjectFacade : ISubjectFacade
 
 		var subject = await subjectRepository.GetObjectAsync(subjectDto.Id, cancellationToken);
 
+		// TODO FUTURE - Teacher can edit own subjects
 		//var currentUser = applicationAuthenticationService.GetCurrentUser();
 		//if (!await userManager.IsInRolesAsync(currentUser, Role.Administrator))
 		//{
@@ -92,6 +94,7 @@ public class SubjectFacade : ISubjectFacade
 		await unitOfWork.CommitAsync(cancellationToken);
 	}
 
+	[Authorize(Roles = nameof(Role.Administrator))]
 	public async Task DeleteSubjectAsync(Dto<int> subjectIdDto, CancellationToken cancellationToken = default)
 	{
 		var subject = await subjectRepository.GetObjectAsync(subjectIdDto.Value, cancellationToken);
