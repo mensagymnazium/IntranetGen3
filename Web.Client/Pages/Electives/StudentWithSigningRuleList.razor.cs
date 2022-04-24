@@ -9,7 +9,7 @@ public partial class StudentWithSigningRuleList
 	[Inject] protected ISigningRulesDataStore SigningRulesDataStore { get; set; }
 	[Inject] protected Func<ISubjectRegistrationsManagerFacade> SubjectRegistrationsManagerFacade { get; set; }
 
-	private HxGrid<StudentWithSigningRuleListItemDto> gridComponent;
+	private StudentWithSigningRuleGrid gridComponent;
 	private StudentWithSigningRuleListQueryFilter filterModel = new();
 
 	protected override async Task OnInitializedAsync()

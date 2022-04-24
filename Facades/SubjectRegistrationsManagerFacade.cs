@@ -188,6 +188,13 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 
 	public async Task<DataFragmentResult<StudentWithSigningRuleListItemDto>> GetStudentWithSigningRuleListAsync(DataFragmentRequest<StudentWithSigningRuleListQueryFilter> facadeRequest, CancellationToken cancellationToken)
 	{
+		if (facadeRequest.Filter.CurrentStudentOnly)
+		{
+			var user = applicationAuthenticationService.GetCurrentUser();
+			Contract.Requires<InvalidOperationException>(user.StudentId is not null);
+			facadeRequest.Filter.StudentId = user.StudentId;
+		}
+
 		studentWithSigningRuleListQuery.Filter = facadeRequest.Filter;
 		studentWithSigningRuleListQuery.Sorting = facadeRequest.Sorting;
 

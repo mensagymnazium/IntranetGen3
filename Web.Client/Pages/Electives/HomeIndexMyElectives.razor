@@ -1,0 +1,7 @@
+﻿<AuthorizeView Roles="@nameof(Role.Student)">
+    <HxListLayout TFilterModel="HxListLayout.NoFilter" Title="Plnění zápisů">
+        <DataTemplate>
+            <StudentWithSigningRuleGrid DataProvider="GetStudentWithSigningRuleGridData" StudentColumnVisible="false" />
+        </DataTemplate>
+    </HxListLayout>
+</AuthorizeView>
