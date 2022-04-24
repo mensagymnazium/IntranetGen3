@@ -7,7 +7,7 @@
             <h1>@subject.Name</h1>
         </div>
 
-        <AuthorizeView Roles="@($"{nameof(Role.Administrator)}, {nameof(Role.Teacher)}")">
+        <AuthorizeView Roles="@nameof(Role.Administrator)">
             <div class="col text-end">
                 <HxButton Color="ThemeColor.Secondary" OnClick="HandleEditClick" CssClass="mb-4">Editovat definici předmětu</HxButton>
             </div>
