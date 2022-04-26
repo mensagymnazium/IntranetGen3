@@ -203,7 +203,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				SubjectTypeRelations =
 				{
 					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
-					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanWork },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
 				},
 			},
 			new SigningRule()
@@ -245,7 +245,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				SubjectTypeRelations =
 				{
 					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanSociety },
-					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanWork },
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.HumanNature },
 				},
 			},
 			new SigningRule()
