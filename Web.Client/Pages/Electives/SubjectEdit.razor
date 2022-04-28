@@ -3,13 +3,10 @@
         <EditForm EditContext="editContext">
             <FluentValidationValidator />
             <HxInputText @bind-Value="model.Name" Label="Název" />
-            <HxInputTextArea @bind-Value="model.Description" Label="Popis" />
+            <HxInputTextArea @bind-Value="model.Description" Label="Anotace" />
             <HxInputNumber @bind-Value="model.Capacity" Label="Kapacita" />
-            <TeacherMultiPicker @bind-Value="model.TeacherIds" Label="Vyučující" />
+            <TeacherMultiPicker @bind-Value="model.TeacherIds" Label="Přednášející" />
             <ScheduleTimeSlotPicker @bind-Day="model.ScheduleDayOfWeek" @bind-Slot="model.ScheduleSlotInDay" />
-            <GradeMultiPicker @bind-Value="model.GradeIds" Label="Ročník(y)" />
-            <SubjectCategoryPicker @bind-Value="model.CategoryId" Label="Skupina" />
-            <SubjectTypeMultiPicker @bind-Value="model.SubjectTypeIds" Label="Vzdělávací oblast(i)" />
         </EditForm>
     </BodyTemplate>
     <FooterTemplate>

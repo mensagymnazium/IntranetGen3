@@ -3,9 +3,10 @@
         SelectionEnabled="this.SelectionEnabled"
         SelectedDataItem="this.SelectedDataItem"
         SelectedDataItemChanged="HandleSelectedDataItemChanged"
-        DataProvider="this.DataProvider">
+        DataProvider="this.DataProvider"
+        IsResponsive="true">
     <Columns>
-        <HxGridColumn HeaderText="Předmět"
+        <HxGridColumn HeaderText="Přednáška"
                       ItemTextSelector="i => SubjectsDataStore.GetByKey(i.SubjectId.Value)?.Name"
                       SortString="@nameof(StudentSubjectRegistrationDto.SubjectId)"
                       Visible="this.ShowSubjectColumn"
@@ -13,18 +14,6 @@
         <HxGridColumn HeaderText="Student"
                       ItemTextSelector="i => StudentsDataStore.GetByKey(i.StudentId.Value)?.Name"
                       SortString="@nameof(StudentSubjectRegistrationDto.StudentId)"
-                      TItem="StudentSubjectRegistrationDto" />
-        <HxGridColumn HeaderText="Ročník"
-                      ItemTextSelector="i => GetStudentGradeName(i)"
-                      SortString="StudentGradeId"
-                      TItem="StudentSubjectRegistrationDto" />
-        <HxGridColumn HeaderText="Typ zápisu"
-                      ItemTextSelector="i => i.RegistrationType.AsEnumValueDescription()"
-                      SortString="@nameof(StudentSubjectRegistrationDto.RegistrationType)"
-                      TItem="StudentSubjectRegistrationDto" />
-        <HxGridColumn HeaderText="Zápisové pravidlo"
-                      ItemTextSelector="i => SigningRulesDataStore.GetByKey(i.SigningRuleId.Value)?.Name"
-                      SortString="@nameof(StudentSubjectRegistrationDto.SigningRuleId)"
                       TItem="StudentSubjectRegistrationDto" />
     </Columns>
     <ContextMenu Context="item">

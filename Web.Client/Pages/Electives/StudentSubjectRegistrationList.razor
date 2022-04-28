@@ -10,11 +10,8 @@
         </AuthorizeView>
     </CommandsTemplate>
     <FilterTemplate>
-        <GradePicker Label="Ročník" @bind-Value="context.GradeId" />
         <StudentPicker Label="Student" @bind-Value="context.StudentId" />
-        <SubjectPicker Label="Předmět" @bind-Value="context.SubjectId" />
-        <SigningRulePicker Label="Zápisové pravidlo" @bind-Value="context.SigningRuleId" />
-        <StudentRegistrationTypePicker Label="Typ zápisu" @bind-Value="context.RegistrationType" />
+        <SubjectPicker Label="Přednáška" @bind-Value="context.SubjectId" />
     </FilterTemplate>
     <DataTemplate>
         <AuthorizeView Context="authenticationState">

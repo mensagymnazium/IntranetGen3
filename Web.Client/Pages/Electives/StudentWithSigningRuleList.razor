@@ -5,9 +5,7 @@
               FilterModel="filterModel"
               FilterModelChanged="HandleFilterModelChanged">
     <FilterTemplate>
-        <GradePicker Label="Ročník" @bind-Value="context.GradeId" />
         <StudentPicker Label="Student" @bind-Value="context.StudentId" />
-        <SigningRulePicker Label="Zápisové pravidlo" @bind-Value="context.SigningRuleId" />
     </FilterTemplate>
     <DataTemplate>
         <StudentWithSigningRuleGrid @ref="gridComponent" DataProvider="GetGridData" />
