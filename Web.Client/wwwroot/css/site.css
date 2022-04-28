@@ -17,6 +17,6 @@
   top: 0.5rem;
 }
 
-app .logo {
-    background: none !important;
+:root .sidebar {
+  --hx-sidebar-background-color: #fafafa;
 }
