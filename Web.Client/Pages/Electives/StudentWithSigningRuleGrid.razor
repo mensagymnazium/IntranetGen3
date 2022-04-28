@@ -1,7 +1,8 @@
 ﻿<HxGrid @ref="gridComponent"
         TItem="StudentWithSigningRuleListItemDto"
         DataProvider="this.DataProvider"
-        Context="item">
+        Context="item"
+        IsResponsive="true">
     <Columns>
         <HxGridColumn HeaderText="Student"
                       ItemTextSelector="i => StudentsDataStore.GetByKey(i.StudentId)?.Name"
