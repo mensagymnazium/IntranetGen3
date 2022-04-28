@@ -135,6 +135,11 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 				resultItem.MainRegistrationAllowed = false;
 				resultItem.MainRegistrationNotAllowedReason = "Kapacita předmětu je naplněna.";
 			}
+			else if (subjectStudentRegistrations.Any(r => r.Subject.ScheduleDayOfWeek == subject.ScheduleDayOfWeek && r.Subject.ScheduleSlotInDay == subject.ScheduleSlotInDay))
+			{
+				resultItem.MainRegistrationAllowed = false;
+				resultItem.MainRegistrationNotAllowedReason = "Předmět koliduje časově s jiným předmětem.";
+			}
 			else
 			{
 				resultItem.MainRegistrationAllowed = true;
