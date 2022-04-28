@@ -36,6 +36,17 @@
         </BodyTemplate>
     </HxCard>
 
+    <AuthorizeView Roles="@nameof(Role.Student)">
+        <HxCard CssClass="mb-4">
+            <HeaderTemplate>
+                <HxCardTitle>Zápis předmětu</HxCardTitle>
+            </HeaderTemplate>
+            <BodyTemplate>
+                <StudentSubjectRegistrationComponent SubjectId="@SubjectId" />
+            </BodyTemplate>
+        </HxCard>
+    </AuthorizeView>
+
     <HxCard CssClass="mb-4">
         <HeaderTemplate>
             <HxCardTitle>Zapsaní studenti</HxCardTitle>
