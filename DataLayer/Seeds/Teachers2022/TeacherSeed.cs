@@ -8,7 +8,7 @@ public class TeacherSeed : DataSeed<Teachers2022Profile>
 	{
 		var teachers = new[]
 		{
-			new Teacher() { SeededEntityId = 111, User = new User() { Email = "Barbora.Lacinova@mensagymnazium.cz", Name = "Barbora Lacinová" } },
+			new Teacher() { SeededEntityId = 111, User = new User() { Email = "Barbora.Lacinova@mensagymnazium.cz", Name = "Barbora Placeholder" } },
 			new Teacher() { SeededEntityId = 112, User = new User() { Email = "Helena.Pollakova@mensagymnazium.cz", Name = "Helena Polláková" } },
 			new Teacher() { SeededEntityId = 113, User = new User() { Email = "david_john.seddon@mensagymnazium.cz", Name = "David John Seddon" } },
 			new Teacher() { SeededEntityId = 121, User = new User() { Email = "Zdenek.Drozd@mensagymnazium.cz", Name = "Zdeněk Drozd" } },
