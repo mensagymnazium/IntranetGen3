@@ -8,7 +8,7 @@
                   FilterModel="subjectListFilter"
                   FilterModelChanged="HandleFilterModelChanged">
         <SearchTemplate>
-            <strong>Zápisové pravidlo:</strong>
+            <strong class="d-none d-sm-block">Zápisové pravidlo:</strong>
             <SigningRulePicker Value="subjectListFilter.SigningRuleId"
                                ValueChanged="HandleSigningRuleFilterChanged"
                                ValueExpression="() => subjectListFilter.SigningRuleId"
@@ -34,7 +34,8 @@
                     SelectedDataItemChanged="HandleSelectedDataItemChanged"
                     ItemRowCssClassSelector="item => GetRowCssClass(item)"
                     HeaderRowCssClass="text-nowrap"
-                    Context="item">
+                    Context="item"
+                    IsResponsive="true">
                 <Columns>
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" SortString="@nameof(SubjectListItemDto.Name)" IsDefaultSortColumn="true" />
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vyučující" ItemTextSelector="@(item => GetTeachers(item.TeacherIds))" SortString="@nameof(SubjectListItemDto.TeacherIds)" />
