@@ -16,7 +16,7 @@
 
     <HxCard CssClass="mb-4">
         <HeaderTemplate>
-            <HxCardTitle>Popis</HxCardTitle>
+            <HxCardTitle>Anotace</HxCardTitle>
         </HeaderTemplate>
         <BodyTemplate>
             <HxCardText>@subject.Description.WithNewLinesAsHtmlBreak()</HxCardText>
@@ -29,26 +29,12 @@
         </HeaderTemplate>
         <BodyTemplate>
             <HxCardText>
-                <TextValue Label="Vyučující" Value="@GetTeachers(subject.TeacherIds)" />
-                <TextValue Label="Rozvrh" Value="@ValueFormatter.GetScheduleTimeSlot(subject.ScheduleDayOfWeek, subject.ScheduleSlotInDay)" />
-                <TextValue Label="Kapacita (celkem/primární zápisy/náhradní zápisy)" Value="@($"{subject.Capacity:n0}/{subject.StudentRegistrationsCountMain}/{subject.StudentRegistrationsCountSecondary}")" />
-                <TextValue Label="Ročník(y)" Value="@GetGrades(subject.GradeIds)" />
-                <TextValue Label="Skupina" Value="@SubjectCategoriesDataStore.GetByKey(subject.CategoryId.Value)?.Name" />
-                <TextValue Label="Vzdělávací oblast(i)" Value="@GetSubjectTypes(subject.SubjectTypeIds)" />
+                <TextValue Label="Přednášející" Value="@GetTeachers(subject.TeacherIds)" />
+                <TextValue Label="Čas" Value="@ValueFormatter.GetScheduleTimeSlot(subject.ScheduleDayOfWeek, subject.ScheduleSlotInDay)" />
+                <TextValue Label="Kapacita" Value="@($"{subject.Capacity:n0}/{subject.StudentRegistrationsCountMain}/{subject.StudentRegistrationsCountSecondary}")" />
             </HxCardText>
         </BodyTemplate>
     </HxCard>
-
-    <AuthorizeView Roles="@nameof(Role.Student)">
-        <HxCard CssClass="mb-4">
-            <HeaderTemplate>
-                <HxCardTitle>Zápis předmětu</HxCardTitle>
-            </HeaderTemplate>
-            <BodyTemplate>
-                <StudentSubjectRegistrationComponent SubjectId="@SubjectId" />
-            </BodyTemplate>
-        </HxCard>
-    </AuthorizeView>
 
     <HxCard CssClass="mb-4">
         <HeaderTemplate>

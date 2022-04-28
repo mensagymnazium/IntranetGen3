@@ -3,10 +3,9 @@
 		
         <EditForm EditContext="editContext">
             <FluentValidationValidator />
-            <SubjectPicker Label="Předmět" @bind-Value="@model.SubjectId" />
+            <SubjectPicker Label="Přednáška" @bind-Value="@model.SubjectId" />
             <StudentPicker Label="Student" @bind-Value="@model.StudentId" />
-            <StudentRegistrationTypePicker Label="Typ zápisu" @bind-Value="@model.RegistrationType" />
-            <SigningRulePicker Label="Zápisové pravidlo" @bind-Value="@model.SigningRuleId" />
+
         </EditForm>
 
 		<HxAlert Color="ThemeColor.Danger" CssClass="mt-4">

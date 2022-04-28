@@ -3,29 +3,15 @@
 <div>
     @* CSS Isolation *@
 
-    <HxListLayout Title="Předměty"
+    <HxListLayout Title="Přednášky"
                   TFilterModel="SubjectListQueryFilter"
                   FilterModel="subjectListFilter"
                   FilterModelChanged="HandleFilterModelChanged">
-        <SearchTemplate>
-            <strong>Zápisové pravidlo:</strong>
-            <SigningRulePicker Value="subjectListFilter.SigningRuleId"
-                               ValueChanged="HandleSigningRuleFilterChanged"
-                               ValueExpression="() => subjectListFilter.SigningRuleId"
-                               RestrictStudentGrade="true"
-                               NullText="-neurčeno-" />
-        </SearchTemplate>
         <CommandsTemplate>
             <AuthorizeView Roles="@nameof(Role.Administrator)">
                 <HxButton Text="Nový předmět" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />
             </AuthorizeView>
         </CommandsTemplate>
-        <FilterTemplate>
-            <HxInputText @bind-Value="@context.Name" Label="Název" />
-            <SubjectCategoryPicker @bind-Value="context.SubjectCategoryId" Label="Skupina" />
-            <SubjectTypePicker @bind-Value="@context.SubjectTypeId" Label="Vzdělávací oblast" />
-            <TeacherPicker @bind-Value="context.TeacherId" Label="Vyučující" />
-        </FilterTemplate>
         <DataTemplate>
             <HxGrid @ref="subjectsGrid"
                     TItem="SubjectListItemDto"
@@ -37,12 +23,9 @@
                     Context="item">
                 <Columns>
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" SortString="@nameof(SubjectListItemDto.Name)" IsDefaultSortColumn="true" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vyučující" ItemTextSelector="@(item => GetTeachers(item.TeacherIds))" SortString="@nameof(SubjectListItemDto.TeacherIds)" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Rozvrh" ItemTextSelector="@(item => ValueFormatter.GetScheduleTimeSlot(item.ScheduleDayOfWeek, item.ScheduleSlotInDay))" SortString="@nameof(SubjectListItemDto.ScheduleSlotInDay)" ItemCssClass="text-nowrap" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Přednášející" ItemTextSelector="@(item => GetTeachers(item.TeacherIds))" SortString="@nameof(SubjectListItemDto.TeacherIds)" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Čas" ItemTextSelector="@(item => ValueFormatter.GetScheduleTimeSlot(item.ScheduleDayOfWeek, item.ScheduleSlotInDay))" SortString="@nameof(SubjectListItemDto.ScheduleSlotInDay)" ItemCssClass="text-nowrap" />
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Kapacita" ItemTextSelector="@(item => $"{item.Capacity:n0}/{item.StudentRegistrationsCountMain}/{item.StudentRegistrationsCountSecondary}")" SortString="@nameof(SubjectListItemDto.Capacity)" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Ročník(y)" ItemTextSelector="@(item => GetGrades(item.GradeIds))" SortString="@nameof(SubjectListItemDto.GradeIds)" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Skupina" ItemTextSelector="@(item => SubjectCategoriesDataStore.GetByKey(item.CategoryId.Value)?.Name)" SortString="@nameof(SubjectListItemDto.CategoryId)" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vzdělávací oblast(i)" ItemTextSelector="@(item => GetSubjectTypes(item.SubjectTypeIds))" SortString="@nameof(SubjectListItemDto.SubjectTypeIds)" />
                 </Columns>
 
                 <ContextMenu Context="item">
