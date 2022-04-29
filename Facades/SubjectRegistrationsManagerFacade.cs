@@ -128,12 +128,12 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 			else if (item.Registrations.Count(r => r.RegistrationType == StudentRegistrationType.Main) >= item.Quantity)
 			{
 				resultItem.MainRegistrationAllowed = false;
-				resultItem.MainRegistrationNotAllowedReason = "Počet registrací vyčerpán.";
+				resultItem.MainRegistrationNotAllowedReason = "Počet vašich registrací je vyčerpán.";
 			}
 			else if (subjectRegistered)
 			{
 				resultItem.MainRegistrationAllowed = false;
-				resultItem.MainRegistrationNotAllowedReason = "Tuto přednášku máte již zapsanou.";
+				resultItem.MainRegistrationNotAllowedReason = "Tuto přednášku již máte zapsanou.";
 			}
 			else if (registrationCount >= subject.Capacity)
 			{
@@ -143,7 +143,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 			else if (collisions.Count > 0)
 			{
 				resultItem.MainRegistrationAllowed = false;
-				resultItem.MainRegistrationNotAllowedReason = $"Přednáška je ve stejný čas, jako {collisions[0].Subject.Name}.";
+				resultItem.MainRegistrationNotAllowedReason = $"Přednáška se kryje s přednáškou {collisions[0].Subject.Name}.";
 			}
 			else
 			{
@@ -165,7 +165,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 			else if (subjectRegistered)
 			{
 				resultItem.SecondaryRegistrationAllowed = false;
-				resultItem.SecondaryRegistrationNotAllowedReason = "Tuto přednášku máte již zapsanou.";
+				resultItem.SecondaryRegistrationNotAllowedReason = "Tuto přednášku již máte zapsanou.";
 			}
 			else
 			{
