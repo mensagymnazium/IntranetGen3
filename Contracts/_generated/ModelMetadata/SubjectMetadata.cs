@@ -17,6 +17,6 @@ namespace MensaGymnazium.IntranetGen3.Contracts.ModelMetadata
 	public static class SubjectMetadata
 	{
 		public const int DescriptionMaxLength = 2000;
-		public const int NameMaxLength = 50;
+		public const int NameMaxLength = 256;
 	}
 }
