@@ -5,3 +5,7 @@
 ::deep .reg-secondary {
 	background-color: rgba(var(--bs-success-rgb), 0.1);
 }
+
+::deep .capacity-full {
+	background-color: rgba(var(--bs-danger-rgb), 0.1);
+}
