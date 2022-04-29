@@ -10,10 +10,9 @@
             <ItemTemplate>
                 @if (context.MainRegistration is not null)
                 {
-                    <div class="me-2">Zapsáno @context.MainRegistration.Created</div>
-                    <HxButton Text="Zrušit zápis"
-                    OnClick="() => HandleCancelRegistrationClicked(context.MainRegistration.Id)"
-                    Color="ThemeColor.Primary" Outline="true" Size="ButtonSize.Small" Icon="BootstrapIcon.Trash" />
+                    <span class="me-2">Zapsáno @context.MainRegistration.Created</span>
+                    <HxButton Text="Zrušit registraci" OnClick="() => HandleCancelRegistrationClicked(context.MainRegistration.Id)" Color="ThemeColor.Primary" Outline="true" Size="ButtonSize.Small" Icon="BootstrapIcon.Trash" />
+
                 }
                 else if (context.MainRegistrationAllowed)
                 {

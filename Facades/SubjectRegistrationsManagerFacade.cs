@@ -123,12 +123,12 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 			if (resultItem.MainRegistration is not null)
 			{
 				resultItem.MainRegistrationAllowed = false;
-				resultItem.MainRegistrationNotAllowedReason = "Primární registrace této přednášky k tomu pravidlu již existuje.";
+				resultItem.MainRegistrationNotAllowedReason = "Registrace této přednášky již existuje.";
 			}
 			else if (item.Registrations.Count(r => r.RegistrationType == StudentRegistrationType.Main) >= item.Quantity)
 			{
 				resultItem.MainRegistrationAllowed = false;
-				resultItem.MainRegistrationNotAllowedReason = "Počet primárních registrací tohoto pravidla je vyčerpán.";
+				resultItem.MainRegistrationNotAllowedReason = "Počet registrací vyčerpán.";
 			}
 			else if (subjectRegistered)
 			{
