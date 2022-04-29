@@ -15,7 +15,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				Name = "kvarta",
 				Description = "Mensa fórum",
 				GradeId = (int) GradeEntry.Kvinta,
-				Quantity = 1,
+				Quantity = 9,
 				SubjectCategoryRelations =
 				{
 					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.GraduationSeminar },
@@ -30,7 +30,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				Name = "kvinta",
 				Description = "Mensa fórum",
 				GradeId = (int) GradeEntry.Sexta,
-				Quantity = 1,
+				Quantity = 9,
 				SubjectCategoryRelations =
 				{
 					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.GraduationSeminar },
@@ -45,7 +45,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				Name = "sexta",
 				Description = "Mensa fórum",
 				GradeId = (int) GradeEntry.Septima,
-				Quantity = 1,
+				Quantity = 9,
 				SubjectCategoryRelations =
 				{
 					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.GraduationSeminar },
@@ -60,7 +60,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 				Name = "septima",
 				Description = "Mensa fórum",
 				GradeId = (int) GradeEntry.Oktava,
-				Quantity = 1,
+				Quantity = 9,
 				SubjectCategoryRelations =
 				{
 					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.GraduationSeminar },
