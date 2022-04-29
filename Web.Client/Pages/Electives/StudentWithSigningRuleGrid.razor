@@ -9,5 +9,19 @@
                       SortString="@nameof(StudentWithSigningRuleListItemDto.StudentId)"
                       Visible="this.StudentColumnVisible"
                       TItem="StudentWithSigningRuleListItemDto" />
+        <HxGridColumn HeaderText="Počet registrací"
+                      TItem="StudentWithSigningRuleListItemDto">
+            <ItemTemplate Context="item">
+                @if (item.SigningRuleQuantity > item.MainRegistrationsCount)
+                {
+                    <HxIcon Icon="BootstrapIcon.ExclamationCircleFill" CssClass="me-2 text-danger" />
+                }
+                else
+                {
+                    <HxIcon Icon="BootstrapIcon.CheckCircleFill" CssClass="me-2 text-success" />
+                }
+                @item.MainRegistrationsCount / @item.SigningRuleQuantity
+            </ItemTemplate>
+        </HxGridColumn>
     </Columns>
 </HxGrid>
