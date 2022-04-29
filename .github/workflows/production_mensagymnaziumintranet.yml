@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'mensagymnaziumintranet'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3D57B084125A411D88A56E4D99D14514 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D443E989DB404C019F41277BEA8D425A }}
           package: .
