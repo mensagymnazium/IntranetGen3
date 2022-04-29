@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Havit.Model.Collections.Generic;
 
 namespace MensaGymnazium.IntranetGen3.Model;
 
@@ -24,8 +25,14 @@ public class SigningRule
 
 	public int? Quantity { get; set; }
 
-	public List<StudentSubjectRegistration> Registrations { get; } = new List<StudentSubjectRegistration>();
+	public List<StudentSubjectRegistration> RegistrationsWithDeleted { get; } = new List<StudentSubjectRegistration>();
+	[NotMapped] public ICollection<StudentSubjectRegistration> Registrations { get; }
 
 	[MaxLength(50)]
 	public string SeedItemIdentifier { get; set; }
+
+	public SigningRule()
+	{
+		Registrations = new FilteringCollection<StudentSubjectRegistration>(RegistrationsWithDeleted, r => r.Deleted is null);
+	}
 }

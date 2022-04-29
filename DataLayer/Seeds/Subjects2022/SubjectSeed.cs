@@ -5,7 +5,7 @@ using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Subjects2022;
 
-public class SubjectSeed : DataSeed<DemoProfile>
+public class SubjectSeed : DataSeed<Subjects2022Profile>
 {
 	private readonly IUserRepository userRepository;
 

@@ -3,7 +3,8 @@
         SelectionEnabled="this.SelectionEnabled"
         SelectedDataItem="this.SelectedDataItem"
         SelectedDataItemChanged="HandleSelectedDataItemChanged"
-        DataProvider="this.DataProvider">
+        DataProvider="this.DataProvider"
+        IsResponsive="true">
     <Columns>
         <HxGridColumn HeaderText="Předmět"
                       ItemTextSelector="i => SubjectsDataStore.GetByKey(i.SubjectId.Value)?.Name"

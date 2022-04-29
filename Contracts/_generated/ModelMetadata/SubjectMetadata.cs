@@ -16,7 +16,8 @@ namespace MensaGymnazium.IntranetGen3.Contracts.ModelMetadata
 	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 	public static class SubjectMetadata
 	{
-		public const int DescriptionMaxLength = 2000;
-		public const int NameMaxLength = 50;
+		public const int DescriptionMaxLength = Int32.MaxValue;
+		public const int NameMaxLength = 100;
+		public const int SeedIdentifierMaxLength = 50;
 	}
 }
