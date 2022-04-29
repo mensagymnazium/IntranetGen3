@@ -1,5 +1,6 @@
 ﻿using Havit;
 using MensaGymnazium.IntranetGen3.Contracts;
+using MensaGymnazium.IntranetGen3.Primitives;
 using Microsoft.AspNetCore.Components;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
@@ -12,15 +13,20 @@ public partial class SubjectEdit : ComponentBase
 	[Inject] protected Func<ISubjectFacade> SubjectFacade { get; set; }
 
 	private HxOffcanvas offcanvasComponent;
-	private SubjectDto model = new();
+	private SubjectDto model;
 	private EditContext editContext;
 	private string title;
+
+	public SubjectEdit()
+	{
+		model = CreateModelWithDefaults();
+	}
 
 	public async Task ShowAsync()
 	{
 		if (SubjectId is null)
 		{
-			model = new();
+			model = CreateModelWithDefaults();
 			editContext = new EditContext(model);
 			title = "Nový předmět";
 		}
@@ -34,12 +40,23 @@ public partial class SubjectEdit : ComponentBase
 		await offcanvasComponent.ShowAsync();
 	}
 
+	private SubjectDto CreateModelWithDefaults()
+	{
+		var result = new SubjectDto();
+		result.GradeIds = new() { (int)GradeEntry.Prima, (int)GradeEntry.Sekunda, (int)GradeEntry.Tercie, (int)GradeEntry.Kvarta, (int)GradeEntry.Kvinta, (int)GradeEntry.Sexta, (int)GradeEntry.Septima, (int)GradeEntry.Oktava };
+		result.CategoryId = 1; /* SubjectCategory.Entry.GraduationalSeminar */
+		result.SubjectTypeIds = new() { 4 /* SubjectType.Entry.Informatics */ };
+
+		return result;
+	}
+
 	private async Task HandleValidSubmit()
 	{
 		try
 		{
 			if (model.Id == default)
 			{
+				Console.WriteLine(model.GradeIds.Count);
 				model.Id = (await SubjectFacade().CreateSubjectAsync(model)).Value;
 			}
 			else
