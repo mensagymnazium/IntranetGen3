@@ -104,7 +104,12 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 
 		var subjectRegistered = signingRulesWithRegistrations.SelectMany(x => x.Registrations).Any(ssr => ssr.SubjectId == subjectId.Value);
 		var subject = await subjectRepository.GetObjectAsync(subjectId.Value, cancellationToken);
-		var subjectStudentRegistrations = await studentSubjectRegistrationRepository.GetBySubjectAsync(subjectId.Value, cancellationToken);
+		var registrationCount = await studentSubjectRegistrationRepository.CountBySubjectAndTypeAsync(subjectId.Value, StudentRegistrationType.Main, cancellationToken);
+
+		var user = applicationAuthenticationService.GetCurrentUser();
+		Contract.Assert<InvalidOperationException>(user.Student is not null);
+
+		var collisions = await studentSubjectRegistrationRepository.GetByStudentAndTimeAsync(user.Student.Id, subject.ScheduleDayOfWeek, subject.ScheduleSlotInDay, cancellationToken);
 
 		foreach (var item in signingRulesWithRegistrations)
 		{
@@ -130,10 +135,15 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 				resultItem.MainRegistrationAllowed = false;
 				resultItem.MainRegistrationNotAllowedReason = "Předmět je již registrován.";
 			}
-			else if (subjectStudentRegistrations.Count(r => r.RegistrationType == StudentRegistrationType.Main) >= subject.Capacity)
+			else if (registrationCount >= subject.Capacity)
 			{
 				resultItem.MainRegistrationAllowed = false;
 				resultItem.MainRegistrationNotAllowedReason = "Kapacita předmětu je naplněna.";
+			}
+			else if (collisions.Count > 0)
+			{
+				resultItem.MainRegistrationAllowed = false;
+				resultItem.MainRegistrationNotAllowedReason = "Předmět koliduje časově s jiným předmětem.";
 			}
 			else
 			{
@@ -141,8 +151,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 			}
 
 			// secondary
-			resultItem.SecondaryRegistration = item.Registrations.FirstOrDefault(r => (r.SubjectId == subjectId.Value)
-																&& (r.RegistrationType == StudentRegistrationType.Secondary));
+			resultItem.SecondaryRegistration = item.Registrations.FirstOrDefault(r => (r.SubjectId == subjectId.Value) && (r.RegistrationType == StudentRegistrationType.Secondary));
 			if (resultItem.SecondaryRegistration is not null)
 			{
 				resultItem.SecondaryRegistrationAllowed = false;
