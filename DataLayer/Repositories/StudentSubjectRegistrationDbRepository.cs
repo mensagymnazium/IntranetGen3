@@ -21,6 +21,6 @@ public partial class StudentSubjectRegistrationDbRepository : IStudentSubjectReg
 			ssr.StudentId == studentId &&
 			ssr.Subject.ScheduleDayOfWeek == day &&
 			ssr.Subject.ScheduleSlotInDay == slot
-		).ToListAsync();
+		).Include(ssr => ssr.Subject).ToListAsync();
 	}
 }

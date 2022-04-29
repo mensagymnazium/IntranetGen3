@@ -123,27 +123,27 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 			if (resultItem.MainRegistration is not null)
 			{
 				resultItem.MainRegistrationAllowed = false;
-				resultItem.MainRegistrationNotAllowedReason = "Primární registrace tohoto předmětu k tomu pravidlu již existuje.";
+				resultItem.MainRegistrationNotAllowedReason = "Primární registrace této přednášky k tomu pravidlu již existuje.";
 			}
 			else if (item.Registrations.Count(r => r.RegistrationType == StudentRegistrationType.Main) >= item.Quantity)
 			{
 				resultItem.MainRegistrationAllowed = false;
-				resultItem.MainRegistrationNotAllowedReason = "Počet primárních registrací tohoto pravidla vyčerpán.";
+				resultItem.MainRegistrationNotAllowedReason = "Počet primárních registrací tohoto pravidla je vyčerpán.";
 			}
 			else if (subjectRegistered)
 			{
 				resultItem.MainRegistrationAllowed = false;
-				resultItem.MainRegistrationNotAllowedReason = "Předmět je již registrován.";
+				resultItem.MainRegistrationNotAllowedReason = "Tuto přednášku máte již zapsanou.";
 			}
 			else if (registrationCount >= subject.Capacity)
 			{
 				resultItem.MainRegistrationAllowed = false;
-				resultItem.MainRegistrationNotAllowedReason = "Kapacita předmětu je naplněna.";
+				resultItem.MainRegistrationNotAllowedReason = "Kapacita této přednášky je již naplněna.";
 			}
 			else if (collisions.Count > 0)
 			{
 				resultItem.MainRegistrationAllowed = false;
-				resultItem.MainRegistrationNotAllowedReason = "Předmět koliduje časově s jiným předmětem.";
+				resultItem.MainRegistrationNotAllowedReason = $"Přednáška je ve stejný čas, jako {collisions[0].Subject.Name}.";
 			}
 			else
 			{
@@ -160,12 +160,12 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 			else if (item.Registrations.Count(r => r.RegistrationType == StudentRegistrationType.Secondary) >= item.Quantity)
 			{
 				resultItem.SecondaryRegistrationAllowed = false;
-				resultItem.SecondaryRegistrationNotAllowedReason = "Počet náhradních registrací tohoto pravidla vyčerpán.";
+				resultItem.SecondaryRegistrationNotAllowedReason = "Počet náhradních registrací tohoto pravidla je vyčerpán.";
 			}
 			else if (subjectRegistered)
 			{
 				resultItem.SecondaryRegistrationAllowed = false;
-				resultItem.SecondaryRegistrationNotAllowedReason = "Předmět je již registrován.";
+				resultItem.SecondaryRegistrationNotAllowedReason = "Tuto přednášku máte již zapsanou.";
 			}
 			else
 			{

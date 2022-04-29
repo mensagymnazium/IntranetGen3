@@ -44,7 +44,7 @@ public partial class StudentSubjectRegistrationComponent
 
 	private async Task HandleCreateRegistrationClicked(int signingRuleId, StudentRegistrationType registrationType)
 	{
-		if (await MessageBox.ConfirmAsync("Opravdu chcete vytvořit zápis?"))
+		if (await MessageBox.ConfirmAsync("Potvrzení", "Opravdu chcete vytvořit zápis?"))
 		{
 			try
 			{

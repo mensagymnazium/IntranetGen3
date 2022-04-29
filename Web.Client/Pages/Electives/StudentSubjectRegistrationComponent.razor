@@ -1,20 +1,25 @@
-﻿<HxGrid @ref="gridComponent"
-        TItem="SigningRuleStudentRegistrationsDto"
-        DataProvider="GetGridData"
-        SelectionEnabled="false"
-        ShowFooterWhenEmptyData="false">
+﻿<HxGrid @ref="gridComponent" TItem="SigningRuleStudentRegistrationsDto" DataProvider="GetGridData"
+    SelectionEnabled="false" ShowFooterWhenEmptyData="false">
     <Columns>
-        <HxGridColumn HeaderText="Zapsat se" TItem="SigningRuleStudentRegistrationsDto">
+        <HxGridColumn HeaderText="Druh zápisu" TItem="SigningRuleStudentRegistrationsDto">
+            <ItemTemplate>
+                Přednáška
+            </ItemTemplate>
+        </HxGridColumn>
+        <HxGridColumn HeaderText="Zápis" TItem="SigningRuleStudentRegistrationsDto">
             <ItemTemplate>
                 @if (context.MainRegistration is not null)
                 {
                     <div class="me-2">Zapsáno @context.MainRegistration.Created</div>
-                    <HxButton Text="Zrušit primární zápis" OnClick="() => HandleCancelRegistrationClicked(context.MainRegistration.Id)" Color="ThemeColor.Primary" Outline="true" Size="ButtonSize.Small" Icon="BootstrapIcon.Trash" />
-
+                    <HxButton Text="Zrušit zápis"
+                    OnClick="() => HandleCancelRegistrationClicked(context.MainRegistration.Id)"
+                    Color="ThemeColor.Primary" Outline="true" Size="ButtonSize.Small" Icon="BootstrapIcon.Trash" />
                 }
                 else if (context.MainRegistrationAllowed)
                 {
-                    <HxButton Text="Zapsat se" OnClick="() => HandleCreateRegistrationClicked(context.Id, StudentRegistrationType.Main)" Color="ThemeColor.Primary" Size="ButtonSize.Small" Icon="BootstrapIcon.Basket" />
+                    <HxButton Text="Zapsat se"
+                    OnClick="() => HandleCreateRegistrationClicked(context.Id, StudentRegistrationType.Main)"
+                    Color="ThemeColor.Primary" Size="ButtonSize.Small" Icon="BootstrapIcon.Basket" />
                 }
                 else
                 {
