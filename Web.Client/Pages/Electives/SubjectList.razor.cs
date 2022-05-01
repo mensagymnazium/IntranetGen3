@@ -65,10 +65,7 @@ public partial class SubjectList
 		{
 			return "reg-secondary";
 		}
-		else if (item.StudentRegistrationsCountMain >= item.Capacity)
-		{
-			return "capacity-full";
-		}
+
 		return null;
 	}
 
