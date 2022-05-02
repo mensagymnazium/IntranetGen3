@@ -9,7 +9,7 @@ public class TeacherSeed : DataSeed<Teachers2022Profile>
 		var teachers = new[]
 		{
 			new Teacher() { SeededEntityId = 111, User = new User() { Email = "mensaforum.2022.001@mensagymnazium.cz", Name = "Štěpán Krtička" } },
-			new Teacher() { SeededEntityId = 112, User = new User() { Email = "mensaforum.2022.010@mensagymnazium.cz", Name = "Placeholder Placeholder" } },
+			new Teacher() { SeededEntityId = 112, User = new User() { Email = "mensaforum.2022.010@mensagymnazium.cz", Name = "Martin Rota" } },
 			new Teacher() { SeededEntityId = 113, User = new User() { Email = "mensaforum.2022.003@mensagymnazium.cz", Name = "Bratr Kliment" } },
 			new Teacher() { SeededEntityId = 121, User = new User() { Email = "mensaforum.2022.002@mensagymnazium.cz", Name = "PhDr. Jakub Železný" } },
 			new Teacher() { SeededEntityId = 122, User = new User() { Email = "mensaforum.2022.004@mensagymnazium.cz", Name = "Mgr. Halina Šimková" } },
@@ -18,7 +18,7 @@ public class TeacherSeed : DataSeed<Teachers2022Profile>
 			new Teacher() { SeededEntityId = 132, User = new User() { Email = "mensaforum.2022.007@mensagymnazium.cz", Name = "Vladimír Strejček" } },
 			new Teacher() { SeededEntityId = 133, User = new User() { Email = "mensaforum.2022.008@mensagymnazium.cz", Name = "Jan Skryja" } },
 			new Teacher() { SeededEntityId = 211, User = new User() { Email = "mensaforum.2022.009@mensagymnazium.cz", Name = "Václav Jiřička" } },
-			new Teacher() { SeededEntityId = 212, User = new User() { Email = "mensaforum.2022.011@mensagymnazium.cz", Name = "Placeholder Placeholder" } },
+			new Teacher() { SeededEntityId = 212, User = new User() { Email = "mensaforum.2022.011@mensagymnazium.cz", Name = "Antonín Lavrenčík" } },
 			new Teacher() { SeededEntityId = 213, User = new User() { Email = "mensaforum.2022.012@mensagymnazium.cz", Name = "Bc. Marek Pražan" } },
 			new Teacher() { SeededEntityId = 221, User = new User() { Email = "mensaforum.2022.013@mensagymnazium.cz", Name = "Mgr. Jana Adámková" } },
 			new Teacher() { SeededEntityId = 222, User = new User() { Email = "mensaforum.2022.014@mensagymnazium.cz", Name = "Mgr. Jakub Kroulík" } },
