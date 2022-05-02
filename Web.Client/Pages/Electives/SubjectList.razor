@@ -23,10 +23,27 @@
                     Context="item"
                     IsResponsive="true">
                 <Columns>
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" SortString="@nameof(SubjectListItemDto.Name)" IsDefaultSortColumn="true" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" SortString="@nameof(SubjectListItemDto.Name)" />
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Přednášející" ItemTextSelector="@(item => GetTeachers(item.TeacherIds))" SortString="@nameof(SubjectListItemDto.TeacherIds)" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Čas" ItemTextSelector="@(item => ValueFormatter.GetScheduleTimeSlot(item.ScheduleDayOfWeek, item.ScheduleSlotInDay))" SortString="@nameof(SubjectListItemDto.ScheduleSlotInDay)" ItemCssClass="text-nowrap" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Kapacita" ItemTextSelector="@(item => $"{item.Capacity:n0}/{item.StudentRegistrationsCountMain}")" SortString="@nameof(SubjectListItemDto.Capacity)" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Čas" ItemTextSelector="@(item => ValueFormatter.GetScheduleTimeSlot(item.ScheduleDayOfWeek, item.ScheduleSlotInDay))" SortString="@nameof(SubjectListItemDto.ScheduleSlotInDay)" IsDefaultSortColumn="true" ItemCssClass="text-nowrap" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Kapacita" SortString="@nameof(SubjectListItemDto.Capacity)" >
+                        <ItemTemplate Context="item">
+                            @if (item.StudentRegistrationsCountMain >= item.Capacity)
+                            {
+                                <HxIcon Icon="BootstrapIcon.XCircleFill" CssClass="me-2 text-danger" />
+                            }
+                            else if (item.StudentRegistrationsCountMain >= item.Capacity - item.Capacity / 3)
+                            {
+                                <HxIcon Icon="BootstrapIcon.ExclamationCircleFill" CssClass="me-2 text-warning" />
+                            }
+                            else
+                            {
+                                <HxIcon Icon="BootstrapIcon.CheckCircleFill" CssClass="me-2 text-success" />
+                            }
+
+                            @item.StudentRegistrationsCountMain / @item.Capacity
+                        </ItemTemplate>
+                    </HxGridColumn>
                 </Columns>
 
                 <ContextMenu Context="item">
@@ -39,10 +56,8 @@
                     </AuthorizeView>
                 </ContextMenu>
             </HxGrid>
-
         </DataTemplate>
     </HxListLayout>
-
 </div>
 
-<SubjectEdit @ref="subjectEditComponent" SubjectId="null" OnSaved="HandleSubjectEditSaved" />    
+<SubjectEdit @ref="subjectEditComponent" SubjectId="null" OnSaved="HandleSubjectEditSaved" />

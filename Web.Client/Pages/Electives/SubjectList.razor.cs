@@ -65,6 +65,7 @@ public partial class SubjectList
 		{
 			return "reg-secondary";
 		}
+
 		return null;
 	}
 

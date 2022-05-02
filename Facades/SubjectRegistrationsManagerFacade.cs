@@ -104,7 +104,12 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 
 		var subjectRegistered = signingRulesWithRegistrations.SelectMany(x => x.Registrations).Any(ssr => ssr.SubjectId == subjectId.Value);
 		var subject = await subjectRepository.GetObjectAsync(subjectId.Value, cancellationToken);
-		var subjectStudentRegistrations = await studentSubjectRegistrationRepository.GetBySubjectAsync(subjectId.Value, cancellationToken);
+		var registrationCount = await studentSubjectRegistrationRepository.CountBySubjectAndTypeAsync(subjectId.Value, StudentRegistrationType.Main, cancellationToken);
+
+		var user = applicationAuthenticationService.GetCurrentUser();
+		Contract.Assert<InvalidOperationException>(user.Student is not null);
+
+		var collisions = await studentSubjectRegistrationRepository.GetByStudentAndTimeAsync(user.Student.Id, subject.ScheduleDayOfWeek, subject.ScheduleSlotInDay, cancellationToken);
 
 		foreach (var item in signingRulesWithRegistrations)
 		{
@@ -118,27 +123,27 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 			if (resultItem.MainRegistration is not null)
 			{
 				resultItem.MainRegistrationAllowed = false;
-				resultItem.MainRegistrationNotAllowedReason = "Primární registrace tohoto předmětu k tomu pravidlu již existuje.";
+				resultItem.MainRegistrationNotAllowedReason = "Registrace této přednášky již existuje.";
 			}
 			else if (item.Registrations.Count(r => r.RegistrationType == StudentRegistrationType.Main) >= item.Quantity)
 			{
 				resultItem.MainRegistrationAllowed = false;
-				resultItem.MainRegistrationNotAllowedReason = "Počet primárních registrací tohoto pravidla vyčerpán.";
+				resultItem.MainRegistrationNotAllowedReason = "Počet vašich registrací je vyčerpán.";
 			}
 			else if (subjectRegistered)
 			{
 				resultItem.MainRegistrationAllowed = false;
-				resultItem.MainRegistrationNotAllowedReason = "Předmět je již registrován.";
+				resultItem.MainRegistrationNotAllowedReason = "Tuto přednášku již máte zapsanou.";
 			}
-			else if (subjectStudentRegistrations.Count(r => r.RegistrationType == StudentRegistrationType.Main) >= subject.Capacity)
+			else if (registrationCount >= subject.Capacity)
 			{
 				resultItem.MainRegistrationAllowed = false;
-				resultItem.MainRegistrationNotAllowedReason = "Kapacita předmětu je naplněna.";
+				resultItem.MainRegistrationNotAllowedReason = "Kapacita této přednášky je již naplněna.";
 			}
-			else if (subjectStudentRegistrations.Any(r => r.Subject.ScheduleDayOfWeek == subject.ScheduleDayOfWeek && r.Subject.ScheduleSlotInDay == subject.ScheduleSlotInDay))
+			else if (collisions.Count > 0)
 			{
 				resultItem.MainRegistrationAllowed = false;
-				resultItem.MainRegistrationNotAllowedReason = "Předmět koliduje časově s jiným předmětem.";
+				resultItem.MainRegistrationNotAllowedReason = $"Přednáška se kryje s přednáškou {collisions[0].Subject.Name}.";
 			}
 			else
 			{
@@ -146,8 +151,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 			}
 
 			// secondary
-			resultItem.SecondaryRegistration = item.Registrations.FirstOrDefault(r => (r.SubjectId == subjectId.Value)
-																&& (r.RegistrationType == StudentRegistrationType.Secondary));
+			resultItem.SecondaryRegistration = item.Registrations.FirstOrDefault(r => (r.SubjectId == subjectId.Value) && (r.RegistrationType == StudentRegistrationType.Secondary));
 			if (resultItem.SecondaryRegistration is not null)
 			{
 				resultItem.SecondaryRegistrationAllowed = false;
@@ -156,12 +160,12 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 			else if (item.Registrations.Count(r => r.RegistrationType == StudentRegistrationType.Secondary) >= item.Quantity)
 			{
 				resultItem.SecondaryRegistrationAllowed = false;
-				resultItem.SecondaryRegistrationNotAllowedReason = "Počet náhradních registrací tohoto pravidla vyčerpán.";
+				resultItem.SecondaryRegistrationNotAllowedReason = "Počet náhradních registrací tohoto pravidla je vyčerpán.";
 			}
 			else if (subjectRegistered)
 			{
 				resultItem.SecondaryRegistrationAllowed = false;
-				resultItem.SecondaryRegistrationNotAllowedReason = "Předmět je již registrován.";
+				resultItem.SecondaryRegistrationNotAllowedReason = "Tuto přednášku již máte zapsanou.";
 			}
 			else
 			{

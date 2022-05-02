@@ -78,6 +78,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub Workflows", "GitHub 
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		.github\workflows\master_mensagymnaziumintranetpreview.yml = .github\workflows\master_mensagymnaziumintranetpreview.yml
+		.github\workflows\mensaforum_mensaforum.yml = .github\workflows\mensaforum_mensaforum.yml
 	EndProjectSection
 EndProject
 Global

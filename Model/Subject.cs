@@ -11,7 +11,7 @@ public class Subject
 {
 	public int Id { get; set; }
 
-	[MaxLength(100)]
+	[MaxLength(256)]
 	public string Name { get; set; }
 
 	[MaxLength]

@@ -1,6 +1,6 @@
 ﻿<HxSidebar CssClass="sticky-top sidebar">
     <HeaderTemplate>
-        <HxSidebarBrand BrandName="Intranet">
+        <HxSidebarBrand BrandName="Mensa fórum">
             <Logo>
                 <BrandLogo />
             </Logo>
@@ -8,11 +8,10 @@
     </HeaderTemplate>
 
     <ItemsTemplate>
-        <HxSidebarItem Text="Dashboard" Href="@Routes.Home" Icon="@BootstrapIcon.Columns" Match="NavLinkMatch.All" />
-        <HxSidebarItem Text="Mensaforum" Icon="@BootstrapIcon.CalendarRange">
-            <HxSidebarItem Text="Seznam přednášek" Href="@Routes.Electives.Subjects" />
-            <HxSidebarItem Text="Zapsaní studenti" Href="@Routes.Electives.StudentSubjectRegistrationList" />
-        </HxSidebarItem>
+        <HxSidebarItem Text="Dashboard" Href="@Routes.Home" Icon="@BootstrapIcon.House" Match="NavLinkMatch.All" />
+        <HxSidebarItem Text="Přednášky" Icon="@BootstrapIcon.CalendarRange" Href="@Routes.Electives.Subjects" />
+        <HxSidebarItem Text="Přehled registrací" Icon="@BootstrapIcon.ListColumnsReverse" Href="@Routes.Electives.StudentSubjectRegistrationList" />
+        <HxSidebarItem Text="Statistiky registrací" Icon="@BootstrapIcon.PersonLinesFill" Href="@Routes.Electives.StudentWithSigningRuleList" />
         <AuthorizeView Roles="@nameof(Role.Administrator)">
             <HxSidebarItem Text="Nastavení" Icon="@BootstrapIcon.Gear">
                 <HxSidebarItem Text="Učitelé" Href="@Routes.Administration.Teachers" />
