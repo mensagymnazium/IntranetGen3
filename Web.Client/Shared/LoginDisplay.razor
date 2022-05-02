@@ -5,7 +5,7 @@
 		<Authorized>
 
 			<div class="initials rounded-circle text-primary p-1">@NameToInitials(@context.User?.Identity?.Name)</div>
-			<a class="login-display-nickname mx-3">@context?.User?.Identity?.Name</a>
+			<span class="login-display-nickname mx-3">@context?.User?.Identity?.Name</span>
 			<div class="ms-auto">
 				<HxContextMenu>
 					<HxContextMenuItem Text="Odhlásit" OnClick="BeginSignOut" />
