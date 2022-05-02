@@ -1,10 +1,7 @@
-﻿using Hangfire;
-using Hangfire.Dashboard;
-using Havit.Blazor.Grpc.Server;
+﻿using Havit.Blazor.Grpc.Server;
 using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
 using MensaGymnazium.IntranetGen3.DependencyInjection;
-using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security;
 using MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ApplicationInsights;
 using MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ConfigurationExtensions;
 using MensaGymnazium.IntranetGen3.Web.Server.Tools;
@@ -53,7 +50,7 @@ public class Startup
 		services.AddGrpcServerInfrastructure(assemblyToScanForDataContracts: typeof(Dto).Assembly);
 
 		// Hangfire
-		services.AddCustomizedHangfire(configuration);
+		//services.AddCustomizedHangfire(configuration);
 	}
 
 	// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -98,14 +95,14 @@ public class Startup
 					endpoint.RequireAuthorization(); // TODO? AuthorizationPolicyNames.ApiScopePolicy when needed
 				});
 
-			endpoints.MapHangfireDashboard("/hangfire", new DashboardOptions
-			{
-				Authorization = new List<IDashboardAuthorizationFilter>() { }, // see https://sahansera.dev/securing-hangfire-dashboard-with-endpoint-routing-auth-policy-aspnetcore/
-				DisplayStorageConnectionString = false,
-				DashboardTitle = "IntranetGen3 - Jobs",
-				StatsPollingInterval = 60_000 // once a minute
-			})
-			.RequireAuthorization(PolicyNames.HangfireDashboardAcccessPolicy);
+			//endpoints.MapHangfireDashboard("/hangfire", new DashboardOptions
+			//{
+			//	Authorization = new List<IDashboardAuthorizationFilter>() { }, // see https://sahansera.dev/securing-hangfire-dashboard-with-endpoint-routing-auth-policy-aspnetcore/
+			//	DisplayStorageConnectionString = false,
+			//	DashboardTitle = "IntranetGen3 - Jobs",
+			//	StatsPollingInterval = 60_000 // once a minute
+			//})
+			//.RequireAuthorization(PolicyNames.HangfireDashboardAcccessPolicy);
 		});
 
 		app.UpgradeDatabaseSchemaAndData();
