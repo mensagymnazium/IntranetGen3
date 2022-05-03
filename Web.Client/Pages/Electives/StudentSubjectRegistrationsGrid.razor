@@ -7,12 +7,12 @@
         IsResponsive="true">
     <Columns>
         <HxGridColumn HeaderText="Předmět"
-                      ItemTextSelector="i => SubjectsDataStore.GetByKey(i.SubjectId.Value)?.Name"
+                      ItemTextSelector="i => SubjectsDataStore.TryGetByKey(i.SubjectId.Value)?.Name"
                       SortString="@nameof(StudentSubjectRegistrationDto.SubjectId)"
                       Visible="this.ShowSubjectColumn"
                       TItem="StudentSubjectRegistrationDto" />
         <HxGridColumn HeaderText="Student"
-                      ItemTextSelector="i => StudentsDataStore.GetByKey(i.StudentId.Value)?.Name"
+                      ItemTextSelector="i => StudentsDataStore.TryGetByKey(i.StudentId.Value)?.Name"
                       SortString="@nameof(StudentSubjectRegistrationDto.StudentId)"
                       TItem="StudentSubjectRegistrationDto" />
         <HxGridColumn HeaderText="Ročník"

@@ -5,7 +5,7 @@
         IsResponsive="true">
     <Columns>
         <HxGridColumn HeaderText="Student"
-                      ItemTextSelector="i => StudentsDataStore.GetByKey(i.StudentId)?.Name"
+                      ItemTextSelector="i => StudentsDataStore.TryGetByKey(i.StudentId)?.Name"
                       SortString="@nameof(StudentWithSigningRuleListItemDto.StudentId)"
                       Visible="this.StudentColumnVisible"
                       TItem="StudentWithSigningRuleListItemDto" />
