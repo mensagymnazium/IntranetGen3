@@ -31,15 +31,15 @@ public partial class StudentSubjectRegistrationComponent
 			try
 			{
 				await SubjectRegistrationsManagerFacade().CancelRegistrationAsync(Dto.FromValue(registrationId));
+
+				await gridComponent.RefreshDataAsync();
+				await OnRegistrationChanged.InvokeAsync();
 			}
 			catch (OperationFailedException)
 			{
 				// NOOP
 			}
 		}
-
-		await gridComponent.RefreshDataAsync();
-		await OnRegistrationChanged.InvokeAsync();
 	}
 
 	private async Task HandleCreateRegistrationClicked(int signingRuleId, StudentRegistrationType registrationType)
@@ -54,14 +54,14 @@ public partial class StudentSubjectRegistrationComponent
 					SigningRuleId = signingRuleId,
 					RegistrationType = registrationType
 				});
+
+				await gridComponent.RefreshDataAsync();
+				await OnRegistrationChanged.InvokeAsync();
 			}
 			catch (OperationFailedException)
 			{
 				// NOOP
 			}
 		}
-
-		await gridComponent.RefreshDataAsync();
-		await OnRegistrationChanged.InvokeAsync();
 	}
 }

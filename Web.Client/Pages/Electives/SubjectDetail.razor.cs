@@ -18,6 +18,7 @@ public partial class SubjectDetail
 	private SubjectDto subject;
 	private SubjectEdit subjectEditComponent;
 	private int? loadedSubjectId;
+	private StudentSubjectRegistrationsGrid registrationsGrid;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -74,6 +75,12 @@ public partial class SubjectDetail
 	private async Task HandleEditSaved(int subjectId)
 	{
 		await LoadSubjectAsync();
+	}
+
+	private async Task HandleRegistrationChanged()
+	{
+		await LoadSubjectAsync();
+		await registrationsGrid.RefreshDataAsync();
 	}
 
 	private string GetSubjectTypes(List<int> subjectTypesIds)

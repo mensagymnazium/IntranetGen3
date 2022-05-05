@@ -45,7 +45,7 @@
                 <HxCardTitle>Zápis předmětu</HxCardTitle>
             </HeaderTemplate>
             <BodyTemplate>
-                <StudentSubjectRegistrationComponent SubjectId="@SubjectId" />
+                <StudentSubjectRegistrationComponent SubjectId="@SubjectId" OnRegistrationChanged="HandleRegistrationChanged" />
             </BodyTemplate>
         </HxCard>
     </AuthorizeView>
@@ -55,7 +55,7 @@
             <HxCardTitle>Zapsaní studenti</HxCardTitle>
         </HeaderTemplate>
         <BodyTemplate>
-            <StudentSubjectRegistrationsGrid DataProvider="GetStudentRegistrations" ShowSubjectColumn="false" />
+            <StudentSubjectRegistrationsGrid @ref="registrationsGrid" DataProvider="GetStudentRegistrations" ShowSubjectColumn="false" />
         </BodyTemplate>
     </HxCard>
 
