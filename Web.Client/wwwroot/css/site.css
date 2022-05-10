@@ -17,6 +17,6 @@
   top: 0.5rem;
 }
 
-:root .sidebar {
+:root {
   --hx-sidebar-background-color: #fafafa;
 }
