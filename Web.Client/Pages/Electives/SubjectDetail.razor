@@ -57,7 +57,7 @@
             <HxCardTitle>Zapsaní studenti</HxCardTitle>
         </HeaderTemplate>
         <BodyTemplate>
-            <StudentSubjectRegistrationsGrid DataProvider="GetStudentRegistrations" ShowSubjectColumn="false" />
+            <StudentSubjectRegistrationsGrid @ref="registrationsGrid" DataProvider="GetStudentRegistrations" ShowSubjectColumn="false" />
         </BodyTemplate>
     </HxCard>
 
