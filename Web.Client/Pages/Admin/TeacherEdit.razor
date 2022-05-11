@@ -1,0 +1,15 @@
+﻿<HxOffcanvas @ref="hxOffcanvas" Title="Učitel" OnClosed="this.OnClosed">
+    <BodyTemplate>
+		
+        <EditForm EditContext="editContext">
+            <FluentValidationValidator />
+            <HxInputText Label="Jméno" @bind-Value="model.Name" />
+            <HxInputText Label="Email" @bind-Value="model.Email" />
+            <HxInputTextArea Label="Fun fact" @bind-Value="model.FunFact" />
+        </EditForm>
+
+    </BodyTemplate>
+    <FooterTemplate>
+		<SaveButton EditContext="editContext" IsNew="(model.Id == default)" OnValidClick="HandleValidSubmit" />
+    </FooterTemplate>
+</HxOffcanvas>

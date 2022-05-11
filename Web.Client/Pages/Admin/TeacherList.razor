@@ -1,4 +1,42 @@
 ﻿@attribute [Route(Routes.Administration.Teachers)]
 @attribute [Authorize(Roles = nameof(Role.Administrator))]
+@using MensaGymnazium.IntranetGen3.Contracts.Security
 
-TODO: Tady bude správa učitelů (grid, editace, přidávání, mazání)
+<HxListLayout Title="Učitelé" TFilterModel="HxListLayout.NoFilter">
+    <CommandsTemplate>
+        <HxButton Text="Nový učitel" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />
+    </CommandsTemplate>
+    <DataTemplate>
+        <HxGrid @ref="gridComponent"
+                TItem="TeacherDto"
+                SelectedDataItem="itemSelected"
+                SelectedDataItemChanged="HandleSelectedDataItemChanged"
+                DataProvider="GetData"
+                IsResponsive="true">
+            <Columns>
+                <HxGridColumn HeaderText="Jméno"
+                              ItemTextSelector="i => i.Name"
+                              SortKeySelector ="i => i.Name"
+                              IsDefaultSortColumn="true"
+                              TItem="TeacherDto" />
+                <HxGridColumn HeaderText="E-mail"
+                              ItemTextSelector="i => i.Email"
+                              SortKeySelector ="i => i.Email"
+                              TItem="TeacherDto" />
+            </Columns>
+            <ContextMenu Context="item">
+                <HxContextMenu>
+                    <HxContextMenuItem Text="Smazat"
+                                       OnClick="async () => await HandleDeleteItemClicked(item)"
+                                       ConfirmationQuestion="Opravdu si přejete učitele smazat?" />
+                </HxContextMenu>
+            </ContextMenu>
+        </HxGrid>
+    </DataTemplate>
+    <DetailTemplate>
+        <TeacherEdit @ref="editComponent"
+                     @bind-Value="itemInEdit"
+                     OnClosed="HandleEditClosed" />
+    </DetailTemplate>
+</HxListLayout>
+
