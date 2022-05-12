@@ -15,6 +15,7 @@ public class SubjectFacade : ISubjectFacade
 {
 	private readonly ISubjectListQuery subjectListQuery;
 	private readonly ISubjectRepository subjectRepository;
+	private readonly IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository;
 	private readonly IUnitOfWork unitOfWork;
 	private readonly IApplicationAuthenticationService applicationAuthenticationService;
 	private readonly IUserManager userManager;
@@ -23,6 +24,7 @@ public class SubjectFacade : ISubjectFacade
 	public SubjectFacade(
 		ISubjectListQuery subjectListQuery,
 		ISubjectRepository subjectRepository,
+		IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository,
 		IUnitOfWork unitOfWork,
 		IApplicationAuthenticationService applicationAuthenticationService,
 		IUserManager userManager,
@@ -30,6 +32,7 @@ public class SubjectFacade : ISubjectFacade
 	{
 		this.subjectListQuery = subjectListQuery;
 		this.subjectRepository = subjectRepository;
+		this.studentSubjectRegistrationRepository = studentSubjectRegistrationRepository;
 		this.unitOfWork = unitOfWork;
 		this.applicationAuthenticationService = applicationAuthenticationService;
 		this.userManager = userManager;
@@ -99,6 +102,9 @@ public class SubjectFacade : ISubjectFacade
 	{
 		var subject = await subjectRepository.GetObjectAsync(subjectIdDto.Value, cancellationToken);
 		unitOfWork.AddForDelete(subject);
+
+		var registrations = await studentSubjectRegistrationRepository.GetBySubjectAsync(subjectIdDto.Value, cancellationToken);
+		unitOfWork.AddRangeForDelete(registrations);
 
 		await unitOfWork.CommitAsync(cancellationToken);
 	}
