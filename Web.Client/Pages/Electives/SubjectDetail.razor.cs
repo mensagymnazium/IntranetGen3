@@ -85,19 +85,19 @@ public partial class SubjectDetail
 
 	private string GetSubjectTypes(List<int> subjectTypesIds)
 	{
-		return String.Join(", ", subjectTypesIds.Select(id => SubjectTypesDataStore.GetByKey(id)?.Name))
-			.Trim(',', ' ');
+		if (subjectTypesIds.Count == 0) return "žádné";
+		return String.Join(", ", subjectTypesIds.Select(id => SubjectTypesDataStore.GetByKey(id)?.Name));
 	}
 
 	private string GetTeachers(List<int> teacherIds)
 	{
-		return String.Join(", ", teacherIds.Select(id => TeachersDataStore.TryGetByKey(id)?.Name))
-			.Trim(',', ' ');
+		if (teacherIds.Count == 0) return "žádní";
+		return String.Join(", ", teacherIds.Select(id => TeachersDataStore.TryGetByKey(id)?.Name));
 	}
 
 	private string GetGrades(List<int> gradeIds)
 	{
-		return String.Join(", ", gradeIds.OrderBy(id => -id).Select(id => GradesDataStore.GetByKey(id)?.Name))
-			.Trim(',', ' ');
+		if (gradeIds.Count == 0) return "žádné";
+		return String.Join(", ", gradeIds.OrderBy(id => -id).Select(id => GradesDataStore.GetByKey(id)?.Name));
 	}
 }
