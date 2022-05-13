@@ -42,7 +42,7 @@
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Rozvrh" ItemTextSelector="@(item => ValueFormatter.GetScheduleTimeSlot(item.ScheduleDayOfWeek, item.ScheduleSlotInDay))" SortString="@nameof(SubjectListItemDto.ScheduleSlotInDay)" ItemCssClass="text-nowrap" />
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Kapacita" SortString="@nameof(SubjectListItemDto.Capacity)" >
                         <ItemTemplate Context="item">
-                            <CapacityDispay Registrations="@item.StudentRegistrationsCountMain" Capacity="@item.Capacity" />
+                            <CapacityDisplay Registrations="@item.StudentRegistrationsCountMain" Capacity="@item.Capacity" />
                         </ItemTemplate>
                     </HxGridColumn>
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Ročník(y)" ItemTextSelector="@(item => GetGrades(item.GradeIds))" SortString="@nameof(SubjectListItemDto.GradeIds)" />

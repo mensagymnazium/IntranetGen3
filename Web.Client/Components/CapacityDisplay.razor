@@ -1,0 +1,26 @@
+@if (Capacity != null)
+{
+    @if (Registrations >= Capacity)
+    {
+        <HxIcon Icon="BootstrapIcon.XCircleFill" CssClass="me-2 text-danger" />
+    }
+    else if (Registrations >= Capacity - Capacity / 3)
+    {
+        <HxIcon Icon="BootstrapIcon.ExclamationCircleFill" CssClass="me-2 text-warning" />
+    }
+    else
+    {
+        <HxIcon Icon="BootstrapIcon.CheckCircleFill" CssClass="me-2 text-success" />
+    }
+}
+else
+{
+    <HxIcon Icon="BootstrapIcon.CheckCircleFill" CssClass="me-2 text-info" />
+}
+
+@Registrations / @(Capacity?.ToString() ?? "\x221E")
+
+@code {
+    [Parameter] public long? Capacity { get; set; }
+    [Parameter] public long Registrations { get; set; }
+}
