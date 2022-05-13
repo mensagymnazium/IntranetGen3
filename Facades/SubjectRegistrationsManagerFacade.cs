@@ -135,7 +135,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 				resultItem.MainRegistrationAllowed = false;
 				resultItem.MainRegistrationNotAllowedReason = "Předmět je již registrován.";
 			}
-			else if (registrationCount >= subject.Capacity)
+			else if (subject.Capacity != null && registrationCount >= subject.Capacity)
 			{
 				resultItem.MainRegistrationAllowed = false;
 				resultItem.MainRegistrationNotAllowedReason = "Kapacita předmětu je naplněna.";

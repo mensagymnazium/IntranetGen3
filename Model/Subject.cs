@@ -17,7 +17,7 @@ public class Subject
 	[MaxLength]
 	public string Description { get; set; }
 
-	public int Capacity { get; set; }
+	public int? Capacity { get; set; }
 
 
 	public List<SubjectTeacherRelation> TeacherRelations { get; } = new List<SubjectTeacherRelation>();
