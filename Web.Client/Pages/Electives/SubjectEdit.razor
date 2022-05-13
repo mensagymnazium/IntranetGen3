@@ -4,8 +4,7 @@
             <FluentValidationValidator />
             <HxInputText @bind-Value="model.Name" Label="Název" />
             <HxInputTextArea @bind-Value="model.Description" Label="Popis" />
-            <HxInputNumber @bind-Value="model.Capacity" Label="Kapacita" Placeholder="Neomezená" />
-            <p class="text-muted mb-0">Ponechte prázné pro neomezenou kapacitu</p>
+            <HxInputNumber @bind-Value="model.Capacity" Label="Kapacita" Hint="Ponechte prázné pro neomezenou kapacitu" Placeholder="Neomezená" />
             <TeacherMultiPicker @bind-Value="model.TeacherIds" Label="Vyučující" />
             <ScheduleTimeSlotPicker @bind-Day="model.ScheduleDayOfWeek" @bind-Slot="model.ScheduleSlotInDay" />
             <GradeMultiPicker @bind-Value="model.GradeIds" Label="Ročník(y)" />
