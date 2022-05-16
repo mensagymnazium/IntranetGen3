@@ -4,10 +4,12 @@
 {
     <div class="row">
         <div class="col">
-            <h1>@subject.Name</h1>
+            <h1>
+                <a href='javascript:history.go(-1)'><i class="bi bi-arrow-return-left" style="font-size: 1.5rem"></i></a>
+                @subject.Name
+            </h1>
         </div>
 
-        <a href='javascript:history.go(-1)'><i class="bi bi-arrow-return-left" style="font-size: 1.5rem"></i></a>
 
         <AuthorizeView Roles="@nameof(Role.Administrator)">
             <div class="col text-end">
