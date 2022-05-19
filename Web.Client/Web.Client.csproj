@@ -6,6 +6,10 @@
 		<AssemblyName>MensaGymnazium.IntranetGen3.Web.Client</AssemblyName>
 		<RootNamespace>MensaGymnazium.IntranetGen3.Web.Client</RootNamespace>
 		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+		
+		<RunAOTCompilation>true</RunAOTCompilation>
+		<WasmEmitSymbolMap>true</WasmEmitSymbolMap>
+		<WasmNativeStrip>false</WasmNativeStrip>
 	</PropertyGroup>
 
 	<ItemGroup>
