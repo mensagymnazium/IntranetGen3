@@ -33,7 +33,7 @@ public partial class StudentSubjectRegistrationsGrid
 
 	private string GetStudentGradeName(StudentSubjectRegistrationDto item)
 	{
-		var gradeId = StudentsDataStore.TryGetByKey(item.StudentId.Value)?.GradeId;
+		var gradeId = StudentsDataStore.GetByKeyOrDefault(item.StudentId.Value)?.GradeId;
 		if (gradeId is not null)
 		{
 			return GradesDataStore.GetByKey(gradeId.Value)?.Name;
