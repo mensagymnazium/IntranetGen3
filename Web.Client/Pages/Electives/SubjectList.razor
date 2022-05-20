@@ -21,7 +21,7 @@
                     ItemRowCssClassSelector="item => GetRowCssClass(item)"
                     HeaderRowCssClass="text-nowrap"
                     Context="item"
-                    IsResponsive="true">
+                    Responsive="true">
                 <Columns>
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" SortString="@nameof(SubjectListItemDto.Name)" />
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Přednášející" ItemTextSelector="@(item => GetTeachers(item.TeacherIds))" SortString="@nameof(SubjectListItemDto.TeacherIds)" />

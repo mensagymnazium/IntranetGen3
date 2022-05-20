@@ -2,10 +2,10 @@
         TItem="StudentWithSigningRuleListItemDto"
         DataProvider="this.DataProvider"
         Context="item"
-        IsResponsive="true">
+        Responsive="true">
     <Columns>
         <HxGridColumn HeaderText="Student"
-                      ItemTextSelector="i => StudentsDataStore.TryGetByKey(i.StudentId)?.Name"
+                      ItemTextSelector="i => StudentsDataStore.GetByKeyOrDefault(i.StudentId)?.Name"
                       SortString="@nameof(StudentWithSigningRuleListItemDto.StudentId)"
                       Visible="this.StudentColumnVisible"
                       TItem="StudentWithSigningRuleListItemDto" />

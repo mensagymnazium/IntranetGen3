@@ -5,15 +5,15 @@
         SelectedDataItemChanged="HandleSelectedDataItemChanged"
         DataProvider="this.DataProvider"
         ContentNavigationMode="GridContentNavigationMode.InfiniteScroll"
-        IsResponsive="true">
+        Responsive="true">
     <Columns>
         <HxGridColumn HeaderText="Přednáška"
-                      ItemTextSelector="i => SubjectsDataStore.TryGetByKey(i.SubjectId.Value)?.Name"
+                      ItemTextSelector="i => SubjectsDataStore.GetByKeyOrDefault(i.SubjectId.Value)?.Name"
                       SortString="@nameof(StudentSubjectRegistrationDto.SubjectId)"
                       Visible="this.ShowSubjectColumn"
                       TItem="StudentSubjectRegistrationDto" />
         <HxGridColumn HeaderText="Student"
-                      ItemTextSelector="i => StudentsDataStore.TryGetByKey(i.StudentId.Value)?.Name"
+                      ItemTextSelector="i => StudentsDataStore.GetByKeyOrDefault(i.StudentId.Value)?.Name"
                       SortString="@nameof(StudentSubjectRegistrationDto.StudentId)"
                       TItem="StudentSubjectRegistrationDto" />
     </Columns>

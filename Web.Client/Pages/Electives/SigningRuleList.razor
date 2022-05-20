@@ -6,7 +6,7 @@
                 TItem="SigningRuleDto"
                 DataProvider="LoadSigningRules"
                 Context="item"
-                IsResponsive="true">
+                Responsive="true">
             <Columns>
                 <HxGridColumn TItem="SigningRuleDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" />
                 <HxGridColumn TItem="SigningRuleDto" HeaderText="Ročník" ItemTextSelector="@(item => GradesDataStore.GetByKey((int)item.GradeId)?.Name)" />

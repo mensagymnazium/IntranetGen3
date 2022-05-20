@@ -84,7 +84,7 @@ public partial class SubjectDetail
 
 	private string GetTeachers(List<int> teacherIds)
 	{
-		return String.Join(", ", teacherIds.Select(id => TeachersDataStore.TryGetByKey(id)?.Name))
+		return String.Join(", ", teacherIds.Select(id => TeachersDataStore.GetByKeyOrDefault(id)?.Name))
 			.Trim(',', ' ');
 	}
 
