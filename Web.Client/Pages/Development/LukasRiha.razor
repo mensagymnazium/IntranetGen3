@@ -1,6 +1,244 @@
 ﻿@page "/development/lukas-riha"
+@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+
 
 <h1>Lukáš Říha</h1>
+
+<Schedule/>
+@*
+<table bordercolor="#808080" border="1">
+    <tbody>
+        <tr>
+            <th>
+                
+            </th>
+            <th style="  border: 2px solid grey; border-collapse: collapse;">
+                1
+            </th>
+             <th style="  border: 1px solid black; border-collapse: collapse;">
+                2
+            </th>
+             <th style="  border: 1px solid black; border-collapse: collapse;">
+                3
+            </th>
+             <th style="  border: 1px solid black; border-collapse: collapse;">
+                4
+            </th>
+             <th style="  border: 1px solid black; border-collapse: collapse;">
+                5
+            </th>
+             <th style="  border: 1px solid black; border-collapse: collapse;">
+                6
+            </th>
+
+        </tr>
+        <tr>
+            <th>
+                <span class="badge bg-secondary" style="width: 64px; text-align: center; font-size: 20px;">Mon</span>
+            </th>
+            <MyBadge Lessons=@less Block="block1" DayOfWeek=@DayOfWeek.Monday/>
+            <MyBadge Lessons=@less Block="block2" DayOfWeek=@DayOfWeek.Monday/>
+            <MyBadge Lessons=@less Block="block3" DayOfWeek=@DayOfWeek.Monday/>
+            <MyBadge Lessons=@less Block="block4" DayOfWeek=@DayOfWeek.Monday/>
+            <MyBadge Lessons=@less Block="block5" DayOfWeek=@DayOfWeek.Monday/>
+            <MyBadge Lessons=@less Block="block6" DayOfWeek=@DayOfWeek.Monday/>
+        </tr>
+        <tr>
+            <th>
+                <span class="badge bg-secondary" style="width: 64px; text-align: center; font-size: 20px;">Tues</span>
+            </th>
+            <MyBadge Lessons=@less Block="block1" DayOfWeek=@DayOfWeek.Tuesday/>
+            <MyBadge Lessons=@less Block="block2" DayOfWeek=@DayOfWeek.Tuesday/>
+            <MyBadge Lessons=@less Block="block3" DayOfWeek=@DayOfWeek.Tuesday/>
+            <MyBadge Lessons=@less Block="block4" DayOfWeek=@DayOfWeek.Tuesday/>
+            <MyBadge Lessons=@less Block="block5" DayOfWeek=@DayOfWeek.Tuesday/>
+            <MyBadge Lessons=@less Block="block6" DayOfWeek=@DayOfWeek.Tuesday/>
+        </tr>
+    </tbody>
+</table>
+*@
+@*
+<HxBadge Color="ThemeColor.Primary" style="width: 128px; text-align: center; font-size: 30px;">Math</HxBadge>
+<HxBadge Color="ThemeColor.Primary" style="width: 128px; text-align: center; font-size: 30px; padding: 10px;">Math</HxBadge>
+<br />
+<HxBadge Color="ThemeColor.Primary">IVT</HxBadge>
+<br />
+    
+<div class="container max-width-sm">
+    <div class="row" style="padding: 2px;">
+        <div class="col-md-auto" style="max-height: 10%;">
+            <HxBadge Color="ThemeColor.Primary" style="width: 128px; text-align: center; font-size: 30px;">h</HxBadge>
+            <HxBadge Color="ThemeColor.Primary" style="width: 128px; text-align: center; font-size: 30px;">m</HxBadge>
+        </div>
+        <div class="col-md-auto">
+            <HxBadge Color="ThemeColor.Primary" style="width: 128px; text-align: center; font-size: 30px;">Math</HxBadge>
+            @((MarkupString)test)
+        </div>
+        <div class="col-md-auto">
+            <HxBadge Color="ThemeColor.Primary" style="width: 128px; text-align: center; font-size: 30px;">Math</HxBadge>
+        </div>
+        <div class="col-md-auto">
+            <HxBadge Color="ThemeColor.Primary" style="width: 128px; text-align: center; font-size: 30px;">Math</HxBadge>
+        </div>
+        <div class="col-md-auto">
+            <HxBadge Color="ThemeColor.Primary" style="width: 128px; text-align: center; font-size: 30px;">Math</HxBadge>
+        </div>
+    </div>
+</div>
+    *@
+    @*
+<div class="container max-width-sm">
+    <div class="row" style="padding: 2px;">
+        <div class="col-md-auto">
+            <span class="badge bg-secondary" style="width: 64px; text-align: center; font-size: 20px;">Mon</span>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block1" DayOfWeek=@DayOfWeek.Monday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block2" DayOfWeek=@DayOfWeek.Monday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block3" DayOfWeek=@DayOfWeek.Monday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block4" DayOfWeek=@DayOfWeek.Monday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block5" DayOfWeek=@DayOfWeek.Monday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block6" DayOfWeek=@DayOfWeek.Monday/>
+        </div>
+    </div>
+        <div class="row" style="padding: 2px;">
+        <div class="col-md-auto">
+            <span class="badge bg-secondary" style="width: 64px; text-align: center; font-size: 20px;">Tues</span>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block1" DayOfWeek=@DayOfWeek.Tuesday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block2" DayOfWeek=@DayOfWeek.Tuesday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block3" DayOfWeek=@DayOfWeek.Tuesday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block4" DayOfWeek=@DayOfWeek.Tuesday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block5" DayOfWeek=@DayOfWeek.Tuesday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block6" DayOfWeek=@DayOfWeek.Tuesday/>
+        </div>
+    </div>
+            <div class="row" style="padding: 2px;">
+        <div class="col-md-auto">
+            <span class="badge bg-secondary" style="width: 64px; text-align: center; font-size: 20px;">Wen</span>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block1" DayOfWeek=@DayOfWeek.Wednesday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block2" DayOfWeek=@DayOfWeek.Wednesday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block3" DayOfWeek=@DayOfWeek.Wednesday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block4" DayOfWeek=@DayOfWeek.Wednesday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block5" DayOfWeek=@DayOfWeek.Wednesday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block6" DayOfWeek=@DayOfWeek.Wednesday/>
+        </div>
+    </div>
+            <div class="row" style="padding: 2px;">
+        <div class="col-md-auto">
+            <span class="badge bg-secondary" style="width: 64px; text-align: center; font-size: 20px;">Thur</span>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block1" DayOfWeek=@DayOfWeek.Thursday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block2" DayOfWeek=@DayOfWeek.Thursday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block3" DayOfWeek=@DayOfWeek.Thursday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block4" DayOfWeek=@DayOfWeek.Thursday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block5" DayOfWeek=@DayOfWeek.Thursday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block6" DayOfWeek=@DayOfWeek.Thursday/>
+        </div>
+    </div>
+            <div class="row" style="padding: 2px;">
+        <div class="col-md-auto">
+            <span class="badge bg-secondary" style="width: 64px; text-align: center; font-size: 20px;">Fri</span>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block1" DayOfWeek=@DayOfWeek.Friday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block2" DayOfWeek=@DayOfWeek.Friday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block3" DayOfWeek=@DayOfWeek.Friday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block4" DayOfWeek=@DayOfWeek.Friday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block5" DayOfWeek=@DayOfWeek.Friday/>
+        </div>
+        <div class="col-md-auto">
+            <MyBadge Lessons=@less Block="block6" DayOfWeek=@DayOfWeek.Friday/>
+        </div>
+    </div>
+</div>
+*@
+@code{
+    [Inject] protected Func<ISubjectFacade> SubjectFacade { get; set; }
+
+    //[Parameter]
+    public IReadOnlyList<string> ParamList { get; set; }
+    //static string test = @"<span class=""badge bg-primary markup"" style=""width: 128px; text-align: center; font-size: 30px;"">r</span>";
+    //static string test2 = @"<span class=""badge bg-primary markup"" style=""width: 128px; text-align: center; font-size: 30px;"">e</span>";
+    //static Lesson l1 = new Lesson("Math", "block2", DayOfWeek.Monday);
+    //static Lesson l2 = new Lesson("ivt", "block2", DayOfWeek.Tuesday);
+    //static Lesson l3 = new Lesson("tv", "block2", DayOfWeek.Monday);
+    //static List<Lesson> less = new List<Lesson>() { l1, l2, l3 };
+
+    //protected override Task OnInitializedAsync()
+    //{
+    //    var response = SubjectFacade().GetSubjectListAsync(new DataFragmentRequest<SubjectListQueryFilter>());
+    //    less = response.Data.Select(dto => new Lesson() { name = dto.Name });
+
+    //}
+
+    //public static RenderFragment Draw(string block, DayOfWeek dayOfWeek)
+    //{
+
+    //    List<int> tmp = less.Select((value, index) => ((value: value, index: index))).Where(p => p.value.dayOfWeek == dayOfWeek && p.value.block == block).Select(p => p.index).ToList();
+    //    foreach (int i in tmp)
+    //    {
+    //        //<span class="badge bg-primary markup" style="width: 128px; text-align: center; font-size: 30px;">less[i].name</span>
+
+    //    }
+		//}
+
+}
+
 
 <p>Hi</p>
 <br />
