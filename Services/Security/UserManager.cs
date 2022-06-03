@@ -38,9 +38,9 @@ public class UserManager : IUserManager
 			roles.Add(Role.Administrator);
 		}
 
-		#if DEBUG
-				roles = Enum.GetValues<Role>().ToList();
-		#endif
+		//#if DEBUG
+		//		roles = Enum.GetValues<Role>().ToList();
+		//#endif
 
 		return Task.FromResult<IList<Role>>(roles);
 	}
