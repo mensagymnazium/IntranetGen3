@@ -5,17 +5,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace MensaGymnazium.IntranetGen3.Contracts.ModelMetadata.Security;
 
-namespace MensaGymnazium.IntranetGen3.Contracts.ModelMetadata.Security
+[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
+public static class TeacherMetadata
 {
-	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public static class TeacherMetadata
-	{
-		public const int FunFactMaxLength = Int32.MaxValue;
-	}
+	public const int FunFactMaxLength = Int32.MaxValue;
 }

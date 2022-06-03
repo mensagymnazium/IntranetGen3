@@ -27,14 +27,14 @@
                       ItemTextSelector="i => SigningRulesDataStore.GetByKey(i.SigningRuleId.Value)?.Name"
                       SortString="@nameof(StudentSubjectRegistrationDto.SigningRuleId)"
                       TItem="StudentSubjectRegistrationDto" />
+        <HxContextMenuGridColumn Context="item">
+            <AuthorizeView Roles="@nameof(Role.Administrator)">
+                <HxContextMenu>
+                    <HxContextMenuItem Text="Smazat"
+                                       OnClick="async () => await HandleDeleteItemClicked(item)"
+                                       ConfirmationQuestion="Opravdu si přejete zápis smazat?" />
+                </HxContextMenu>
+            </AuthorizeView>
+        </HxContextMenuGridColumn>
     </Columns>
-    <ContextMenu Context="item">
-        <AuthorizeView Roles="@nameof(Role.Administrator)">
-            <HxContextMenu>
-                <HxContextMenuItem Text="Smazat"
-                                   OnClick="async () => await HandleDeleteItemClicked(item)"
-                                   ConfirmationQuestion="Opravdu si přejete zápis smazat?" />
-            </HxContextMenu>
-        </AuthorizeView>
-    </ContextMenu>
 </HxGrid>

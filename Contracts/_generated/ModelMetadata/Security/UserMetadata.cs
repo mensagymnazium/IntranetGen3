@@ -5,18 +5,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace MensaGymnazium.IntranetGen3.Contracts.ModelMetadata.Security;
 
-namespace MensaGymnazium.IntranetGen3.Contracts.ModelMetadata.Security
+[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
+public static class UserMetadata
 {
-	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public static class UserMetadata
-	{
-		public const int EmailMaxLength = 320;
-		public const int NameMaxLength = 64;
-	}
+	public const int EmailMaxLength = 320;
+	public const int NameMaxLength = 64;
 }

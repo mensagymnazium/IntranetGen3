@@ -5,29 +5,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Havit.Data.EntityFrameworkCore.Patterns.DataSources.Fakes;
 using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
 using Havit.Data.Patterns.Attributes;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources.Security.Fakes
-{
-	[Fake]
-	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public class FakeStudentDataSource : FakeDataSource<MensaGymnazium.IntranetGen3.Model.Security.Student>, MensaGymnazium.IntranetGen3.DataLayer.DataSources.Security.IStudentDataSource
-	{
-		public FakeStudentDataSource(params MensaGymnazium.IntranetGen3.Model.Security.Student[] data)
-			: this((IEnumerable<MensaGymnazium.IntranetGen3.Model.Security.Student>)data)
-		{			
-		}
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources.Security.Fakes;
 
-		public FakeStudentDataSource(IEnumerable<MensaGymnazium.IntranetGen3.Model.Security.Student> data, ISoftDeleteManager softDeleteManager = null)
-			: base(data, softDeleteManager)
-		{
-		}
+[Fake]
+[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
+public class FakeStudentDataSource : FakeDataSource<MensaGymnazium.IntranetGen3.Model.Security.Student>, MensaGymnazium.IntranetGen3.DataLayer.DataSources.Security.IStudentDataSource
+{
+	public FakeStudentDataSource(params MensaGymnazium.IntranetGen3.Model.Security.Student[] data)
+		: this((IEnumerable<MensaGymnazium.IntranetGen3.Model.Security.Student>)data)
+	{			
+	}
+
+	public FakeStudentDataSource(IEnumerable<MensaGymnazium.IntranetGen3.Model.Security.Student> data, ISoftDeleteManager softDeleteManager = null)
+		: base(data, softDeleteManager)
+	{
 	}
 }

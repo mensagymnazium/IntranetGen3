@@ -5,19 +5,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Data.Patterns.DataEntries;
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries.Common;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries.Common
+[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
+public interface IApplicationSettingsEntries : Havit.Data.Patterns.DataEntries.IDataEntries
 {
-	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public interface IApplicationSettingsEntries : IDataEntries
-	{
-		MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings Current { get; }
-			
-	}
+	MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings Current { get; }
 }
