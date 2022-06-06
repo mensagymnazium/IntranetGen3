@@ -1,9 +1,16 @@
 ﻿@attribute [Route(Routes.Electives.StudentWithSigningRuleList)]
 
-<HxListLayout Title="Zapsaní studenti"
+<HxListLayout Title="Přehled plnění zápisů"
               TFilterModel="StudentWithSigningRuleListQueryFilter"
               FilterModel="filterModel"
               FilterModelChanged="HandleFilterModelChanged">
+    <SearchTemplate>
+        <HxInputSwitch Value="filterModel.IncompleteOnly"
+                       ValueExpression="() => filterModel.IncompleteOnly"
+                       ValueChanged="HandleIncompleteOnlyValueChanged"
+                       Label="pouze nekompletní"
+                       CssClass="me-3" />
+    </SearchTemplate>
     <FilterTemplate>
         <GradePicker Label="Ročník" @bind-Value="context.GradeId" />
         <StudentPicker Label="Student" @bind-Value="context.StudentId" />

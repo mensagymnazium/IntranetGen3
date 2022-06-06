@@ -42,7 +42,8 @@ public class StudentWithSigningRuleListQuery : QueryBase<StudentWithSigningRuleL
 				SigningRuleQuantity = x.signingRule.Quantity,
 				MainRegistrationsCount = x.signingRule.RegistrationsWithDeleted.Count(r => (r.Deleted == null) && (r.RegistrationType == StudentRegistrationType.Main) && (r.StudentId == x.student.Id)),
 				SecondaryRegistrationsCount = x.signingRule.RegistrationsWithDeleted.Count(r => (r.Deleted == null) && (r.RegistrationType == StudentRegistrationType.Secondary) && (r.StudentId == x.student.Id)),
-			});
+			})
+			.WhereIf(Filter.IncompleteOnly, i => i.MainRegistrationsCount != i.SigningRuleQuantity);
 
 		return data;
 	}

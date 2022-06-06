@@ -6,4 +6,5 @@ public record StudentWithSigningRuleListQueryFilter
 	public int? StudentId { get; set; }
 	public int? SigningRuleId { get; set; }
 	public bool CurrentStudentOnly { get; set; } = false;
+	public bool IncompleteOnly { get; set; } = false;
 }
