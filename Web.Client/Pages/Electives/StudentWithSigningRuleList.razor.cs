@@ -10,7 +10,7 @@ public partial class StudentWithSigningRuleList
 	[Inject] protected Func<ISubjectRegistrationsManagerFacade> SubjectRegistrationsManagerFacade { get; set; }
 
 	private StudentWithSigningRuleGrid gridComponent;
-	private StudentWithSigningRuleListQueryFilter filterModel = new();
+	private StudentWithSigningRuleListQueryFilter filterModel = new() { IncompleteOnly = true };
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -40,6 +40,12 @@ public partial class StudentWithSigningRuleList
 	private async Task HandleFilterModelChanged(StudentWithSigningRuleListQueryFilter newFilterModel)
 	{
 		filterModel = newFilterModel;
+		await gridComponent.RefreshDataAsync();
+	}
+
+	private async Task HandleIncompleteOnlyValueChanged(bool newValue)
+	{
+		filterModel.IncompleteOnly = newValue;
 		await gridComponent.RefreshDataAsync();
 	}
 }

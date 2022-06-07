@@ -1,0 +1,33 @@
+﻿<td style="width:128px; border: 2px solid grey; border-collapse: collapse; border-style: dashed;">
+@{
+    List<int> tmp = Lessons.Select((value, index) => ((value: value, index: index))).Where(p => p.value.DayOfWeek == DayOfWeek && p.value.Block == Block).Select(p => p.index).ToList();
+
+    if (tmp.Count != 0)
+    {
+
+        foreach (int i in tmp)
+        {
+            <span class="badge bg-primary" style="width: 128px; text-align: center; font-size: 20px;">@Lessons[i].Name</span>
+        }
+    }
+    else
+    {
+        <span>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+    }
+}
+</td>
+@code
+{
+    [Inject] protected Func<ISubjectFacade> SubjectFacade { get; set; }
+
+    [Parameter]
+    public List<Lesson> Lessons { get; set; }
+
+    [Parameter]
+    public string Block { get; set; }
+
+    [Parameter]
+    public DayOfWeek DayOfWeek { get; set; }
+}

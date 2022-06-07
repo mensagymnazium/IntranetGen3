@@ -5,11 +5,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Havit.Data.EntityFrameworkCore;
 using Havit.Data.EntityFrameworkCore.Patterns.Caching;
 using Havit.Data.EntityFrameworkCore.Patterns.Repositories;
@@ -18,14 +13,13 @@ using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.DataLoaders;
 using Havit.Data.Patterns.Infrastructure;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
+
+[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
+public partial class StudentDbRepository : StudentDbRepositoryBase, IStudentRepository
 {
-	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public partial class StudentDbRepository : StudentDbRepositoryBase, IStudentRepository
+	public StudentDbRepository(IDbContext dbContext, MensaGymnazium.IntranetGen3.DataLayer.DataSources.Security.IStudentDataSource dataSource, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.Security.Student, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
+		: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
 	{
-		public StudentDbRepository(IDbContext dbContext, MensaGymnazium.IntranetGen3.DataLayer.DataSources.Security.IStudentDataSource dataSource, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.Security.Student, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
-			: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
-		{
-		}
 	}
 }

@@ -5,25 +5,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Data.Patterns.DataEntries;
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries
+[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
+public interface ISubjectCategoryEntries : Havit.Data.Patterns.DataEntries.IDataEntries
 {
-	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public interface ISubjectCategoryEntries : IDataEntries
-	{
-		MensaGymnazium.IntranetGen3.Model.SubjectCategory ExtensionSeminar { get; }
-			
-		MensaGymnazium.IntranetGen3.Model.SubjectCategory ForeignLanguage { get; }
-			
-		MensaGymnazium.IntranetGen3.Model.SubjectCategory GraduationSeminar { get; }
-			
-		MensaGymnazium.IntranetGen3.Model.SubjectCategory SpecialisationSeminar { get; }
-			
-	}
+	MensaGymnazium.IntranetGen3.Model.SubjectCategory ExtensionSeminar { get; }
+	MensaGymnazium.IntranetGen3.Model.SubjectCategory ForeignLanguage { get; }
+	MensaGymnazium.IntranetGen3.Model.SubjectCategory GraduationSeminar { get; }
+	MensaGymnazium.IntranetGen3.Model.SubjectCategory SpecialisationSeminar { get; }
 }

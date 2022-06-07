@@ -5,18 +5,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace MensaGymnazium.IntranetGen3.Contracts.ModelMetadata;
 
-namespace MensaGymnazium.IntranetGen3.Contracts.ModelMetadata
+[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
+public static class GradeMetadata
 {
-	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public static class GradeMetadata
-	{
-		public const int AadGroupIdMaxLength = 36;
-		public const int NameMaxLength = 20;
-	}
+	public const int AadGroupIdMaxLength = 36;
+	public const int NameMaxLength = 20;
 }

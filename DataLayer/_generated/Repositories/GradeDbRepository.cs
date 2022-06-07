@@ -5,11 +5,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Havit.Data.EntityFrameworkCore;
 using Havit.Data.EntityFrameworkCore.Patterns.Caching;
 using Havit.Data.EntityFrameworkCore.Patterns.Repositories;
@@ -18,14 +13,13 @@ using Havit.Data.Patterns.DataEntries;
 using Havit.Data.Patterns.DataLoaders;
 using Havit.Data.Patterns.Infrastructure;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
+
+[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
+public partial class GradeDbRepository : GradeDbRepositoryBase, IGradeRepository
 {
-	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public partial class GradeDbRepository : GradeDbRepositoryBase, IGradeRepository
+	public GradeDbRepository(IDbContext dbContext, MensaGymnazium.IntranetGen3.DataLayer.DataSources.IGradeDataSource dataSource, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.Grade, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
+		: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
 	{
-		public GradeDbRepository(IDbContext dbContext, MensaGymnazium.IntranetGen3.DataLayer.DataSources.IGradeDataSource dataSource, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.Grade, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
-			: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
-		{
-		}
 	}
 }

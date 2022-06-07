@@ -23,14 +23,14 @@
                               ItemTextSelector="i => i.Email"
                               SortKeySelector ="i => i.Email"
                               TItem="TeacherDto" />
+                <HxContextMenuGridColumn Context="item">
+                    <HxContextMenu>
+                        <HxContextMenuItem Text="Smazat"
+                                           OnClick="async () => await HandleDeleteItemClicked(item)"
+                                           ConfirmationQuestion="Opravdu si přejete učitele smazat?" />
+                    </HxContextMenu>
+                </HxContextMenuGridColumn>
             </Columns>
-            <ContextMenu Context="item">
-                <HxContextMenu>
-                    <HxContextMenuItem Text="Smazat"
-                                       OnClick="async () => await HandleDeleteItemClicked(item)"
-                                       ConfirmationQuestion="Opravdu si přejete učitele smazat?" />
-                </HxContextMenu>
-            </ContextMenu>
         </HxGrid>
     </DataTemplate>
     <DetailTemplate>

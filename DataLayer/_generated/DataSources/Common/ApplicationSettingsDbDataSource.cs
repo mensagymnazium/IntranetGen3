@@ -5,23 +5,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Havit.Data.EntityFrameworkCore;
 using Havit.Data.EntityFrameworkCore.Patterns.DataSources;
 using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources.Common
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources.Common;
+
+[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
+public partial class ApplicationSettingsDbDataSource : DbDataSource<MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings>, IApplicationSettingsDataSource
 {
-	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public partial class ApplicationSettingsDbDataSource : DbDataSource<MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings>, IApplicationSettingsDataSource
+	public ApplicationSettingsDbDataSource(IDbContext dbContext, ISoftDeleteManager softDeleteManager)
+		: base(dbContext, softDeleteManager)
 	{
-		public ApplicationSettingsDbDataSource(IDbContext dbContext, ISoftDeleteManager softDeleteManager)
-			: base(dbContext, softDeleteManager)
-		{
-		}
 	}
 }
