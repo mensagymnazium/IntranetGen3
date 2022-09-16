@@ -5,11 +5,11 @@
               FilterModel="filterModel"
               FilterModelChanged="HandleFilterModelChanged">
     <SearchTemplate>
-        <HxInputSwitch Value="filterModel.IncompleteOnly"
-                       ValueExpression="() => filterModel.IncompleteOnly"
-                       ValueChanged="HandleIncompleteOnlyValueChanged"
-                       Label="pouze nekompletní"
-                       CssClass="me-3" />
+        <HxSwitch Value="filterModel.IncompleteOnly"
+                  ValueExpression="() => filterModel.IncompleteOnly"
+                  ValueChanged="HandleIncompleteOnlyValueChanged"
+                  Text="pouze nekompletní"
+                  CssClass="me-3" />
     </SearchTemplate>
     <FilterTemplate>
         <GradePicker Label="Ročník" @bind-Value="context.GradeId" />

@@ -77,6 +77,9 @@ public class Program
 	private static void SetHxComponents()
 	{
 		HxGrid.Defaults.ContentNavigationMode = GridContentNavigationMode.InfiniteScroll;
+		HxOffcanvas.Defaults.Backdrop = OffcanvasBackdrop.Static;
+		HxModal.Defaults.Backdrop = ModalBackdrop.Static;
+		HxInputDate.Defaults.CalendarIcon = BootstrapIcon.Calendar3;
 	}
 
 	private static void AddGrpcClient(WebAssemblyHostBuilder builder)
