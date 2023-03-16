@@ -11,8 +11,23 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 		var data = new[]
 		{
 			new SigningRule() {
-				SeedItemIdentifier = "kvinta",
+				SeedItemIdentifier = "kvarta",
 				Name = "kvarta",
+				Description = "Mensa fórum",
+				GradeId = (int) GradeEntry.Kvarta,
+				Quantity = 9,
+				SubjectCategoryRelations =
+				{
+					new SigningRuleSubjectCategoryRelation() { SubjectCategoryId = (int)SubjectCategory.Entry.GraduationSeminar },
+				},
+				SubjectTypeRelations =
+				{
+					new SigningRuleSubjectTypeRelation() { SubjectTypeId = (int)SubjectType.Entry.Informatics },
+				}
+			},
+			new SigningRule() {
+				SeedItemIdentifier = "kvinta",
+				Name = "kvinta",
 				Description = "Mensa fórum",
 				GradeId = (int) GradeEntry.Kvinta,
 				Quantity = 9,
@@ -27,7 +42,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 			},
 			new SigningRule() {
 				SeedItemIdentifier = "sexta",
-				Name = "kvinta",
+				Name = "sexta",
 				Description = "Mensa fórum",
 				GradeId = (int) GradeEntry.Sexta,
 				Quantity = 9,
@@ -42,7 +57,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 			},
 			new SigningRule() {
 				SeedItemIdentifier = "septima",
-				Name = "sexta",
+				Name = "septima",
 				Description = "Mensa fórum",
 				GradeId = (int) GradeEntry.Septima,
 				Quantity = 9,
@@ -57,7 +72,7 @@ public class SigningRuleSeed : DataSeed<CoreProfile>
 			},
 			new SigningRule() {
 				SeedItemIdentifier = "oktava",
-				Name = "septima",
+				Name = "oktáva",
 				Description = "Mensa fórum",
 				GradeId = (int) GradeEntry.Oktava,
 				Quantity = 9,
