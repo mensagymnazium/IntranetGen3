@@ -25,7 +25,7 @@ public class StudentWithSigningRuleListQuery : QueryBase<StudentWithSigningRuleL
 	protected override IQueryable<StudentWithSigningRuleListItemDto> Query()
 	{
 		var data = studentDataSource.Data
-			.Join(signingRuleDataSource.Data, s => s.GradeId - 1, sr => sr.GradeId, (student, signingRule) => new { student, signingRule })
+			.Join(signingRuleDataSource.Data, s => s.GradeId, sr => sr.GradeId, (student, signingRule) => new { student, signingRule })
 			.WhereIf(Filter.GradeId.HasValue, i => i.student.GradeId == Filter.GradeId)
 			.WhereIf(Filter.StudentId.HasValue, i => i.student.Id == Filter.StudentId)
 			.WhereIf(Filter.SigningRuleId.HasValue, i => i.signingRule.Id == Filter.SigningRuleId)
