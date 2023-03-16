@@ -1,5 +1,7 @@
-﻿using System.Security;
+﻿using System.CodeDom;
+using System.Security;
 using Havit;
+using Havit.Services.TimeServices;
 using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.DataLayer.Queries;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
@@ -19,6 +21,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 	private readonly ISubjectRepository subjectRepository;
 	private readonly IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository;
 	private readonly IUnitOfWork unitOfWork;
+	private readonly ITimeService timeService;
 	private readonly IDataLoader dataLoader;
 
 	public SubjectRegistrationsManagerFacade(
@@ -28,6 +31,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		ISubjectRepository subjectRepository,
 		IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository,
 		IUnitOfWork unitOfWork,
+		ITimeService timeService,
 		IDataLoader dataLoader)
 	{
 		this.studentSigningRulesWithRegistrationsQuery = studentSigningRulesWithRegistrationsQuery;
@@ -36,6 +40,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		this.subjectRepository = subjectRepository;
 		this.studentSubjectRegistrationRepository = studentSubjectRegistrationRepository;
 		this.unitOfWork = unitOfWork;
+		this.timeService = timeService;
 		this.dataLoader = dataLoader;
 	}
 
@@ -44,6 +49,8 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 	{
 		Contract.Requires<ArgumentNullException>(studentSubjectRegistrationId is not null);
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationId.Value != default);
+
+		VerifyRegistrationChangesAllowedToStudents();
 
 		var studentSubjectRegistration = await studentSubjectRegistrationRepository.GetObjectAsync(studentSubjectRegistrationId.Value, cancellationToken);
 
@@ -61,6 +68,8 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.SigningRuleId != default);
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.SubjectId != default);
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.RegistrationType != default);
+
+		VerifyRegistrationChangesAllowedToStudents();
 
 		// Verify registration requirements
 		var signingRulesForRegistration = await GetCurrentUserSubjectSigningRulesForRegistrationAsync(Dto.FromValue(studentSubjectRegistrationCreateDto.SubjectId.Value), cancellationToken);
@@ -208,5 +217,17 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		studentWithSigningRuleListQuery.Sorting = facadeRequest.Sorting;
 
 		return await studentWithSigningRuleListQuery.GetDataFragmentAsync(facadeRequest.StartIndex, facadeRequest.Count, cancellationToken);
+	}
+
+	private void VerifyRegistrationChangesAllowedToStudents()
+	{
+		if (timeService.GetCurrentDate() > new DateTime(2023, 3, 26))
+		{
+			throw new OperationFailedException("Registrace jsou uzavřeny, kontaktujte organizátory.");
+		}
+		else if (timeService.GetCurrentTime() < new DateTime(2023, 3, 20, 19, 0, 0))
+		{
+			throw new OperationFailedException("Registrace se otevírají 20.3. v 19:00.");
+		}
 	}
 }
