@@ -34,7 +34,7 @@ public class SigningRulePicker : HxSelectBase<int?, SigningRuleReferenceDto>
 			var gradeId = await ClientAuthService.GetCurrentStudentGradeIdAsync();
 			if (gradeId is not null)
 			{
-				data = data.Where(c => c.GradeId == gradeId.Value.NextGrade());
+				data = data.Where(c => c.GradeId == gradeId.Value);
 			}
 		}
 

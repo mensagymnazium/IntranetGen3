@@ -25,10 +25,10 @@ public class StudentSigningRulesWithRegistrationsQuery : QueryBase<SigningRuleWi
 	{
 		Contract.Requires<ArgumentException>(Student is not null);
 
-		var studentNextGrade = ((GradeEntry)this.Student.GradeId).NextGrade();
+		var studentGrade = ((GradeEntry)this.Student.GradeId);
 
 		var data = signingRuleDataSource.Data
-			.Where(x => x.GradeId == (int)studentNextGrade);
+			.Where(x => x.GradeId == (int)studentGrade);
 
 		if (this.SubjectFilter is not null)
 		{
