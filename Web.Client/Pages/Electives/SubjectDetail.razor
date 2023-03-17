@@ -31,7 +31,7 @@
             <HxCardText>
                 <TextValue Label="Přednášející" Value="@GetTeachers(subject.TeacherIds)" />
                 <TextValue Label="Čas" Value="@ValueFormatter.GetScheduleTimeSlot(subject.ScheduleDayOfWeek, subject.ScheduleSlotInDay)" />
-                <TextValue Label="Kapacita" Value="@($"{subject.StudentRegistrationsCountMain}/{subject.Capacity:n0}")" />
+                <TextValue Label="Kapacita" Value="@($"{subject.StudentRegistrationsCountMain} / {subject.Capacity:n0}")" />
             </HxCardText>
         </BodyTemplate>
     </HxCard>
