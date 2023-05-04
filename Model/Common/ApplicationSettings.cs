@@ -7,6 +7,9 @@ public class ApplicationSettings
 	[DatabaseGenerated(DatabaseGeneratedOption.None)]
 	public int Id { get; set; }
 
+	public DateTime? CanRegisterSubjectFrom { get; set; }
+	public DateTime? CanRegisterSubjectTo { get; set; }
+
 	public enum Entry
 	{
 		Current = -1

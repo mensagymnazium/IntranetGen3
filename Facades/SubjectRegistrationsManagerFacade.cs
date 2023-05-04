@@ -1,6 +1,8 @@
 ﻿using System.Security;
 using Havit;
+using Havit.Services.TimeServices;
 using MensaGymnazium.IntranetGen3.Contracts;
+using MensaGymnazium.IntranetGen3.DataLayer.DataEntries.Common;
 using MensaGymnazium.IntranetGen3.DataLayer.Queries;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
@@ -20,6 +22,8 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 	private readonly IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository;
 	private readonly IUnitOfWork unitOfWork;
 	private readonly IDataLoader dataLoader;
+	private readonly ITimeService timeService;
+	private readonly IApplicationSettingsEntries applicationSettingsEntries;
 
 	public SubjectRegistrationsManagerFacade(
 		IStudentSigningRulesWithRegistrationsQuery studentSigningRulesWithRegistrationsQuery,
@@ -28,7 +32,9 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		ISubjectRepository subjectRepository,
 		IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository,
 		IUnitOfWork unitOfWork,
-		IDataLoader dataLoader)
+		IDataLoader dataLoader,
+		ITimeService timeService,
+		IApplicationSettingsEntries applicationSettingsEntries)
 	{
 		this.studentSigningRulesWithRegistrationsQuery = studentSigningRulesWithRegistrationsQuery;
 		this.studentWithSigningRuleListQuery = studentWithSigningRuleListQuery;
@@ -37,6 +43,8 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		this.studentSubjectRegistrationRepository = studentSubjectRegistrationRepository;
 		this.unitOfWork = unitOfWork;
 		this.dataLoader = dataLoader;
+		this.timeService = timeService;
+		this.applicationSettingsEntries = applicationSettingsEntries;
 	}
 
 	[Authorize(Roles = nameof(Role.Student))]
@@ -57,10 +65,28 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 	[Authorize(Roles = nameof(Role.Student))]
 	public async Task CreateRegistrationAsync(StudentSubjectRegistrationCreateDto studentSubjectRegistrationCreateDto, CancellationToken cancellationToken = default)
 	{
+		// Verify request
 		Contract.Requires<ArgumentNullException>(studentSubjectRegistrationCreateDto is not null);
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.SigningRuleId != default);
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.SubjectId != default);
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.RegistrationType != default);
+
+		// Verify registration date (optional)
+		var registerFrom = applicationSettingsEntries.Current.CanRegisterSubjectFrom;
+		var registerTo = applicationSettingsEntries.Current.CanRegisterSubjectTo;
+		if (registerFrom is not null && registerTo is not null)
+		{
+			var today = timeService.GetCurrentDate();
+			if (!(today > registerFrom) || !(today < registerTo))
+			{
+				throw new InvalidOperationException($"You can only register a subject between between {registerFrom.Value.ToShortDateString()}-{registerTo.Value.ToShortDateString()}.");
+			}
+
+			//Contract.Requires<InvalidOperationException>(
+			//	today > registerFrom && today < registerTo,
+			//	$"You can only register a subject between between {registerFrom.Value.ToShortDateString()}-{registerTo.Value.ToShortDateString()}"
+			//);
+		}
 
 		// Verify registration requirements
 		var signingRulesForRegistration = await GetCurrentUserSubjectSigningRulesForRegistrationAsync(Dto.FromValue(studentSubjectRegistrationCreateDto.SubjectId.Value), cancellationToken);
