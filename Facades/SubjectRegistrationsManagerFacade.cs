@@ -58,6 +58,18 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		var currentUser = applicationAuthenticationService.GetCurrentUser();
 		Contract.Requires<SecurityException>(studentSubjectRegistration.StudentId == currentUser.StudentId);
 
+		// Verify registration date (optional)
+		var canRegisterFrom = applicationSettingsEntries.Current.CanRegisterSubjectFrom;
+		var canRegisterTo = applicationSettingsEntries.Current.CanRegisterSubjectTo;
+		if (canRegisterFrom is not null && canRegisterTo is not null)
+		{
+			var today = timeService.GetCurrentDate();
+			Contract.Requires<OperationFailedException>(
+				today > canRegisterFrom && today < canRegisterTo,
+				$"Se zápisy volitelných předmětů je možné manipulovat pouze mezi daty {canRegisterFrom.Value.ToShortDateString()}-{canRegisterTo.Value.ToShortDateString()}"
+			);
+		}
+
 		unitOfWork.AddForDelete(studentSubjectRegistration);
 		await unitOfWork.CommitAsync(cancellationToken);
 	}
@@ -72,20 +84,15 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.RegistrationType != default);
 
 		// Verify registration date (optional)
-		var registerFrom = applicationSettingsEntries.Current.CanRegisterSubjectFrom;
-		var registerTo = applicationSettingsEntries.Current.CanRegisterSubjectTo;
-		if (registerFrom is not null && registerTo is not null)
+		var canRegisterFrom = applicationSettingsEntries.Current.CanRegisterSubjectFrom;
+		var canRegisterTo = applicationSettingsEntries.Current.CanRegisterSubjectTo;
+		if (canRegisterFrom is not null && canRegisterTo is not null)
 		{
 			var today = timeService.GetCurrentDate();
-			if (!(today > registerFrom) || !(today < registerTo))
-			{
-				throw new InvalidOperationException($"You can only register a subject between between {registerFrom.Value.ToShortDateString()}-{registerTo.Value.ToShortDateString()}.");
-			}
-
-			//Contract.Requires<InvalidOperationException>(
-			//	today > registerFrom && today < registerTo,
-			//	$"You can only register a subject between between {registerFrom.Value.ToShortDateString()}-{registerTo.Value.ToShortDateString()}"
-			//);
+			Contract.Requires<OperationFailedException>(
+				today > canRegisterFrom && today < canRegisterTo,
+				$"Se zápisy volitelných předmětů je možné manipulovat pouze mezi daty {canRegisterFrom.Value.ToShortDateString()}-{canRegisterTo.Value.ToShortDateString()}"
+			);
 		}
 
 		// Verify registration requirements

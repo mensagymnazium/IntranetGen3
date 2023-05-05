@@ -6,17 +6,28 @@ public class ApplicationSettingsSeed : DataSeed<DemoProfile>
 {
 	public override void SeedData()
 	{
+		// MF: S Tímhle nastavením by zápis měl být časově možný
 		var data = new[]
 		{
 			new ApplicationSettings()
 			{
-				CanRegisterSubjectFrom = DateTime.Today.AddDays(-2),
-				CanRegisterSubjectTo = DateTime.Today.AddDays(-1),
+				CanRegisterSubjectFrom = DateTime.Today.AddDays(-1),
+				CanRegisterSubjectTo = DateTime.Today.AddDays(1),
 				Id = -1
 			}
 		};
 
-		//Seed(For(data).PairBy(grade => grade.Id)); // TODO WithoutUpdate
+		// MF: S Tímhle nastavením je na zápis předmětu už pozdě
+		//var data = new[]
+		//{
+		//	new ApplicationSettings()
+		//	{
+		//		CanRegisterSubjectFrom = DateTime.Today.AddDays(-2),
+		//		CanRegisterSubjectTo = DateTime.Today.AddDays(-1),
+		//		Id = -1
+		//	}
+		//};
+
 		Seed(
 			For(data)
 			.PairBy(s => s.Id)

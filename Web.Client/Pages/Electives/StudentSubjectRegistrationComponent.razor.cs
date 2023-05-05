@@ -11,6 +11,7 @@ public partial class StudentSubjectRegistrationComponent
 	[Parameter] public EventCallback OnRegistrationChanged { get; set; }
 
 	[Inject] protected IHxMessageBoxService MessageBox { get; set; }
+	[Inject] protected IHxMessengerService Messenger { get; set; }
 	[Inject] protected Func<ISubjectRegistrationsManagerFacade> SubjectRegistrationsManagerFacade { get; set; }
 
 	private HxGrid<SigningRuleStudentRegistrationsDto> gridComponent;
@@ -37,7 +38,7 @@ public partial class StudentSubjectRegistrationComponent
 			}
 			catch (OperationFailedException)
 			{
-				// NOOP
+				//NOOP
 			}
 		}
 	}
@@ -48,19 +49,20 @@ public partial class StudentSubjectRegistrationComponent
 		{
 			try
 			{
-				await SubjectRegistrationsManagerFacade().CreateRegistrationAsync(new StudentSubjectRegistrationCreateDto()
-				{
-					SubjectId = SubjectId.Value,
-					SigningRuleId = signingRuleId,
-					RegistrationType = registrationType
-				});
+				await SubjectRegistrationsManagerFacade().CreateRegistrationAsync(
+					new StudentSubjectRegistrationCreateDto()
+					{
+						SubjectId = SubjectId.Value,
+						SigningRuleId = signingRuleId,
+						RegistrationType = registrationType
+					});
 
 				await gridComponent.RefreshDataAsync();
 				await OnRegistrationChanged.InvokeAsync();
 			}
 			catch (OperationFailedException)
 			{
-				// NOOP
+				//NOOP
 			}
 		}
 	}
