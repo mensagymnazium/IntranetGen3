@@ -1,4 +1,6 @@
-﻿namespace MensaGymnazium.IntranetGen3.Web.Server;
+﻿using System.Runtime.InteropServices;
+
+namespace MensaGymnazium.IntranetGen3.Web.Server;
 
 public class Program
 {
