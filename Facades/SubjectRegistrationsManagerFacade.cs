@@ -47,6 +47,25 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		this.applicationSettingsEntries = applicationSettingsEntries;
 	}
 
+	private bool RegistrationIsWithinValidDate()
+	{
+		var allowedFrom = applicationSettingsEntries.Current.SubjectRegistrationAllowedFrom;
+		var allowedTo = applicationSettingsEntries.Current.SubjectRegistrationAllowedTo;
+		var today = timeService.GetCurrentDate();
+
+		if (allowedFrom is not null && today < allowedFrom)
+		{
+			return false;
+		}
+
+		if (allowedTo is not null && today > allowedTo)
+		{
+			return false;
+		}
+
+		return true;
+	}
+
 	[Authorize(Roles = nameof(Role.Student))]
 	public async Task CancelRegistrationAsync(Dto<int> studentSubjectRegistrationId, CancellationToken cancellationToken = default)
 	{
@@ -58,17 +77,8 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		var currentUser = applicationAuthenticationService.GetCurrentUser();
 		Contract.Requires<SecurityException>(studentSubjectRegistration.StudentId == currentUser.StudentId);
 
-		// Verify registration date (optional)
-		var canRegisterFrom = applicationSettingsEntries.Current.CanRegisterSubjectFrom;
-		var canRegisterTo = applicationSettingsEntries.Current.CanRegisterSubjectTo;
-		if (canRegisterFrom is not null && canRegisterTo is not null)
-		{
-			var today = timeService.GetCurrentDate();
-			Contract.Requires<OperationFailedException>(
-				today > canRegisterFrom && today < canRegisterTo,
-				$"Se zápisy volitelných předmětů je možné manipulovat pouze mezi daty {canRegisterFrom.Value.ToShortDateString()}-{canRegisterTo.Value.ToShortDateString()}"
-			);
-		}
+		// Verify registration dat
+		Contract.Requires<OperationFailedException>(RegistrationIsWithinValidDate(),"Přihlášku není možné zrušit. Je před, nebo již po termínu přihlašování");
 
 		unitOfWork.AddForDelete(studentSubjectRegistration);
 		await unitOfWork.CommitAsync(cancellationToken);
@@ -83,17 +93,8 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.SubjectId != default);
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.RegistrationType != default);
 
-		// Verify registration date (optional)
-		var canRegisterFrom = applicationSettingsEntries.Current.CanRegisterSubjectFrom;
-		var canRegisterTo = applicationSettingsEntries.Current.CanRegisterSubjectTo;
-		if (canRegisterFrom is not null && canRegisterTo is not null)
-		{
-			var today = timeService.GetCurrentDate();
-			Contract.Requires<OperationFailedException>(
-				today > canRegisterFrom && today < canRegisterTo,
-				$"Se zápisy volitelných předmětů je možné manipulovat pouze mezi daty {canRegisterFrom.Value.ToShortDateString()}-{canRegisterTo.Value.ToShortDateString()}"
-			);
-		}
+		// Verify registration date
+		Contract.Requires<OperationFailedException>(RegistrationIsWithinValidDate(), "Přihlášku není možné založit. Je před, nebo již po termínu přihlašování");
 
 		// Verify registration requirements
 		var signingRulesForRegistration = await GetCurrentUserSubjectSigningRulesForRegistrationAsync(Dto.FromValue(studentSubjectRegistrationCreateDto.SubjectId.Value), cancellationToken);

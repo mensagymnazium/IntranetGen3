@@ -11,8 +11,8 @@ public class ApplicationSettingsSeed : DataSeed<DemoProfile>
 		{
 			new ApplicationSettings()
 			{
-				CanRegisterSubjectFrom = DateTime.Today.AddDays(-1),
-				CanRegisterSubjectTo = DateTime.Today.AddDays(1),
+				SubjectRegistrationAllowedFrom = null,
+				SubjectRegistrationAllowedTo = null,
 				Id = -1
 			}
 		};
@@ -22,8 +22,8 @@ public class ApplicationSettingsSeed : DataSeed<DemoProfile>
 		//{
 		//	new ApplicationSettings()
 		//	{
-		//		CanRegisterSubjectFrom = DateTime.Today.AddDays(-2),
-		//		CanRegisterSubjectTo = DateTime.Today.AddDays(-1),
+		//		SubjectRegistrationAllowedFrom = null,
+		//		SubjectRegistrationAllowedTo = DateTime.Today.AddDays(-1),
 		//		Id = -1
 		//	}
 		//};
@@ -31,7 +31,6 @@ public class ApplicationSettingsSeed : DataSeed<DemoProfile>
 		Seed(
 			For(data)
 			.PairBy(s => s.Id)
-			//.WithoutUpdate()
 			);
 	}
 }

@@ -7,8 +7,17 @@ public class ApplicationSettings
 	[DatabaseGenerated(DatabaseGeneratedOption.None)]
 	public int Id { get; set; }
 
-	public DateTime? CanRegisterSubjectFrom { get; set; }
-	public DateTime? CanRegisterSubjectTo { get; set; }
+	/// <summary>
+	/// <b>Null</b> means that this parameter wont be checked
+	/// </summary>
+	[Column(TypeName = "datetime")]
+	public DateTime? SubjectRegistrationAllowedFrom { get; set; }
+
+	/// <summary>
+	/// <b>Null</b> means that this parameter wont be checked
+	/// </summary>
+	[Column(TypeName = "datetime")]
+	public DateTime? SubjectRegistrationAllowedTo { get; set; }
 
 	public enum Entry
 	{
