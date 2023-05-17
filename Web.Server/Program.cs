@@ -34,7 +34,10 @@ public class Program
 				logging.AddDebug();
 				logging.AddAzureWebAppDiagnostics();
 #if !DEBUG
-				logging.AddEventLog();
+				if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+				{
+					logging.AddEventLog();
+				}
 #endif
 			});
 }

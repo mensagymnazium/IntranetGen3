@@ -5,12 +5,11 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Shared;
 
 public partial class LoginDisplay
 {
-	[Inject] protected NavigationManager Navigation { get; set; }
-	[Inject] protected SignOutSessionStateManager SignOutManager { get; set; }
-	private async Task BeginSignOut()
+	[Inject] protected NavigationManager NavigationManager { get; set; }
+
+	private void BeginSignOut()
 	{
-		await SignOutManager.SetSignOutState();
-		Navigation.NavigateTo("authentication/logout");
+		NavigationManager.NavigateToLogout("authentication/logout");
 	}
 
 	/// <summary>

@@ -78,7 +78,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		Contract.Requires<SecurityException>(studentSubjectRegistration.StudentId == currentUser.StudentId);
 
 		// Verify registration dat
-		Contract.Requires<OperationFailedException>(RegistrationIsWithinValidDate(),"Přihlášku není možné zrušit. Je před, nebo již po termínu přihlašování");
+		Contract.Requires<OperationFailedException>(RegistrationIsWithinValidDate(), "Přihlášku není možné zrušit. Je před, nebo již po termínu přihlašování");
 
 		unitOfWork.AddForDelete(studentSubjectRegistration);
 		await unitOfWork.CommitAsync(cancellationToken);

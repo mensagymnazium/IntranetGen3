@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AssemblyName>MensaGymnazium.IntranetGen3.Entity</AssemblyName>
 		<RootNamespace>MensaGymnazium.IntranetGen3.Entity</RootNamespace>
@@ -12,15 +12,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Havit.Data.EntityFrameworkCore" Version="2.6.4" />
-		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.9">
+		<PackageReference Include="Havit.Data.EntityFrameworkCore" Version="2.7.3" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

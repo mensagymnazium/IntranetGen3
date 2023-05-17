@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AssemblyName>MensaGymnazium.IntranetGen3.Facades</AssemblyName>
 		<RootNamespace>MensaGymnazium.IntranetGen3.Facades</RootNamespace>
@@ -16,9 +16,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Havit.Data.Patterns" Version="2.1.22" />
-		<PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.9" />
-		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.9" />
+		<PackageReference Include="Havit.Data.Patterns" Version="2.1.23" />
+		<PackageReference Include="Microsoft.AspNetCore.Authorization" Version="7.0.5" />
+		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="7.0.5" />
 	</ItemGroup>
 
 	<ItemGroup>
