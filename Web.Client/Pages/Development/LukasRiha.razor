@@ -208,7 +208,7 @@
 </div>
 *@
 @code{
-    [Inject] protected Func<ISubjectFacade> SubjectFacade { get; set; }
+    [Inject] protected ISubjectFacade SubjectFacade { get; set; }
 
     //[Parameter]
     public IReadOnlyList<string> ParamList { get; set; }

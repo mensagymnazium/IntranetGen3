@@ -20,7 +20,7 @@
 </td>
 @code
 {
-    [Inject] protected Func<ISubjectFacade> SubjectFacade { get; set; }
+    [Inject] protected ISubjectFacade SubjectFacade { get; set; }
 
     [Parameter]
     public List<Lesson> Lessons { get; set; }

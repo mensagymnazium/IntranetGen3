@@ -5,7 +5,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Admin.Components;
 
 public partial class DataSeeds : ComponentBase
 {
-	[Inject] protected Func<IDataSeedFacade> DataSeedFacade { get; set; }
+	[Inject] protected IDataSeedFacade DataSeedFacade { get; set; }
 	[Inject] protected IHxMessengerService Messenger { get; set; }
 	[Inject] protected IHxMessageBoxService MessageBox { get; set; }
 
@@ -17,7 +17,7 @@ public partial class DataSeeds : ComponentBase
 	{
 		if (selectedSeedProfile is not null && await MessageBox.ConfirmAsync($"Do you really want to seed {selectedSeedProfile}?"))
 		{
-			await DataSeedFacade().SeedDataProfile(selectedSeedProfile);
+			await DataSeedFacade.SeedDataProfile(selectedSeedProfile);
 			Messenger.AddInformation($"Seed successful: {selectedSeedProfile}");
 
 			await offcanvasComponent.HideAsync();
@@ -26,7 +26,7 @@ public partial class DataSeeds : ComponentBase
 
 	public async Task ShowAsync()
 	{
-		seedProfiles ??= await DataSeedFacade().GetDataSeedProfiles();
+		seedProfiles ??= await DataSeedFacade.GetDataSeedProfiles();
 
 		await offcanvasComponent.ShowAsync();
 	}

@@ -11,7 +11,6 @@ public partial class StudentWithSigningRuleGrid
 
 	[Inject] protected IStudentsDataStore StudentsDataStore { get; set; }
 	[Inject] protected ISigningRulesDataStore SigningRulesDataStore { get; set; }
-	[Inject] protected Func<ISubjectRegistrationsManagerFacade> SubjectRegistrationsManagerFacade { get; set; }
 
 	private HxGrid<StudentWithSigningRuleListItemDto> gridComponent;
 	private StudentWithSigningRuleListQueryFilter filterModel = new();

@@ -58,7 +58,7 @@
 </table>
 
 @code{
-    [Inject] protected Func<ISubjectFacade> SubjectFacade { get; set; }
+    [Inject] protected ISubjectFacade SubjectFacade { get; set; }
 
     public List<Lesson> less;
 
@@ -67,7 +67,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var response = await SubjectFacade().GetSubjectListAsync(new DataFragmentRequest<SubjectListQueryFilter>() {Filter = new SubjectListQueryFilter()});
+        var response = await SubjectFacade.GetSubjectListAsync(new DataFragmentRequest<SubjectListQueryFilter>() {Filter = new SubjectListQueryFilter()});
         less = response.Data.Select(dto => new Lesson(dto.Name, dto.ScheduleSlotInDay.ToString().ToLower(), dto.ScheduleDayOfWeek.Value)).ToList();
 
     }

@@ -5,7 +5,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
 
 public partial class StudentSubjectRegistrationList
 {
-	[Inject] protected Func<IStudentSubjectRegistrationFacade> StudentSubjectRegistrationFacade { get; set; }
+	[Inject] protected IStudentSubjectRegistrationFacade StudentSubjectRegistrationFacade { get; set; }
 
 	private StudentSubjectRegistrationsGrid gridComponent;
 	private StudentSubjectRegistrationListQueryFilter filterModel = new StudentSubjectRegistrationListQueryFilter();
@@ -15,7 +15,7 @@ public partial class StudentSubjectRegistrationList
 
 	private async Task<GridDataProviderResult<StudentSubjectRegistrationDto>> GetStudentRegistrations(GridDataProviderRequest<StudentSubjectRegistrationDto> request)
 	{
-		var response = await StudentSubjectRegistrationFacade().GetStudentSubjectRegistrationListAsync(
+		var response = await StudentSubjectRegistrationFacade.GetStudentSubjectRegistrationListAsync(
 			new DataFragmentRequest<StudentSubjectRegistrationListQueryFilter>()
 			{
 				Filter = filterModel,

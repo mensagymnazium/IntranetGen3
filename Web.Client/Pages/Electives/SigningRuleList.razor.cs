@@ -8,7 +8,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
 public partial class SigningRuleList
 {
 	[Inject] protected IHxMessengerService Messenger { get; set; }
-	[Inject] protected Func<ISigningRuleFacade> SigningRuleFacade { get; set; }
+	[Inject] protected ISigningRuleFacade SigningRuleFacade { get; set; }
 	[Inject] protected NavigationManager NavigationManager { get; set; }
 	[Inject] protected IGradesDataStore GradesDataStore { get; set; }
 	[Inject] protected ISubjectCategoriesDataStore SubjectCategoriesDataStore { get; set; }
@@ -34,7 +34,7 @@ public partial class SigningRuleList
 			Sorting = request.Sorting?.Select(s => new SortItem(s.SortString, s.SortDirection)).ToArray()
 		};
 
-		var signingRuleListResult = await SigningRuleFacade().GetSigningRuleListAsync(SigningRuleRequest, request.CancellationToken);
+		var signingRuleListResult = await SigningRuleFacade.GetSigningRuleListAsync(SigningRuleRequest, request.CancellationToken);
 
 		return new()
 		{

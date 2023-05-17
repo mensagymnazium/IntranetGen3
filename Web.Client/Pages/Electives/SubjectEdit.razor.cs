@@ -9,7 +9,7 @@ public partial class SubjectEdit : ComponentBase
 	[Parameter] public int? SubjectId { get; set; }
 	[Parameter] public EventCallback<int> OnSaved { get; set; }
 
-	[Inject] protected Func<ISubjectFacade> SubjectFacade { get; set; }
+	[Inject] protected ISubjectFacade SubjectFacade { get; set; }
 
 	private HxOffcanvas offcanvasComponent;
 	private SubjectDto model = new();
@@ -26,7 +26,7 @@ public partial class SubjectEdit : ComponentBase
 		}
 		else if (SubjectId != model.Id)
 		{
-			model = await SubjectFacade().GetSubjectDetailAsync(Dto.FromValue(SubjectId.Value));
+			model = await SubjectFacade.GetSubjectDetailAsync(Dto.FromValue(SubjectId.Value));
 			editContext = new EditContext(model);
 			title = model.Name;
 		}
@@ -40,11 +40,11 @@ public partial class SubjectEdit : ComponentBase
 		{
 			if (model.Id == default)
 			{
-				model.Id = (await SubjectFacade().CreateSubjectAsync(model)).Value;
+				model.Id = (await SubjectFacade.CreateSubjectAsync(model)).Value;
 			}
 			else
 			{
-				await SubjectFacade().UpdateSubjectAsync(model);
+				await SubjectFacade.UpdateSubjectAsync(model);
 			}
 
 			await offcanvasComponent.HideAsync();

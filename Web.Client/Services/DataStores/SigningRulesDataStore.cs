@@ -6,9 +6,9 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 
 public class SigningRulesDataStore : DictionaryStaticDataStore<int, SigningRuleReferenceDto>, ISigningRulesDataStore
 {
-	private readonly Func<ISigningRuleFacade> signingRuleFacade;
+	private readonly ISigningRuleFacade signingRuleFacade;
 
-	public SigningRulesDataStore(Func<ISigningRuleFacade> signingRuleFacade)
+	public SigningRulesDataStore(ISigningRuleFacade signingRuleFacade)
 	{
 		this.signingRuleFacade = signingRuleFacade;
 	}
@@ -18,7 +18,7 @@ public class SigningRulesDataStore : DictionaryStaticDataStore<int, SigningRuleR
 
 	protected async override Task<IEnumerable<SigningRuleReferenceDto>> LoadDataAsync()
 	{
-		var dto = await signingRuleFacade().GetAllSigningRuleReferencesAsync();
+		var dto = await signingRuleFacade.GetAllSigningRuleReferencesAsync();
 		return dto ?? new List<SigningRuleReferenceDto>();
 	}
 }

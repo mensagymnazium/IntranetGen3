@@ -5,9 +5,9 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 
 public class SubjectTypesDataStore : DictionaryStaticDataStore<int, SubjectTypeDto>, ISubjectTypesDataStore
 {
-	private readonly Func<ISubjectTypeFacade> subjectTypeFacade;
+	private readonly ISubjectTypeFacade subjectTypeFacade;
 
-	public SubjectTypesDataStore(Func<ISubjectTypeFacade> subjectTypeFacade)
+	public SubjectTypesDataStore(ISubjectTypeFacade subjectTypeFacade)
 	{
 		this.subjectTypeFacade = subjectTypeFacade;
 	}
@@ -17,7 +17,7 @@ public class SubjectTypesDataStore : DictionaryStaticDataStore<int, SubjectTypeD
 
 	protected async override Task<IEnumerable<SubjectTypeDto>> LoadDataAsync()
 	{
-		var dto = await subjectTypeFacade().GetAllSubjectTypesAsync();
+		var dto = await subjectTypeFacade.GetAllSubjectTypesAsync();
 		return dto ?? new List<SubjectTypeDto>();
 	}
 }

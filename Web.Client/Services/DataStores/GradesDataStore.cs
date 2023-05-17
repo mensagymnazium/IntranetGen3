@@ -5,9 +5,9 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 
 public class GradesDataStore : DictionaryStaticDataStore<int, GradeDto>, IGradesDataStore
 {
-	private readonly Func<IGradeFacade> GradeFacade;
+	private readonly IGradeFacade GradeFacade;
 
-	public GradesDataStore(Func<IGradeFacade> GradeFacade)
+	public GradesDataStore(IGradeFacade GradeFacade)
 	{
 		this.GradeFacade = GradeFacade;
 	}
@@ -17,7 +17,7 @@ public class GradesDataStore : DictionaryStaticDataStore<int, GradeDto>, IGrades
 
 	protected async override Task<IEnumerable<GradeDto>> LoadDataAsync()
 	{
-		var dto = await GradeFacade().GetAllGradesAsync();
+		var dto = await GradeFacade.GetAllGradesAsync();
 		return dto ?? new List<GradeDto>();
 	}
 }

@@ -8,8 +8,8 @@ public partial class SubjectDetail
 {
 	[Parameter] public int? SubjectId { get; set; }
 
-	[Inject] protected Func<ISubjectFacade> SubjectFacade { get; set; }
-	[Inject] protected Func<IStudentSubjectRegistrationFacade> StudentSubjectRegistrationFacade { get; set; }
+	[Inject] protected ISubjectFacade SubjectFacade { get; set; }
+	[Inject] protected IStudentSubjectRegistrationFacade StudentSubjectRegistrationFacade { get; set; }
 	[Inject] protected ISubjectCategoriesDataStore SubjectCategoriesDataStore { get; set; }
 	[Inject] protected ISubjectTypesDataStore SubjectTypesDataStore { get; set; }
 	[Inject] protected ITeachersDataStore TeachersDataStore { get; set; }
@@ -46,7 +46,7 @@ public partial class SubjectDetail
 
 	private async Task<GridDataProviderResult<StudentSubjectRegistrationDto>> GetStudentRegistrations(GridDataProviderRequest<StudentSubjectRegistrationDto> request)
 	{
-		var response = await StudentSubjectRegistrationFacade().GetStudentSubjectRegistrationListAsync(
+		var response = await StudentSubjectRegistrationFacade.GetStudentSubjectRegistrationListAsync(
 			new DataFragmentRequest<StudentSubjectRegistrationListQueryFilter>()
 			{
 				Filter = new StudentSubjectRegistrationListQueryFilter() { SubjectId = SubjectId },
@@ -64,7 +64,7 @@ public partial class SubjectDetail
 
 	private async Task LoadSubjectAsync()
 	{
-		subject = await SubjectFacade().GetSubjectDetailAsync(Dto.FromValue(SubjectId.Value));
+		subject = await SubjectFacade.GetSubjectDetailAsync(Dto.FromValue(SubjectId.Value));
 	}
 
 	private async Task HandleEditClick()

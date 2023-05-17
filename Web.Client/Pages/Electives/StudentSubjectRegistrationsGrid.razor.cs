@@ -12,7 +12,7 @@ public partial class StudentSubjectRegistrationsGrid
 	[Parameter] public EventCallback<StudentSubjectRegistrationDto> SelectedDataItemChanged { get; set; }
 	[Parameter] public bool SelectionEnabled { get; set; } = true;
 
-	[Inject] protected Func<IStudentSubjectRegistrationFacade> StudentSubjectRegistrationFacade { get; set; }
+	[Inject] protected IStudentSubjectRegistrationFacade StudentSubjectRegistrationFacade { get; set; }
 	[Inject] protected IStudentsDataStore StudentsDataStore { get; set; }
 	[Inject] protected ISubjectsDataStore SubjectsDataStore { get; set; }
 	[Inject] protected ISigningRulesDataStore SigningRulesDataStore { get; set; }
@@ -49,7 +49,7 @@ public partial class StudentSubjectRegistrationsGrid
 
 	private async Task HandleDeleteItemClicked(StudentSubjectRegistrationDto item)
 	{
-		await StudentSubjectRegistrationFacade().DeleteRegistrationAsync(Dto.FromValue(item.Id));
+		await StudentSubjectRegistrationFacade.DeleteRegistrationAsync(Dto.FromValue(item.Id));
 		Messenger.AddInformation("Zápis smazán.");
 		await gridComponent.RefreshDataAsync();
 	}

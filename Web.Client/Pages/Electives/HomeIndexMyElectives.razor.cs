@@ -5,7 +5,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
 
 public partial class HomeIndexMyElectives
 {
-	[Inject] protected Func<ISubjectRegistrationsManagerFacade> SubjectRegistrationsManagerFacade { get; set; }
+	[Inject] protected ISubjectRegistrationsManagerFacade SubjectRegistrationsManagerFacade { get; set; }
 
 	private async Task<GridDataProviderResult<StudentWithSigningRuleListItemDto>> GetStudentWithSigningRuleGridData(GridDataProviderRequest<StudentWithSigningRuleListItemDto> request)
 	{
@@ -17,7 +17,7 @@ public partial class HomeIndexMyElectives
 			Sorting = request.Sorting?.Select(s => new SortItem(s.SortString, s.SortDirection)).ToArray()
 		};
 
-		var signingRuleListResult = await SubjectRegistrationsManagerFacade().GetStudentWithSigningRuleListAsync(facadeRequest, request.CancellationToken);
+		var signingRuleListResult = await SubjectRegistrationsManagerFacade.GetStudentWithSigningRuleListAsync(facadeRequest, request.CancellationToken);
 
 		return new()
 		{

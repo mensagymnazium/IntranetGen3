@@ -10,8 +10,8 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
 public partial class SubjectList
 {
 	[Inject] protected IHxMessengerService Messenger { get; set; }
-	[Inject] protected Func<ISubjectFacade> SubjectFacade { get; set; }
-	[Inject] protected Func<ISubjectRegistrationsManagerFacade> SubjectRegistrationsManagerFacade { get; set; }
+	[Inject] protected ISubjectFacade SubjectFacade { get; set; }
+	[Inject] protected ISubjectRegistrationsManagerFacade SubjectRegistrationsManagerFacade { get; set; }
 	[Inject] protected NavigationManager NavigationManager { get; set; }
 	[Inject] protected ISubjectCategoriesDataStore SubjectCategoriesDataStore { get; set; }
 	[Inject] protected ISubjectTypesDataStore SubjectTypesDataStore { get; set; }
@@ -39,7 +39,7 @@ public partial class SubjectList
 
 		if ((await ClientAuthService.GetCurrentClaimsPrincipal()).IsInRole(nameof(Role.Student)))
 		{
-			studentRegistrations = await SubjectRegistrationsManagerFacade().GetCurrentUserSigningRulesWithRegistrationsAsync(Dto.FromValue((int?)null));
+			studentRegistrations = await SubjectRegistrationsManagerFacade.GetCurrentUserSigningRulesWithRegistrationsAsync(Dto.FromValue((int?)null));
 		}
 	}
 
@@ -79,7 +79,7 @@ public partial class SubjectList
 			Sorting = request.Sorting?.Select(s => new SortItem(s.SortString, s.SortDirection)).ToArray()
 		};
 
-		var subjectListResult = await SubjectFacade().GetSubjectListAsync(subjectListRequest, request.CancellationToken);
+		var subjectListResult = await SubjectFacade.GetSubjectListAsync(subjectListRequest, request.CancellationToken);
 
 		return new()
 		{
@@ -104,7 +104,7 @@ public partial class SubjectList
 
 	private async Task HandleDeleteItemClicked(SubjectListItemDto subject)
 	{
-		await SubjectFacade().DeleteSubjectAsync(Dto.FromValue(subject.Id));
+		await SubjectFacade.DeleteSubjectAsync(Dto.FromValue(subject.Id));
 		Messenger.AddInformation(subject.Name, "Předmět smazán.");
 		await subjectsGrid.RefreshDataAsync();
 	}

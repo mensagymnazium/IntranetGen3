@@ -7,7 +7,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Admin;
 
 public partial class TeacherList
 {
-	[Inject] protected Func<ITeacherFacade> TeacherFacade { get; set; }
+	[Inject] protected ITeacherFacade TeacherFacade { get; set; }
 	[Inject] protected IHxMessengerService Messenger { get; set; }
 
 	private HxGrid<TeacherDto> gridComponent;
@@ -17,7 +17,7 @@ public partial class TeacherList
 
 	private async Task<GridDataProviderResult<TeacherDto>> GetData(GridDataProviderRequest<TeacherDto> request)
 	{
-		var data = await TeacherFacade().GetAllAsync();
+		var data = await TeacherFacade.GetAllAsync();
 		return request.ApplyTo(data);
 	}
 
@@ -43,7 +43,7 @@ public partial class TeacherList
 
 	private async Task HandleDeleteItemClicked(TeacherDto item)
 	{
-		await TeacherFacade().DeleteTeacherAsync(Dto.FromValue(item.Id));
+		await TeacherFacade.DeleteTeacherAsync(Dto.FromValue(item.Id));
 		Messenger.AddInformation("Učitel smazán.");
 		await gridComponent.RefreshDataAsync();
 	}

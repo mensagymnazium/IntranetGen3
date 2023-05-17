@@ -12,7 +12,7 @@ public partial class StudentSubjectRegistrationComponent
 
 	[Inject] protected IHxMessageBoxService MessageBox { get; set; }
 	[Inject] protected IHxMessengerService Messenger { get; set; }
-	[Inject] protected Func<ISubjectRegistrationsManagerFacade> SubjectRegistrationsManagerFacade { get; set; }
+	[Inject] protected ISubjectRegistrationsManagerFacade SubjectRegistrationsManagerFacade { get; set; }
 
 	private HxGrid<SigningRuleStudentRegistrationsDto> gridComponent;
 
@@ -20,7 +20,7 @@ public partial class StudentSubjectRegistrationComponent
 	{
 		Contract.Assert<InvalidOperationException>(SubjectId is not null);
 
-		var data = await SubjectRegistrationsManagerFacade().GetCurrentUserSubjectSigningRulesForRegistrationAsync(Dto.FromValue(SubjectId.Value));
+		var data = await SubjectRegistrationsManagerFacade.GetCurrentUserSubjectSigningRulesForRegistrationAsync(Dto.FromValue(SubjectId.Value));
 
 		return request.ApplyTo(data);
 	}
@@ -31,7 +31,7 @@ public partial class StudentSubjectRegistrationComponent
 		{
 			try
 			{
-				await SubjectRegistrationsManagerFacade().CancelRegistrationAsync(Dto.FromValue(registrationId));
+				await SubjectRegistrationsManagerFacade.CancelRegistrationAsync(Dto.FromValue(registrationId));
 
 				await gridComponent.RefreshDataAsync();
 				await OnRegistrationChanged.InvokeAsync();
@@ -49,7 +49,7 @@ public partial class StudentSubjectRegistrationComponent
 		{
 			try
 			{
-				await SubjectRegistrationsManagerFacade().CreateRegistrationAsync(
+				await SubjectRegistrationsManagerFacade.CreateRegistrationAsync(
 					new StudentSubjectRegistrationCreateDto()
 					{
 						SubjectId = SubjectId.Value,
