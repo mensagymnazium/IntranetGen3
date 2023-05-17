@@ -48,9 +48,6 @@ public class Startup
 
 		// gRPC
 		services.AddGrpcServerInfrastructure(assemblyToScanForDataContracts: typeof(Dto).Assembly);
-
-		// Hangfire
-		//services.AddCustomizedHangfire(configuration);
 	}
 
 	// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -94,15 +91,6 @@ public class Startup
 				{
 					endpoint.RequireAuthorization(); // TODO? AuthorizationPolicyNames.ApiScopePolicy when needed
 				});
-
-			//endpoints.MapHangfireDashboard("/hangfire", new DashboardOptions
-			//{
-			//	Authorization = new List<IDashboardAuthorizationFilter>() { }, // see https://sahansera.dev/securing-hangfire-dashboard-with-endpoint-routing-auth-policy-aspnetcore/
-			//	DisplayStorageConnectionString = false,
-			//	DashboardTitle = "IntranetGen3 - Jobs",
-			//	StatsPollingInterval = 60_000 // once a minute
-			//})
-			//.RequireAuthorization(PolicyNames.HangfireDashboardAcccessPolicy);
 		});
 
 		app.UpgradeDatabaseSchemaAndData();

@@ -37,13 +37,6 @@ public static class AuthConfig
 			configuration.Events.OnRedirectToLogin = (context) => RedirectOrApiStatus(context, HttpStatusCode.Unauthorized);
 			configuration.Events.OnRedirectToAccessDenied = (context) => RedirectOrApiStatus(context, HttpStatusCode.Forbidden);
 		});
-
-		services.AddAuthorization(options =>
-		{
-			options.AddPolicy(PolicyNames.HangfireDashboardAcccessPolicy, policy => policy
-				.RequireAuthenticatedUser()
-				.RequireRole(nameof(Role.Administrator)));
-		});
 	}
 
 	private static Task RedirectOrApiStatus(RedirectContext<CookieAuthenticationOptions> context, HttpStatusCode apiStatus)
