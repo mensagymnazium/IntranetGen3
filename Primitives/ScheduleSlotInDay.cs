@@ -17,9 +17,9 @@ public enum ScheduleSlotInDay
 	Block2 = 2,
 
 	/// <summary>
-	/// 12:15 – 13:50
+	/// 12:20 – 13:55
 	/// </summary>
-	[Description("12:15 – 13:50")]
+	[Description("12:20 – 13:55")]
 	Block3 = 3,
 
 	/// <summary>
