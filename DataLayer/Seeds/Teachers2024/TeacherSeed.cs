@@ -8,8 +8,8 @@ public class TeacherSeed : DataSeed<Teachers2024Profile>
 	{
 		var teachers = new[]
 		{
-			new Teacher() { SeededEntityId = 0, User = new User() { Email = "mensaforum.2023.001@mensagymnazium.cz", Name = "Vojta gastronaut" } },
-			new Teacher() { SeededEntityId = 1, User = new User() { Email = "mensaforum.2023.010@mensagymnazium.cz", Name = "Angelika" } },
+			new Teacher() { SeededEntityId = 0, User = new User() { Email = "mensaforum.2023.001@mensagymnazium.cz", Name = "Vojtěch Vačkář" } },
+			new Teacher() { SeededEntityId = 1, User = new User() { Email = "mensaforum.2023.010@mensagymnazium.cz", Name = "sestra Angelika" } },
 			new Teacher() { SeededEntityId = 2, User = new User() { Email = "mensaforum.2023.003@mensagymnazium.cz", Name = "Eva Zažímalová" } },
 			new Teacher() { SeededEntityId = 3, User = new User() { Email = "mensaforum.2023.002@mensagymnazium.cz", Name = "František Skála" } },
 			new Teacher() { SeededEntityId = 4, User = new User() { Email = "mensaforum.2023.004@mensagymnazium.cz", Name = "Kateřina Kněžíková" } },
@@ -17,7 +17,7 @@ public class TeacherSeed : DataSeed<Teachers2024Profile>
 			new Teacher() { SeededEntityId = 6, User = new User() { Email = "mensaforum.2023.006@mensagymnazium.cz", Name = "Šárka Robinson" } },
 			new Teacher() { SeededEntityId = 7, User = new User() { Email = "mensaforum.2023.007@mensagymnazium.cz", Name = "Jan Nedbal" } },
 			new Teacher() { SeededEntityId = 8, User = new User() { Email = "mensaforum.2023.008@mensagymnazium.cz", Name = "Pavel Cejnar" } },
-			new Teacher() { SeededEntityId = 9, User = new User() { Email = "mensaforum.2023.009@mensagymnazium.cz", Name = "Honza Vojtko" } },
+			new Teacher() { SeededEntityId = 9, User = new User() { Email = "mensaforum.2023.009@mensagymnazium.cz", Name = "Jan Vojtko" } },
 			new Teacher() { SeededEntityId = 10, User = new User() { Email = "mensaforum.2023.011@mensagymnazium.cz", Name = "Tomáš Petráček" } },
 			new Teacher() { SeededEntityId = 11, User = new User() { Email = "mensaforum.2023.012@mensagymnazium.cz", Name = "Luboš Pick" } },
 			new Teacher() { SeededEntityId = 12, User = new User() { Email = "mensaforum.2023.013@mensagymnazium.cz", Name = "Aleš Gerloch" } },
@@ -27,7 +27,7 @@ public class TeacherSeed : DataSeed<Teachers2024Profile>
 			new Teacher() { SeededEntityId = 16, User = new User() { Email = "mensaforum.2023.017@mensagymnazium.cz", Name = "Láďa Hruška" } },
 			new Teacher() { SeededEntityId = 17, User = new User() { Email = "mensaforum.2023.018@mensagymnazium.cz", Name = "Vladimír Polívka" } },
 			new Teacher() { SeededEntityId = 18, User = new User() { Email = "mensaforum.2023.019@mensagymnazium.cz", Name = "Tomáš Zima" } },
-			new Teacher() { SeededEntityId = 19, User = new User() { Email = "mensaforum.2023.020@mensagymnazium.cz", Name = "Czechedsubstance" } },
+			new Teacher() { SeededEntityId = 19, User = new User() { Email = "mensaforum.2023.020@mensagymnazium.cz", Name = "czechedsubstance" } },
 			new Teacher() { SeededEntityId = 20, User = new User() { Email = "mensaforum.2023.021@mensagymnazium.cz", Name = "Anna Geislerová" } },
 			new Teacher() { SeededEntityId = 21, User = new User() { Email = "mensaforum.2023.022@mensagymnazium.cz", Name = "Hana Švábíková" } },
 			new Teacher() { SeededEntityId = 22, User = new User() { Email = "mensaforum.2023.023@mensagymnazium.cz", Name = "Jiří Martínek" } },
