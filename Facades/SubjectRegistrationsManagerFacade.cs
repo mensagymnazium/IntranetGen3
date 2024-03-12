@@ -221,7 +221,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 
 	private void VerifyRegistrationChangesAllowedToStudents()
 	{
-		if (timeService.GetCurrentDate() > new DateTime(2024, 3, 13))
+		if (timeService.GetCurrentDate() > new DateTime(2024, 3, 14))
 		{
 			throw new OperationFailedException("Registrace jsou uzavřeny, kontaktujte organizátory.");
 		}
