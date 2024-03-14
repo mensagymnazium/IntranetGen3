@@ -223,6 +223,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 	{
 		if (timeService.GetCurrentDate() > new DateTime(2024, 3, 15))
 		{
+			
 			throw new OperationFailedException("Registrace jsou uzavřeny, kontaktujte organizátory.");
 		}
 		else if (timeService.GetCurrentTime() < new DateTime(2024, 3, 7, 19, 0, 0))
