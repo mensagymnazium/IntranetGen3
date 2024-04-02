@@ -28,4 +28,12 @@
 		<ProjectReference Include="..\Primitives\Primitives.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Pages\Development\MartinFiala.razor" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="Pages\Development\MartinFiala.razor" />
+	</ItemGroup>
+
 </Project>
