@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MensaGymnazium.IntranetGen3.Model.Subject">
+    <Position X="3" Y="1.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AgBCAAAAAEAgAgAAAAAAEAQCAAQAAAQAQCAAAoEACAA=</HashCode>
+      <FileName>Subject.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Category" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MensaGymnazium.IntranetGen3.Model.SubjectType">
+    <Position X="10" Y="2" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="MensaGymnazium.IntranetGen3.Model.SubjectType.Entry" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>SubjectType.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SubjectType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MensaGymnazium.IntranetGen3.Model.SubjectTypeRelation">
+    <Position X="6.5" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAEAAAAAAAAIAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>SubjectTypeRelation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Subject" />
+      <Property Name="SubjectType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MensaGymnazium.IntranetGen3.Model.SubjectCategory">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="MensaGymnazium.IntranetGen3.Model.SubjectCategory.Entry" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>SubjectCategory.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SubjectCategory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
