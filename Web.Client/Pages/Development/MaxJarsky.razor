@@ -1,16 +1,65 @@
-﻿@page "/maxjarsky"
+﻿@page "/development/maxjarsky"
 
-<h1>Max Jarský</h1>
-<br />
 <br />
 <h3>Snažme se žít tak, aby naší smrti litoval i majitel pohřební služby.</h3>
 <br />
-<br />
-<h3>
-    Autobusák 1: tak když do toho neteče nafta...
-    Autobusák 2: no ty píčo... To je imobilní!
-</h3>
+
+<h3>@distance<HxIcon Icon="@icon" CssClass="display-3" /></h3>
+<h3>..........................................................................................................................................<HxIcon Icon="@personIcon" CssClass="display-3" /></h3>
+<h3>..........................................................................................................................................<HxIcon Icon="@arrowIcon" CssClass="display-3" /></h3>
+
+<HxButton Icon="@BootstrapIcon.BoxArrowLeft" Color="ThemeColor.Primary" OnClick="MoveCartLeft"/>
+<HxButton Icon="@BootstrapIcon.BoxArrowRight" Color="ThemeColor.Primary" OnClick="MoveCartRight" />
+<HxButton Text="@pickupButtonText" Color="ThemeColor.Primary" OnClick="CollectBody" />
 
 @code {
+    BootstrapIcon icon = BootstrapIcon.Minecart;
+    BootstrapIcon personIcon = BootstrapIcon.Person;
+    BootstrapIcon arrowIcon = BootstrapIcon.ArrowUp;
 
+    int cartPosition = 1;
+    string distance = "";
+
+    string pickupButtonText = "--";
+
+    void MoveCartRight()
+    {
+        if (cartPosition == 16)
+        {
+            pickupButtonText = "Pickup";
+        }
+        else
+        {
+            cartPosition++;
+            pickupButtonText = "--";
+        }
+        UpdateCart();
+    }
+    void MoveCartLeft()
+    {
+        if (cartPosition > 0)
+        {
+            cartPosition--;
+            pickupButtonText = "--";
+        }
+        UpdateCart();
+    }
+    void UpdateCart()
+    {
+        distance = "";
+        for (int i = 0; i < cartPosition; i++)
+        {
+            distance += "_____";
+        }
+    }
+    void CollectBody()
+    {
+        if (cartPosition == 16)
+        {
+            pickupButtonText = "--";
+            icon = BootstrapIcon.MinecartLoaded;
+            personIcon = BootstrapIcon.BorderBottom;
+            arrowIcon = BootstrapIcon.HandThumbsUpFill;
+        }
+    }
 }
