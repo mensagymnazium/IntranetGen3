@@ -67,6 +67,8 @@ public class Subject
 	[MaxLength(50)]
 	public string SeedIdentifier { get; set; }
 
+	public bool CanRegisterRepeatedly { get; set; }
+
 	public DateTime Created { get; set; } = DateTime.Now;
 	public DateTime? Deleted { get; set; }
 }
