@@ -15,8 +15,8 @@ public class StudentSubjectRegistration
 
 	public StudentRegistrationType RegistrationType { get; set; }
 
-	public SigningRule UsedSigningRule { get; set; }
-	public int UsedSigningRuleId { get; set; }
+	//public SigningRule UsedSigningRule { get; set; }
+	//public int UsedSigningRuleId { get; set; }
 
 	public DateTime Created { get; set; }
 	public DateTime? Deleted { get; set; }

@@ -69,7 +69,7 @@ public class StudentSubjectRegistrationFacade : IStudentSubjectRegistrationFacad
 		registration.SubjectId = registrationDto.SubjectId.Value;
 		registration.StudentId = registrationDto.StudentId.Value;
 		registration.RegistrationType = registrationDto.RegistrationType.Value;
-		registration.UsedSigningRuleId = registrationDto.SigningRuleId.Value;
+		//registration.UsedSigningRuleId = registrationDto.SigningRuleId.Value;
 	}
 
 	[Authorize(Roles = nameof(Role.Administrator))]

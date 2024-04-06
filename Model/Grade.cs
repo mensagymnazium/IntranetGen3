@@ -17,5 +17,5 @@ public class Grade
 
 	public ICollection<Student> Students { get; } = new List<Student>();
 
-	public List<SigningRule> SigningRules { get; } = new List<SigningRule>();
+	//public List<SigningRule> SigningRules { get; } = new List<SigningRule>();
 }

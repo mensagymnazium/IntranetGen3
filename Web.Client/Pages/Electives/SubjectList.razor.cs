@@ -26,7 +26,7 @@ public partial class SubjectList
 	private HxGrid<SubjectListItemDto> subjectsGrid;
 	private SubjectListItemDto subjectSelected;
 	private SubjectEdit subjectEditComponent;
-	private List<SigningRuleWithRegistrationsDto> studentRegistrations;
+	//private List<SigningRuleWithRegistrationsDto> studentRegistrations;
 
 	private static int? LastSigningRuleId { get; set; }
 
@@ -39,20 +39,24 @@ public partial class SubjectList
 
 		if ((await ClientAuthService.GetCurrentClaimsPrincipal()).IsInRole(nameof(Role.Student)))
 		{
-			studentRegistrations = await SubjectRegistrationsManagerFacade.GetCurrentUserSigningRulesWithRegistrationsAsync(Dto.FromValue((int?)null));
+			//Todo : RETHERE
+			//studentRegistrations = await SubjectRegistrationsManagerFacade.GetCurrentUserSigningRulesWithRegistrationsAsync(Dto.FromValue((int?)null));
 		}
 	}
 
 	protected bool IsStudentRegistered(int subjectId, StudentRegistrationType registrationType)
 	{
-		if (studentRegistrations == null)
-		{
-			return false;
-		}
-		return studentRegistrations
-			.Where(ssr => (this.subjectListFilter.SigningRuleId is null) || (ssr.Id == this.subjectListFilter.SigningRuleId))
-			.SelectMany(sr => sr.Registrations)
-			.Any(r => (r.SubjectId == subjectId) && (r.RegistrationType == registrationType));
+		//Todo : RETHERE
+		return false;
+
+		//if (studentRegistrations == null)
+		//{
+		//	return false;
+		//}
+		//return studentRegistrations
+		//	.Where(ssr => (this.subjectListFilter.SigningRuleId is null) || (ssr.Id == this.subjectListFilter.SigningRuleId))
+		//	.SelectMany(sr => sr.Registrations)
+		//	.Any(r => (r.SubjectId == subjectId) && (r.RegistrationType == registrationType));
 	}
 
 	protected string GetRowCssClass(SubjectListItemDto item)

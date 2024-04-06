@@ -9,16 +9,16 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Queries;
 public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 {
 	private readonly ISubjectDataSource subjectDataSource;
-	private readonly ISigningRuleRepository signingRuleRepository;
+	//private readonly ISigningRuleRepository signingRuleRepository;
 	private readonly IStudentSubjectRegistrationDataSource studentSubjectRegistrationDataSource;
 
 	public SubjectListQuery(
 		ISubjectDataSource subjectDataSource,
-		ISigningRuleRepository signingRuleRepository,
+		//ISigningRuleRepository signingRuleRepository,
 		IStudentSubjectRegistrationDataSource studentSubjectRegistrationDataSource)
 	{
 		this.subjectDataSource = subjectDataSource;
-		this.signingRuleRepository = signingRuleRepository;
+		//this.signingRuleRepository = signingRuleRepository;
 		this.studentSubjectRegistrationDataSource = studentSubjectRegistrationDataSource;
 	}
 
@@ -33,24 +33,24 @@ public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 			.WhereIf(Filter.SubjectCategoryId != null, s => s.CategoryId == Filter.SubjectCategoryId)
 			.WhereIf(Filter.TeacherId != null, s => s.TeacherRelations.Any(tr => tr.TeacherId == Filter.TeacherId));
 
-		if (Filter.SigningRuleId is not null)
-		{
-			var signingRule = signingRuleRepository.GetObject(Filter.SigningRuleId.Value);
+		//if (Filter.SigningRuleId is not null)
+		//{
+		//	var signingRule = signingRuleRepository.GetObject(Filter.SigningRuleId.Value);
 
-			data = data.Where(s => s.GradeRelations.Any(gr => gr.GradeId == signingRule.GradeId));
+		//	data = data.Where(s => s.GradeRelations.Any(gr => gr.GradeId == signingRule.GradeId));
 
-			var subjectTypesIds = signingRule.SubjectTypeRelations.Select(str => str.SubjectTypeId);
-			if (subjectTypesIds.Any())
-			{
-				data = data.Where(s => s.TypeRelations.Any(tr => subjectTypesIds.Contains(tr.SubjectTypeId)));
-			}
+		//	var subjectTypesIds = signingRule.SubjectTypeRelations.Select(str => str.SubjectTypeId);
+		//	if (subjectTypesIds.Any())
+		//	{
+		//		data = data.Where(s => s.TypeRelations.Any(tr => subjectTypesIds.Contains(tr.SubjectTypeId)));
+		//	}
 
-			var subjectCategoriesIds = signingRule.SubjectCategoryRelations.Select(str => str.SubjectCategoryId);
-			if (subjectCategoriesIds.Any())
-			{
-				data = data.Where(s => subjectCategoriesIds.Contains(s.CategoryId));
-			}
-		}
+		//	var subjectCategoriesIds = signingRule.SubjectCategoryRelations.Select(str => str.SubjectCategoryId);
+		//	if (subjectCategoriesIds.Any())
+		//	{
+		//		data = data.Where(s => subjectCategoriesIds.Contains(s.CategoryId));
+		//	}
+		//}
 
 		data = data
 			.OrderByMultiple(Sorting, sortingExpression => sortingExpression switch

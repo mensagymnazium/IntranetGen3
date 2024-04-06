@@ -1,6 +1,6 @@
-﻿namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
+﻿//namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 
-public partial interface ISigningRuleRepository
-{
+//public partial interface ISigningRuleRepository
+//{
 
-}
+//}

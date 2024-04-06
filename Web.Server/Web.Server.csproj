@@ -6,6 +6,7 @@
 		<DisableImplicitComponentsAnalyzers>true</DisableImplicitComponentsAnalyzers>
 		<AssemblyName>MensaGymnazium.IntranetGen3.Web.Server</AssemblyName>
 		<RootNamespace>MensaGymnazium.IntranetGen3.Web.Server</RootNamespace>
+		<UserSecretsId>d785f9e1-fb2e-4c35-834c-a3d637d688db</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
