@@ -7,14 +7,6 @@
                   TFilterModel="SubjectListQueryFilter"
                   FilterModel="subjectListFilter"
                   FilterModelChanged="HandleFilterModelChanged">
-       @*  <SearchTemplate>
-            <strong class="d-none d-sm-block">Zápisové pravidlo:</strong>
-            <SigningRulePicker Value="subjectListFilter.SigningRuleId"
-                               ValueChanged="HandleSigningRuleFilterChanged"
-                               ValueExpression="() => subjectListFilter.SigningRuleId"
-                               RestrictStudentGrade="true"
-                               NullText="-neurčeno-" />
-        </SearchTemplate> *@
         <CommandsTemplate>
             <AuthorizeView Roles="@nameof(Role.Administrator)">
                 <HxButton Text="Nový předmět" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />

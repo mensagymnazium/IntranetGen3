@@ -1,6 +1,7 @@
 ﻿using Havit;
 using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Primitives;
+using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
 
@@ -13,30 +14,27 @@ public partial class StudentSubjectRegistrationComponent
 	[Inject] protected IHxMessageBoxService MessageBox { get; set; }
 	[Inject] protected IHxMessengerService Messenger { get; set; }
 	[Inject] protected ISubjectRegistrationsManagerFacade SubjectRegistrationsManagerFacade { get; set; }
+	[Inject] protected IStudentSubjectRegistrationsDataStore StudentSubjectRegistrationsDataStore { get; set; }
 
 	/// <summary>
-	/// If registration type is null there is no registration, no registration was made by current user (student) for this subject
-	/// //TODO: Replace with data from data store? This is now messy
+	/// Registration was made by current user (student) for this subject
+	/// If null: no registration
 	/// </summary>
-	private StudentSubjectRegistrationDto studentsRegistrationForThisSubject;
+	private StudentSubjectRegistrationDto studentsRegistrationForThisSubject = null;
 
 	protected override async Task OnInitializedAsync()
 	{
-		studentsRegistrationForThisSubject = await SubjectRegistrationsManagerFacade.GetCurrentUserRegistrationForSubject(
-			Dto.FromValue(SubjectId!.Value));
+		await LoadStudentRegistrationAsync();
 	}
 
-	//private HxGrid<SigningRuleStudentRegistrationsDto> gridComponent;
+	private async Task LoadStudentRegistrationAsync()
+	{
+		await StudentSubjectRegistrationsDataStore.EnsureDataAsync();
+		studentsRegistrationForThisSubject =
+			await StudentSubjectRegistrationsDataStore.GetByKeyOrDefaultAsync(SubjectId!.Value);
 
-	//private async Task<GridDataProviderResult<SigningRuleStudentRegistrationsDto>> GetGridData(GridDataProviderRequest<SigningRuleStudentRegistrationsDto> request)
-	//{
-	//	Contract.Assert<InvalidOperationException>(SubjectId is not null);
-
-	//	var data = await SubjectRegistrationsManagerFacade.GetCurrentUserSubjectSigningRulesForRegistrationAsync(Dto.FromValue(SubjectId.Value));
-
-	//	return request.ApplyTo(data);
-	//}
-
+		StateHasChanged();
+	}
 	private async Task HandleCancelRegistrationClicked()
 	{
 		if (studentsRegistrationForThisSubject is null)
@@ -50,7 +48,12 @@ public partial class StudentSubjectRegistrationComponent
 			{
 				await SubjectRegistrationsManagerFacade.CancelRegistrationAsync(Dto.FromValue(studentsRegistrationForThisSubject.Id));
 
-				//await gridComponent.RefreshDataAsync();
+				// Invalidate data store
+				StudentSubjectRegistrationsDataStore.RegistrationsChanged();
+
+				// Reload from cache (Xopa: maybe unnecessarily expensive?)
+				await LoadStudentRegistrationAsync();
+
 				await OnRegistrationChanged.InvokeAsync();
 			}
 			catch (OperationFailedException)
@@ -74,7 +77,12 @@ public partial class StudentSubjectRegistrationComponent
 						RegistrationType = registrationType
 					});
 
-				//await gridComponent.RefreshDataAsync();
+				//Invalidate data store
+				StudentSubjectRegistrationsDataStore.RegistrationsChanged();
+
+				// Reload from cache (Xopa: maybe unnecessarily expensive?)
+				await LoadStudentRegistrationAsync();
+
 				await OnRegistrationChanged.InvokeAsync();
 			}
 			catch (OperationFailedException)

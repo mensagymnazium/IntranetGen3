@@ -112,23 +112,6 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		// Verify registration date
 		Contract.Requires<OperationFailedException>(RegistrationIsWithinValidDate(), "Přihlášku není možné založit. Je před, nebo již po termínu přihlašování");
 
-		//// Verify registration requirements
-		//var signingRulesForRegistration = await GetCurrentUserSubjectSigningRulesForRegistrationAsync(Dto.FromValue(studentSubjectRegistrationCreateDto.SubjectId.Value), cancellationToken);
-		//var signingRuleForRegistrationDto = signingRulesForRegistration.Single(sr => sr.Id == studentSubjectRegistrationCreateDto.SigningRuleId);
-		//Contract.Requires<ArgumentException>(signingRuleForRegistrationDto is not null);
-
-		//switch (studentSubjectRegistrationCreateDto.RegistrationType)
-		//{
-		//	case StudentRegistrationType.Main:
-		//		Contract.Requires<OperationFailedException>(signingRuleForRegistrationDto.MainRegistrationAllowed, signingRuleForRegistrationDto.MainRegistrationNotAllowedReason);
-		//		break;
-		//	case StudentRegistrationType.Secondary:
-		//		Contract.Requires<OperationFailedException>(signingRuleForRegistrationDto.SecondaryRegistrationAllowed, signingRuleForRegistrationDto.SecondaryRegistrationNotAllowedReason);
-		//		break;
-		//	default:
-		//		throw new InvalidOperationException($"Unknown {nameof(StudentRegistrationType)} value: {studentSubjectRegistrationCreateDto.RegistrationType}.");
-		//}
-
 		// create registration
 		var currentUser = applicationAuthenticationService.GetCurrentUser();
 		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
@@ -136,7 +119,6 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		var studentSubjectRegistration = new StudentSubjectRegistration
 		{
 			StudentId = currentUser.StudentId.Value,
-			//UsedSigningRuleId = studentSubjectRegistrationCreateDto.SigningRuleId.Value,
 			SubjectId = studentSubjectRegistrationCreateDto.SubjectId.Value,
 			RegistrationType = studentSubjectRegistrationCreateDto.RegistrationType.Value
 		};

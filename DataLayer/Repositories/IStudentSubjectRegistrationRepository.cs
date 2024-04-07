@@ -16,4 +16,5 @@ public partial interface IStudentSubjectRegistrationRepository
 	//public Task<long> CountBySubjectAndTypeAsync(int subjectId, StudentRegistrationType type, CancellationToken cancellationToken = default);
 
 	//public Task<List<StudentSubjectRegistration>> GetByStudentAndTimeAsync(int studentId, DayOfWeek day, ScheduleSlotInDay slot, CancellationToken cancellationToken = default);
+	Task<List<StudentSubjectRegistration>> GetRegistrationsByStudent(int studentId);
 }

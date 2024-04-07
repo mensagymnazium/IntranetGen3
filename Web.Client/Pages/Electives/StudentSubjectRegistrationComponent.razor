@@ -1,14 +1,15 @@
-﻿@* Todo : RETHERE *@
-            
-<HxButton 
-    Text="Zapsat jako primární"
-    OnClick="() => HandleCreateRegistrationClicked(StudentRegistrationType.Main)" 
-    Color="ThemeColor.Primary"
-    Size="ButtonSize.Small"
-    Icon="BootstrapIcon.Basket" />
-
-@if (studentsRegistrationForThisSubject?.RegistrationType is not null)
+﻿@if (studentsRegistrationForThisSubject is null)
 {
+    // No registration
+    <HxButton 
+        Text="Zapsat jako primární"
+        OnClick="() => HandleCreateRegistrationClicked(StudentRegistrationType.Main)" 
+        Color="ThemeColor.Primary"
+        Size="ButtonSize.Small"
+        Icon="BootstrapIcon.Basket" />
+} else
+{
+    // Registered already
     <HxButton 
         Text="Zrušit primární zápis"
         OnClick="() => HandleCancelRegistrationClicked()"
@@ -16,7 +17,6 @@
         Outline="true" 
         Size="ButtonSize.Small" 
         Icon="BootstrapIcon.Trash" />
-
 }
 
 
