@@ -6,7 +6,6 @@ public record StudentSubjectRegistrationListQueryFilter
 {
 	public int? SubjectId { get; set; }
 	public int? GradeId { get; set; }
-	public int? SigningRuleId { get; set; }
 	public int? StudentId { get; set; }
 	public StudentRegistrationType? RegistrationType { get; set; }
 }

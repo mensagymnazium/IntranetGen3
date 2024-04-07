@@ -16,6 +16,4 @@ public class Grade
 	public string AadGroupId { get; set; }
 
 	public ICollection<Student> Students { get; } = new List<Student>();
-
-	//public List<SigningRule> SigningRules { get; } = new List<SigningRule>();
 }

@@ -73,7 +73,6 @@ public partial class StudentSubjectRegistrationComponent
 					new StudentSubjectRegistrationCreateDto()
 					{
 						SubjectId = SubjectId!.Value,
-						//SigningRuleId = signingRuleId,
 						RegistrationType = registrationType
 					});
 
