@@ -53,9 +53,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{CF770CA3-11AC-42A1-9EBF-F62B274FB194}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{299B9B52-EFCA-4B17-B119-C4681DF12656}"
-	ProjectSection(SolutionItems) = preProject
-		byl tu fantomas = byl tu fantomas
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{0E8ABFD9-D8BD-40A6-A2BE-2974A1418C03}"
 EndProject

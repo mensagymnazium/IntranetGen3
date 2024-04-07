@@ -25,11 +25,7 @@ public partial class SubjectList
 	private SubjectEdit subjectEditComponent;
 
 	private List<StudentSubjectRegistrationDto> registeredSubjects = new(); // Never null, may be empty...
-	private SubjectListQueryFilter subjectListFilter = new SubjectListQueryFilter()
-	{
-		SigningRuleId = LastSigningRuleId //Todo remove
-	};
-	private static int? LastSigningRuleId { get; set; }
+	private SubjectListQueryFilter subjectListFilter = new();
 
 	protected override async Task OnInitializedAsync()
 	{
