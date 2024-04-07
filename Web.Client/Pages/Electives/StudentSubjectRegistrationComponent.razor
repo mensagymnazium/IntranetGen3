@@ -1,7 +1,28 @@
-﻿            @* Todo : RETHERE *@
+﻿@* Todo : RETHERE *@
+            
+<HxButton 
+    Text="Zapsat jako primární"
+    OnClick="() => HandleCreateRegistrationClicked(StudentRegistrationType.Main)" 
+    Color="ThemeColor.Primary"
+    Size="ButtonSize.Small"
+    Icon="BootstrapIcon.Basket" />
+
+@if (studentsRegistrationForThisSubject?.RegistrationType is not null)
+{
+    <HxButton 
+        Text="Zrušit primární zápis"
+        OnClick="() => HandleCancelRegistrationClicked()"
+        Color="ThemeColor.Primary"
+        Outline="true" 
+        Size="ButtonSize.Small" 
+        Icon="BootstrapIcon.Trash" />
+
+}
 
 
-@* <HxGrid @ref="gridComponent"
+@* 
+
+<HxGrid @ref="gridComponent"
         TItem="SigningRuleStudentRegistrationsDto"
         DataProvider="GetGridData"
         SelectionEnabled="false"

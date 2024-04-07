@@ -8,36 +8,30 @@
 //namespace MensaGymnazium.IntranetGen3.DataLayer.Queries;
 
 //[Service]
-//public class StudentSigningRulesWithRegistrationsQuery : QueryBase<SigningRuleWithRegistrationsDto>, IStudentSigningRulesWithRegistrationsQuery
+//public class StudentRegistrationsQuery : QueryBase<RegistrationsDto>, IStudentRegistrationsQuery
 //{
-//	private readonly ISigningRuleDataSource signingRuleDataSource;
-
 //	protected Student Student { get; set; }
 //	protected Subject SubjectFilter { get; set; }
 
-//	public StudentSigningRulesWithRegistrationsQuery(
-//		ISigningRuleDataSource signingRuleDataSource)
-//	{
-//		this.signingRuleDataSource = signingRuleDataSource;
-//	}
-
-//	protected override IQueryable<SigningRuleWithRegistrationsDto> Query()
+//	protected override IQueryable<RegistrationsDto> Query()
 //	{
 //		Contract.Requires<ArgumentException>(Student is not null);
 
-//		var studentNextGrade = ((GradeEntry)this.Student.GradeId).NextGrade();
+//		//var studentNextGrade = ((GradeEntry)this.Student.GradeId).NextGrade();
 
-//		var data = signingRuleDataSource.Data
-//			.Where(x => x.GradeId == (int)studentNextGrade);
+//		//var signingRulesData = signingRuleDataSource.Data
+//			//.Where(x => x.GradeId == (int)studentNextGrade);
 
-//		if (this.SubjectFilter is not null)
-//		{
-//			data = data.Where(sr => this.SubjectFilter.GradeRelations.Select(gr => gr.GradeId).Contains(sr.GradeId));
-//			data = data.Where(sr => sr.SubjectTypeRelations.Any(str => this.SubjectFilter.TypeRelations.Select(tr => tr.SubjectTypeId).Contains(str.SubjectTypeId)));
-//			data = data.Where(sr => sr.SubjectCategoryRelations.Any(scr => scr.SubjectCategoryId == this.SubjectFilter.CategoryId));
-//		}
+//		//if (this.SubjectFilter is not null)
+//		//{
+//		//	signingRulesData = signingRulesData.Where(sr => this.SubjectFilter.GradeRelations.Select(gr => gr.GradeId).Contains(sr.GradeId));
+//		//	signingRulesData = signingRulesData.Where(sr => sr.SubjectTypeRelations.Any(str => this.SubjectFilter.TypeRelations.Select(tr => tr.SubjectTypeId).Contains(str.SubjectTypeId)));
+//		//	signingRulesData = signingRulesData.Where(sr => sr.SubjectCategoryRelations.Any(scr => scr.SubjectCategoryId == this.SubjectFilter.CategoryId));
+//		//}
 
-//		return data.Select(sr => new SigningRuleWithRegistrationsDto()
+
+
+//		return signingRulesData.Select(sr => new RegistrationsDto()
 //		{
 //			Id = sr.Id,
 //			GradeId = (GradeEntry)sr.GradeId,
@@ -59,7 +53,7 @@
 //		});
 //	}
 
-//	public Task<List<SigningRuleWithRegistrationsDto>> GetDataAsync(Student student, Subject subjectFilter = null, CancellationToken cancellationToken = default)
+//	public Task<List<RegistrationsDto>> GetDataAsync(Student student, Subject subjectFilter = null, CancellationToken cancellationToken = default)
 //	{
 //		Contract.Requires<ArgumentException>(student is not null);
 

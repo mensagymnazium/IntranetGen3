@@ -3,8 +3,16 @@
 [ApiContract]
 public interface ISubjectRegistrationsManagerFacade
 {
-	//Task<List<SigningRuleWithRegistrationsDto>> GetCurrentUserSigningRulesWithRegistrationsAsync(Dto<int?> onlySubjectId, CancellationToken cancellationToken = default);
-	//Task<List<SigningRuleStudentRegistrationsDto>> GetCurrentUserSubjectSigningRulesForRegistrationAsync(Dto<int> subjectId, CancellationToken cancellationToken = default);
+	//Task<List<StudentRegistrationsDto>> GetCurrentUserSubjectSigningRulesForRegistrationAsync(Dto<int> subjectId, CancellationToken cancellationToken = default);
+
+	/// <summary>
+	/// Returns the users registration for a subject
+	/// // TODO: Change to query that can be cached inside data store
+	/// </summary>
+	/// <param name="subjectId"></param>
+	/// <param name="cancellationToken"></param>
+	/// <returns>Always returns a registration. If there is no registration, it returns the DTO with no data set</returns>
+	Task<StudentSubjectRegistrationDto> GetCurrentUserRegistrationForSubject(Dto<int> subjectId, CancellationToken cancellationToken = default);
 	Task CancelRegistrationAsync(Dto<int> studentSubjectRegistrationId, CancellationToken cancellationToken = default);
 	Task CreateRegistrationAsync(StudentSubjectRegistrationCreateDto studentSubjectRegistrationCreateDto, CancellationToken cancellationToken = default);
 	//Task<DataFragmentResult<StudentWithSigningRuleListItemDto>> GetStudentWithSigningRuleListAsync(DataFragmentRequest<StudentWithSigningRuleListQueryFilter> facadeRequest, CancellationToken cancellationToken);

@@ -1,6 +1,6 @@
 ﻿namespace MensaGymnazium.IntranetGen3.Contracts;
 
-public record SigningRuleStudentRegistrationsDto
+public record StudentRegistrationsDto
 {
 	public int Id { get; set; }
 	public string Name { get; set; }

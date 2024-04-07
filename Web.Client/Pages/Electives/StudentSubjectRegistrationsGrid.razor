@@ -23,10 +23,10 @@
                       ItemTextSelector="i => i.RegistrationType.AsEnumValueDescription()"
                       SortString="@nameof(StudentSubjectRegistrationDto.RegistrationType)"
                       TItem="StudentSubjectRegistrationDto" />
-        <HxGridColumn HeaderText="Zápisové pravidlo"
+        @* <HxGridColumn HeaderText="Zápisové pravidlo"
                       ItemTextSelector="i => SigningRulesDataStore.GetByKey(i.SigningRuleId.Value)?.Name"
                       SortString="@nameof(StudentSubjectRegistrationDto.SigningRuleId)"
-                      TItem="StudentSubjectRegistrationDto" />
+                      TItem="StudentSubjectRegistrationDto" /> *@
         <HxContextMenuGridColumn Context="item">
             <AuthorizeView Roles="@nameof(Role.Administrator)">
                 <HxContextMenu>

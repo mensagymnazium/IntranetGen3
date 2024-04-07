@@ -55,6 +55,34 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 	}
 
 	[Authorize(Roles = nameof(Role.Student))]
+	public async Task<StudentSubjectRegistrationDto> GetCurrentUserRegistrationForSubject(Dto<int> subjectId, CancellationToken cancellationToken = default)
+	{
+		var user = applicationAuthenticationService.GetCurrentUser();
+		Contract.Requires<InvalidOperationException>(user.StudentId is not null);
+
+		// Todo: change to query?
+		var registration = await studentSubjectRegistrationRepository.GetByStudentForSubject(
+			studentId: user.Id,
+			subjectId: subjectId.Value,
+			cancellationToken: cancellationToken);
+
+		if (registration is null) // No registration
+		{
+			return new();
+		}
+
+		// Map
+		return new StudentSubjectRegistrationDto()
+		{
+			RegistrationType = registration.RegistrationType,
+			Created = registration.Created,
+			Id = registration.Id,
+			StudentId = registration.StudentId, // Should be same as input
+			SubjectId = registration.SubjectId // Should be same as input
+		};
+	}
+
+	[Authorize(Roles = nameof(Role.Student))]
 	public async Task CancelRegistrationAsync(Dto<int> studentSubjectRegistrationId, CancellationToken cancellationToken = default)
 	{
 		Contract.Requires<ArgumentNullException>(studentSubjectRegistrationId is not null);
@@ -77,7 +105,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 	{
 		// Verify request
 		Contract.Requires<ArgumentNullException>(studentSubjectRegistrationCreateDto is not null);
-		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.SigningRuleId != default);
+		//Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.SigningRuleId != default);
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.SubjectId != default);
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.RegistrationType != default);
 
@@ -117,12 +145,14 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		await unitOfWork.CommitAsync(cancellationToken);
 	}
 
+
+
 	//[Authorize(Roles = nameof(Role.Student))]
-	//public async Task<List<SigningRuleStudentRegistrationsDto>> GetCurrentUserSubjectSigningRulesForRegistrationAsync(Dto<int> subjectId, CancellationToken cancellationToken = default)
+	//public async Task<List<StudentRegistrationsDto>> GetCurrentUserSubjectSigningRulesForRegistrationAsync(Dto<int> subjectId, CancellationToken cancellationToken = default)
 	//{
 	//	var signingRulesWithRegistrations = await GetCurrentUserSigningRulesWithRegistrationsAsync(Dto.FromValue((int?)subjectId.Value), cancellationToken);
 
-	//	List<SigningRuleStudentRegistrationsDto> result = new();
+	//	List<StudentRegistrationsDto> result = new();
 
 	//	var subjectRegistered = signingRulesWithRegistrations.SelectMany(x => x.Registrations).Any(ssr => ssr.SubjectId == subjectId.Value);
 	//	var subject = await subjectRepository.GetObjectAsync(subjectId.Value, cancellationToken);
@@ -135,7 +165,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 
 	//	foreach (var item in signingRulesWithRegistrations)
 	//	{
-	//		var resultItem = new SigningRuleStudentRegistrationsDto();
+	//		var resultItem = new StudentRegistrationsDto();
 	//		resultItem.Id = item.Id;
 	//		resultItem.Name = item.Name;
 
@@ -201,7 +231,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 	//}
 
 	//[Authorize(Roles = nameof(Role.Student))]
-	//public async Task<List<SigningRuleWithRegistrationsDto>> GetCurrentUserSigningRulesWithRegistrationsAsync(Dto<int?> onlySubjectId, CancellationToken cancellationToken = default)
+	//public async Task<List<RegistrationsDto>> GetCurrentUserSigningRulesWithRegistrationsAsync(Dto<int?> onlySubjectId, CancellationToken cancellationToken = default)
 	//{
 	//	var user = applicationAuthenticationService.GetCurrentUser();
 	//	Contract.Assert<InvalidOperationException>(user.Student is not null);
