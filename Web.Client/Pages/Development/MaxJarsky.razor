@@ -5,8 +5,8 @@
 <br />
 
 <h3>@distance<HxIcon Icon="@icon" CssClass="display-3" /></h3>
-<h3>..........................................................................................................................................<HxIcon Icon="@personIcon" CssClass="display-3" /></h3>
-<h3>..........................................................................................................................................<HxIcon Icon="@arrowIcon" CssClass="display-3" /></h3>
+<h3>.................................................................................................................................<HxIcon Icon="@personIcon" CssClass="display-3" /></h3>
+<h3>.................................................................................................................................<HxIcon Icon="@arrowIcon" CssClass="display-3" /></h3>
 
 <HxButton Icon="@BootstrapIcon.BoxArrowLeft" Color="ThemeColor.Primary" OnClick="MoveCartLeft"/>
 <HxButton Icon="@BootstrapIcon.BoxArrowRight" Color="ThemeColor.Primary" OnClick="MoveCartRight" />
@@ -49,7 +49,7 @@
         distance = "";
         for (int i = 0; i < cartPosition; i++)
         {
-            distance += "_____";
+            distance += "........";
         }
     }
     void CollectBody()
