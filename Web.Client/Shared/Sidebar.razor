@@ -12,8 +12,6 @@
         <HxSidebarItem Text="Volitelné předměty" Icon="@BootstrapIcon.CalendarRange">
             <HxSidebarItem Text="Předměty" Href="@Routes.Electives.Subjects" />
             <HxSidebarItem Text="Zapsaní studenti" Href="@Routes.Electives.StudentSubjectRegistrationList" />
-            <HxSidebarItem Text="Zápisová pravidla" Href="@Routes.Electives.SigningRuleList" />
-            <HxSidebarItem Text="Přehled plnění" Href="@Routes.Electives.StudentWithSigningRuleList" />
         </HxSidebarItem>
         <AuthorizeView Roles="@nameof(Role.Administrator)">
             <HxSidebarItem Text="Nastavení" Icon="@BootstrapIcon.Gear">

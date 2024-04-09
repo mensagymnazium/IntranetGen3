@@ -5,22 +5,20 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 
 public partial class StudentSubjectRegistrationDbRepository : IStudentSubjectRegistrationRepository
 {
+	public Task<StudentSubjectRegistration?> GetByStudentForSubject(
+		int studentId,
+		int subjectId,
+		CancellationToken cancellationToken = default)
+	{
+		return Data.FirstOrDefaultAsync(ssr => ssr.StudentId == studentId && ssr.SubjectId == subjectId, cancellationToken);
+	}
 	public Task<List<StudentSubjectRegistration>> GetBySubjectAsync(int subjectId, CancellationToken cancellationToken = default)
 	{
 		return Data.Where(ssr => ssr.SubjectId == subjectId).ToListAsync(cancellationToken);
 	}
 
-	public Task<long> CountBySubjectAndTypeAsync(int subjectId, StudentRegistrationType type, CancellationToken cancellationToken = default)
+	public Task<List<StudentSubjectRegistration>> GetRegistrationsByStudent(int studentId)
 	{
-		return Data.Where(ssr => ssr.SubjectId == subjectId && ssr.RegistrationType == type).LongCountAsync();
-	}
-
-	public Task<List<StudentSubjectRegistration>> GetByStudentAndTimeAsync(int studentId, DayOfWeek day, ScheduleSlotInDay slot, CancellationToken cancellationToken = default)
-	{
-		return Data.Where(ssr =>
-			ssr.StudentId == studentId &&
-			ssr.Subject.ScheduleDayOfWeek == day &&
-			ssr.Subject.ScheduleSlotInDay == slot
-		).ToListAsync();
+		return Data.Where(ssr => ssr.StudentId == studentId).ToListAsync();
 	}
 }

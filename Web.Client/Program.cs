@@ -49,7 +49,7 @@ public class Program
 		builder.Services.AddScoped<IGradesDataStore, GradesDataStore>();
 		builder.Services.AddScoped<IStudentsDataStore, StudentsDataStore>();
 		builder.Services.AddScoped<ISubjectsDataStore, SubjectsDataStore>();
-		builder.Services.AddScoped<ISigningRulesDataStore, SigningRulesDataStore>();
+		builder.Services.AddScoped<IStudentSubjectRegistrationsDataStore, StudentSubjectRegistrationsDataStore>();
 
 		builder.Services.AddScoped<IClientAuthService, ClientAuthService>();
 

@@ -18,17 +18,14 @@ public partial class SubjectList
 	[Inject] protected ITeachersDataStore TeachersDataStore { get; set; }
 	[Inject] protected IGradesDataStore GradesDataStore { get; set; }
 	[Inject] protected IClientAuthService ClientAuthService { get; set; }
+	[Inject] protected IStudentSubjectRegistrationsDataStore StudentSubjectRegistrationsDataStore { get; set; }
 
-	private SubjectListQueryFilter subjectListFilter = new SubjectListQueryFilter()
-	{
-		SigningRuleId = LastSigningRuleId
-	};
 	private HxGrid<SubjectListItemDto> subjectsGrid;
 	private SubjectListItemDto subjectSelected;
 	private SubjectEdit subjectEditComponent;
-	private List<SigningRuleWithRegistrationsDto> studentRegistrations;
 
-	private static int? LastSigningRuleId { get; set; }
+	private List<StudentSubjectRegistrationDto> registeredSubjects = new(); // Never null, may be empty...
+	private SubjectListQueryFilter subjectListFilter = new();
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -39,20 +36,20 @@ public partial class SubjectList
 
 		if ((await ClientAuthService.GetCurrentClaimsPrincipal()).IsInRole(nameof(Role.Student)))
 		{
-			studentRegistrations = await SubjectRegistrationsManagerFacade.GetCurrentUserSigningRulesWithRegistrationsAsync(Dto.FromValue((int?)null));
+			await StudentSubjectRegistrationsDataStore.EnsureDataAsync();
+			registeredSubjects = (await StudentSubjectRegistrationsDataStore.GetAllAsync()).ToList();
 		}
 	}
 
 	protected bool IsStudentRegistered(int subjectId, StudentRegistrationType registrationType)
 	{
-		if (studentRegistrations == null)
+		if (registeredSubjects.Count == 0)
 		{
 			return false;
 		}
-		return studentRegistrations
-			.Where(ssr => (this.subjectListFilter.SigningRuleId is null) || (ssr.Id == this.subjectListFilter.SigningRuleId))
-			.SelectMany(sr => sr.Registrations)
-			.Any(r => (r.SubjectId == subjectId) && (r.RegistrationType == registrationType));
+
+		// Todo: now omitting registration type, change that
+		return registeredSubjects.Any(reg => reg.SubjectId == subjectId);
 	}
 
 	protected string GetRowCssClass(SubjectListItemDto item)
@@ -86,13 +83,6 @@ public partial class SubjectList
 			Data = subjectListResult.Data ?? new(),
 			TotalCount = subjectListResult.TotalCount
 		};
-	}
-
-	private async Task HandleSigningRuleFilterChanged(int? newSigningRuleFilterValue)
-	{
-		subjectListFilter.SigningRuleId = newSigningRuleFilterValue;
-		LastSigningRuleId = newSigningRuleFilterValue;
-		await subjectsGrid.RefreshDataAsync();
 	}
 
 	private Task HandleSelectedDataItemChanged(SubjectListItemDto selection)

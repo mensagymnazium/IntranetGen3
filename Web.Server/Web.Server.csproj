@@ -6,10 +6,12 @@
 		<DisableImplicitComponentsAnalyzers>true</DisableImplicitComponentsAnalyzers>
 		<AssemblyName>MensaGymnazium.IntranetGen3.Web.Server</AssemblyName>
 		<RootNamespace>MensaGymnazium.IntranetGen3.Web.Server</RootNamespace>
+		<UserSecretsId>d785f9e1-fb2e-4c35-834c-a3d637d688db</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Havit.Blazor.Grpc.Server" Version="1.3.3" />
+		<PackageReference Include="Havit.Core" Version="2.0.29" />
 		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.5" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />

@@ -22,7 +22,6 @@ public record StudentSubjectRegistrationDto : StudentSubjectRegistrationCreateDt
 		public StudentSubjectRegistrationDtoValidator()
 		{
 			RuleFor(x => x.SubjectId).NotNull().WithName("Předmět");
-			RuleFor(x => x.SigningRuleId).NotNull().WithName("Zápisové pravidlo");
 			RuleFor(x => x.RegistrationType).NotNull().WithName("Typ zápisu");
 			RuleFor(x => x.StudentId).NotNull().WithName("Student");
 		}
