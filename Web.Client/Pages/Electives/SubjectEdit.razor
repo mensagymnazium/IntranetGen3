@@ -10,6 +10,7 @@
             <GradeMultiPicker @bind-Value="model.GradeIds" Label="Ročník(y)" />
             <SubjectCategoryPicker @bind-Value="model.CategoryId" Label="Skupina" />
             <SubjectTypeMultiPicker @bind-Value="model.SubjectTypeIds" Label="Vzdělávací oblast(i)" />
+			<HxSwitch @bind-Value="model.CanRegisterRepeatedly" Label="Lze zapsat opakovaně" />
         </EditForm>
     </BodyTemplate>
     <FooterTemplate>

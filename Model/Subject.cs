@@ -69,6 +69,8 @@ public class Subject
 
 	public bool CanRegisterRepeatedly { get; set; }
 
+	public int HoursPerWeek { get; set; } = 2;
+
 	public DateTime Created { get; set; } = DateTime.Now;
 	public DateTime? Deleted { get; set; }
 }

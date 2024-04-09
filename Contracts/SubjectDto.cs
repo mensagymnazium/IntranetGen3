@@ -7,6 +7,8 @@ public record SubjectDto : SubjectListItemDto
 {
 	public string Description { get; set; }
 
+	public bool CanRegisterRepeatedly { get; set; }
+
 	public class SubjectValidator : AbstractValidator<SubjectDto>
 	{
 		public SubjectValidator()
