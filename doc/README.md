@@ -1,6 +1,9 @@
 ﻿# Dokumentace
 
 ## Architektura projektu
+<a href="https://github.com/mensagymnazium/IntranetGen3/blob/master/doc/ProjectArchitecture.png">
+	<img src="https://raw.githubusercontent.com/mensagymnazium/IntranetGen3/master/doc/ProjectArchitecture.png">
+</a>
 
 ## Užitečné zdroje
 
@@ -18,4 +21,7 @@
 * https://docs.microsoft.com/en-us/aspnet/core/blazor/security/webassembly/hosted-with-azure-active-directory
 * https://docs.microsoft.com/en-us/aspnet/core/blazor/security/webassembly/azure-active-directory-groups-and-roles
 
-## Další, co se hodí vědět
+## Github workflow
+<a href="https://raw.githubusercontent.com/mensagymnazium/IntranetGen3/master/doc/GithubWorkflow.png">
+	<img src="https://raw.githubusercontent.com/mensagymnazium/IntranetGen3/master/doc/GithubWorkflow.png">
+</a>
