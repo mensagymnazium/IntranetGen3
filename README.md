@@ -1,7 +1,5 @@
 ﻿<p align="center">
-  <a href="https://github.com/Xopabyteh/Seminary_PrimirestSharp">
-    <img src="https://avatars.githubusercontent.com/u/91312705?s=250&v=250" />
-  </a>
+	<img src="https://avatars.githubusercontent.com/u/91312705?s=250&v=250" />
 </p>
 
 <h3 align="center">Mensa gymnázium intranet</h3>
