@@ -1,6 +1,8 @@
 ﻿# Dokumentace
 
-## Vývoj
+## Architektura projektu
+
+## Užitečné zdroje
 
 * [ASP.NET Blazor - Microsoft Docs](https://docs.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-5.0) - technologie pro implementaci UI
 * [HAVIT Blazor](https://havit.blazor.eu) - používané UI komponenty
@@ -15,3 +17,5 @@
 ### Authentizace, autorizace
 * https://docs.microsoft.com/en-us/aspnet/core/blazor/security/webassembly/hosted-with-azure-active-directory
 * https://docs.microsoft.com/en-us/aspnet/core/blazor/security/webassembly/azure-active-directory-groups-and-roles
+
+## Další, co se hodí vědět
