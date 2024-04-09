@@ -8,6 +8,7 @@ using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
 using MensaGymnazium.IntranetGen3.Model;
 using MensaGymnazium.IntranetGen3.Primitives;
+using MensaGymnazium.IntranetGen3.Services.SubjectRegistration;
 
 namespace MensaGymnazium.IntranetGen3.Facades;
 
@@ -16,43 +17,20 @@ namespace MensaGymnazium.IntranetGen3.Facades;
 public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFacade
 {
 	private readonly IApplicationAuthenticationService applicationAuthenticationService;
-	private readonly IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository;
 	private readonly IUnitOfWork unitOfWork;
-	private readonly ITimeService timeService;
-	private readonly IApplicationSettingsEntries applicationSettingsEntries;
+	private readonly ISubjectRegistrationsManagerService subjectRegistrationsManagerService;
+
 
 	public SubjectRegistrationsManagerFacade(
 		IApplicationAuthenticationService applicationAuthenticationService,
-		IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository,
-		IUnitOfWork unitOfWork,
-		ITimeService timeService,
-		IApplicationSettingsEntries applicationSettingsEntries)
+		IUnitOfWork unitOfWork, ISubjectRegistrationsManagerService subjectRegistrationsManagerService)
 	{
 		this.applicationAuthenticationService = applicationAuthenticationService;
-		this.studentSubjectRegistrationRepository = studentSubjectRegistrationRepository;
 		this.unitOfWork = unitOfWork;
-		this.timeService = timeService;
-		this.applicationSettingsEntries = applicationSettingsEntries;
+		this.subjectRegistrationsManagerService = subjectRegistrationsManagerService;
 	}
 
-	private bool RegistrationIsWithinValidDate()
-	{
-		var allowedFrom = applicationSettingsEntries.Current.SubjectRegistrationAllowedFrom;
-		var allowedTo = applicationSettingsEntries.Current.SubjectRegistrationAllowedTo;
-		var today = timeService.GetCurrentDate();
 
-		if (allowedFrom is not null && today < allowedFrom)
-		{
-			return false;
-		}
-
-		if (allowedTo is not null && today > allowedTo)
-		{
-			return false;
-		}
-
-		return true;
-	}
 
 	[Authorize(Roles = nameof(Role.Student))]
 	public async Task CancelRegistrationAsync(Dto<int> studentSubjectRegistrationId, CancellationToken cancellationToken = default)
@@ -60,15 +38,18 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		Contract.Requires<ArgumentNullException>(studentSubjectRegistrationId is not null);
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationId.Value != default);
 
-		var studentSubjectRegistration = await studentSubjectRegistrationRepository.GetObjectAsync(studentSubjectRegistrationId.Value, cancellationToken);
+		// Verify registration date
+		if (!subjectRegistrationsManagerService.IsRegistrationPeriodActive())
+		{
+			throw new OperationFailedException(
+				"Přihlášku není možné zrušit. Je před, nebo již po termínu přihlašování");
+		}
 
+		// Cancel
 		var currentUser = applicationAuthenticationService.GetCurrentUser();
-		Contract.Requires<SecurityException>(studentSubjectRegistration.StudentId == currentUser.StudentId);
+		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
+		await subjectRegistrationsManagerService.CancelRegistrationAsync(studentSubjectRegistrationId.Value, currentUser.StudentId.Value, cancellationToken);
 
-		// Verify registration dat
-		Contract.Requires<OperationFailedException>(RegistrationIsWithinValidDate(), "Přihlášku není možné zrušit. Je před, nebo již po termínu přihlašování");
-
-		unitOfWork.AddForDelete(studentSubjectRegistration);
 		await unitOfWork.CommitAsync(cancellationToken);
 	}
 
@@ -80,22 +61,22 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.SubjectId != default);
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.RegistrationType != default);
 
-		// Xopa: Todo: Maybe these two operations belong to the application layer?
 		// Verify registration date
-		Contract.Requires<OperationFailedException>(RegistrationIsWithinValidDate(), "Přihlášku není možné založit. Je před, nebo již po termínu přihlašování");
+		if (!subjectRegistrationsManagerService.IsRegistrationPeriodActive())
+		{
+			throw new OperationFailedException(
+								"Přihlášku není možné vytvořit. Je před, nebo již po termínu přihlašování");
+		}
 
-		// create registration
+		// Create registration
 		var currentUser = applicationAuthenticationService.GetCurrentUser();
 		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
 
-		var studentSubjectRegistration = new StudentSubjectRegistration
-		{
-			StudentId = currentUser.StudentId.Value,
-			SubjectId = studentSubjectRegistrationCreateDto.SubjectId.Value,
-			RegistrationType = studentSubjectRegistrationCreateDto.RegistrationType.Value
-		};
+		subjectRegistrationsManagerService.CreateNewSubjectRegistration(
+			studentId: currentUser.StudentId.Value,
+			subjectId: studentSubjectRegistrationCreateDto.SubjectId.Value,
+			registrationType: studentSubjectRegistrationCreateDto.RegistrationType.Value);
 
-		unitOfWork.AddForInsert(studentSubjectRegistration);
 		await unitOfWork.CommitAsync(cancellationToken);
 	}
 }
