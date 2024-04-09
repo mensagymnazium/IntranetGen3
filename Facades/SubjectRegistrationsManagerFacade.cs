@@ -55,34 +55,6 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 	}
 
 	[Authorize(Roles = nameof(Role.Student))]
-	public async Task<StudentSubjectRegistrationDto> GetCurrentUserRegistrationForSubject(Dto<int> subjectId, CancellationToken cancellationToken = default)
-	{
-		var user = applicationAuthenticationService.GetCurrentUser();
-		Contract.Requires<InvalidOperationException>(user.StudentId is not null);
-
-		// Todo: change to query?
-		var registration = await studentSubjectRegistrationRepository.GetByStudentForSubject(
-			studentId: user.Id,
-			subjectId: subjectId.Value,
-			cancellationToken: cancellationToken);
-
-		if (registration is null) // No registration
-		{
-			return new();
-		}
-
-		// Map
-		return new StudentSubjectRegistrationDto()
-		{
-			RegistrationType = registration.RegistrationType,
-			Created = registration.Created,
-			Id = registration.Id,
-			StudentId = registration.StudentId, // Should be same as input
-			SubjectId = registration.SubjectId // Should be same as input
-		};
-	}
-
-	[Authorize(Roles = nameof(Role.Student))]
 	public async Task CancelRegistrationAsync(Dto<int> studentSubjectRegistrationId, CancellationToken cancellationToken = default)
 	{
 		Contract.Requires<ArgumentNullException>(studentSubjectRegistrationId is not null);
@@ -108,6 +80,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.SubjectId != default);
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.RegistrationType != default);
 
+		// Xopa: Todo: Maybe these two operations belong to the application layer?
 		// Verify registration date
 		Contract.Requires<OperationFailedException>(RegistrationIsWithinValidDate(), "Přihlášku není možné založit. Je před, nebo již po termínu přihlašování");
 

@@ -1,4 +1,5 @@
-﻿using System.Security;
+﻿
+using System.Security;
 using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.DataLayer.Queries;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
