@@ -1,4 +1,5 @@
 ﻿using MensaGymnazium.IntranetGen3.Model;
+using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 
@@ -12,5 +13,12 @@ public partial class StudentSubjectRegistrationDbRepository : IStudentSubjectReg
 	public Task<List<StudentSubjectRegistration>> GetRegistrationsByStudent(int studentId)
 	{
 		return Data.Where(ssr => ssr.StudentId == studentId).ToListAsync();
+	}
+
+	public async Task<int> CountMainRegistrationsForSubjectAsync(int subjectId)
+	{
+		return await Data.CountAsync(
+			ssr => ssr.SubjectId == subjectId
+			&& ssr.RegistrationType == StudentRegistrationType.Main);
 	}
 }

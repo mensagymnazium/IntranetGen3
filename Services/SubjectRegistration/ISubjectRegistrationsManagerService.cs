@@ -33,4 +33,7 @@ public interface ISubjectRegistrationsManagerService
 	/// <param name="cancellationToken"></param>
 	/// <returns></returns>
 	public Task CancelRegistrationAsync(int registrationId, int callerStudentId, CancellationToken cancellationToken = default);
+
+	/// <returns>True, if the number of registrations for this subject reached the subject's capacity</returns>
+	Task<bool> IsSubjectCapacityFullAsync(int subjectId);
 }
