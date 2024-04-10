@@ -1,12 +1,7 @@
 ﻿using System.Security;
 using Havit;
-using Havit.Services.TimeServices;
 using MensaGymnazium.IntranetGen3.Contracts;
-using MensaGymnazium.IntranetGen3.DataLayer.DataEntries.Common;
-using MensaGymnazium.IntranetGen3.DataLayer.Queries;
-using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
-using MensaGymnazium.IntranetGen3.Model;
 using MensaGymnazium.IntranetGen3.Primitives;
 using MensaGymnazium.IntranetGen3.Services.SubjectRegistration;
 

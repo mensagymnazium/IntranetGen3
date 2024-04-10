@@ -18,7 +18,7 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 	public SubjectRegistrationsManagerService(
 		ITimeService timeService,
 		IApplicationSettingsEntries applicationSettingsEntries,
-		IUnitOfWork unitOfWork, 
+		IUnitOfWork unitOfWork,
 		IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository)
 	{
 		this.timeService = timeService;

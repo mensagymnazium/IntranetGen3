@@ -1,14 +1,9 @@
 ﻿using MensaGymnazium.IntranetGen3.Model;
-using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 
 public partial interface IStudentSubjectRegistrationRepository
 {
-	public Task<StudentSubjectRegistration?> GetByStudentForSubject(
-		int studentId,
-		int subjectId,
-		CancellationToken cancellationToken);
 	public Task<List<StudentSubjectRegistration>> GetBySubjectAsync(
 		int id,
 		CancellationToken cancellationToken = default);
