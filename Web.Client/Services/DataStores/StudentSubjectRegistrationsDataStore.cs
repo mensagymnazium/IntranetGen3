@@ -16,19 +16,12 @@ public class StudentSubjectRegistrationsDataStore : DictionaryStaticDataStore<in
 	}
 
 	protected override Func<StudentSubjectRegistrationDto, int> KeySelector => registration => registration.SubjectId!.Value;
-	protected override bool ShouldRefresh() => hasUnresolvedChanges;
+	protected override bool ShouldRefresh() => false; // Cleared by component causing changes
 
 	protected override async Task<IEnumerable<StudentSubjectRegistrationDto>> LoadDataAsync()
 	{
 		var dto = await studentSubjectRegistrationFacade.GetAllRegistrationsOfCurrentStudent();
-		hasUnresolvedChanges = false;
 
 		return dto ?? new();
-	}
-
-	private bool hasUnresolvedChanges = false;
-	public void RegistrationsChanged()
-	{
-		hasUnresolvedChanges = true;
 	}
 }

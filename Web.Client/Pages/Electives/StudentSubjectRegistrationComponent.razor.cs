@@ -32,8 +32,6 @@ public partial class StudentSubjectRegistrationComponent
 		await StudentSubjectRegistrationsDataStore.EnsureDataAsync();
 		studentsRegistrationForThisSubject =
 			await StudentSubjectRegistrationsDataStore.GetByKeyOrDefaultAsync(SubjectId!.Value);
-
-		StateHasChanged();
 	}
 	private async Task HandleCancelRegistrationClicked()
 	{
@@ -49,7 +47,7 @@ public partial class StudentSubjectRegistrationComponent
 				await SubjectRegistrationsManagerFacade.CancelRegistrationAsync(Dto.FromValue(studentsRegistrationForThisSubject.Id));
 
 				// Invalidate data store
-				StudentSubjectRegistrationsDataStore.RegistrationsChanged();
+				StudentSubjectRegistrationsDataStore.Clear();
 
 				// Reload from cache (Xopa: maybe unnecessarily expensive?)
 				await LoadStudentRegistrationAsync();
@@ -77,7 +75,7 @@ public partial class StudentSubjectRegistrationComponent
 					});
 
 				//Invalidate data store
-				StudentSubjectRegistrationsDataStore.RegistrationsChanged();
+				StudentSubjectRegistrationsDataStore.Clear();
 
 				// Reload from cache (Xopa: maybe unnecessarily expensive?)
 				await LoadStudentRegistrationAsync();
