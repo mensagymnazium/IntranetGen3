@@ -56,7 +56,7 @@ public class Program
 		AddGrpcClient(builder);
 
 		WebAssemblyHost webAssemblyHost = builder.Build();
-		
+
 		await webAssemblyHost.RunAsync();
 	}
 

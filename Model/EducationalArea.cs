@@ -25,6 +25,6 @@ public class EducationalArea
 
 	public static bool IsEntry(EducationalArea educationalArea, Entry entry)
 	{
-		return educationalArea.Id == (int) entry;
+		return educationalArea.Id == (int)entry;
 	}
 }
