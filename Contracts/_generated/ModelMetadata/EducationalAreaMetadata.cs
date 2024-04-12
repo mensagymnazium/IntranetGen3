@@ -8,7 +8,7 @@
 namespace MensaGymnazium.IntranetGen3.Contracts.ModelMetadata;
 
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-public static class SubjectTypeMetadata
+public static class EducationalAreaMetadata
 {
 	public const int NameMaxLength = 50;
 }

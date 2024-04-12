@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MensaGymnazium.IntranetGen3.Entity.Configurations;
 
-public class SubjectTypeRelationConfiguration : IEntityTypeConfiguration<SubjectTypeRelation>
+public class EducationalAreaRelationConfiguration : IEntityTypeConfiguration<EducationalAreaRelation>
 {
-	public void Configure(EntityTypeBuilder<SubjectTypeRelation> builder)
+	public void Configure(EntityTypeBuilder<EducationalAreaRelation> builder)
 	{
-		builder.HasKey(str => new { str.SubjectId, str.SubjectTypeId });
+		builder.HasKey(str => new { str.SubjectId, EducationalAreaId = str.EducationalAreaId });
 
 		builder
 			.HasOne(ur => ur.Subject)

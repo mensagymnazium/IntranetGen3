@@ -6,11 +6,11 @@ namespace MensaGymnazium.IntranetGen3.Model;
 /// M:N relation representing Subject.Types
 /// </summary>
 [Cache]
-public class SubjectTypeRelation
+public class EducationalAreaRelation
 {
 	public Subject Subject { get; set; }
 	public int SubjectId { get; set; }
 
-	public SubjectType SubjectType { get; set; }
-	public int SubjectTypeId { get; set; }
+	public EducationalArea EducationalArea { get; set; }
+	public int EducationalAreaId { get; set; }
 }

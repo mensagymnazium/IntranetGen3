@@ -12,9 +12,9 @@ using Havit.Data.EntityFrameworkCore.Patterns.SoftDeletes;
 namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources;
 
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-public partial class SubjectTypeDbDataSource : DbDataSource<MensaGymnazium.IntranetGen3.Model.SubjectType>, ISubjectTypeDataSource
+public partial class EducationalAreaDbDataSource : DbDataSource<MensaGymnazium.IntranetGen3.Model.EducationalArea>, IEducationalAreaDataSource
 {
-	public SubjectTypeDbDataSource(IDbContext dbContext, ISoftDeleteManager softDeleteManager)
+	public EducationalAreaDbDataSource(IDbContext dbContext, ISoftDeleteManager softDeleteManager)
 		: base(dbContext, softDeleteManager)
 	{
 	}

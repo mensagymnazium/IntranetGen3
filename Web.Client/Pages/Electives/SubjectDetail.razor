@@ -38,7 +38,7 @@
                 <TextValue Label="Počet zápisů primárních (+náhradních)" Value="@($"{subject.StudentRegistrationsCountMain} / {subject.Capacity?.ToString() ?? "\x221E"} (+{subject.StudentRegistrationsCountSecondary})")" />
                 <TextValue Label="@(subject.GradeIds.Count != 1 ? "Ročníky" : "Ročník")" Value="@GetGrades(subject.GradeIds)" />
                 <TextValue Label="Skupina" Value="@SubjectCategoriesDataStore.GetByKey(subject.CategoryId.Value)?.Name" />
-                <TextValue Label="@(subject.SubjectTypeIds.Count != 1 ? "Vzdělávací oblasti" : "Vzdělávací oblast")" Value="@GetSubjectTypes(subject.SubjectTypeIds)" />
+                <TextValue Label="@(subject.EducationalAreaIds.Count != 1 ? "Vzdělávací oblasti" : "Vzdělávací oblast")" Value="@GetEducationalAreas(subject.EducationalAreaIds)" />
             </HxCardText>
         </BodyTemplate>
     </HxCard>

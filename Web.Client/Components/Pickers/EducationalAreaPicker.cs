@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Components;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Components.Pickers;
 
-public class SubjectTypePicker : HxSelectBase<int?, SubjectTypeDto>
+public class EducationalAreaPicker : HxSelectBase<int?, EducationalAreaDto>
 {
 	[Parameter] public string NullText { get => NullTextImpl; set => NullTextImpl = value; }
 
-	[Inject] protected ISubjectTypesDataStore SubjectTypesDataStore { get; set; }
+	[Inject] protected IEducationalAreasDataStore EducationalAreasDataStore { get; set; }
 
-	public SubjectTypePicker()
+	public EducationalAreaPicker()
 	{
 		this.NullableImpl = true;
 		this.NullDataTextImpl = "načítám";
@@ -23,6 +23,6 @@ public class SubjectTypePicker : HxSelectBase<int?, SubjectTypeDto>
 	{
 		await base.OnInitializedAsync();
 
-		this.DataImpl = (await SubjectTypesDataStore.GetAllAsync()).ToList();
+		this.DataImpl = (await EducationalAreasDataStore.GetAllAsync()).ToList();
 	}
 }

@@ -4,7 +4,7 @@ using Havit.Data.EntityFrameworkCore.Attributes;
 namespace MensaGymnazium.IntranetGen3.Model;
 
 [Cache]
-public class SubjectType
+public class EducationalArea
 {
 	public int Id { get; set; }
 

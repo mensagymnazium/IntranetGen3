@@ -16,11 +16,10 @@ using Havit.Data.Patterns.Infrastructure;
 namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-public abstract class SubjectTypeDbRepositoryBase : DbRepository<MensaGymnazium.IntranetGen3.Model.SubjectType>
+public partial class EducationalAreaDbRepository : EducationalAreaDbRepositoryBase, IEducationalAreaRepository
 {
-	protected SubjectTypeDbRepositoryBase(IDbContext dbContext, MensaGymnazium.IntranetGen3.DataLayer.DataSources.ISubjectTypeDataSource dataSource, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.SubjectType, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
+	public EducationalAreaDbRepository(IDbContext dbContext, MensaGymnazium.IntranetGen3.DataLayer.DataSources.IEducationalAreaDataSource dataSource, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.EducationalArea, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
 		: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
 	{
 	}
-
 }

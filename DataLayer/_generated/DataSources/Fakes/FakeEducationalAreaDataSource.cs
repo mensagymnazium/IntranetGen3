@@ -13,14 +13,14 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources.Fakes;
 
 [Fake]
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-public class FakeSubjectTypeDataSource : FakeDataSource<MensaGymnazium.IntranetGen3.Model.SubjectType>, MensaGymnazium.IntranetGen3.DataLayer.DataSources.ISubjectTypeDataSource
+public class FakeEducationalAreaDataSource : FakeDataSource<MensaGymnazium.IntranetGen3.Model.EducationalArea>, MensaGymnazium.IntranetGen3.DataLayer.DataSources.IEducationalAreaDataSource
 {
-	public FakeSubjectTypeDataSource(params MensaGymnazium.IntranetGen3.Model.SubjectType[] data)
-		: this((IEnumerable<MensaGymnazium.IntranetGen3.Model.SubjectType>)data)
+	public FakeEducationalAreaDataSource(params MensaGymnazium.IntranetGen3.Model.EducationalArea[] data)
+		: this((IEnumerable<MensaGymnazium.IntranetGen3.Model.EducationalArea>)data)
 	{			
 	}
 
-	public FakeSubjectTypeDataSource(IEnumerable<MensaGymnazium.IntranetGen3.Model.SubjectType> data, ISoftDeleteManager softDeleteManager = null)
+	public FakeEducationalAreaDataSource(IEnumerable<MensaGymnazium.IntranetGen3.Model.EducationalArea> data, ISoftDeleteManager softDeleteManager = null)
 		: base(data, softDeleteManager)
 	{
 	}

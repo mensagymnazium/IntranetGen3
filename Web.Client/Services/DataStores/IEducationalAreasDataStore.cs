@@ -3,6 +3,6 @@ using MensaGymnazium.IntranetGen3.Contracts;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 
-public interface ISubjectTypesDataStore : IDictionaryStaticDataStore<int, SubjectTypeDto>
+public interface IEducationalAreasDataStore : IDictionaryStaticDataStore<int, EducationalAreaDto>
 {
 }

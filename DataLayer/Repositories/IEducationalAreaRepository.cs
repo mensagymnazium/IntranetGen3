@@ -1,6 +1,6 @@
 ﻿namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 
-public partial interface ISubjectTypeRelationRepository
+public partial interface IEducationalAreaRepository
 {
 
 }

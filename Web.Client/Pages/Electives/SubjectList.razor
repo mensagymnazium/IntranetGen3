@@ -15,7 +15,7 @@
         <FilterTemplate>
             <HxInputText @bind-Value="@context.Name" Label="Název" />
             <SubjectCategoryPicker @bind-Value="context.SubjectCategoryId" Label="Skupina" />
-            <SubjectTypePicker @bind-Value="@context.SubjectTypeId" Label="Vzdělávací oblast" />
+            <EducationalAreaPicker @bind-Value="@context.EducationalAreaId" Label="Vzdělávací oblast" />
             <TeacherPicker @bind-Value="context.TeacherId" Label="Vyučující" />
         </FilterTemplate>
         <DataTemplate>
@@ -39,7 +39,7 @@
                     </HxGridColumn>
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Ročník(y)" ItemTextSelector="@(item => GetGrades(item.GradeIds))" SortString="@nameof(SubjectListItemDto.GradeIds)" />
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Skupina" ItemTextSelector="@(item => SubjectCategoriesDataStore.GetByKey(item.CategoryId.Value)?.Name)" SortString="@nameof(SubjectListItemDto.CategoryId)" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vzdělávací oblast(i)" ItemTextSelector="@(item => GetSubjectTypes(item.SubjectTypeIds))" SortString="@nameof(SubjectListItemDto.SubjectTypeIds)" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vzdělávací oblast(i)" ItemTextSelector="@(item => GetEducationalAreas(item.EducationalAreaIds))" SortString="@nameof(SubjectListItemDto.EducationalAreaIds)" />
                     <HxContextMenuGridColumn Context="item">
                         <AuthorizeView Roles="@nameof(Role.Administrator)">
                             <HxContextMenu>

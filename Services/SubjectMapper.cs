@@ -50,11 +50,11 @@ public class SubjectMapper : ISubjectMapper
 			removeItemAction: t => { });
 		unitOfWork.AddUpdateFromResult(teacherRelationsUpdateFromResult);
 
-		var typeRelationsUpdateFromResult = subject.TypeRelations.UpdateFrom(subjectDto.SubjectTypeIds,
-			targetKeySelector: t => t.SubjectTypeId,
+		var typeRelationsUpdateFromResult = subject.TypeRelations.UpdateFrom(subjectDto.EducationalAreaIds,
+			targetKeySelector: t => t.EducationalAreaId,
 			sourceKeySelector: s => s,
-			newItemCreateFunc: s => new SubjectTypeRelation { SubjectId = subject.Id, SubjectTypeId = s },
-			updateItemAction: (s, t) => t.SubjectTypeId = s,
+			newItemCreateFunc: s => new EducationalAreaRelation { SubjectId = subject.Id, EducationalAreaId = s },
+			updateItemAction: (s, t) => t.EducationalAreaId = s,
 			removeItemAction: t => { });
 		unitOfWork.AddUpdateFromResult(typeRelationsUpdateFromResult);
 
@@ -84,7 +84,7 @@ public class SubjectMapper : ISubjectMapper
 			Name = subject.Name,
 			Description = subject.Description,
 			CategoryId = subject.CategoryId,
-			SubjectTypeIds = subject.TypeRelations.Select(tr => tr.SubjectTypeId).ToList(),
+			EducationalAreaIds = subject.TypeRelations.Select(tr => tr.EducationalAreaId).ToList(),
 			Capacity = subject.Capacity,
 			StudentRegistrationsCountMain = studentRegistrations.Count(ssr => ssr.RegistrationType == StudentRegistrationType.Main),
 			StudentRegistrationsCountSecondary = studentRegistrations.Count(ssr => ssr.RegistrationType == StudentRegistrationType.Secondary),

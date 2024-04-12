@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Components;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Components.Pickers;
 
-public class SubjectTypeMultiPicker : HxMultiSelect<int, SubjectTypeDto>
+public class EducationalAreaMultiPicker : HxMultiSelect<int, EducationalAreaDto>
 {
-	[Inject] protected ISubjectTypesDataStore SubjectTypesDataStore { get; set; }
+	[Inject] protected IEducationalAreasDataStore EducationalAreasDataStore { get; set; }
 
-	public SubjectTypeMultiPicker()
+	public EducationalAreaMultiPicker()
 	{
 		this.EmptyText = "-vyberte-";
 		this.ValueSelector = (c => c.Id);
@@ -20,6 +20,6 @@ public class SubjectTypeMultiPicker : HxMultiSelect<int, SubjectTypeDto>
 	{
 		await base.OnInitializedAsync();
 
-		this.Data = (await SubjectTypesDataStore.GetAllAsync()).ToList();
+		this.Data = (await EducationalAreasDataStore.GetAllAsync()).ToList();
 	}
 }
