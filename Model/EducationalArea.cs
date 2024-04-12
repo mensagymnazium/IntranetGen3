@@ -22,4 +22,9 @@ public class EducationalArea
 		HumanHealth = 64,
 		HumanWork = 128,
 	}
+
+	public static bool IsEntry(EducationalArea educationalArea, Entry entry)
+	{
+		return educationalArea.Id == (int) entry;
+	}
 }

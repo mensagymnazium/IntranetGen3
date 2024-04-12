@@ -1,5 +1,21 @@
 ﻿<AuthorizeView Roles="@nameof(Role.Student)">
-    <p>HomeIndexMyElectives.razor</p>
+    @if (studentsProgress is not null)
+    {
+        @if (studentsProgress.MeetsAllCriteria)
+        {
+            <text>Meets all criteria!</text>
+        }
+
+        @if (studentsProgress.RequiresCspOrCpValidation)
+        {
+            @if (studentsProgress.MeetsCsOrCpCriteria)
+            {
+                <text>Meets all Csp or Cp criteria!</text>
+            }
+
+            <text>@($"{studentsProgress.AmOfDonatedHoursInCspOrCp} / {studentsProgress.RequiredAmOfDonatedHoursInCspOrCp}")</text>
+        }
+    }
     @*     <HxListLayout TFilterModel="HxListLayout.NoFilter" Title="Splnění zápisových požadavků volitelých předmětů">
         <DataTemplate>
             <StudentWithSigningRuleGrid DataProvider="GetStudentWithSigningRuleGridData" StudentColumnVisible="false" />

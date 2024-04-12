@@ -46,15 +46,15 @@ public class Subject
 	}
 
 
-	public List<EducationalAreaRelation> TypeRelations { get; } = new List<EducationalAreaRelation>();
+	public List<EducationalAreaRelation> EducationalAreaRelations { get; } = new List<EducationalAreaRelation>();
 
 	[NotMapped]
-	public IEnumerable<EducationalArea> Types
+	public IEnumerable<EducationalArea> EducationalAreas
 	{
 		get
 		{
-			Contract.Requires<InvalidOperationException>(TypeRelations.TrueForAll(m => m.EducationalArea is not null), $"Unable to access {nameof(Types)} without loading the {nameof(TypeRelations)}.");
-			return TypeRelations.Select(m => m.EducationalArea);
+			Contract.Requires<InvalidOperationException>(EducationalAreaRelations.TrueForAll(m => m.EducationalArea is not null), $"Unable to access {nameof(EducationalAreas)} without loading the {nameof(EducationalAreaRelations)}.");
+			return EducationalAreaRelations.Select(m => m.EducationalArea);
 		}
 	}
 

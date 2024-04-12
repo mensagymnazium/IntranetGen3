@@ -30,7 +30,7 @@ public class SubjectMapper : ISubjectMapper
 		if (subject.Id != default)
 		{
 			await dataLoader.LoadAsync(subject, s => s.TeacherRelations, cancellationToken);
-			await dataLoader.LoadAsync(subject, s => s.TypeRelations, cancellationToken);
+			await dataLoader.LoadAsync(subject, s => s.EducationalAreaRelations, cancellationToken);
 			await dataLoader.LoadAsync(subject, s => s.GradeRelations, cancellationToken);
 		}
 
@@ -50,7 +50,7 @@ public class SubjectMapper : ISubjectMapper
 			removeItemAction: t => { });
 		unitOfWork.AddUpdateFromResult(teacherRelationsUpdateFromResult);
 
-		var typeRelationsUpdateFromResult = subject.TypeRelations.UpdateFrom(subjectDto.EducationalAreaIds,
+		var typeRelationsUpdateFromResult = subject.EducationalAreaRelations.UpdateFrom(subjectDto.EducationalAreaIds,
 			targetKeySelector: t => t.EducationalAreaId,
 			sourceKeySelector: s => s,
 			newItemCreateFunc: s => new EducationalAreaRelation { SubjectId = subject.Id, EducationalAreaId = s },
@@ -74,7 +74,7 @@ public class SubjectMapper : ISubjectMapper
 
 		await dataLoader.LoadAsync(subject, s => s.TeacherRelations, cancellationToken);
 		await dataLoader.LoadAsync(subject, s => s.GradeRelations, cancellationToken);
-		await dataLoader.LoadAsync(subject, s => s.TypeRelations, cancellationToken);
+		await dataLoader.LoadAsync(subject, s => s.EducationalAreaRelations, cancellationToken);
 
 		var studentRegistrations = await studentSubjectRegistrationRepository.GetBySubjectAsync(subject.Id, cancellationToken);
 
@@ -84,7 +84,7 @@ public class SubjectMapper : ISubjectMapper
 			Name = subject.Name,
 			Description = subject.Description,
 			CategoryId = subject.CategoryId,
-			EducationalAreaIds = subject.TypeRelations.Select(tr => tr.EducationalAreaId).ToList(),
+			EducationalAreaIds = subject.EducationalAreaRelations.Select(tr => tr.EducationalAreaId).ToList(),
 			Capacity = subject.Capacity,
 			StudentRegistrationsCountMain = studentRegistrations.Count(ssr => ssr.RegistrationType == StudentRegistrationType.Main),
 			StudentRegistrationsCountSecondary = studentRegistrations.Count(ssr => ssr.RegistrationType == StudentRegistrationType.Secondary),

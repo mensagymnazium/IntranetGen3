@@ -26,7 +26,7 @@ public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 	{
 		var data = subjectDataSource.Data
 			.WhereIf(!String.IsNullOrWhiteSpace(Filter.Name), s => s.Name.Contains(Filter.Name))
-			.WhereIf(Filter.EducationalAreaId != null, s => s.TypeRelations.Any(r => r.EducationalAreaId == Filter.EducationalAreaId))
+			.WhereIf(Filter.EducationalAreaId != null, s => s.EducationalAreaRelations.Any(r => r.EducationalAreaId == Filter.EducationalAreaId))
 			.WhereIf(Filter.SubjectCategoryId != null, s => s.CategoryId == Filter.SubjectCategoryId)
 			.WhereIf(Filter.TeacherId != null, s => s.TeacherRelations.Any(tr => tr.TeacherId == Filter.TeacherId));
 
@@ -39,7 +39,7 @@ public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 				 nameof(SubjectListItemDto.ScheduleSlotInDay) => new() { s => s.ScheduleDayOfWeek, s => s.ScheduleSlotInDay },
 				 nameof(SubjectListItemDto.CategoryId) => new() { s => s.Category.Name },
 				 nameof(SubjectListItemDto.GradeIds) => new() { s => s.GradeRelations.FirstOrDefault().GradeId },
-				 nameof(SubjectListItemDto.EducationalAreaIds) => new() { s => s.TypeRelations.FirstOrDefault().EducationalArea.Name },
+				 nameof(SubjectListItemDto.EducationalAreaIds) => new() { s => s.EducationalAreaRelations.FirstOrDefault().EducationalArea.Name },
 				 _ => throw new InvalidOperationException($"Unknown SortingItem.Expression {sortingExpression}.")
 			 });
 
@@ -48,7 +48,7 @@ public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 			Id = s.Id,
 			Name = s.Name,
 			CategoryId = s.CategoryId,
-			EducationalAreaIds = s.TypeRelations.Select(tr => tr.EducationalAreaId).ToList(),
+			EducationalAreaIds = s.EducationalAreaRelations.Select(tr => tr.EducationalAreaId).ToList(),
 			Capacity = s.Capacity,
 			StudentRegistrationsCountMain = studentSubjectRegistrationDataSource.Data.Count(ssr => ssr.SubjectId == s.Id && ssr.RegistrationType == StudentRegistrationType.Main),
 			StudentRegistrationsCountSecondary = studentSubjectRegistrationDataSource.Data.Count(ssr => ssr.SubjectId == s.Id && ssr.RegistrationType == StudentRegistrationType.Secondary),

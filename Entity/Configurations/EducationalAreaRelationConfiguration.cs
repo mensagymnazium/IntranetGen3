@@ -11,7 +11,7 @@ public class EducationalAreaRelationConfiguration : IEntityTypeConfiguration<Edu
 
 		builder
 			.HasOne(ur => ur.Subject)
-			.WithMany(u => u.TypeRelations)
+			.WithMany(u => u.EducationalAreaRelations)
 			.HasForeignKey(ur => ur.SubjectId);
 	}
 }

@@ -12,7 +12,11 @@ public partial class StudentSubjectRegistrationDbRepository : IStudentSubjectReg
 
 	public Task<List<StudentSubjectRegistration>> GetRegistrationsByStudent(int studentId)
 	{
-		return Data.Where(ssr => ssr.StudentId == studentId).ToListAsync();
+		return Data
+			.Include(ssr => ssr.Subject)
+			.ThenInclude(s => s.EducationalAreaRelations)
+			.ThenInclude(r => r.EducationalArea)
+			.Where(ssr => ssr.StudentId == studentId).ToListAsync();
 	}
 
 	public async Task<int> CountMainRegistrationsForSubjectAsync(int subjectId)

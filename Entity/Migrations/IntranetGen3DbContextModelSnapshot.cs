@@ -50,7 +50,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ApplicationSettings");
+                    b.ToTable("ApplicationSettings", (string)null);
                 });
 
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.EducationalArea", b =>
@@ -64,7 +64,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EducationalArea");
+                    b.ToTable("EducationalArea", (string)null);
 
                     b
                         .HasAnnotation("Caching-AllKeysEnabled", true)
@@ -83,7 +83,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.HasIndex("EducationalAreaId");
 
-                    b.ToTable("EducationalAreaRelation");
+                    b.ToTable("EducationalAreaRelation", (string)null);
 
                     b
                         .HasAnnotation("Caching-AllKeysEnabled", true)
@@ -106,7 +106,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Grade");
+                    b.ToTable("Grade", (string)null);
 
                     b
                         .HasAnnotation("Caching-AllKeysEnabled", true)
@@ -137,7 +137,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.HasIndex("GradeId");
 
-                    b.ToTable("Student");
+                    b.ToTable("Student", (string)null);
 
                     b
                         .HasAnnotation("Caching-AllKeysEnabled", true)
@@ -167,7 +167,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teacher");
+                    b.ToTable("Teacher", (string)null);
 
                     b
                         .HasAnnotation("Caching-AllKeysEnabled", true)
@@ -219,7 +219,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .IsUnique()
                         .HasFilter("[TeacherId] IS NOT NULL");
 
-                    b.ToTable("User");
+                    b.ToTable("User", (string)null);
 
                     b
                         .HasAnnotation("Caching-AllKeysEnabled", true)
@@ -255,7 +255,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("StudentSubjectRegistration");
+                    b.ToTable("StudentSubjectRegistration", (string)null);
                 });
 
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Subject", b =>
@@ -307,7 +307,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Subject");
+                    b.ToTable("Subject", (string)null);
 
                     b
                         .HasAnnotation("Caching-AllKeysEnabled", true)
@@ -325,7 +325,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SubjectCategory");
+                    b.ToTable("SubjectCategory", (string)null);
 
                     b
                         .HasAnnotation("Caching-AllKeysEnabled", true)
@@ -344,7 +344,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.HasIndex("GradeId");
 
-                    b.ToTable("SubjectGradeRelation");
+                    b.ToTable("SubjectGradeRelation", (string)null);
                 });
 
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.SubjectTeacherRelation", b =>
@@ -359,7 +359,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("SubjectTeacherRelation");
+                    b.ToTable("SubjectTeacherRelation", (string)null);
                 });
 
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.EducationalAreaRelation", b =>
