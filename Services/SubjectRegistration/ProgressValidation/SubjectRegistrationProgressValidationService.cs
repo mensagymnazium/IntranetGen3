@@ -33,17 +33,17 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		Contract.Requires<ArgumentNullException>(studentsRegistrations is not null);
 		Contract.Requires<ArgumentNullException>(futureGrade is not null);
 
-		var cspOrCpProgress = await GetCspOrCpRegistrationProgressAsync(futureGrade, studentsRegistrations);
+		var csOrCpProgress = GetCsOrCpRegistrationProgress(futureGrade, studentsRegistrations);
 
-		var registrationProgress = new StudentRegistrationProgress(cspOrCpProgress);
+		var registrationProgress = new StudentRegistrationProgress(csOrCpProgress);
 		return registrationProgress;
 	}
 
-	private async Task<StudentCsOrCpRegistrationProgress> GetCspOrCpRegistrationProgressAsync(
+	private StudentCsOrCpRegistrationProgress GetCsOrCpRegistrationProgress(
 		Grade forGrade, // Todo: Use the grade to determine the criteria
 		List<StudentSubjectRegistration> forRegistrations)
 	{
-		bool IsRegistrationWithinAreaCspOrCp(StudentSubjectRegistration registration)
+		static bool IsRegistrationWithinAreaCspOrCp(StudentSubjectRegistration registration)
 			=> registration.Subject.EducationalAreas.Any(area =>
 				EducationalArea.IsEntry(area, EducationalArea.Entry.HumanSociety)
 				|| EducationalArea.IsEntry(area, EducationalArea.Entry.HumanNature));
@@ -55,7 +55,7 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		//	return new StudentCspOrCpRegistrationProgress(false, 0, 0);
 		//}
 
-		var ammOfHoursInCspOrCp = forRegistrations
+		var ammOfHoursInCsOrCp = forRegistrations
 			.Aggregate(0, (total, reg) =>
 				IsRegistrationWithinAreaCspOrCp(reg)
 					//? total + reg.Subject.HoursPerWeek // Xopa: Todo: uncomment this, when HoursPerWeek is implemented
@@ -68,11 +68,11 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 
 		// Xopa: Todo: Change this random value with some configuration related to the grade
 		// For now just random magic value 4
-		var requiredAmountOfDonatedHoursInCspOrCp = 4;
+		var requiredAmountOfDonatedHoursInCsOrCp = 4;
 
 		return new StudentCsOrCpRegistrationProgress(
 			DoesRequireCsOrCpValidation: true,
-			AmountOfDonatedHoursInCspOrCp: ammOfHoursInCspOrCp,
-			RequiredAmountOfDonatedHoursInCspOrCp: requiredAmountOfDonatedHoursInCspOrCp);
+			AmountOfDonatedHoursInCsOrCp: ammOfHoursInCsOrCp,
+			RequiredAmountOfDonatedHoursInCsOrCp: requiredAmountOfDonatedHoursInCsOrCp);
 	}
 }
