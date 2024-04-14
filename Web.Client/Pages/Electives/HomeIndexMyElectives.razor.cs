@@ -9,8 +9,15 @@ public partial class HomeIndexMyElectives
 
 	private StudentRegistrationProgressDto studentsProgress;
 
-	protected override async Task OnInitializedAsync()
+	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
+		if (!firstRender)
+		{
+			return;
+		}
+
 		studentsProgress = await SubjectRegistrationProgressValidationFacade.GetProgressOfCurrentStudentAsync();
+		
+		StateHasChanged();
 	}
 }
