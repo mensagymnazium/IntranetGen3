@@ -55,11 +55,11 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		//	return new StudentCspOrCpRegistrationProgress(false, 0, 0);
 		//}
 
+		// Calculate the sum of hours in those fields
 		var ammOfHoursInCsOrCp = forRegistrations
 			.Aggregate(0, (total, reg) =>
 				IsRegistrationWithinAreaCspOrCp(reg)
-					//? total + reg.Subject.HoursPerWeek // Xopa: Todo: uncomment this, when HoursPerWeek is implemented
-					? total + 2
+					? total + reg.Subject.HoursPerWeek
 					: total);
 
 		// Xopa: Todo: Something like this?

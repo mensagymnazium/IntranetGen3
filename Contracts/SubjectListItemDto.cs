@@ -8,6 +8,7 @@ public record SubjectListItemDto : SubjectReferenceDto
 	public int? Capacity { get; set; }
 	public DayOfWeek? ScheduleDayOfWeek { get; set; }
 	public ScheduleSlotInDay? ScheduleSlotInDay { get; set; }
+	public int HoursPerWeek { get; set; }
 	public List<int> EducationalAreaIds { get; set; } = new List<int>();
 	public List<int> GradeIds { get; set; } = new List<int>();
 	public List<int> TeacherIds { get; set; } = new List<int>();

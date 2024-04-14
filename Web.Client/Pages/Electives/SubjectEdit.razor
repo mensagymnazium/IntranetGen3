@@ -7,6 +7,7 @@
             <HxInputNumber @bind-Value="model.Capacity" Label="Kapacita" Hint="Ponechte prázné pro neomezenou kapacitu" Placeholder="Neomezená" />
             <TeacherMultiPicker @bind-Value="model.TeacherIds" Label="Vyučující" />
             <ScheduleTimeSlotPicker @bind-Day="model.ScheduleDayOfWeek" @bind-Slot="model.ScheduleSlotInDay" />
+            <HxInputNumber @bind-Value="model.HoursPerWeek" Label="Dotované hodiny" />
             <GradeMultiPicker @bind-Value="model.GradeIds" Label="Ročník(y)" />
             <SubjectCategoryPicker @bind-Value="model.CategoryId" Label="Skupina" />
             <EducationalAreaMultiPicker @bind-Value="model.EducationalAreaIds" Label="Vzdělávací oblast(i)" />
