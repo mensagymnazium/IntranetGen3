@@ -1,6 +1,6 @@
 ﻿namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration.ProgressValidation;
 
-public record StudentCsOrCpRegistrationProgress(
+public readonly record struct StudentCsOrCpRegistrationProgress(
 	bool DoesRequireCsOrCpValidation,
 	int AmountOfDonatedHoursInCsOrCp,
 	int RequiredAmountOfDonatedHoursInCsOrCp)
@@ -11,5 +11,7 @@ public record StudentCsOrCpRegistrationProgress(
 	/// </summary>
 	public bool DoesRequireCsOrCpValidation { get; init; } = DoesRequireCsOrCpValidation;
 
-	public bool MeetsCriteria => AmountOfDonatedHoursInCsOrCp == RequiredAmountOfDonatedHoursInCsOrCp;
+	public bool MeetsCriteria =>
+		(DoesRequireCsOrCpValidation)
+		&& (AmountOfDonatedHoursInCsOrCp == RequiredAmountOfDonatedHoursInCsOrCp);
 }

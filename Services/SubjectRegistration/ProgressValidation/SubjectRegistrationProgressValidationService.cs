@@ -32,6 +32,7 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 
 		Contract.Requires<ArgumentNullException>(studentsRegistrations is not null);
 		Contract.Requires<ArgumentNullException>(futureGrade is not null);
+		Contract.Requires<ArgumentNullException>(futureGrade.RegistrationCriteria is not null);
 
 		var csOrCpProgress = GetCsOrCpRegistrationProgress(futureGrade, studentsRegistrations);
 
@@ -40,7 +41,7 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 	}
 
 	private StudentCsOrCpRegistrationProgress GetCsOrCpRegistrationProgress(
-		Grade forGrade, // Todo: Use the grade to determine the criteria
+		Grade forGrade,
 		List<StudentSubjectRegistration> forRegistrations)
 	{
 		static bool IsRegistrationWithinAreaCspOrCp(StudentSubjectRegistration registration)
@@ -48,12 +49,14 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 				EducationalArea.IsEntry(area, EducationalArea.Entry.HumanSociety)
 				|| EducationalArea.IsEntry(area, EducationalArea.Entry.HumanNature));
 
-		// Xopa Todo: Something like this?
-		//if (!forGrade.GradeRegistrationCriteria.RequiresCspOrCpValidation)
-		//{
-		//	// Validation not needed here
-		//	return new StudentCspOrCpRegistrationProgress(false, 0, 0);
-		//}
+		if (!forGrade.RegistrationCriteria.RequiresCspOrCpValidation)
+		{
+			// Validation not needed here
+			return new StudentCsOrCpRegistrationProgress()
+			{
+				DoesRequireCsOrCpValidation = false
+			};
+		}
 
 		// Calculate the sum of hours in those fields
 		var ammOfHoursInCsOrCp = forRegistrations
@@ -62,17 +65,13 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 					? total + reg.Subject.HoursPerWeek
 					: total);
 
-		// Xopa: Todo: Something like this?
-		//var requiredAmountOfDonatedHoursInCspOrCp =
-		//	forGrade.GradeRegistrationCriteria.RequiredAmountOfDonatedHoursInAreaCspOrCp;
+		var requiredAmountOfDonatedHoursInCspOrCp =
+			forGrade.RegistrationCriteria.RequiredAmountOfDonatedHoursInAreaCspOrCp;
 
-		// Xopa: Todo: Change this random value with some configuration related to the grade
-		// For now just random magic value 4
-		var requiredAmountOfDonatedHoursInCsOrCp = 4;
 
 		return new StudentCsOrCpRegistrationProgress(
 			DoesRequireCsOrCpValidation: true,
 			AmountOfDonatedHoursInCsOrCp: ammOfHoursInCsOrCp,
-			RequiredAmountOfDonatedHoursInCsOrCp: requiredAmountOfDonatedHoursInCsOrCp);
+			RequiredAmountOfDonatedHoursInCsOrCp: requiredAmountOfDonatedHoursInCspOrCp);
 	}
 }

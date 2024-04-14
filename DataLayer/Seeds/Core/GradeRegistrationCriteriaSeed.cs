@@ -15,8 +15,8 @@ public class GradeSeedRegistrationCriteria : DataSeed<CoreProfile>
 			new GradeRegistrationCriteria() { Id = (int) GradeEntry.Kvarta},
 			new GradeRegistrationCriteria() { Id = (int) GradeEntry.Kvinta},
 			new GradeRegistrationCriteria() { Id = (int) GradeEntry.Sexta},
-			new GradeRegistrationCriteria() { Id = (int) GradeEntry.Septima},
-			new GradeRegistrationCriteria() { Id = (int) GradeEntry.Oktava},
+			new GradeRegistrationCriteria() { Id = (int) GradeEntry.Septima, RequiresCspOrCpValidation = true, RequiredAmountOfDonatedHoursInAreaCspOrCp = 4},
+			new GradeRegistrationCriteria() { Id = (int) GradeEntry.Oktava, RequiresCspOrCpValidation = true, RequiredAmountOfDonatedHoursInAreaCspOrCp = 4},
 		};
 
 		Seed(For(data).PairBy(grade => grade.Id)); // TODO WithoutUpdate nebo bez AadGroupId? 
