@@ -42,6 +42,11 @@ public class SubjectRegistrationProgressValidationFacade : ISubjectRegistrationP
 	{
 		return new StudentRegistrationProgressDto(
 			obj.IsRegistrationValid,
+
+			obj.DonatedHoursProgress.AmountOfDonatedHoursExcludingLanguages,
+			obj.DonatedHoursProgress.RequiredAmountOfDonatedHoursExcludingLanguages,
+			obj.DonatedHoursProgress.MeetsCriteria,
+
 			obj.CsOrCpRegistrationProgress.DoesRequireCsOrCpValidation,
 			obj.CsOrCpRegistrationProgress.AmountOfDonatedHoursInCsOrCp,
 			obj.CsOrCpRegistrationProgress.RequiredAmountOfDonatedHoursInCsOrCp,

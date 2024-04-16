@@ -16,6 +16,7 @@ public partial class StudentSubjectRegistrationDbRepository : IStudentSubjectReg
 			.Include(ssr => ssr.Subject)
 			.ThenInclude(s => s.EducationalAreaRelations)
 			.ThenInclude(r => r.EducationalArea)
+			.Include(ssr => ssr.Subject.Category)
 			.Where(ssr => ssr.StudentId == studentId).ToListAsync();
 	}
 

@@ -2,6 +2,7 @@
 
 public record StudentRegistrationProgress(
 	bool IsRegistrationValid,
+	StudentDonatedHoursProgress DonatedHoursProgress,
 	StudentCsOrCpRegistrationProgress CsOrCpRegistrationProgress)
 {
 	/// <summary>
@@ -17,4 +18,9 @@ public record StudentRegistrationProgress(
 	/// společnost“ či „Člověk a příroda“'
 	/// </summary>
 	public StudentCsOrCpRegistrationProgress CsOrCpRegistrationProgress { get; init; } = CsOrCpRegistrationProgress;
+
+	/// <summary>
+	/// Progress of the rule about weekly donated hours
+	/// </summary>
+	public StudentDonatedHoursProgress DonatedHoursProgress { get; init; } = DonatedHoursProgress;
 }

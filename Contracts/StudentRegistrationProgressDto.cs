@@ -4,6 +4,9 @@ public record StudentRegistrationProgressDto
 {
 	public StudentRegistrationProgressDto(
 		bool isRegistrationValid,
+		int amOfDonatedHoursExcludingLanguages,
+		int requiredAmOfDonatedHoursExcludingLanguages,
+		bool meetsDonatedHoursCriteria,
 		bool requiresCspOrCpValidation,
 		int amOfDonatedHoursInCspOrCp,
 		int requiredAmOfDonatedHoursInCspOrCp,
@@ -14,9 +17,12 @@ public record StudentRegistrationProgressDto
 		AmOfDonatedHoursInCspOrCp = amOfDonatedHoursInCspOrCp;
 		RequiredAmOfDonatedHoursInCspOrCp = requiredAmOfDonatedHoursInCspOrCp;
 		MeetsCsOrCpCriteria = meetsCsOrCpCriteria;
+		AmOfDonatedHoursExcludingLanguages = amOfDonatedHoursExcludingLanguages;
+		RequiredAmOfDonatedHoursExcludingLanguages = requiredAmOfDonatedHoursExcludingLanguages;
+		MeetsDonatedHoursCriteria = meetsDonatedHoursCriteria;
 	}
 
-	public StudentRegistrationProgressDto()
+	private StudentRegistrationProgressDto()
 	{
 		// Parameterless constructor required for serialization
 	}
@@ -27,6 +33,11 @@ public record StudentRegistrationProgressDto
 	/// that results in a valid registration
 	/// </summary>
 	public bool IsRegistrationValid { get; set; }
+
+	public int AmOfDonatedHoursExcludingLanguages { get; set; }
+	public int RequiredAmOfDonatedHoursExcludingLanguages { get; set; }
+	public bool MeetsDonatedHoursCriteria { get; set; }
+
 	public bool RequiresCspOrCpValidation { get; set; }
 	public int AmOfDonatedHoursInCspOrCp { get; set; }
 	public int RequiredAmOfDonatedHoursInCspOrCp { get; set; }

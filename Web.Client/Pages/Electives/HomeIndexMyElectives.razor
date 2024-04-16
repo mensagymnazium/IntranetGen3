@@ -5,24 +5,23 @@
         {
             // Loaded, show data
 
-            @* Xopa: TODO: Donated hours validation *@
             <HxListGroupItem>
                 <div class="d-flex w-100 justify-content-between">
                     <h6 class="mb-1">Celkový počet hodin</h6>
                     <small>
-@*                         @if (false) 
+                        @if (studentsProgress.MeetsDonatedHoursCriteria) 
                         {
                             <HxIcon Icon='BootstrapIcon.CheckCircleFill' CssClass="me-2 text-success" />
                         }
                         else
                         {
                             <HxIcon Icon='BootstrapIcon.ExclamationCircleFill' CssClass="me-2 text-warning" />
-                        } *@
+                        }
                     </small>
                 </div>
-                <b class="mb-1">@($"xh / yh")</b>
+                <b class="mb-1">@($"{studentsProgress.AmOfDonatedHoursExcludingLanguages}h / {studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages}h")</b>
                 <br />
-                <small>Musíš mít tolik předmětů, aby dohromady dávali (dotovali) v rozvrhu {} hodin</small>
+                <small>Musíš mít tolik předmětů (kromě jazyků), aby dohromady dávali (dotovali) v rozvrhu @studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages hodin</small>
             </HxListGroupItem>
 
             @if (studentsProgress.RequiresCspOrCpValidation)

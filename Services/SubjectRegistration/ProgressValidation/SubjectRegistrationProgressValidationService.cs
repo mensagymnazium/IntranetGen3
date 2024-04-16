@@ -34,13 +34,36 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		Contract.Requires<ArgumentNullException>(futureGrade is not null);
 		Contract.Requires<ArgumentNullException>(futureGrade.RegistrationCriteria is not null);
 
+		var donatedHoursProgress = GetDonatedHoursProgress(futureGrade, studentsRegistrations);
 		var csOrCpProgress = GetCsOrCpRegistrationProgress(futureGrade, studentsRegistrations);
 
 		var registrationProgress = ConstructRegistrationProgress(
 			futureGrade,
+			donatedHoursProgress,
 			csOrCpProgress);
 
 		return registrationProgress;
+	}
+
+	private StudentDonatedHoursProgress GetDonatedHoursProgress(
+		Grade forGrade,
+		List<StudentSubjectRegistration> forRegistrations)
+	{
+		static bool IsSubjectALanguage(Subject subject)
+			=> SubjectCategory.IsEntry(subject.Category, SubjectCategory.Entry.ForeignLanguage);
+
+		var amOfHoursExcludingLanguages = forRegistrations
+			.Aggregate(0, (total, reg) =>
+				IsSubjectALanguage(reg.Subject)
+					? total
+					: total + reg.Subject.HoursPerWeek);
+
+		var requiredAmountOfDonatedHoursExcludingLanguages =
+			forGrade.RegistrationCriteria.RequiredTotalAmountOfDonatedHoursExcludingLanguage;
+
+		return new StudentDonatedHoursProgress(
+			AmountOfDonatedHoursExcludingLanguages: amOfHoursExcludingLanguages,
+			RequiredAmountOfDonatedHoursExcludingLanguages: requiredAmountOfDonatedHoursExcludingLanguages);
 	}
 
 	private StudentCsOrCpRegistrationProgress GetCsOrCpRegistrationProgress(
@@ -90,12 +113,16 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 	/// <returns></returns>
 	private StudentRegistrationProgress ConstructRegistrationProgress(
 		Grade forGrade,
+		StudentDonatedHoursProgress donatedHoursProgress,
 		StudentCsOrCpRegistrationProgress csOrCpProgress)
 	{
-		var isRegistrationValid = csOrCpProgress.MeetsCriteria;
+		var isRegistrationValid =
+			(donatedHoursProgress.MeetsCriteria)
+			&& (csOrCpProgress.MeetsCriteria);
 
 		return new StudentRegistrationProgress(
 			isRegistrationValid,
+			donatedHoursProgress,
 			csOrCpProgress);
 	}
 }
