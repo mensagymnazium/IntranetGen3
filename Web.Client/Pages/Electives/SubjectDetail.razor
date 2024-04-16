@@ -39,6 +39,7 @@
                 <TextValue Label="@(subject.GradeIds.Count != 1 ? "Ročníky" : "Ročník")" Value="@GetGrades(subject.GradeIds)" />
                 <TextValue Label="Skupina" Value="@SubjectCategoriesDataStore.GetByKey(subject.CategoryId.Value)?.Name" />
                 <TextValue Label="@(subject.EducationalAreaIds.Count != 1 ? "Vzdělávací oblasti" : "Vzdělávací oblast")" Value="@GetEducationalAreas(subject.EducationalAreaIds)" />
+                <TextValue Label="Dotované hodiny týdně" Value="@(subject.HoursPerWeek.ToString())"/>
             </HxCardText>
         </BodyTemplate>
     </HxCard>

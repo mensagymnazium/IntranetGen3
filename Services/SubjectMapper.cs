@@ -41,6 +41,7 @@ public class SubjectMapper : ISubjectMapper
 		subject.ScheduleDayOfWeek = subjectDto.ScheduleDayOfWeek.Value;
 		subject.ScheduleSlotInDay = subjectDto.ScheduleSlotInDay.Value;
 		subject.CanRegisterRepeatedly = subjectDto.CanRegisterRepeatedly;
+		subject.HoursPerWeek = subjectDto.HoursPerWeek;
 
 		var teacherRelationsUpdateFromResult = subject.TeacherRelations.UpdateFrom(subjectDto.TeacherIds,
 			targetKeySelector: t => t.TeacherId,
