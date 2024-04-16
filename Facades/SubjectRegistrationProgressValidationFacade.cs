@@ -41,7 +41,7 @@ public class SubjectRegistrationProgressValidationFacade : ISubjectRegistrationP
 	private StudentRegistrationProgressDto MapToDto(StudentRegistrationProgress obj)
 	{
 		return new StudentRegistrationProgressDto(
-			obj.DoesMeetAllCriteria,
+			obj.IsRegistrationValid,
 			obj.CsOrCpRegistrationProgress.DoesRequireCsOrCpValidation,
 			obj.CsOrCpRegistrationProgress.AmountOfDonatedHoursInCsOrCp,
 			obj.CsOrCpRegistrationProgress.RequiredAmountOfDonatedHoursInCsOrCp,

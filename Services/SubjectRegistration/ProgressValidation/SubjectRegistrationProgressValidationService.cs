@@ -36,7 +36,10 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 
 		var csOrCpProgress = GetCsOrCpRegistrationProgress(futureGrade, studentsRegistrations);
 
-		var registrationProgress = new StudentRegistrationProgress(csOrCpProgress);
+		var registrationProgress = ConstructRegistrationProgress(
+			futureGrade,
+			csOrCpProgress);
+
 		return registrationProgress;
 	}
 
@@ -73,5 +76,26 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 			DoesRequireCsOrCpValidation: true,
 			AmountOfDonatedHoursInCsOrCp: ammOfHoursInCsOrCp,
 			RequiredAmountOfDonatedHoursInCsOrCp: requiredAmountOfDonatedHoursInCspOrCp);
+	}
+
+	/// <summary>
+	/// Reponsible for creating the <see cref="StudentSubjectRegistration"/>.
+	/// Determines, whether the combination of "rule progresses" (i.e. <see cref="StudentCsOrCpRegistrationProgress"/>)
+	/// results in a valid registration (<see cref="StudentRegistrationProgress.IsRegistrationValid"/>).
+	/// 
+	/// This will be useful, when exceptions in the criteria are made, such as - Prima can choose a second language
+	/// instead of filling the donated hours with regular subjects, so he won't fill the donated hours criteria,
+	/// but it will still result in a valid registration.
+	/// </summary>
+	/// <returns></returns>
+	private StudentRegistrationProgress ConstructRegistrationProgress(
+		Grade forGrade,
+		StudentCsOrCpRegistrationProgress csOrCpProgress)
+	{
+		var isRegistrationValid = csOrCpProgress.MeetsCriteria;
+
+		return new StudentRegistrationProgress(
+			isRegistrationValid,
+			csOrCpProgress);
 	}
 }

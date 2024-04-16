@@ -17,7 +17,7 @@ public partial class HomeIndexMyElectives
 		}
 
 		studentsProgress = await SubjectRegistrationProgressValidationFacade.GetProgressOfCurrentStudentAsync();
-		
+
 		StateHasChanged();
 	}
 }
