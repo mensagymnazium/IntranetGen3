@@ -9,7 +9,7 @@ public record StudentRegistrationProgress(
 	/// meaning he meets all the signing criteria, or a combination of them,
 	/// that results in a valid registration
 	/// </summary>
-	public bool IsRegistrationValid { get; init; }
+	public bool IsRegistrationValid { get; init; } = IsRegistrationValid;
 
 	/// <summary>
 	/// Progress of the rule:
