@@ -16,4 +16,7 @@ public class Grade
 	public string AadGroupId { get; set; }
 
 	public ICollection<Student> Students { get; } = new List<Student>();
+
+	public GradeRegistrationCriteria RegistrationCriteria { get; set; }
+	public int RegistrationCriteriaId { get; set; }
 }

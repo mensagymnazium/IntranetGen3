@@ -14,7 +14,7 @@ public partial class SubjectList
 	[Inject] protected ISubjectRegistrationsManagerFacade SubjectRegistrationsManagerFacade { get; set; }
 	[Inject] protected NavigationManager NavigationManager { get; set; }
 	[Inject] protected ISubjectCategoriesDataStore SubjectCategoriesDataStore { get; set; }
-	[Inject] protected ISubjectTypesDataStore SubjectTypesDataStore { get; set; }
+	[Inject] protected IEducationalAreasDataStore EducationalAreasDataStore { get; set; }
 	[Inject] protected ITeachersDataStore TeachersDataStore { get; set; }
 	[Inject] protected IGradesDataStore GradesDataStore { get; set; }
 	[Inject] protected IClientAuthService ClientAuthService { get; set; }
@@ -30,7 +30,7 @@ public partial class SubjectList
 	protected override async Task OnInitializedAsync()
 	{
 		await SubjectCategoriesDataStore.EnsureDataAsync();
-		await SubjectTypesDataStore.EnsureDataAsync();
+		await EducationalAreasDataStore.EnsureDataAsync();
 		await TeachersDataStore.EnsureDataAsync();
 		await GradesDataStore.EnsureDataAsync();
 
@@ -115,9 +115,9 @@ public partial class SubjectList
 		await subjectsGrid.RefreshDataAsync();
 	}
 
-	private string GetSubjectTypes(List<int> subjectTypesIds)
+	private string GetEducationalAreas(List<int> educationalAreasIds)
 	{
-		return String.Join(", ", subjectTypesIds.Select(id => SubjectTypesDataStore.GetByKey(id)?.Name))
+		return String.Join(", ", educationalAreasIds.Select(id => EducationalAreasDataStore.GetByKey(id)?.Name))
 			.Trim(',', ' ');
 	}
 

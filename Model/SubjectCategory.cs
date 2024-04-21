@@ -18,4 +18,9 @@ public class SubjectCategory
 		SpecialisationSeminar = 4,
 		ForeignLanguage = 8
 	}
+
+	public static bool IsEntry(SubjectCategory subjectCategory, Entry entry)
+	{
+		return subjectCategory.Id == (int)entry;
+	}
 }
