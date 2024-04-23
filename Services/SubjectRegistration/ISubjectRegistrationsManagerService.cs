@@ -36,4 +36,7 @@ public interface ISubjectRegistrationsManagerService
 
 	/// <returns>True, if the number of registrations for this subject reached the subject's capacity</returns>
 	Task<bool> IsSubjectCapacityFullAsync(int subjectId);
+
+	/// <returns>True, if the student has already registered for this subject</returns>
+	Task<bool> IsSubjectRegisteredForStudent(int subjectId, int callerStudentId);
 }
