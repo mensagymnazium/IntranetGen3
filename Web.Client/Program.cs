@@ -44,12 +44,12 @@ public class Program
 		SetHxComponents();
 
 		builder.Services.AddScoped<ITeachersDataStore, TeachersDataStore>();
-		builder.Services.AddScoped<ISubjectTypesDataStore, SubjectTypesDataStore>();
+		builder.Services.AddScoped<IEducationalAreasDataStore, EducationalAreasDataStore>();
 		builder.Services.AddScoped<ISubjectCategoriesDataStore, SubjectCategoriesDataStore>();
 		builder.Services.AddScoped<IGradesDataStore, GradesDataStore>();
 		builder.Services.AddScoped<IStudentsDataStore, StudentsDataStore>();
 		builder.Services.AddScoped<ISubjectsDataStore, SubjectsDataStore>();
-		builder.Services.AddScoped<ISigningRulesDataStore, SigningRulesDataStore>();
+		builder.Services.AddScoped<IStudentSubjectRegistrationsDataStore, StudentSubjectRegistrationsDataStore>();
 
 		builder.Services.AddScoped<IClientAuthService, ClientAuthService>();
 

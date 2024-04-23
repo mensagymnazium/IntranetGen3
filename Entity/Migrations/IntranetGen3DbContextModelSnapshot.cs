@@ -17,10 +17,10 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.9")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Havit.Data.EntityFrameworkCore.Model.DataSeedVersion", b =>
                 {
@@ -53,6 +53,43 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.ToTable("ApplicationSettings");
                 });
 
+            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.EducationalArea", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EducationalArea");
+
+                    b
+                        .HasAnnotation("Caching-AllKeysEnabled", true)
+                        .HasAnnotation("Caching-EntitiesEnabled", true);
+                });
+
+            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.EducationalAreaRelation", b =>
+                {
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EducationalAreaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SubjectId", "EducationalAreaId");
+
+                    b.HasIndex("EducationalAreaId");
+
+                    b.ToTable("EducationalAreaRelation");
+
+                    b
+                        .HasAnnotation("Caching-AllKeysEnabled", true)
+                        .HasAnnotation("Caching-EntitiesEnabled", true);
+                });
+
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Grade", b =>
                 {
                     b.Property<int>("Id")
@@ -67,9 +104,37 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<int>("RegistrationCriteriaId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("RegistrationCriteriaId");
+
                     b.ToTable("Grade");
+
+                    b
+                        .HasAnnotation("Caching-AllKeysEnabled", true)
+                        .HasAnnotation("Caching-EntitiesEnabled", true);
+                });
+
+            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.GradeRegistrationCriteria", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RequiredAmountOfDonatedHoursInAreaCspOrCp")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RequiredTotalAmountOfDonatedHoursExcludingLanguage")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("RequiresCspOrCpValidation")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GradeRegistrationCriteria");
 
                     b
                         .HasAnnotation("Caching-AllKeysEnabled", true)
@@ -82,7 +147,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -113,7 +178,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -143,7 +208,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -189,76 +254,13 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .HasAnnotation("Caching-EntitiesEnabled", true);
                 });
 
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.SigningRule", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(2147483647)
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("GradeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int?>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SeedItemIdentifier")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GradeId");
-
-                    b.ToTable("SigningRule");
-                });
-
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.SigningRuleSubjectCategoryRelation", b =>
-                {
-                    b.Property<int>("SigningRuleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubjectCategoryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SigningRuleId", "SubjectCategoryId");
-
-                    b.HasIndex("SubjectCategoryId");
-
-                    b.ToTable("SigningRuleSubjectCategoryRelation");
-                });
-
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.SigningRuleSubjectTypeRelation", b =>
-                {
-                    b.Property<int>("SigningRuleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubjectTypeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SigningRuleId", "SubjectTypeId");
-
-                    b.HasIndex("SubjectTypeId");
-
-                    b.ToTable("SigningRuleSubjectTypeRelation");
-                });
-
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.StudentSubjectRegistration", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -275,16 +277,11 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UsedSigningRuleId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("StudentId");
 
                     b.HasIndex("SubjectId");
-
-                    b.HasIndex("UsedSigningRuleId");
 
                     b.ToTable("StudentSubjectRegistration");
                 });
@@ -295,7 +292,10 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("CanRegisterRepeatedly")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("Capacity")
                         .HasColumnType("int");
@@ -313,6 +313,9 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HoursPerWeek")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasMaxLength(100)
@@ -387,41 +390,34 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.ToTable("SubjectTeacherRelation");
                 });
 
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.SubjectType", b =>
+            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.EducationalAreaRelation", b =>
                 {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.HasOne("MensaGymnazium.IntranetGen3.Model.EducationalArea", "EducationalArea")
+                        .WithMany()
+                        .HasForeignKey("EducationalAreaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.HasOne("MensaGymnazium.IntranetGen3.Model.Subject", "Subject")
+                        .WithMany("EducationalAreaRelations")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.HasKey("Id");
+                    b.Navigation("EducationalArea");
 
-                    b.ToTable("SubjectType");
-
-                    b
-                        .HasAnnotation("Caching-AllKeysEnabled", true)
-                        .HasAnnotation("Caching-EntitiesEnabled", true);
+                    b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.SubjectTypeRelation", b =>
+            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Grade", b =>
                 {
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
+                    b.HasOne("MensaGymnazium.IntranetGen3.Model.GradeRegistrationCriteria", "RegistrationCriteria")
+                        .WithMany()
+                        .HasForeignKey("RegistrationCriteriaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Property<int>("SubjectTypeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SubjectId", "SubjectTypeId");
-
-                    b.HasIndex("SubjectTypeId");
-
-                    b.ToTable("SubjectTypeRelation");
-
-                    b
-                        .HasAnnotation("Caching-AllKeysEnabled", true)
-                        .HasAnnotation("Caching-EntitiesEnabled", true);
+                    b.Navigation("RegistrationCriteria");
                 });
 
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Security.Student", b =>
@@ -452,55 +448,6 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.SigningRule", b =>
-                {
-                    b.HasOne("MensaGymnazium.IntranetGen3.Model.Grade", "Grade")
-                        .WithMany("SigningRules")
-                        .HasForeignKey("GradeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Grade");
-                });
-
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.SigningRuleSubjectCategoryRelation", b =>
-                {
-                    b.HasOne("MensaGymnazium.IntranetGen3.Model.SigningRule", "SigningRule")
-                        .WithMany("SubjectCategoryRelations")
-                        .HasForeignKey("SigningRuleId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("MensaGymnazium.IntranetGen3.Model.SubjectCategory", "SubjectCategory")
-                        .WithMany()
-                        .HasForeignKey("SubjectCategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("SigningRule");
-
-                    b.Navigation("SubjectCategory");
-                });
-
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.SigningRuleSubjectTypeRelation", b =>
-                {
-                    b.HasOne("MensaGymnazium.IntranetGen3.Model.SigningRule", "SigningRule")
-                        .WithMany("SubjectTypeRelations")
-                        .HasForeignKey("SigningRuleId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("MensaGymnazium.IntranetGen3.Model.SubjectType", "SubjectType")
-                        .WithMany()
-                        .HasForeignKey("SubjectTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("SigningRule");
-
-                    b.Navigation("SubjectType");
-                });
-
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.StudentSubjectRegistration", b =>
                 {
                     b.HasOne("MensaGymnazium.IntranetGen3.Model.Security.Student", "Student")
@@ -515,17 +462,9 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MensaGymnazium.IntranetGen3.Model.SigningRule", "UsedSigningRule")
-                        .WithMany("RegistrationsWithDeleted")
-                        .HasForeignKey("UsedSigningRuleId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("Student");
 
                     b.Navigation("Subject");
-
-                    b.Navigation("UsedSigningRule");
                 });
 
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Subject", b =>
@@ -577,29 +516,8 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.SubjectTypeRelation", b =>
-                {
-                    b.HasOne("MensaGymnazium.IntranetGen3.Model.Subject", "Subject")
-                        .WithMany("TypeRelations")
-                        .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("MensaGymnazium.IntranetGen3.Model.SubjectType", "SubjectType")
-                        .WithMany()
-                        .HasForeignKey("SubjectTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Subject");
-
-                    b.Navigation("SubjectType");
-                });
-
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Grade", b =>
                 {
-                    b.Navigation("SigningRules");
-
                     b.Navigation("Students");
                 });
 
@@ -613,22 +531,13 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.SigningRule", b =>
-                {
-                    b.Navigation("RegistrationsWithDeleted");
-
-                    b.Navigation("SubjectCategoryRelations");
-
-                    b.Navigation("SubjectTypeRelations");
-                });
-
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Subject", b =>
                 {
+                    b.Navigation("EducationalAreaRelations");
+
                     b.Navigation("GradeRelations");
 
                     b.Navigation("TeacherRelations");
-
-                    b.Navigation("TypeRelations");
                 });
 #pragma warning restore 612, 618
         }

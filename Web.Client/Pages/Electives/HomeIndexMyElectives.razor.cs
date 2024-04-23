@@ -5,25 +5,19 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
 
 public partial class HomeIndexMyElectives
 {
-	[Inject] protected ISubjectRegistrationsManagerFacade SubjectRegistrationsManagerFacade { get; set; }
+	[Inject] protected ISubjectRegistrationProgressValidationFacade SubjectRegistrationProgressValidationFacade { get; set; }
 
-	private async Task<GridDataProviderResult<StudentWithSigningRuleListItemDto>> GetStudentWithSigningRuleGridData(GridDataProviderRequest<StudentWithSigningRuleListItemDto> request)
+	private StudentRegistrationProgressDto studentsProgress;
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
-		var facadeRequest = new DataFragmentRequest<StudentWithSigningRuleListQueryFilter>()
+		if (!firstRender)
 		{
-			Filter = new() { CurrentStudentOnly = true },
-			StartIndex = request.StartIndex,
-			Count = request.Count,
-			Sorting = request.Sorting?.Select(s => new SortItem(s.SortString, s.SortDirection)).ToArray()
-		};
+			return;
+		}
 
-		var signingRuleListResult = await SubjectRegistrationsManagerFacade.GetStudentWithSigningRuleListAsync(facadeRequest, request.CancellationToken);
+		studentsProgress = await SubjectRegistrationProgressValidationFacade.GetProgressOfCurrentStudentAsync();
 
-		return new()
-		{
-			Data = signingRuleListResult.Data ?? new(),
-			TotalCount = signingRuleListResult.TotalCount
-		};
+		StateHasChanged();
 	}
-
 }

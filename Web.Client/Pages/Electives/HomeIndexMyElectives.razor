@@ -1,7 +1,64 @@
 ﻿<AuthorizeView Roles="@nameof(Role.Student)">
-    <HxListLayout TFilterModel="HxListLayout.NoFilter" Title="Splnění zápisových požadavků volitelých předmětů">
-        <DataTemplate>
-            <StudentWithSigningRuleGrid DataProvider="GetStudentWithSigningRuleGridData" StudentColumnVisible="false" />
-        </DataTemplate>
-    </HxListLayout>
+    <h5>Postup tvé registrace předmětů</h5>
+    <HxListGroup CssClass='contained-width'>
+        @if (studentsProgress is not null)
+        {
+            // Loaded, show data
+
+            <HxListGroupItem>
+                <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-1">Celkový počet hodin</h6>
+                    <small>
+                        @if (studentsProgress.MeetsDonatedHoursCriteria) 
+                        {
+                            <HxIcon Icon='BootstrapIcon.CheckCircleFill' CssClass="me-2 text-success" />
+                        }
+                        else
+                        {
+                            <HxIcon Icon='BootstrapIcon.ExclamationCircleFill' CssClass="me-2 text-warning" />
+                        }
+                    </small>
+                </div>
+                <b class="mb-1">@($"{studentsProgress.AmOfDonatedHoursExcludingLanguages}h / {studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages}h")</b>
+                <br />
+                <small>Musíš mít tolik předmětů (kromě jazyků), aby dohromady dávali (dotovali) v rozvrhu @studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages hodin</small>
+            </HxListGroupItem>
+
+            @if (studentsProgress.RequiresCspOrCpValidation)
+            {
+                <HxListGroupItem>
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">Člověk & svět práce nebo Člověk & příroda</h6>
+                        <small>
+                            @if (studentsProgress.MeetsCsOrCpCriteria)
+                            {
+                                <HxIcon Icon='BootstrapIcon.CheckCircleFill' CssClass="me-2 text-success" />
+                            }
+                            else
+                            {
+                                <HxIcon Icon='BootstrapIcon.ExclamationCircleFill' CssClass="me-2 text-warning" />
+                            }
+                        </small>
+                    </div>
+                    <b class="mb-1">@($"{studentsProgress.AmOfDonatedHoursInCspOrCp}h / {studentsProgress.RequiredAmOfDonatedHoursInCspOrCp}h")</b>
+                    <br />
+                    <small>4 dotované hodiny musí být ze vzdělávacích oblastí „Člověk aspolečnost“ či „Člověk a příroda“</small>
+                </HxListGroupItem>
+            }
+        }
+        else
+        {
+            // Not loaded, show placeholder
+
+            <HxPlaceholderContainer Animation='PlaceholderAnimation.Glow'>
+                <HxPlaceholder>
+                    <HxListGroupItem>
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">Načítání tvého postupu</h6>
+                        </div>
+                    </HxListGroupItem>
+                </HxPlaceholder>
+            </HxPlaceholderContainer>
+        }
+    </HxListGroup>            
 </AuthorizeView>

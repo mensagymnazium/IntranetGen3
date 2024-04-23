@@ -7,6 +7,8 @@ public record SubjectDto : SubjectListItemDto
 {
 	public string Description { get; set; }
 
+	public bool CanRegisterRepeatedly { get; set; }
+
 	public class SubjectValidator : AbstractValidator<SubjectDto>
 	{
 		public SubjectValidator()
@@ -16,6 +18,12 @@ public record SubjectDto : SubjectListItemDto
 			RuleFor(x => x.CategoryId).NotEmpty().WithName("Kategorie");
 			RuleFor(x => x.ScheduleDayOfWeek).NotEmpty().WithName("Den");
 			RuleFor(x => x.ScheduleSlotInDay).NotEmpty().WithName("Čas");
+			RuleFor(x => x.HoursPerWeek).Must(BeMoreThanZero).WithName("Dotované hodiny");
+		}
+
+		private bool BeMoreThanZero(int arg)
+		{
+			return arg > 0;
 		}
 	}
 }

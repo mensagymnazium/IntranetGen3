@@ -9,16 +9,13 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Queries;
 public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 {
 	private readonly ISubjectDataSource subjectDataSource;
-	private readonly ISigningRuleRepository signingRuleRepository;
 	private readonly IStudentSubjectRegistrationDataSource studentSubjectRegistrationDataSource;
 
 	public SubjectListQuery(
 		ISubjectDataSource subjectDataSource,
-		ISigningRuleRepository signingRuleRepository,
 		IStudentSubjectRegistrationDataSource studentSubjectRegistrationDataSource)
 	{
 		this.subjectDataSource = subjectDataSource;
-		this.signingRuleRepository = signingRuleRepository;
 		this.studentSubjectRegistrationDataSource = studentSubjectRegistrationDataSource;
 	}
 
@@ -29,28 +26,9 @@ public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 	{
 		var data = subjectDataSource.Data
 			.WhereIf(!String.IsNullOrWhiteSpace(Filter.Name), s => s.Name.Contains(Filter.Name))
-			.WhereIf(Filter.SubjectTypeId != null, s => s.TypeRelations.Any(r => r.SubjectTypeId == Filter.SubjectTypeId))
+			.WhereIf(Filter.EducationalAreaId != null, s => s.EducationalAreaRelations.Any(r => r.EducationalAreaId == Filter.EducationalAreaId))
 			.WhereIf(Filter.SubjectCategoryId != null, s => s.CategoryId == Filter.SubjectCategoryId)
 			.WhereIf(Filter.TeacherId != null, s => s.TeacherRelations.Any(tr => tr.TeacherId == Filter.TeacherId));
-
-		if (Filter.SigningRuleId is not null)
-		{
-			var signingRule = signingRuleRepository.GetObject(Filter.SigningRuleId.Value);
-
-			data = data.Where(s => s.GradeRelations.Any(gr => gr.GradeId == signingRule.GradeId));
-
-			var subjectTypesIds = signingRule.SubjectTypeRelations.Select(str => str.SubjectTypeId);
-			if (subjectTypesIds.Any())
-			{
-				data = data.Where(s => s.TypeRelations.Any(tr => subjectTypesIds.Contains(tr.SubjectTypeId)));
-			}
-
-			var subjectCategoriesIds = signingRule.SubjectCategoryRelations.Select(str => str.SubjectCategoryId);
-			if (subjectCategoriesIds.Any())
-			{
-				data = data.Where(s => subjectCategoriesIds.Contains(s.CategoryId));
-			}
-		}
 
 		data = data
 			.OrderByMultiple(Sorting, sortingExpression => sortingExpression switch
@@ -61,7 +39,7 @@ public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 				 nameof(SubjectListItemDto.ScheduleSlotInDay) => new() { s => s.ScheduleDayOfWeek, s => s.ScheduleSlotInDay },
 				 nameof(SubjectListItemDto.CategoryId) => new() { s => s.Category.Name },
 				 nameof(SubjectListItemDto.GradeIds) => new() { s => s.GradeRelations.FirstOrDefault().GradeId },
-				 nameof(SubjectListItemDto.SubjectTypeIds) => new() { s => s.TypeRelations.FirstOrDefault().SubjectType.Name },
+				 nameof(SubjectListItemDto.EducationalAreaIds) => new() { s => s.EducationalAreaRelations.FirstOrDefault().EducationalArea.Name },
 				 _ => throw new InvalidOperationException($"Unknown SortingItem.Expression {sortingExpression}.")
 			 });
 
@@ -70,7 +48,7 @@ public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 			Id = s.Id,
 			Name = s.Name,
 			CategoryId = s.CategoryId,
-			SubjectTypeIds = s.TypeRelations.Select(tr => tr.SubjectTypeId).ToList(),
+			EducationalAreaIds = s.EducationalAreaRelations.Select(tr => tr.EducationalAreaId).ToList(),
 			Capacity = s.Capacity,
 			StudentRegistrationsCountMain = studentSubjectRegistrationDataSource.Data.Count(ssr => ssr.SubjectId == s.Id && ssr.RegistrationType == StudentRegistrationType.Main),
 			StudentRegistrationsCountSecondary = studentSubjectRegistrationDataSource.Data.Count(ssr => ssr.SubjectId == s.Id && ssr.RegistrationType == StudentRegistrationType.Secondary),
