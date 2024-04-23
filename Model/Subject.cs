@@ -71,6 +71,8 @@ public class Subject
 
 	public int HoursPerWeek { get; set; } = 2;
 
+	public int MinStudentsToOpen { get; set; } = 5;
+
 	public DateTime Created { get; set; } = DateTime.Now;
 	public DateTime? Deleted { get; set; }
 }

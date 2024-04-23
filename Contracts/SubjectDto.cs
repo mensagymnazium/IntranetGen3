@@ -19,6 +19,7 @@ public record SubjectDto : SubjectListItemDto
 			RuleFor(x => x.ScheduleDayOfWeek).NotEmpty().WithName("Den");
 			RuleFor(x => x.ScheduleSlotInDay).NotEmpty().WithName("Čas");
 			RuleFor(x => x.HoursPerWeek).Must(BeMoreThanZero).WithName("Dotované hodiny");
+			RuleFor(x => x.MinStudentsToOpen).Must(BeMoreThanZero).WithName("Minimální počet účastníků pro otevření");
 		}
 
 		private bool BeMoreThanZero(int arg)
