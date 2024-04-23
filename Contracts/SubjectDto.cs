@@ -23,7 +23,7 @@ public record SubjectDto : SubjectListItemDto
 
 		private bool BeMoreThanZero(int arg)
 		{
-			return arg > 0;
+			return arg > 0 && arg < 5;
 		}
 	}
 }
