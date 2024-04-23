@@ -36,4 +36,5 @@ public interface ISubjectRegistrationsManagerService
 
 	/// <returns>True, if the number of registrations for this subject reached the subject's capacity</returns>
 	Task<bool> IsSubjectCapacityFullAsync(int subjectId);
+	Task<bool> IsStudentInAssignableGrade(int studentId, int subjectId);
 }
