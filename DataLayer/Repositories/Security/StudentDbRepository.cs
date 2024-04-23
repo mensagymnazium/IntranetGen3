@@ -13,6 +13,7 @@ public partial class StudentDbRepository : IStudentRepository
 	protected override IEnumerable<Expression<Func<Student, object>>> GetLoadReferences()
 	{
 		yield return s => s.User;
+		yield return s => s.Grade;
 	}
 
 }
