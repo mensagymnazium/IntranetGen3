@@ -43,6 +43,7 @@ public class SubjectMapper : ISubjectMapper
 		subject.ScheduleSlotInDay = subjectDto.ScheduleSlotInDay.Value;
 		subject.CanRegisterRepeatedly = subjectDto.CanRegisterRepeatedly;
 		subject.HoursPerWeek = subjectDto.HoursPerWeek;
+		subject.MinStudentsToOpen = subjectDto.MinStudentsToOpen;
 
 		var teacherRelationsUpdateFromResult = subject.TeacherRelations.UpdateFrom(subjectDto.TeacherIds,
 			targetKeySelector: t => t.TeacherId,
@@ -105,7 +106,8 @@ public class SubjectMapper : ISubjectMapper
 			ScheduleSlotInDay = subject.ScheduleSlotInDay,
 			ScheduleDayOfWeek = subject.ScheduleDayOfWeek,
 			CanRegisterRepeatedly = subject.CanRegisterRepeatedly,
-			HoursPerWeek = subject.HoursPerWeek
+			HoursPerWeek = subject.HoursPerWeek,
+			MinStudentsToOpen = subject.MinStudentsToOpen
 		};
 	}
 }

@@ -4,6 +4,7 @@ using MensaGymnazium.IntranetGen3.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 {
     [DbContext(typeof(IntranetGen3DbContext))]
-    partial class IntranetGen3DbContextModelSnapshot : ModelSnapshot
+    [Migration("20240423131501_AddMinStudentsToOpen")]
+    partial class AddMinStudentsToOpen
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,43 +138,6 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("GradeRegistrationCriteria");
-
-                    b
-                        .HasAnnotation("Caching-AllKeysEnabled", true)
-                        .HasAnnotation("Caching-EntitiesEnabled", true);
-                });
-
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.GraduationSubject", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GraduationSubject");
-
-                    b
-                        .HasAnnotation("Caching-AllKeysEnabled", true)
-                        .HasAnnotation("Caching-EntitiesEnabled", true);
-                });
-
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.GraduationSubjectRelation", b =>
-                {
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GraduationSubjectId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SubjectId", "GraduationSubjectId");
-
-                    b.HasIndex("GraduationSubjectId");
-
-                    b.ToTable("GraduationSubjectRelation");
 
                     b
                         .HasAnnotation("Caching-AllKeysEnabled", true)
@@ -460,25 +426,6 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.Navigation("RegistrationCriteria");
                 });
 
-            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.GraduationSubjectRelation", b =>
-                {
-                    b.HasOne("MensaGymnazium.IntranetGen3.Model.GraduationSubject", "GraduationSubject")
-                        .WithMany()
-                        .HasForeignKey("GraduationSubjectId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("MensaGymnazium.IntranetGen3.Model.Subject", "Subject")
-                        .WithMany("GraduationSubjectRelations")
-                        .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("GraduationSubject");
-
-                    b.Navigation("Subject");
-                });
-
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Security.Student", b =>
                 {
                     b.HasOne("MensaGymnazium.IntranetGen3.Model.Grade", "Grade")
@@ -595,8 +542,6 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.Navigation("EducationalAreaRelations");
 
                     b.Navigation("GradeRelations");
-
-                    b.Navigation("GraduationSubjectRelations");
 
                     b.Navigation("TeacherRelations");
                 });

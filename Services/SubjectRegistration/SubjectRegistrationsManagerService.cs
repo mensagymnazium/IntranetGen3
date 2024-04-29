@@ -86,4 +86,19 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 
 		return registrationsForSubject >= subject.Capacity.Value;
 	}
+
+	public async Task<bool> IsSubjectRegisteredForStudent(int subjectId, int callerStudentId)
+	{
+		var registrationsForStudent = await studentSubjectRegistrationRepository.GetRegistrationsByStudent(callerStudentId);
+
+		foreach (var registration in registrationsForStudent)
+		{
+			if (registration.SubjectId == subjectId)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
 }
