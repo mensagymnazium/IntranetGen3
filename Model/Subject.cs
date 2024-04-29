@@ -57,6 +57,18 @@ public class Subject
 			return EducationalAreaRelations.Select(m => m.EducationalArea);
 		}
 	}
+	
+	public List<GraduationSubjectRelation> GraduationSubjectRelations { get; } = new List<GraduationSubjectRelation>();
+
+	[NotMapped]
+	public IEnumerable<GraduationSubject> GraduationSubjects
+	{
+		get
+		{
+			Contract.Requires<InvalidOperationException>(EducationalAreaRelations.TrueForAll(m => m.EducationalArea is not null), $"Unable to access {nameof(EducationalAreas)} without loading the {nameof(EducationalAreaRelations)}.");
+			return GraduationSubjectRelations.Select(m => m.GraduationSubject);
+		}
+	}
 
 	public SubjectCategory Category { get; set; }
 	public int CategoryId { get; set; }
