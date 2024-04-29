@@ -8,10 +8,11 @@
             <TeacherMultiPicker @bind-Value="model.TeacherIds" Label="Vyučující" />
             <ScheduleTimeSlotPicker @bind-Day="model.ScheduleDayOfWeek" @bind-Slot="model.ScheduleSlotInDay" />
             <HxInputNumber @bind-Value="model.HoursPerWeek" Label="Dotované hodiny" />
+            <HxInputNumber @bind-Value="model.MinStudentsToOpen" Label="Minimální počet účastníků potřebných pro otevření" />
             <GradeMultiPicker @bind-Value="model.GradeIds" Label="Ročník(y)" />
             <SubjectCategoryPicker @bind-Value="model.CategoryId" Label="Skupina" />
             <EducationalAreaMultiPicker @bind-Value="model.EducationalAreaIds" Label="Vzdělávací oblast(i)" />
-			<HxSwitch @bind-Value="model.CanRegisterRepeatedly" Label="Lze zapsat opakovaně" />
+            <HxSwitch @bind-Value="model.CanRegisterRepeatedly" Label="Lze zapsat opakovaně" />
         </EditForm>
     </BodyTemplate>
     <FooterTemplate>
