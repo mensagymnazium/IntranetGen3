@@ -7,15 +7,15 @@ public class GraduationSubjectsDataStore : DictionaryStaticDataStore<int, Gradua
 	IGraduationSubjectsDataStore
 {
 	private readonly IGraduationSubjectFacade _graduationSubjectFacade;
-	
+
 	public GraduationSubjectsDataStore(IGraduationSubjectFacade graduationSubjectFacade)
 	{
 		this._graduationSubjectFacade = graduationSubjectFacade;
 	}
-	
+
 	protected override Func<GraduationSubjectDto, int> KeySelector => graduationSubjectDto => graduationSubjectDto.Id;
 	protected override bool ShouldRefresh() => false; // just hit F5 :-D
-	
+
 	protected async override Task<IEnumerable<GraduationSubjectDto>> LoadDataAsync()
 	{
 		var dto = await _graduationSubjectFacade.GetAllGraduationSubjectsAsync();

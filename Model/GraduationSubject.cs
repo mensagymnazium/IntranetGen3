@@ -11,17 +11,26 @@ public class GraduationSubject
 	[MaxLength(50)]
 	public string Name { get; set; }
 
-	// TODO: Add subjects
 	public enum Entry
 	{
-		LanguageCommunication = 1,
-		MathApplication = 2,
+		CzechLanguageLiterature = 1,
+		Math = 2,
 		Informatics = 4,
-		HumanSociety = 8,
-		HumanNature = 16,
-		ArtCulture = 32,
-		HumanHealth = 64,
-		HumanWork = 128,
+		Physics = 8,
+		Chemistry = 16,
+		Biology = 32,
+		ArtHistory = 64,
+		History = 128,
+		Geography = 256,
+		Philosophy = 512,
+		Psychology = 1024,
+		Sociology = 2048,
+		Economy = 4096,
+		Law = 8192,
+		PoliticalScience = 16384,
+		English = 32768,
+		ForeignLanguage = 65536,
+		HumanWork = 131072,
 	}
 
 	public static bool IsEntry(EducationalArea educationalArea, Entry entry)

@@ -57,7 +57,7 @@ public class Subject
 			return EducationalAreaRelations.Select(m => m.EducationalArea);
 		}
 	}
-	
+
 	public List<GraduationSubjectRelation> GraduationSubjectRelations { get; } = new List<GraduationSubjectRelation>();
 
 	[NotMapped]
