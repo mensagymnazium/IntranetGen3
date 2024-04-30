@@ -32,6 +32,7 @@ public class SubjectMapper : ISubjectMapper
 			await dataLoader.LoadAsync(subject, s => s.TeacherRelations, cancellationToken);
 			await dataLoader.LoadAsync(subject, s => s.EducationalAreaRelations, cancellationToken);
 			await dataLoader.LoadAsync(subject, s => s.GradeRelations, cancellationToken);
+			await dataLoader.LoadAsync(subject, s => s.GraduationSubjectRelations, cancellationToken);
 		}
 
 		subject.Name = subjectDto.Name;
@@ -60,6 +61,14 @@ public class SubjectMapper : ISubjectMapper
 			removeItemAction: t => { });
 		unitOfWork.AddUpdateFromResult(typeRelationsUpdateFromResult);
 
+		var graduationSubjectRelationsUpdateFromResult = subject.GraduationSubjectRelations.UpdateFrom(subjectDto.GraduationSubjectIds,
+			targetKeySelector: t => t.GraduationSubjectId,
+			sourceKeySelector: s => s,
+			newItemCreateFunc: s => new GraduationSubjectRelation { SubjectId = subject.Id, GraduationSubjectId = s },
+			updateItemAction: (s, t) => t.GraduationSubjectId = s,
+			removeItemAction: t => { });
+		unitOfWork.AddUpdateFromResult(graduationSubjectRelationsUpdateFromResult);
+
 		var gradeRelationsUpdateFromResult = subject.GradeRelations.UpdateFrom(subjectDto.GradeIds,
 			targetKeySelector: t => t.GradeId,
 			sourceKeySelector: s => s,
@@ -77,6 +86,7 @@ public class SubjectMapper : ISubjectMapper
 		await dataLoader.LoadAsync(subject, s => s.TeacherRelations, cancellationToken);
 		await dataLoader.LoadAsync(subject, s => s.GradeRelations, cancellationToken);
 		await dataLoader.LoadAsync(subject, s => s.EducationalAreaRelations, cancellationToken);
+		await dataLoader.LoadAsync(subject, s => s.GraduationSubjectRelations, cancellationToken);
 
 		var studentRegistrations = await studentSubjectRegistrationRepository.GetBySubjectAsync(subject.Id, cancellationToken);
 
@@ -87,6 +97,7 @@ public class SubjectMapper : ISubjectMapper
 			Description = subject.Description,
 			CategoryId = subject.CategoryId,
 			EducationalAreaIds = subject.EducationalAreaRelations.Select(tr => tr.EducationalAreaId).ToList(),
+			GraduationSubjectIds = subject.GraduationSubjectRelations.Select(tr => tr.GraduationSubjectId).ToList(),
 			Capacity = subject.Capacity,
 			StudentRegistrationsCountMain = studentRegistrations.Count(ssr => ssr.RegistrationType == StudentRegistrationType.Main),
 			StudentRegistrationsCountSecondary = studentRegistrations.Count(ssr => ssr.RegistrationType == StudentRegistrationType.Secondary),

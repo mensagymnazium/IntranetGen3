@@ -12,6 +12,7 @@ public partial class SubjectDetail
 	[Inject] protected IStudentSubjectRegistrationFacade StudentSubjectRegistrationFacade { get; set; }
 	[Inject] protected ISubjectCategoriesDataStore SubjectCategoriesDataStore { get; set; }
 	[Inject] protected IEducationalAreasDataStore EducationalAreasDataStore { get; set; }
+	[Inject] protected IGraduationSubjectsDataStore GraduationSubjectsDataStore { get; set; }
 	[Inject] protected ITeachersDataStore TeachersDataStore { get; set; }
 	[Inject] protected IGradesDataStore GradesDataStore { get; set; }
 
@@ -24,6 +25,7 @@ public partial class SubjectDetail
 	{
 		await SubjectCategoriesDataStore.EnsureDataAsync();
 		await EducationalAreasDataStore.EnsureDataAsync();
+		await GraduationSubjectsDataStore.EnsureDataAsync();
 		await TeachersDataStore.EnsureDataAsync();
 		await GradesDataStore.EnsureDataAsync();
 	}
@@ -91,6 +93,16 @@ public partial class SubjectDetail
 		}
 
 		return String.Join(", ", educationalAreasIds.Select(id => EducationalAreasDataStore.GetByKey(id)?.Name));
+	}
+
+	private string GetGraduationSubjects(List<int> graduationSubjectIds)
+	{
+		if (graduationSubjectIds.Count == 0)
+		{
+			return "žádné";
+		}
+
+		return String.Join(", ", graduationSubjectIds.Select(id => GraduationSubjectsDataStore.GetByKey(id)?.Name));
 	}
 
 	private string GetTeachers(List<int> teacherIds)

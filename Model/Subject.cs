@@ -58,6 +58,18 @@ public class Subject
 		}
 	}
 
+	public List<GraduationSubjectRelation> GraduationSubjectRelations { get; } = new List<GraduationSubjectRelation>();
+
+	[NotMapped]
+	public IEnumerable<GraduationSubject> GraduationSubjects
+	{
+		get
+		{
+			Contract.Requires<InvalidOperationException>(GraduationSubjectRelations.TrueForAll(m => m.GraduationSubject is not null), $"Unable to access {nameof(GraduationSubjects)} without loading the {nameof(GraduationSubjectRelations)}.");
+			return GraduationSubjectRelations.Select(m => m.GraduationSubject);
+		}
+	}
+
 	public SubjectCategory Category { get; set; }
 	public int CategoryId { get; set; }
 
