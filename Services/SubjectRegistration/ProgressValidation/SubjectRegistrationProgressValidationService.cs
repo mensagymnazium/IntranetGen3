@@ -20,15 +20,15 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		this.gradeRepository = gradeRepository;
 	}
 
-	public async Task<StudentRegistrationProgress> GetRegistrationProgressOfStudentAsync(int studentId)
+	public async Task<StudentRegistrationProgress> GetRegistrationProgressOfStudentAsync(int studentId, CancellationToken cancellationToken = default)
 	{
-		var student = await studentRepository.GetObjectAsync(studentId);
+		var student = await studentRepository.GetObjectAsync(studentId, cancellationToken);
 		Contract.Requires<ArgumentNullException>(student is not null);
 
 		// Logically we want to validate the rules for the next grade
 		// Todo: what if someone from oktava (no future grade) calls this method?
-		var futureGrade = await gradeRepository.GetObjectAsync(student.GradeId - 1);
-		var studentsRegistrations = await subjectRegistrationRepository.GetRegistrationsByStudent(studentId);
+		var futureGrade = await gradeRepository.GetObjectAsync(student.GradeId - 1, cancellationToken);
+		var studentsRegistrations = await subjectRegistrationRepository.GetRegistrationsByStudentAsync(studentId, cancellationToken);
 
 		Contract.Requires<ArgumentNullException>(studentsRegistrations is not null);
 		Contract.Requires<ArgumentNullException>(futureGrade is not null);

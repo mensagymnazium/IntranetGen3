@@ -20,7 +20,7 @@ public class StudentSubjectRegistrationsDataStore : DictionaryStaticDataStore<in
 
 	protected override async Task<IEnumerable<StudentSubjectRegistrationDto>> LoadDataAsync()
 	{
-		var dto = await studentSubjectRegistrationFacade.GetAllRegistrationsOfCurrentStudent();
+		var dto = await studentSubjectRegistrationFacade.GetAllRegistrationsOfCurrentStudentAsync();
 
 		return dto ?? new();
 	}

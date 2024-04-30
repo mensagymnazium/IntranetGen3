@@ -65,14 +65,14 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 
 		// Verify student isn't already registered for this subject
 		var currentUser = applicationAuthenticationService.GetCurrentUser();
-		if (await subjectRegistrationsManagerService.IsSubjectRegisteredForStudent(studentSubjectRegistrationCreateDto.SubjectId.Value, currentUser.StudentId.Value))
+		if (await subjectRegistrationsManagerService.IsSubjectRegisteredForStudentAsync(studentSubjectRegistrationCreateDto.SubjectId.Value, currentUser.StudentId.Value, cancellationToken))
 		{
 			throw new OperationFailedException("Student už je přihlášený");
 		}
 
 		// Verify subject isn't full
 		if (await subjectRegistrationsManagerService
-				.IsSubjectCapacityFullAsync(studentSubjectRegistrationCreateDto.SubjectId.Value))
+				.IsSubjectCapacityFullAsync(studentSubjectRegistrationCreateDto.SubjectId.Value, cancellationToken))
 		{
 			throw new OperationFailedException("Předmět je již plný");
 		}

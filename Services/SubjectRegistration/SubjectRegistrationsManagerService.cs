@@ -74,22 +74,22 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 		unitOfWork.AddForDelete(studentSubjectRegistration);
 	}
 
-	public async Task<bool> IsSubjectCapacityFullAsync(int subjectId)
+	public async Task<bool> IsSubjectCapacityFullAsync(int subjectId, CancellationToken cancellationToken = default)
 	{
-		var subject = await subjectRepository.GetObjectAsync(subjectId);
+		var subject = await subjectRepository.GetObjectAsync(subjectId, cancellationToken);
 		if (subject.Capacity is null)
 		{
 			return false; // No capacity => no limit
 		}
 
-		var registrationsForSubject = await studentSubjectRegistrationRepository.CountMainRegistrationsForSubjectAsync(subjectId);
+		var registrationsForSubject = await studentSubjectRegistrationRepository.CountMainRegistrationsForSubjectAsync(subjectId, cancellationToken);
 
 		return registrationsForSubject >= subject.Capacity.Value;
 	}
 
-	public async Task<bool> IsSubjectRegisteredForStudent(int subjectId, int callerStudentId)
+	public async Task<bool> IsSubjectRegisteredForStudentAsync(int subjectId, int callerStudentId, CancellationToken cancellationToken = default)
 	{
-		var registrationsForStudent = await studentSubjectRegistrationRepository.GetRegistrationsByStudent(callerStudentId);
+		var registrationsForStudent = await studentSubjectRegistrationRepository.GetRegistrationsByStudentAsync(callerStudentId, cancellationToken);
 
 		foreach (var registration in registrationsForStudent)
 		{

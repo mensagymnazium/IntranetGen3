@@ -39,12 +39,12 @@ public class StudentSubjectRegistrationFacade : IStudentSubjectRegistrationFacad
 	}
 
 	[Authorize(Roles = nameof(Role.Student))]
-	public async Task<List<StudentSubjectRegistrationDto>> GetAllRegistrationsOfCurrentStudent()
+	public async Task<List<StudentSubjectRegistrationDto>> GetAllRegistrationsOfCurrentStudentAsync(CancellationToken cancellationToken = default)
 	{
 		var currentUser = applicationAuthenticationService.GetCurrentUser();
 		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
 
-		var registrations = await studentSubjectRegistrationRepository.GetRegistrationsByStudent(currentUser.StudentId.Value);
+		var registrations = await studentSubjectRegistrationRepository.GetRegistrationsByStudentAsync(currentUser.StudentId.Value, cancellationToken);
 
 		// Map
 		var response = registrations.Select(r => new StudentSubjectRegistrationDto()

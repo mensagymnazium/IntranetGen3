@@ -1,4 +1,5 @@
-﻿namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration.ProgressValidation;
+﻿
+namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration.ProgressValidation;
 
 /// <summary>
 /// Responsible for determining, whether a student has fulfilled the registration criteria
@@ -6,5 +7,5 @@
 /// </summary>
 public interface ISubjectRegistrationProgressValidationService
 {
-	public Task<StudentRegistrationProgress> GetRegistrationProgressOfStudentAsync(int studentId);
+	Task<StudentRegistrationProgress> GetRegistrationProgressOfStudentAsync(int studentId, CancellationToken cancellationToken = default);
 }
