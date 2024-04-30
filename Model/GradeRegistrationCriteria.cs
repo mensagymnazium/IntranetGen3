@@ -23,4 +23,11 @@ public record GradeRegistrationCriteria
 	/// How many hours in educational field Csp/cP
 	/// </summary>
 	public int RequiredAmountOfDonatedHoursInAreaCspOrCp { get; set; }
+
+	/// <summary>
+	/// Does the student need to have a foreign language
+	/// </summary>
+	public bool RequiresForeginLanguage { get; set; }
+
+	public bool CanUseForeignLanguageInsteadOfDonatedHours { get; set; }
 }

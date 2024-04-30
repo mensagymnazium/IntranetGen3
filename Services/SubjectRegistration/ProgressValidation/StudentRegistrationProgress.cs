@@ -3,7 +3,8 @@
 public record StudentRegistrationProgress(
 	bool IsRegistrationValid,
 	StudentDonatedHoursProgress DonatedHoursProgress,
-	StudentCsOrCpRegistrationProgress CsOrCpRegistrationProgress)
+	StudentCsOrCpRegistrationProgress CsOrCpRegistrationProgress,
+	StudentLanguageRegistrationProgress LanguageRegistrationProgress)
 {
 	/// <summary>
 	/// When true, the student has registered all of his subjects correctly,

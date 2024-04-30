@@ -23,35 +23,41 @@ public class GradeRegistrationCriteriaSeed : DataSeed<CoreProfile>
 			{
 				Id = (int)GradeEntry.Tercie,
 				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 2,
+				RequiresForeginLanguage = true,
 			},
 			new GradeRegistrationCriteria()
 			{
 				Id = (int)GradeEntry.Kvarta,
 				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 2,
+				RequiresForeginLanguage = true,
 			},
 			new GradeRegistrationCriteria()
 			{
 				Id = (int)GradeEntry.Kvinta,
 				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 4,
+				RequiresForeginLanguage = true,
 			},
 			new GradeRegistrationCriteria()
 			{
 				Id = (int)GradeEntry.Sexta,
 				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 4,
+				RequiresForeginLanguage = true,
 			},
 			new GradeRegistrationCriteria()
 			{
 				Id = (int)GradeEntry.Septima,
 				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 10,
 				RequiresCspOrCpValidation = true,
-				RequiredAmountOfDonatedHoursInAreaCspOrCp = 4
+				RequiredAmountOfDonatedHoursInAreaCspOrCp = 4,
+				RequiresForeginLanguage = true,
 			},
 			new GradeRegistrationCriteria()
 			{
 				Id = (int)GradeEntry.Oktava,
 				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 12,
 				RequiresCspOrCpValidation = true,
-				RequiredAmountOfDonatedHoursInAreaCspOrCp = 4
+				RequiredAmountOfDonatedHoursInAreaCspOrCp = 4,
+				RequiresForeginLanguage = true,
 			},
 		};
 

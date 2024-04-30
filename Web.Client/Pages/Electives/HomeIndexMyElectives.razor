@@ -45,6 +45,28 @@
                     <small>4 hodiny musí být ze vzdělávacích oblastí „Člověk aspolečnost“ či „Člověk a příroda“</small>
                 </HxListGroupItem>
             }
+
+            @if (studentsProgress.IsLanguageRequired)
+            {
+                <HxListGroupItem>
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">Jazyk</h6>
+                        <small>
+                            @if (studentsProgress.MeetsLanguageCriteria)
+                            {
+                                <HxIcon Icon='BootstrapIcon.CheckCircleFill' CssClass="me-2 text-success" />
+                            }
+                            else
+                            {
+                                <HxIcon Icon='BootstrapIcon.ExclamationCircleFill' CssClass="me-2 text-warning" />
+                            }
+                        </small>
+                    </div>
+                    <b class="mb-1">@(studentsProgress.HasRegisteredLanguage ? "Máš zapsaný jazyk" : "Potřebuješ zapsat jazyk" )</b>
+                    <br />
+                    <small>Musíš mít cízí zapsaný jazyk</small>
+                </HxListGroupItem>
+            }
         }
         else
         {
