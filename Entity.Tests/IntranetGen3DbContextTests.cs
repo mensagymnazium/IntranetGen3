@@ -18,11 +18,12 @@ public class IntranetGen3DbContextTests
 
 		// Act
 		Havit.Data.EntityFrameworkCore.ModelValidation.ModelValidator modelValidator = new();
+
+		// TODO #145
 		var validationRules = new ValidationRules()
 		{
 			CheckOnlyForeignKeysEndWithId = false // This convention is broken in many instances. For now just ignore it.
 												  // I.E. (Grade.AadGroupId) or (Student.SeedEntityId)
-												  // Xopa Todo: Maybe change the naming, so it fits the convention
 		};
 		string errors = modelValidator.Validate(dbContext, validationRules);
 
