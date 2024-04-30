@@ -37,7 +37,6 @@ public partial class SubjectList
 
 		if ((await ClientAuthService.GetCurrentClaimsPrincipal()).IsInRole(nameof(Role.Student)))
 		{
-			// TODO: Check this works, it should only for kvinta and sexta
 			var gradeId = await ClientAuthService.GetCurrentStudentGradeIdAsync();
 			showRocnikovkaWarning = (gradeId == GradeEntry.Kvinta || gradeId == GradeEntry.Sexta);
 
