@@ -15,6 +15,7 @@ public partial class StudentSubjectRegistrationComponent
 	[Inject] protected IHxMessengerService Messenger { get; set; }
 	[Inject] protected ISubjectRegistrationsManagerFacade SubjectRegistrationsManagerFacade { get; set; }
 	[Inject] protected IStudentSubjectRegistrationsDataStore StudentSubjectRegistrationsDataStore { get; set; }
+	[Inject] protected ISubjectRegistrationProgressValidationFacade SubjectRegistrationProgressValidationFacade { get; set; }
 
 	/// <summary>
 	/// Registration was made by current user (student) for this subject
@@ -22,9 +23,21 @@ public partial class StudentSubjectRegistrationComponent
 	/// </summary>
 	private StudentSubjectRegistrationDto studentsRegistrationForThisSubject = null;
 
+	private StudentRegistrationProgressDto studentsProgress = null;
+
+	/// <summary>
+	/// Determines whether the student's amount of registered hours is less than the required amount of hours
+	/// </summary>
+	/// <returns>True if the registration isn't possible</returns>
+	public bool IsRegistrationNotPossible()
+	{
+		return studentsProgress.AmOfDonatedHoursExcludingLanguages >= studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages;
+	}
+
 	protected override async Task OnInitializedAsync()
 	{
 		await LoadStudentRegistrationAsync();
+		studentsProgress = await SubjectRegistrationProgressValidationFacade.GetProgressOfCurrentStudentAsync();
 	}
 
 	private async Task LoadStudentRegistrationAsync()
@@ -48,6 +61,7 @@ public partial class StudentSubjectRegistrationComponent
 
 				// Invalidate data store
 				StudentSubjectRegistrationsDataStore.Clear();
+				studentsProgress = await SubjectRegistrationProgressValidationFacade.GetProgressOfCurrentStudentAsync();
 
 				// Reload from cache (Xopa: maybe unnecessarily expensive?)
 				await LoadStudentRegistrationAsync();
@@ -76,6 +90,7 @@ public partial class StudentSubjectRegistrationComponent
 
 				//Invalidate data store
 				StudentSubjectRegistrationsDataStore.Clear();
+				studentsProgress = await SubjectRegistrationProgressValidationFacade.GetProgressOfCurrentStudentAsync();
 
 				// Reload from cache (Xopa: maybe unnecessarily expensive?)
 				await LoadStudentRegistrationAsync();

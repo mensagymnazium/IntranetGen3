@@ -1,22 +1,35 @@
-﻿@if (studentsRegistrationForThisSubject is null)
+﻿@if (studentsProgress is not null)
 {
-    // No registration
-    <HxButton 
-        Text="Zapsat jako primární"
-        OnClick="() => HandleCreateRegistrationClicked(StudentRegistrationType.Main)" 
-        Color="ThemeColor.Primary"
-        Size="ButtonSize.Small"
-        Icon="BootstrapIcon.Basket" />
-} else
+    @if (studentsRegistrationForThisSubject is not null)
+    {
+        // Registered already
+        <HxButton 
+            Text="Zrušit primární zápis"
+            OnClick="() => HandleCancelRegistrationClicked()"
+            Color="ThemeColor.Primary"
+            Outline="true" 
+            Size="ButtonSize.Small" 
+            Icon="BootstrapIcon.Trash" />
+    }
+    else if (IsRegistrationNotPossible())
+    {
+        // Registration not possible
+        <text>Už máte naplněné podmínky registrace</text>
+    }
+    else
+    {
+        // No registration
+        <HxButton
+            Text="Zapsat jako primární"
+            OnClick="() => HandleCreateRegistrationClicked(StudentRegistrationType.Main)" 
+            Color="ThemeColor.Primary"
+            Size="ButtonSize.Small"
+            Icon="BootstrapIcon.Basket" />
+    }
+}
+else
 {
-    // Registered already
-    <HxButton 
-        Text="Zrušit primární zápis"
-        OnClick="() => HandleCancelRegistrationClicked()"
-        Color="ThemeColor.Primary"
-        Outline="true" 
-        Size="ButtonSize.Small" 
-        Icon="BootstrapIcon.Trash" />
+    <HxSpinner Color="ThemeColor.Primary" Size="SpinnerSize.Small" />
 }
 
 
