@@ -9,7 +9,7 @@ public class GraduationSubjectSeed : DataSeed<CoreProfile>
 		var data = new[]
 		{
 			new GraduationSubject() { Name = "český jazyk a literatura", Id = (int)GraduationSubject.Entry.CzechLanguageLiterature },
-			new GraduationSubject() { Name = "matematika", Id= (int)GraduationSubject.Entry.Math },
+			new GraduationSubject() { Name = "matematika", Id = (int)GraduationSubject.Entry.Math },
 			new GraduationSubject() { Name = "informatika a výpočetní technika", Id = (int)GraduationSubject.Entry.Informatics },
 			new GraduationSubject() { Name = "fyzika", Id = (int)GraduationSubject.Entry.Physics },
 			new GraduationSubject() { Name = "chemie", Id = (int)GraduationSubject.Entry.Chemistry },
