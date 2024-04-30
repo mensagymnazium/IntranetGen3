@@ -35,7 +35,7 @@
             <HxCardText>
                 <TextValue Label="Vyučující" Value="@GetTeachers(subject.TeacherIds)" />
                 <TextValue Label="Rozvrh" Value="@ValueFormatter.GetScheduleTimeSlot(subject.ScheduleDayOfWeek, subject.ScheduleSlotInDay)" />
-                <TextValue Label="Dotované hodiny týdně" Value="@($"{subject.HoursPerWeek}h")" />
+                <TextValue Label="Počet hodin týdně" Value="@($"{subject.HoursPerWeek}h")" />
                 <TextValue Label="Minimální počet účastníků potřebný pro otevření" Value="@subject.MinStudentsToOpen.ToString()" />
                 <TextValue Label="Počet zápisů primárních (+náhradních)" Value="@($"{subject.StudentRegistrationsCountMain} / {subject.Capacity?.ToString() ?? "\x221E"} (+{subject.StudentRegistrationsCountSecondary})")" />
                 <TextValue Label="@(subject.GradeIds.Count != 1 ? "Ročníky" : "Ročník")" Value="@GetGrades(subject.GradeIds)" />
