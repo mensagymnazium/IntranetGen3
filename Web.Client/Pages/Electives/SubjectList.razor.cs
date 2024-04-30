@@ -26,6 +26,7 @@ public partial class SubjectList
 
 	private List<StudentSubjectRegistrationDto> registeredSubjects = new(); // Never null, may be empty...
 	private SubjectListQueryFilter subjectListFilter = new();
+	private bool showRocnikovkaWarning = false;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -36,6 +37,9 @@ public partial class SubjectList
 
 		if ((await ClientAuthService.GetCurrentClaimsPrincipal()).IsInRole(nameof(Role.Student)))
 		{
+			var gradeId = await ClientAuthService.GetCurrentStudentGradeIdAsync();
+			showRocnikovkaWarning = (gradeId == GradeEntry.Kvinta || gradeId == GradeEntry.Sexta);
+
 			await StudentSubjectRegistrationsDataStore.EnsureDataAsync();
 			registeredSubjects = (await StudentSubjectRegistrationsDataStore.GetAllAsync()).ToList();
 		}
