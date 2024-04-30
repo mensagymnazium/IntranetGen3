@@ -36,13 +36,27 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 
 		var donatedHoursProgress = GetDonatedHoursProgress(futureGrade, studentsRegistrations);
 		var csOrCpProgress = GetCsOrCpRegistrationProgress(futureGrade, studentsRegistrations);
+		var languageProgress = GetLanguageRegistrationProgress(futureGrade, studentsRegistrations);
 
 		var registrationProgress = ConstructRegistrationProgress(
 			futureGrade,
 			donatedHoursProgress,
-			csOrCpProgress);
+			csOrCpProgress,
+			languageProgress);
 
 		return registrationProgress;
+	}
+
+	private StudentLanguageRegistrationProgress GetLanguageRegistrationProgress(
+		Grade forGrade,
+		List<StudentSubjectRegistration> studentsRegistrations)
+	{
+		var doesStudentHaveLanguage = studentsRegistrations
+			.Any(r => SubjectCategory.IsEntry(r.Subject.Category, SubjectCategory.Entry.ForeignLanguage));
+
+		return new StudentLanguageRegistrationProgress(
+			IsLanguageRequired: forGrade.RegistrationCriteria.RequiresForeginLanguage,
+			doesStudentHaveLanguage);
 	}
 
 	private StudentDonatedHoursProgress GetDonatedHoursProgress(
@@ -114,7 +128,8 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 	private StudentRegistrationProgress ConstructRegistrationProgress(
 		Grade forGrade,
 		StudentDonatedHoursProgress donatedHoursProgress,
-		StudentCsOrCpRegistrationProgress csOrCpProgress)
+		StudentCsOrCpRegistrationProgress csOrCpProgress,
+		StudentLanguageRegistrationProgress languageRegistrationProgress)
 	{
 		var isRegistrationValid =
 			(donatedHoursProgress.MeetsCriteria)
@@ -123,6 +138,7 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		return new StudentRegistrationProgress(
 			isRegistrationValid,
 			donatedHoursProgress,
-			csOrCpProgress);
+			csOrCpProgress,
+			languageRegistrationProgress);
 	}
 }
