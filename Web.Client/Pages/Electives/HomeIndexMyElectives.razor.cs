@@ -1,5 +1,4 @@
-﻿using Havit.Collections;
-using MensaGymnazium.IntranetGen3.Contracts;
+﻿using MensaGymnazium.IntranetGen3.Contracts;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
 
@@ -9,15 +8,8 @@ public partial class HomeIndexMyElectives
 
 	private StudentRegistrationProgressDto studentsProgress;
 
-	protected override async Task OnAfterRenderAsync(bool firstRender)
+	protected override async Task OnInitializedAsync()
 	{
-		if (!firstRender)
-		{
-			return;
-		}
-
 		studentsProgress = await SubjectRegistrationProgressValidationFacade.GetProgressOfCurrentStudentAsync();
-
-		StateHasChanged();
 	}
 }
