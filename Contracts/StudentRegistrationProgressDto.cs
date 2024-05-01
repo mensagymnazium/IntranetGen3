@@ -48,7 +48,7 @@ public record StudentRegistrationProgressDto
 	public int RequiredAmOfDonatedHoursInCspOrCp { get; set; }
 	public bool MeetsCsOrCpCriteria { get; set; }
 
-	public bool IsLanguageRequired {get; set; }
+	public bool IsLanguageRequired { get; set; }
 	public bool HasRegisteredLanguage { get; set; }
 	public bool MeetsLanguageCriteria { get; set; }
 }
