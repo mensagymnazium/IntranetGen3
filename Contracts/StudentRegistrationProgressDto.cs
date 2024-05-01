@@ -12,7 +12,9 @@ public record StudentRegistrationProgressDto
 		int requiredAmOfDonatedHoursInCspOrCp,
 		bool meetsCsOrCpCriteria,
 		bool isLanguageRequired,
-		bool hasRegisteredLanguage, bool meetsLanguageCriteria)
+		bool hasRegisteredLanguage,
+		bool meetsLanguageCriteria,
+		bool canUseLanguageInsteadOfDonatedHours)
 	{
 		IsRegistrationValid = isRegistrationValid;
 		RequiresCspOrCpValidation = requiresCspOrCpValidation;
@@ -25,6 +27,7 @@ public record StudentRegistrationProgressDto
 		AmOfDonatedHoursExcludingLanguages = amOfDonatedHoursExcludingLanguages;
 		RequiredAmOfDonatedHoursExcludingLanguages = requiredAmOfDonatedHoursExcludingLanguages;
 		MeetsDonatedHoursCriteria = meetsDonatedHoursCriteria;
+		CanUseLanguageInsteadOfDonatedHours = canUseLanguageInsteadOfDonatedHours;
 	}
 
 	private StudentRegistrationProgressDto()
@@ -51,4 +54,5 @@ public record StudentRegistrationProgressDto
 	public bool IsLanguageRequired { get; set; }
 	public bool HasRegisteredLanguage { get; set; }
 	public bool MeetsLanguageCriteria { get; set; }
+	public bool CanUseLanguageInsteadOfDonatedHours { get; set; }
 }

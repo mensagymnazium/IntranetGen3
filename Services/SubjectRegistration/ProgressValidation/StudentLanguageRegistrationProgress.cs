@@ -5,5 +5,6 @@ public record StudentLanguageRegistrationProgress(
 	bool HasRegisteredLanguage)
 {
 	public bool MeetsCriteria
-		=> (IsLanguageRequired && HasRegisteredLanguage) || (!IsLanguageRequired);
+		=> (IsLanguageRequired && HasRegisteredLanguage)
+		   || (!IsLanguageRequired);
 }

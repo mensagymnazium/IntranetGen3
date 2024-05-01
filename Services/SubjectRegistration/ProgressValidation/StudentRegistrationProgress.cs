@@ -1,4 +1,6 @@
-﻿namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration.ProgressValidation;
+﻿using System;
+
+namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration.ProgressValidation;
 
 /// <summary>
 /// 
@@ -19,8 +21,15 @@
 /// <param name="LanguageRegistrationProgress">
 /// Progress of the rule about having a language
 /// </param>
+/// <param name="CanUseLanguageInsteadOfDonatedHours">
+/// If true, the student may choose a language instead of completing the donated hours mark.
+/// Applied to Sekunda (2023/2024) and stated:
+/// '1 volitelný předmět (může být i druhý cizí 
+/// jazyk s dotací 2 hodiny týdně)'
+/// </param>
 public record StudentRegistrationProgress(
 	bool IsRegistrationValid,
 	StudentDonatedHoursProgress DonatedHoursProgress,
 	StudentCsOrCpRegistrationProgress CsOrCpRegistrationProgress,
-	StudentLanguageRegistrationProgress LanguageRegistrationProgress);
+	StudentLanguageRegistrationProgress LanguageRegistrationProgress,
+	bool CanUseLanguageInsteadOfDonatedHours);

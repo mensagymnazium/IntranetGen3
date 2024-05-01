@@ -1,0 +1,18 @@
+﻿<HxListGroupItem CssClass='@(CompleteRegistrationIsValid && !MeetsCriteria ? "opacity-50" : string.Empty)'>
+    <div class="d-flex w-100 justify-content-between">
+        <h6 class="mb-1">@CriteriaName</h6>
+        <small>
+            @if (MeetsCriteria)
+            {
+                <HxIcon Icon='BootstrapIcon.CheckCircleFill' CssClass="me-2 text-success"/>
+            }
+            else if(!CompleteRegistrationIsValid)
+            {
+                <HxIcon Icon='BootstrapIcon.ExclamationCircleFill' CssClass="me-2 text-warning"/>
+            }
+        </small>
+    </div>
+    <b class="mb-1">@(CriteriaProgress)</b>
+    <br/>
+    <small>@CriteriaDescription</small>
+</HxListGroupItem>

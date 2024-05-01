@@ -131,14 +131,38 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		StudentCsOrCpRegistrationProgress csOrCpProgress,
 		StudentLanguageRegistrationProgress languageRegistrationProgress)
 	{
-		var isRegistrationValid =
-			(donatedHoursProgress.MeetsCriteria)
-			&& (csOrCpProgress.MeetsCriteria);
+		bool isRegistrationValid = IsRegistrationValid(
+			forGrade,
+			donatedHoursProgress,
+			csOrCpProgress,
+			languageRegistrationProgress);
 
 		return new StudentRegistrationProgress(
 			isRegistrationValid,
 			donatedHoursProgress,
 			csOrCpProgress,
-			languageRegistrationProgress);
+			languageRegistrationProgress,
+			forGrade.RegistrationCriteria.CanUseForeignLanguageInsteadOfDonatedHours);
+	}
+
+	private static bool IsRegistrationValid(
+		Grade forGrade,
+		StudentDonatedHoursProgress donatedHoursProgress,
+		StudentCsOrCpRegistrationProgress csOrCpProgress,
+		StudentLanguageRegistrationProgress languageProgress)
+	{
+		var meetsBaseCriteria = csOrCpProgress.MeetsCriteria && languageProgress.MeetsCriteria;
+
+		if (forGrade.RegistrationCriteria.CanUseForeignLanguageInsteadOfDonatedHours)
+		{
+			// If language progress is sufficient, we can skip donated hours
+			if (meetsBaseCriteria)
+			{
+				return true;
+			}
+		}
+
+		// -> Cannot skip donated hours validation
+		return meetsBaseCriteria && donatedHoursProgress.MeetsCriteria;
 	}
 }

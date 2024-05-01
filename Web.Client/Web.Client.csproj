@@ -35,6 +35,11 @@
 
 	<ItemGroup>
 	  <_ContentIncludedByDefault Remove="Pages\Development\MartinFiala.razor" />
+	  <_ContentIncludedByDefault Remove="Pages\Electives\ElectiveProgressComponent.razor" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Pages\Electives\ElectiveProgressComponent.razor" />
 	</ItemGroup>
 
 </Project>
