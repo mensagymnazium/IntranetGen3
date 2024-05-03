@@ -8,10 +8,10 @@
             
             <HxInputNumber Label="Počet hodin v rozvrhu (kromě jazyků)" TValue="int" @bind-Value="model.RequiredTotalAmountOfDonatedHoursExcludingLanguage" />
             
-            <HxInputCheckbox Label="Vyžaduje cizí jazyk?" @bind-Value="model.RequiresForeignLanguage"/>
-            <HxInputCheckbox Label="Cizí jazyk místo hodin?" @bind-Value="model.CanUseForeignLanguageInsteadOfDonatedHours" />
+            <HxCheckbox Text="Vyžaduje cizí jazyk?" @bind-Value="model.RequiresForeignLanguage"/>
+            <HxCheckbox Text="Cizí jazyk místo hodin?" @bind-Value="model.CanUseForeignLanguageInsteadOfDonatedHours" />
 
-            <HxInputCheckbox Label="Kontrola ČSP/ČS?" @bind-Value="model.RequiresCspOrCpValidation" />
+            <HxCheckbox Text="Kontrola ČSP/ČS?" @bind-Value="model.RequiresCspOrCpValidation" />
             <HxInputNumber Label="Alespoň hodin z ČSP/ČS" TValue="int" @bind-Value="model.RequiredAmountOfDonatedHoursInAreaCspOrCp" />
         </EditForm>
     </BodyTemplate>
