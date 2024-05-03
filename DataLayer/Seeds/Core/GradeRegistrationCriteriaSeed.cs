@@ -18,6 +18,7 @@ public class GradeRegistrationCriteriaSeed : DataSeed<CoreProfile>
 			{
 				Id = (int)GradeEntry.Sekunda,
 				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 2,
+				CanUseForeignLanguageInsteadOfDonatedHours = true
 			},
 			new GradeRegistrationCriteria()
 			{

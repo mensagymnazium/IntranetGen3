@@ -1,4 +1,5 @@
-﻿using MensaGymnazium.IntranetGen3.Model.Security;
+﻿using Havit.Data.EntityFrameworkCore.Metadata;
+using MensaGymnazium.IntranetGen3.Model.Security;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MensaGymnazium.IntranetGen3.Entity.Configurations.Security;

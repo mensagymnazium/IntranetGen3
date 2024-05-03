@@ -17,6 +17,7 @@ public static class Routes
 	{
 		public const string Index = "/admin/";
 		public const string Teachers = "/admin/teachers";
+		public const string GradeRegistrationCriterias = "/admin/grade-registration-criterias";
 	}
 
 	public static class UserAdministration

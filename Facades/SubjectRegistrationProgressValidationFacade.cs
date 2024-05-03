@@ -54,7 +54,9 @@ public class SubjectRegistrationProgressValidationFacade : ISubjectRegistrationP
 
 			obj.LanguageRegistrationProgress.IsLanguageRequired,
 			obj.LanguageRegistrationProgress.HasRegisteredLanguage,
-			obj.LanguageRegistrationProgress.MeetsCriteria
+			obj.LanguageRegistrationProgress.MeetsCriteria,
+
+			obj.CanUseLanguageInsteadOfDonatedHours
 		);
 	}
 }

@@ -1,23 +1,28 @@
-﻿using Havit.Collections;
-using MensaGymnazium.IntranetGen3.Contracts;
+﻿using MensaGymnazium.IntranetGen3.Contracts;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
 
 public partial class HomeIndexMyElectives
 {
-	[Inject] protected ISubjectRegistrationProgressValidationFacade SubjectRegistrationProgressValidationFacade { get; set; }
+	[Inject]
+	protected ISubjectRegistrationProgressValidationFacade SubjectRegistrationProgressValidationFacade { get; set; }
 
 	private StudentRegistrationProgressDto studentsProgress;
 
-	protected override async Task OnAfterRenderAsync(bool firstRender)
+	protected override async Task OnInitializedAsync()
 	{
-		if (!firstRender)
-		{
-			return;
-		}
-
 		studentsProgress = await SubjectRegistrationProgressValidationFacade.GetProgressOfCurrentStudentAsync();
+	}
 
-		StateHasChanged();
+	private string GetHoursWithGrammar(int hours)
+	{
+		var word = hours switch
+		{
+			1 => "hodinu",
+			2 or 3 or 4 => "hodiny",
+			_ => "hodin"
+		};
+
+		return $"{hours} {word}";
 	}
 }

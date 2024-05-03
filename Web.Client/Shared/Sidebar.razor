@@ -16,6 +16,7 @@
         <AuthorizeView Roles="@nameof(Role.Administrator)">
             <HxSidebarItem Text="Nastavení" Icon="@BootstrapIcon.Gear">
                 <HxSidebarItem Text="Učitelé" Href="@Routes.Administration.Teachers" />
+                <HxSidebarItem Text="Registrační kritéria" Href="@Routes.Administration.GradeRegistrationCriterias" />
                 <HxSidebarItem Text="Administrace" Href="@Routes.Administration.Index" Match="NavLinkMatch.All" />
             </HxSidebarItem>
         </AuthorizeView>
