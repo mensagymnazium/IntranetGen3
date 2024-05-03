@@ -1,9 +1,9 @@
-﻿using Havit.Collections;
+﻿using System.Diagnostics;
+using Havit.Collections;
 using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Primitives;
 using MensaGymnazium.IntranetGen3.Web.Client.Services;
 using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
-using Microsoft.AspNetCore.Components;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
 
@@ -20,7 +20,7 @@ public partial class SubjectList
 	[Inject] protected IClientAuthService ClientAuthService { get; set; }
 	[Inject] protected IStudentSubjectRegistrationsDataStore StudentSubjectRegistrationsDataStore { get; set; }
 
-	private HxGrid<SubjectListItemDto> subjectsGrid;
+	private HxGrid<SubjectListItemDto> subjectsGrid; // @ref
 	private SubjectListItemDto subjectSelected;
 	private SubjectEdit subjectEditComponent;
 
@@ -37,9 +37,18 @@ public partial class SubjectList
 
 		if ((await ClientAuthService.GetCurrentClaimsPrincipal()).IsInRole(nameof(Role.Student)))
 		{
+			// Get grade (shouldn't be null, user is student)
 			var gradeId = await ClientAuthService.GetCurrentStudentGradeIdAsync();
+			Debug.Assert(gradeId != null, nameof(gradeId) + " != null");
+
+			// Use grade filter
+			// Xopa: Todo: the filter was used, but I couldn't make it appear in the UI. I didn't find a way to refresh the list layout filter ui.
+			//subjectListFilter.GradeId = (int)gradeId.Value;
+
+			// Determine "rocnikovka warning"
 			showRocnikovkaWarning = (gradeId == GradeEntry.Kvinta || gradeId == GradeEntry.Sexta);
 
+			// Get registered subjects
 			await StudentSubjectRegistrationsDataStore.EnsureDataAsync();
 			registeredSubjects = (await StudentSubjectRegistrationsDataStore.GetAllAsync()).ToList();
 		}
@@ -100,12 +109,6 @@ public partial class SubjectList
 	{
 		await SubjectFacade.DeleteSubjectAsync(Dto.FromValue(subject.Id));
 		Messenger.AddInformation(subject.Name, "Předmět smazán.");
-		await subjectsGrid.RefreshDataAsync();
-	}
-
-	private async Task HandleFilterModelChanged(SubjectListQueryFilter newFilterModel)
-	{
-		subjectListFilter = newFilterModel;
 		await subjectsGrid.RefreshDataAsync();
 	}
 

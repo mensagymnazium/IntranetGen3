@@ -26,9 +26,11 @@ public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 	{
 		var data = subjectDataSource.Data
 			.WhereIf(!String.IsNullOrWhiteSpace(Filter.Name), s => s.Name.Contains(Filter.Name))
-			.WhereIf(Filter.EducationalAreaId != null, s => s.EducationalAreaRelations.Any(r => r.EducationalAreaId == Filter.EducationalAreaId))
+			.WhereIf(Filter.EducationalAreaId != null,
+				s => s.EducationalAreaRelations.Any(r => r.EducationalAreaId == Filter.EducationalAreaId))
 			.WhereIf(Filter.SubjectCategoryId != null, s => s.CategoryId == Filter.SubjectCategoryId)
-			.WhereIf(Filter.TeacherId != null, s => s.TeacherRelations.Any(tr => tr.TeacherId == Filter.TeacherId));
+			.WhereIf(Filter.TeacherId != null, s => s.TeacherRelations.Any(tr => tr.TeacherId == Filter.TeacherId))
+			.WhereIf(Filter.GradeId is not null, s => s.GradeRelations.Any(g => g.GradeId == Filter.GradeId));
 
 		data = data
 			.OrderByMultiple(Sorting, sortingExpression => sortingExpression switch
