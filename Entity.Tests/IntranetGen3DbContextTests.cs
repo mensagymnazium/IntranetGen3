@@ -1,5 +1,4 @@
-﻿using Havit.Data.EntityFrameworkCore.ModelValidation;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MensaGymnazium.IntranetGen3.Entity.Tests;
@@ -19,13 +18,7 @@ public class IntranetGen3DbContextTests
 		// Act
 		Havit.Data.EntityFrameworkCore.ModelValidation.ModelValidator modelValidator = new();
 
-		// TODO #145
-		var validationRules = new ValidationRules()
-		{
-			CheckOnlyForeignKeysEndWithId = false // This convention is broken in many instances. For now just ignore it.
-												  // I.E. (Grade.AadGroupId) or (Student.SeedEntityId)
-		};
-		string errors = modelValidator.Validate(dbContext, validationRules);
+		string errors = modelValidator.Validate(dbContext);
 
 		// Assert
 		if (!String.IsNullOrEmpty(errors))
