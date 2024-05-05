@@ -91,14 +91,13 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 		return registrationsForSubject >= subject.Capacity.Value;
 	}
 
-  public async Task<bool> IsStudentInAssignableGrade(int studentId, int subjectId)
+	public async Task<bool> IsStudentInAssignableGrade(int studentId, int subjectId)
 	{
 		var subject = await subjectRepository.GetObjectAsync(subjectId);
 		var student = await studentRepository.GetObjectAsync(studentId);
 
 		return subject.Grades.Contains(student.Grade);
 	}
-}
 
 	public async Task<bool> IsSubjectRegisteredForStudentAsync(int subjectId, int callerStudentId, CancellationToken cancellationToken = default)
 	{

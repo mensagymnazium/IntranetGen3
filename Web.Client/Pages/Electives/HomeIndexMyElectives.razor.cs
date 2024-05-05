@@ -1,5 +1,4 @@
-﻿using Havit.Collections;
-using MensaGymnazium.IntranetGen3.Contracts;
+﻿using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Web.Client.Services;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
@@ -19,7 +18,7 @@ public partial class HomeIndexMyElectives
 			return;
 		}
 
-    studentsProgress = await SubjectRegistrationProgressValidationFacade.GetProgressOfCurrentStudentAsync();
+		studentsProgress = await SubjectRegistrationProgressValidationFacade.GetProgressOfCurrentStudentAsync();
 	}
 
 	private string GetHoursWithGrammar(int hours)

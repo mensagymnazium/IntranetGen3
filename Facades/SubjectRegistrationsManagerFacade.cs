@@ -77,9 +77,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 			throw new OperationFailedException("Předmět je již plný");
 		}
 
-		var currentUser = applicationAuthenticationService.GetCurrentUser();
-
-    // Create registration
+		// Create registration
 		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
 
 		// Verify student is in correct grade
