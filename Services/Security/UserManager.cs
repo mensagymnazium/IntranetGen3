@@ -39,8 +39,9 @@ public class UserManager : IUserManager
 		}
 
 #if DEBUG
-		roles = Enum.GetValues<Role>().ToList();
+		//roles = Enum.GetValues<Role>().ToList();
 #endif
+
 		return Task.FromResult<IList<Role>>(roles);
 	}
 }
