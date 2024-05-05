@@ -18,8 +18,8 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 public partial class UserDbRepository : UserDbRepositoryBase, IUserRepository
 {
-	public UserDbRepository(IDbContext dbContext, MensaGymnazium.IntranetGen3.DataLayer.DataSources.Security.IUserDataSource dataSource, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.Security.User, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
-		: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
+	public UserDbRepository(IDbContext dbContext, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.Security.User, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager, IRepositoryQueryProvider repositoryQueryProvider)
+		: base(dbContext, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager, repositoryQueryProvider)
 	{
 	}
 }

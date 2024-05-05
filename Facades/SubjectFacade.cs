@@ -46,7 +46,7 @@ public class SubjectFacade : ISubjectFacade
 		subjectListQuery.Filter = subjectListRequest.Filter;
 		subjectListQuery.Sorting = subjectListRequest.Sorting;
 
-		return await subjectListQuery.GetDataFragmentAsync(subjectListRequest.StartIndex, subjectListRequest.Count, cancellationToken);
+		return await subjectListQuery.GetDataFragmentResultAsync(subjectListRequest.StartIndex, subjectListRequest.Count, cancellationToken);
 	}
 
 	public async Task<SubjectDto> GetSubjectDetailAsync(Dto<int> subjectIdDto, CancellationToken cancellationToken = default)

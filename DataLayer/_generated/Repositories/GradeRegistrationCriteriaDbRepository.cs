@@ -18,8 +18,8 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 public partial class GradeRegistrationCriteriaDbRepository : GradeRegistrationCriteriaDbRepositoryBase, IGradeRegistrationCriteriaRepository
 {
-	public GradeRegistrationCriteriaDbRepository(IDbContext dbContext, MensaGymnazium.IntranetGen3.DataLayer.DataSources.IGradeRegistrationCriteriaDataSource dataSource, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.GradeRegistrationCriteria, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
-		: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
+	public GradeRegistrationCriteriaDbRepository(IDbContext dbContext, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.GradeRegistrationCriteria, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager, IRepositoryQueryProvider repositoryQueryProvider)
+		: base(dbContext, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager, repositoryQueryProvider)
 	{
 	}
 }

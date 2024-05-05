@@ -63,12 +63,9 @@ public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 		return result;
 	}
 
-	public async Task<DataFragmentResult<SubjectListItemDto>> GetDataFragmentAsync(int startIndex, int? count, CancellationToken cancellationToken = default)
+	public async Task<DataFragmentResult<SubjectListItemDto>> GetDataFragmentResultAsync(int startIndex, int? count, CancellationToken cancellationToken = default)
 	{
-		return new()
-		{
-			Data = await SelectDataFragmentAsync(startIndex, count, cancellationToken),
-			TotalCount = await CountAsync(cancellationToken)
-		};
+		var dataFragment = await GetDataFragmentAsync(startIndex, count, cancellationToken);
+		return dataFragment.ToDataFragmentResult();
 	}
 }

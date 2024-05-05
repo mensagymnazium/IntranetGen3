@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AssemblyName>MensaGymnazium.IntranetGen3.Contracts</AssemblyName>
 		<RootNamespace>MensaGymnazium.IntranetGen3.Contracts</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentValidation" Version="11.9.0" />
+		<PackageReference Include="FluentValidation" Version="11.9.1" />
 		<PackageReference Include="Havit.Blazor.Grpc.Core" Version="1.5.5" />
-		<PackageReference Include="Havit.Core" Version="2.0.29" />
+		<PackageReference Include="Havit.Core" Version="2.0.30" />
 		<PackageReference Include="protobuf-net" Version="3.2.30" />
 		<PackageReference Include="protobuf-net.Grpc" Version="1.1.1" />
 	</ItemGroup>

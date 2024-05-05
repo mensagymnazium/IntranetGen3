@@ -5,11 +5,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Havit.Data.Patterns.DataSources;
+using Havit.Data.Patterns.Repositories;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources;
+namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-public interface IGraduationSubjectDataSource : IDataSource<MensaGymnazium.IntranetGen3.Model.GraduationSubject>
+public partial interface IGraduationSubjectRepository : IRepository<MensaGymnazium.IntranetGen3.Model.GraduationSubject>
 {
 }

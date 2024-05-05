@@ -35,7 +35,7 @@ public class StudentSubjectRegistrationFacade : IStudentSubjectRegistrationFacad
 		studentSubjectRegistrationListQuery.Filter = studentSubjectRegistrationListRequest.Filter;
 		studentSubjectRegistrationListQuery.Sorting = studentSubjectRegistrationListRequest.Sorting;
 
-		return await studentSubjectRegistrationListQuery.GetDataFragmentAsync(studentSubjectRegistrationListRequest.StartIndex, studentSubjectRegistrationListRequest.Count, cancellationToken);
+		return await studentSubjectRegistrationListQuery.GetDataFragmentResultAsync(studentSubjectRegistrationListRequest.StartIndex, studentSubjectRegistrationListRequest.Count, cancellationToken);
 	}
 
 	[Authorize(Roles = nameof(Role.Student))]

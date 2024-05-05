@@ -18,8 +18,8 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 public abstract class TeacherDbRepositoryBase : DbRepository<MensaGymnazium.IntranetGen3.Model.Security.Teacher>
 {
-	protected TeacherDbRepositoryBase(IDbContext dbContext, MensaGymnazium.IntranetGen3.DataLayer.DataSources.Security.ITeacherDataSource dataSource, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.Security.Teacher, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
-		: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
+	protected TeacherDbRepositoryBase(IDbContext dbContext, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.Security.Teacher, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager, IRepositoryQueryProvider repositoryQueryProvider)
+		: base(dbContext, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager, repositoryQueryProvider)
 	{
 	}
 

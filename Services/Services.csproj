@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AssemblyName>MensaGymnazium.IntranetGen3.Services</AssemblyName>
 		<RootNamespace>MensaGymnazium.IntranetGen3.Services</RootNamespace>
@@ -12,10 +12,10 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="Havit.Core" Version="2.0.29" />
-		<PackageReference Include="Havit.Extensions.DependencyInjection.Abstractions" Version="2.0.5" />
-		<PackageReference Include="Havit.Services" Version="2.0.37" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+		<PackageReference Include="Havit.Core" Version="2.0.30" />
+		<PackageReference Include="Havit.Extensions.DependencyInjection.Abstractions" Version="2.0.6" />
+		<PackageReference Include="Havit.Services" Version="2.0.42" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

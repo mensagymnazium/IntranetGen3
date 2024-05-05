@@ -46,12 +46,9 @@ public class StudentSubjectRegistrationListQuery : QueryBase<StudentSubjectRegis
 			});
 	}
 
-	public async Task<DataFragmentResult<StudentSubjectRegistrationDto>> GetDataFragmentAsync(int startIndex, int? count, CancellationToken cancellationToken = default)
+	public async Task<DataFragmentResult<StudentSubjectRegistrationDto>> GetDataFragmentResultAsync(int startIndex, int? count, CancellationToken cancellationToken = default)
 	{
-		return new()
-		{
-			Data = await SelectDataFragmentAsync(startIndex, count, cancellationToken),
-			TotalCount = await CountAsync(cancellationToken)
-		};
+		var dataFragment = await GetDataFragmentAsync(startIndex, count, cancellationToken);
+		return dataFragment.ToDataFragmentResult();
 	}
 }
