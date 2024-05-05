@@ -10,16 +10,24 @@ public record StudentRegistrationProgressDto
 		bool requiresCspOrCpValidation,
 		int amOfDonatedHoursInCspOrCp,
 		int requiredAmOfDonatedHoursInCspOrCp,
-		bool meetsCsOrCpCriteria)
+		bool meetsCsOrCpCriteria,
+		bool isLanguageRequired,
+		bool hasRegisteredLanguage,
+		bool meetsLanguageCriteria,
+		bool canUseLanguageInsteadOfDonatedHours)
 	{
 		IsRegistrationValid = isRegistrationValid;
 		RequiresCspOrCpValidation = requiresCspOrCpValidation;
 		AmOfDonatedHoursInCspOrCp = amOfDonatedHoursInCspOrCp;
 		RequiredAmOfDonatedHoursInCspOrCp = requiredAmOfDonatedHoursInCspOrCp;
 		MeetsCsOrCpCriteria = meetsCsOrCpCriteria;
+		IsLanguageRequired = isLanguageRequired;
+		HasRegisteredLanguage = hasRegisteredLanguage;
+		MeetsLanguageCriteria = meetsLanguageCriteria;
 		AmOfDonatedHoursExcludingLanguages = amOfDonatedHoursExcludingLanguages;
 		RequiredAmOfDonatedHoursExcludingLanguages = requiredAmOfDonatedHoursExcludingLanguages;
 		MeetsDonatedHoursCriteria = meetsDonatedHoursCriteria;
+		CanUseLanguageInsteadOfDonatedHours = canUseLanguageInsteadOfDonatedHours;
 	}
 
 	private StudentRegistrationProgressDto()
@@ -42,4 +50,9 @@ public record StudentRegistrationProgressDto
 	public int AmOfDonatedHoursInCspOrCp { get; set; }
 	public int RequiredAmOfDonatedHoursInCspOrCp { get; set; }
 	public bool MeetsCsOrCpCriteria { get; set; }
+
+	public bool IsLanguageRequired { get; set; }
+	public bool HasRegisteredLanguage { get; set; }
+	public bool MeetsLanguageCriteria { get; set; }
+	public bool CanUseLanguageInsteadOfDonatedHours { get; set; }
 }

@@ -1,64 +1,77 @@
 ﻿<AuthorizeView Roles="@nameof(Role.Student)">
-    <h5>Postup tvé registrace předmětů</h5>
-    <HxListGroup CssClass='contained-width'>
-        @if (studentsProgress is not null)
+    <h5 class="mt-3">
+        <text>Postup tvé registrace předmětů</text>
+        @if (studentsProgress is not null && studentsProgress.IsRegistrationValid)
         {
-            // Loaded, show data
+            <b> - Máš splněné své registrace! 🥳</b>
+        }
+    </h5>
+    @if (studentsProgress is not null) 
+    {
+        // Loaded, show data
+        @if (studentsProgress.CanUseLanguageInsteadOfDonatedHours)
+        {
+            <p><b>Profesionální rada</b>: Tvůj ročník umožňuje zapsat druhý cizí jazyk namísto volitelného předmětu 😎</p>
+        }
 
-            <HxListGroupItem>
-                <div class="d-flex w-100 justify-content-between">
-                    <h6 class="mb-1">Celkový počet hodin</h6>
-                    <small>
-                        @if (studentsProgress.MeetsDonatedHoursCriteria) 
-                        {
-                            <HxIcon Icon='BootstrapIcon.CheckCircleFill' CssClass="me-2 text-success" />
-                        }
-                        else
-                        {
-                            <HxIcon Icon='BootstrapIcon.ExclamationCircleFill' CssClass="me-2 text-warning" />
-                        }
-                    </small>
-                </div>
-                <b class="mb-1">@($"{studentsProgress.AmOfDonatedHoursExcludingLanguages}h / {studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages}h")</b>
-                <br />
-                <small>Musíš mít tolik předmětů (kromě jazyků), aby dohromady dávali (dotovali) v rozvrhu @studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages hodin</small>
-            </HxListGroupItem>
+        <HxListGroup 
+            CssClass='contained-width'>
+            @if (!studentsProgress.CanUseLanguageInsteadOfDonatedHours)
+            {
+                // Cannot use language instead of donated hours (more common)
+
+                <ElectiveProgressComponent
+                    CriteriaName='Celkový počet hodin'
+                    MeetsCriteria="@studentsProgress.MeetsDonatedHoursCriteria"
+                    CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid'
+                    CriteriaProgress="@($"{studentsProgress.AmOfDonatedHoursExcludingLanguages}h / {studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages}h")"
+                    CriteriaDescription=@($"Musíš mít tolik předmětů (kromě jazyků), aby dohromady zabrali v rozvrhu {GetHoursWithGrammar(studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages)}")/>
+
+                @if (studentsProgress.IsLanguageRequired)
+                {
+                    <ElectiveProgressComponent
+                        CriteriaName='Druhý cizí jazyk'
+                        MeetsCriteria="@studentsProgress.MeetsLanguageCriteria"
+                        CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid'
+                        CriteriaProgress="@(studentsProgress.HasRegisteredLanguage ? "Splněno - Máš zapsaný jazyk" : "Chybí - Potřebuješ zapsat jazyk")"
+                        CriteriaDescription="Musíš mít zapsaný cizí jazyk"/>
+                }
+            }
+            else
+            {
+                // Can use language instead of donated hours
+
+                <ElectiveProgressComponent
+                    CriteriaName='Celkový počet hodin'
+                    MeetsCriteria="@studentsProgress.MeetsDonatedHoursCriteria"
+                    CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid'
+                    CriteriaProgress="@($"{studentsProgress.AmOfDonatedHoursExcludingLanguages}h / {studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages}h")"
+                    CriteriaDescription=@($"Musíš mít tolik předmětů (kromě jazyků), aby dohromady zabrali v rozvrhu {GetHoursWithGrammar(studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages)}")/>
+                <HxListGroupItem> Nebo </HxListGroupItem>
+                <ElectiveProgressComponent
+                    CriteriaName='Druhý cizí jazyk'
+                    MeetsCriteria="@studentsProgress.MeetsLanguageCriteria"
+                    CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid'
+                    CriteriaProgress="@(studentsProgress.HasRegisteredLanguage ? "Splněno - Máš zapsaný jazyk" : "Chybí - Potřebuješ zapsat jazyk")"
+                    CriteriaDescription="Musíš mít zapsaný cizí jazyk"/>
+            }
 
             @if (studentsProgress.RequiresCspOrCpValidation)
             {
-                <HxListGroupItem>
-                    <div class="d-flex w-100 justify-content-between">
-                        <h6 class="mb-1">Člověk & svět práce nebo Člověk & příroda</h6>
-                        <small>
-                            @if (studentsProgress.MeetsCsOrCpCriteria)
-                            {
-                                <HxIcon Icon='BootstrapIcon.CheckCircleFill' CssClass="me-2 text-success" />
-                            }
-                            else
-                            {
-                                <HxIcon Icon='BootstrapIcon.ExclamationCircleFill' CssClass="me-2 text-warning" />
-                            }
-                        </small>
-                    </div>
-                    <b class="mb-1">@($"{studentsProgress.AmOfDonatedHoursInCspOrCp}h / {studentsProgress.RequiredAmOfDonatedHoursInCspOrCp}h")</b>
-                    <br />
-                    <small>4 dotované hodiny musí být ze vzdělávacích oblastí „Člověk aspolečnost“ či „Člověk a příroda“</small>
-                </HxListGroupItem>
+                <ElectiveProgressComponent
+                    CriteriaName='Člověk & svět práce nebo Člověk & příroda'
+                    MeetsCriteria="@studentsProgress.MeetsCsOrCpCriteria"
+                    CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid'
+                    CriteriaProgress="@($"{studentsProgress.AmOfDonatedHoursInCspOrCp}h / {studentsProgress.RequiredAmOfDonatedHoursInCspOrCp}h")"
+                    CriteriaDescription=@($"Alespoň {GetHoursWithGrammar(studentsProgress.RequiredAmOfDonatedHoursInCspOrCp)} musí být ze vzdělávacích oblastí „Člověk aspolečnost“ či „Člověk a příroda“")/>
             }
-        }
-        else
-        {
-            // Not loaded, show placeholder
+        </HxListGroup>
+    }
+    else
+    {
+        // Not loaded, show placeholder
 
-            <HxPlaceholderContainer Animation='PlaceholderAnimation.Glow'>
-                <HxPlaceholder>
-                    <HxListGroupItem>
-                        <div class="d-flex w-100 justify-content-between">
-                            <h6 class="mb-1">Načítání tvého postupu</h6>
-                        </div>
-                    </HxListGroupItem>
-                </HxPlaceholder>
-            </HxPlaceholderContainer>
-        }
-    </HxListGroup>            
+        <b>Načítání postupu</b>
+        <HxSpinner Color="ThemeColor.Primary" Size="SpinnerSize.Small" />
+    }
 </AuthorizeView>

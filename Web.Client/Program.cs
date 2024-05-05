@@ -45,6 +45,7 @@ public class Program
 
 		builder.Services.AddScoped<ITeachersDataStore, TeachersDataStore>();
 		builder.Services.AddScoped<IEducationalAreasDataStore, EducationalAreasDataStore>();
+		builder.Services.AddScoped<IGraduationSubjectsDataStore, GraduationSubjectsDataStore>();
 		builder.Services.AddScoped<ISubjectCategoriesDataStore, SubjectCategoriesDataStore>();
 		builder.Services.AddScoped<IGradesDataStore, GradesDataStore>();
 		builder.Services.AddScoped<IStudentsDataStore, StudentsDataStore>();

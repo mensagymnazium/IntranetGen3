@@ -50,6 +50,13 @@ public class SubjectRegistrationProgressValidationFacade : ISubjectRegistrationP
 			obj.CsOrCpRegistrationProgress.DoesRequireCsOrCpValidation,
 			obj.CsOrCpRegistrationProgress.AmountOfDonatedHoursInCsOrCp,
 			obj.CsOrCpRegistrationProgress.RequiredAmountOfDonatedHoursInCsOrCp,
-			obj.CsOrCpRegistrationProgress.MeetsCriteria);
+			obj.CsOrCpRegistrationProgress.MeetsCriteria,
+
+			obj.LanguageRegistrationProgress.IsLanguageRequired,
+			obj.LanguageRegistrationProgress.HasRegisteredLanguage,
+			obj.LanguageRegistrationProgress.MeetsCriteria,
+
+			obj.CanUseLanguageInsteadOfDonatedHours
+		);
 	}
 }

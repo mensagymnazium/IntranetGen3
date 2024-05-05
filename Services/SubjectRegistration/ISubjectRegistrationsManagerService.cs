@@ -34,7 +34,11 @@ public interface ISubjectRegistrationsManagerService
 	/// <returns></returns>
 	public Task CancelRegistrationAsync(int registrationId, int callerStudentId, CancellationToken cancellationToken = default);
 
-	/// <returns>True, if the number of registrations for this subject reached the subject's capacity</returns>
-	Task<bool> IsSubjectCapacityFullAsync(int subjectId);
 	Task<bool> IsStudentInAssignableGrade(int studentId, int subjectId);
+
+  /// <returns>True, if the number of registrations for this subject reached the subject's capacity</returns>
+	Task<bool> IsSubjectCapacityFullAsync(int subjectId, CancellationToken cancellationToken = default);
+
+	/// <returns>True, if the student has already registered for this subject</returns>
+	Task<bool> IsSubjectRegisteredForStudentAsync(int subjectId, int studentId, CancellationToken cancellationToken = default);
 }

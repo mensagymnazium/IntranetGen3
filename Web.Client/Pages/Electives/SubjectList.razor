@@ -2,11 +2,14 @@
 
 <div>
     @* CSS Isolation *@
-
+    @if (showRocnikovkaWarning)
+    {
+        <HxAlert Color="ThemeColor.Danger"><HxIcon Icon="@BootstrapIcon.ExclamationTriangleFill" /> Téma jednoho z vybraných předmětů se musí shodovat s tématem vaší <strong>ročníkové práce</strong>.</HxAlert>
+    }
     <HxListLayout Title="Předměty"
                   TFilterModel="SubjectListQueryFilter"
-                  FilterModel="subjectListFilter"
-                  FilterModelChanged="HandleFilterModelChanged">
+                  @bind-FilterModel='subjectListFilter'
+                  @bind-FilterModel:after='subjectsGrid.RefreshDataAsync'>
         <CommandsTemplate>
             <AuthorizeView Roles="@nameof(Role.Administrator)">
                 <HxButton Text="Nový předmět" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />
@@ -14,6 +17,7 @@
         </CommandsTemplate>
         <FilterTemplate>
             <HxInputText @bind-Value="@context.Name" Label="Název" />
+            <GradePicker @bind-Value='@context.GradeId' Label='Ročník'/>
             <SubjectCategoryPicker @bind-Value="context.SubjectCategoryId" Label="Skupina" />
             <EducationalAreaPicker @bind-Value="@context.EducationalAreaId" Label="Vzdělávací oblast" />
             <TeacherPicker @bind-Value="context.TeacherId" Label="Vyučující" />

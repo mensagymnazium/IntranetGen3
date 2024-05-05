@@ -11,22 +11,26 @@ public partial class HomeIndexMyElectives
 
 	private StudentRegistrationProgressDto studentsProgress;
 
-
-	protected override async Task OnAfterRenderAsync(bool firstRender)
+	protected override async Task OnInitializedAsync()
 	{
-		if (!firstRender)
-		{
-			return;
-		}
-
 		var user = await ClientAuthService.GetCurrentClaimsPrincipal();
 		if (!user.IsInRole("Student"))
 		{
 			return;
 		}
 
-		studentsProgress = await SubjectRegistrationProgressValidationFacade.GetProgressOfCurrentStudentAsync();
+    studentsProgress = await SubjectRegistrationProgressValidationFacade.GetProgressOfCurrentStudentAsync();
+	}
 
-		StateHasChanged();
+	private string GetHoursWithGrammar(int hours)
+	{
+		var word = hours switch
+		{
+			1 => "hodinu",
+			2 or 3 or 4 => "hodiny",
+			_ => "hodin"
+		};
+
+		return $"{hours} {word}";
 	}
 }

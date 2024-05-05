@@ -9,5 +9,5 @@ public interface IStudentSubjectRegistrationFacade
 	Task UpdateRegistrationAsync(StudentSubjectRegistrationDto registrationDto, CancellationToken cancellationToken = default);
 	Task DeleteRegistrationAsync(Dto<int> registrationIdDto, CancellationToken cancellationToken = default);
 	Task<DataFragmentResult<StudentSubjectRegistrationDto>> GetStudentSubjectRegistrationListAsync(DataFragmentRequest<StudentSubjectRegistrationListQueryFilter> studentSubjectRegistrationListRequest, CancellationToken cancellationToken = default);
-	Task<List<StudentSubjectRegistrationDto>> GetAllRegistrationsOfCurrentStudent(); // Xopa: Todo? Change to query? It was too entangled with signing rules, but now it could be done? 
+	Task<List<StudentSubjectRegistrationDto>> GetAllRegistrationsOfCurrentStudentAsync(CancellationToken cancellationToken = default);  // Xopa: Todo? Change to query? It was too entangled with signing rules, but now it could be done? 
 }

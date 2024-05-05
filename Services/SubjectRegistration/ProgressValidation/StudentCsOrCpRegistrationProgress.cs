@@ -12,6 +12,6 @@ public readonly record struct StudentCsOrCpRegistrationProgress(
 	public bool DoesRequireCsOrCpValidation { get; init; } = DoesRequireCsOrCpValidation;
 
 	public bool MeetsCriteria =>
-		(DoesRequireCsOrCpValidation)
-		&& (AmountOfDonatedHoursInCsOrCp >= RequiredAmountOfDonatedHoursInCsOrCp);
+		((DoesRequireCsOrCpValidation) && (AmountOfDonatedHoursInCsOrCp >= RequiredAmountOfDonatedHoursInCsOrCp))
+		|| (!DoesRequireCsOrCpValidation);
 }

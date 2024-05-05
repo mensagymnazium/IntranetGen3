@@ -58,6 +58,18 @@ public class Subject
 		}
 	}
 
+	public List<GraduationSubjectRelation> GraduationSubjectRelations { get; } = new List<GraduationSubjectRelation>();
+
+	[NotMapped]
+	public IEnumerable<GraduationSubject> GraduationSubjects
+	{
+		get
+		{
+			Contract.Requires<InvalidOperationException>(GraduationSubjectRelations.TrueForAll(m => m.GraduationSubject is not null), $"Unable to access {nameof(GraduationSubjects)} without loading the {nameof(GraduationSubjectRelations)}.");
+			return GraduationSubjectRelations.Select(m => m.GraduationSubject);
+		}
+	}
+
 	public SubjectCategory Category { get; set; }
 	public int CategoryId { get; set; }
 
@@ -70,6 +82,8 @@ public class Subject
 	public bool CanRegisterRepeatedly { get; set; }
 
 	public int HoursPerWeek { get; set; } = 2;
+
+	public int MinStudentsToOpen { get; set; } = 5;
 
 	public DateTime Created { get; set; } = DateTime.Now;
 	public DateTime? Deleted { get; set; }

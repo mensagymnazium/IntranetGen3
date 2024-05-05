@@ -63,16 +63,23 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 								"Přihlášku není možné vytvořit. Je před, nebo již po termínu přihlašování");
 		}
 
+		// Verify student isn't already registered for this subject
+		var currentUser = applicationAuthenticationService.GetCurrentUser();
+		if (await subjectRegistrationsManagerService.IsSubjectRegisteredForStudentAsync(studentSubjectRegistrationCreateDto.SubjectId.Value, currentUser.StudentId.Value, cancellationToken))
+		{
+			throw new OperationFailedException("Student už je přihlášený");
+		}
+
 		// Verify subject isn't full
 		if (await subjectRegistrationsManagerService
-				.IsSubjectCapacityFullAsync(studentSubjectRegistrationCreateDto.SubjectId.Value))
+				.IsSubjectCapacityFullAsync(studentSubjectRegistrationCreateDto.SubjectId.Value, cancellationToken))
 		{
 			throw new OperationFailedException("Předmět je již plný");
 		}
 
 		var currentUser = applicationAuthenticationService.GetCurrentUser();
 
-		// Create registration
+    // Create registration
 		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
 
 		// Verify student is in correct grade

@@ -4,13 +4,11 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 
 public partial interface IStudentSubjectRegistrationRepository
 {
-	public Task<List<StudentSubjectRegistration>> GetBySubjectAsync(
-		int subjectId,
-		CancellationToken cancellationToken = default);
+	public Task<List<StudentSubjectRegistration>> GetBySubjectAsync(int subjectId, CancellationToken cancellationToken = default);
 
 	//public Task<long> CountBySubjectAndTypeAsync(int subjectId, StudentRegistrationType type, CancellationToken cancellationToken = default);
 
 	//public Task<List<StudentSubjectRegistration>> GetByStudentAndTimeAsync(int studentId, DayOfWeek day, ScheduleSlotInDay slot, CancellationToken cancellationToken = default);
-	Task<List<StudentSubjectRegistration>> GetRegistrationsByStudent(int studentId);
-	Task<int> CountMainRegistrationsForSubjectAsync(int subjectId);
+	Task<List<StudentSubjectRegistration>> GetRegistrationsByStudentAsync(int studentId, CancellationToken cancellationToken = default);
+	Task<int> CountMainRegistrationsForSubjectAsync(int subjectId, CancellationToken cancellationToken = default);
 }

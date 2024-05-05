@@ -123,6 +123,9 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.Property<int>("Id")
                         .HasColumnType("int");
 
+                    b.Property<bool>("CanUseForeignLanguageInsteadOfDonatedHours")
+                        .HasColumnType("bit");
+
                     b.Property<int>("RequiredAmountOfDonatedHoursInAreaCspOrCp")
                         .HasColumnType("int");
 
@@ -132,9 +135,49 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.Property<bool>("RequiresCspOrCpValidation")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("RequiresForeginLanguage")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.ToTable("GradeRegistrationCriteria");
+
+                    b
+                        .HasAnnotation("Caching-AllKeysEnabled", true)
+                        .HasAnnotation("Caching-EntitiesEnabled", true);
+                });
+
+            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.GraduationSubject", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GraduationSubject");
+
+                    b
+                        .HasAnnotation("Caching-AllKeysEnabled", true)
+                        .HasAnnotation("Caching-EntitiesEnabled", true);
+                });
+
+            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.GraduationSubjectRelation", b =>
+                {
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GraduationSubjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SubjectId", "GraduationSubjectId");
+
+                    b.HasIndex("GraduationSubjectId");
+
+                    b.ToTable("GraduationSubjectRelation");
 
                     b
                         .HasAnnotation("Caching-AllKeysEnabled", true)
@@ -317,6 +360,9 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.Property<int>("HoursPerWeek")
                         .HasColumnType("int");
 
+                    b.Property<int>("MinStudentsToOpen")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -418,6 +464,25 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .IsRequired();
 
                     b.Navigation("RegistrationCriteria");
+                });
+
+            modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.GraduationSubjectRelation", b =>
+                {
+                    b.HasOne("MensaGymnazium.IntranetGen3.Model.GraduationSubject", "GraduationSubject")
+                        .WithMany()
+                        .HasForeignKey("GraduationSubjectId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MensaGymnazium.IntranetGen3.Model.Subject", "Subject")
+                        .WithMany("GraduationSubjectRelations")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("GraduationSubject");
+
+                    b.Navigation("Subject");
                 });
 
             modelBuilder.Entity("MensaGymnazium.IntranetGen3.Model.Security.Student", b =>
@@ -536,6 +601,8 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.Navigation("EducationalAreaRelations");
 
                     b.Navigation("GradeRelations");
+
+                    b.Navigation("GraduationSubjectRelations");
 
                     b.Navigation("TeacherRelations");
                 });
