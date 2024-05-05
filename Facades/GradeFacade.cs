@@ -1,6 +1,7 @@
 ﻿using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 using MensaGymnazium.IntranetGen3.Model;
+using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.Facades;
 
@@ -21,7 +22,6 @@ public class GradeFacade : IGradeFacade
 	{
 		var data = await gradeRepository.GetAllAsync(cancellationToken);
 
-
 		return data
 			.Select(g => new GradeDto()
 			{
@@ -31,6 +31,7 @@ public class GradeFacade : IGradeFacade
 			.ToList();
 	}
 
+	[Authorize(Roles = nameof(Role.Administrator))]
 	public async Task<List<GradeRegistrationCriteriaDto>> GetGradeRegistrationCriteriasAsync(CancellationToken cancellationToken = default)
 	{
 		// Only ever get 8 elements, so we can load all to memory
@@ -60,7 +61,8 @@ public class GradeFacade : IGradeFacade
 			.ToList();
 	}
 
-	public async Task UpdateGradeRegistrationCriteriaAsync(GradeRegistrationCriteriaDto model, CancellationToken cancellation = default)
+	[Authorize(Roles = nameof(Role.Administrator))]
+	public async Task UpdateGradeRegistrationCriteriaAsync(GradeRegistrationCriteriaDto model, CancellationToken cancellationToken = default)
 	{
 		Contract.Requires<ArgumentNullException>(model is not null);
 		if (model.CanUseForeignLanguageInsteadOfDonatedHours && model.RequiresForeignLanguage)
@@ -69,12 +71,12 @@ public class GradeFacade : IGradeFacade
 			throw new InvalidOperationException("Ročník nemůže vyžadovat jazyk a zároveň ho využít namísto hodin v rozvrhu");
 		}
 
-		var grade = await gradeRepository.GetObjectAsync(model.GradeId, cancellation);
+		var grade = await gradeRepository.GetObjectAsync(model.GradeId, cancellationToken);
 
 		MapRegistrationCriteriaFromDTO(model, grade.RegistrationCriteria);
 
 		unitOfWork.AddForUpdate(grade);
-		await unitOfWork.CommitAsync(cancellation);
+		await unitOfWork.CommitAsync(cancellationToken);
 	}
 
 	private void MapRegistrationCriteriaFromDTO(GradeRegistrationCriteriaDto dto, GradeRegistrationCriteria criteria)

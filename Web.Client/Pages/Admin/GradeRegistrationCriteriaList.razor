@@ -1,40 +1,31 @@
 ﻿@attribute [Route(Routes.Administration.GradeRegistrationCriterias)]
 @attribute [Authorize(Roles = nameof(Role.Administrator))]
 
-<HxListLayout Title="Kritéria registrací" TFilterModel="HxListLayout.NoFilter">
+<HxListLayout Title="Podmínky zápisů volitelných předmětů" TFilterModel="HxListLayout.NoFilter">
     <DataTemplate>
         <HxGrid @ref="gridComponent"
-                TItem="GradeRegistrationCriteriaDto"
-                SelectedDataItem="itemSelected"
-                SelectedDataItemChanged="HandleSelectedDataItemChanged"
+                @bind-SelectedDataItem="itemSelected"
+				@bind-SelectedDataItem:after="HandleSelectedDataItemChanged"
                 DataProvider="GetData"
                 Responsive="true">
             <Columns>
-                <HxGridColumn TItem="GradeRegistrationCriteriaDto"
-                              HeaderText="Ročník"
+                <HxGridColumn HeaderText="Ročník"
                               ItemTextSelector="i => GetGradeName(i.GradeId)"
                               SortKeySelector="i => -i.GradeId"
                               IsDefaultSortColumn="true"/>
-                <HxGridColumn TItem="GradeRegistrationCriteriaDto"
-                              HeaderText="Počet hodin v rozvrhu (kromě jazyků)"
+                <HxGridColumn HeaderText="Počet hodin v rozvrhu (kromě jazyků)"
                               ItemTextSelector="i => i.RequiredTotalAmountOfDonatedHoursExcludingLanguage.ToString()"
                               SortKeySelector="i => i.RequiredTotalAmountOfDonatedHoursExcludingLanguage"/>
-                <HxGridColumn TItem="GradeRegistrationCriteriaDto"
-                              HeaderText="Vyžaduje cizí jazyk?"
-                              ItemTextSelector="i => i.RequiresForeignLanguage.ToString()"
+                <HxGridColumn HeaderText="Vyžaduje cizí jazyk?"
+                              ItemTextSelector="@(i => i.RequiresForeignLanguage ? "ano" : "ne")"
                               SortKeySelector="i => i.RequiresForeignLanguage"/>
-                <HxGridColumn TItem="GradeRegistrationCriteriaDto"
-                              HeaderText="Cizí jazyk místo hodin?"
-                              ItemTextSelector="i => i.CanUseForeignLanguageInsteadOfDonatedHours.ToString()"
+                <HxGridColumn HeaderText="Cizí jazyk místo hodin?"
+							  ItemTextSelector="@(i => i.CanUseForeignLanguageInsteadOfDonatedHours ? "ano" : "ne")"
                               SortKeySelector="i => i.CanUseForeignLanguageInsteadOfDonatedHours"/>
-                              
-                <HxGridColumn TItem="GradeRegistrationCriteriaDto"
-                              HeaderText="Kontrola ČSP/ČS?"
-                              ItemTextSelector="i => i.RequiresCspOrCpValidation.ToString()"
+                <HxGridColumn HeaderText="Kontrola ČSP/ČS?"
+                              ItemTextSelector="@(i => i.RequiresCspOrCpValidation ? "ano" : "ne")"
                               SortKeySelector="i => i.RequiresCspOrCpValidation"/>
-
-                <HxGridColumn TItem="GradeRegistrationCriteriaDto"
-                              HeaderText="Alespoň hodin z ČSP/ČS"
+                <HxGridColumn HeaderText="Alespoň hodin z ČSP/ČS"
                               ItemTextSelector="i => i.RequiredAmountOfDonatedHoursInAreaCspOrCp.ToString()"
                               SortKeySelector="i => i.RequiredAmountOfDonatedHoursInAreaCspOrCp"/>
             </Columns>

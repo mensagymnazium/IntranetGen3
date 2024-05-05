@@ -6,7 +6,6 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Admin;
 public partial class GradeRegistrationCriteriaList
 {
 	[Inject] protected IGradeFacade GradeFacade { get; set; }
-	[Inject] protected IHxMessengerService Messenger { get; set; }
 	[Inject] protected IGradesDataStore GradesDataStore { get; set; }
 
 	private HxGrid<GradeRegistrationCriteriaDto> gridComponent; // @ref
@@ -27,14 +26,11 @@ public partial class GradeRegistrationCriteriaList
 
 	private string GetGradeName(int gradeId)
 	{
-		// Xopa: Throws error when I don't make it nullable, but that makes no sense.
-		// There should always be all the grades we're asking for...
 		return GradesDataStore.GetByKeyOrDefault(gradeId)?.Name;
 	}
-	private async Task HandleSelectedDataItemChanged(GradeRegistrationCriteriaDto selection)
+	private async Task HandleSelectedDataItemChanged()
 	{
-		itemSelected = selection;
-		itemInEdit = selection ?? new();
+		itemInEdit = itemSelected ?? new();
 		await editComponent.ShowAsync();
 	}
 
