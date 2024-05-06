@@ -30,7 +30,7 @@
                     IsProgressComplete="@studentsProgress.IsDonatedHoursProgressComplete"
                     CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid'
                     CriteriaProgressDescription="@($"{studentsProgress.AmOfDonatedHoursExcludingLanguages}h / {studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages}h")"
-                    CriteriaDescription=@($"Musíš mít tolik předmětů (kromě jazyků), aby dohromady zabrali v rozvrhu {GetHoursWithGrammar(studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages)}")/>
+                    CriteriaDescription=@($"Musíš mít tolik předmětů (kromě jazyků), aby dohromady zabraly v rozvrhu {GetHoursWithGrammar(studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages)}")/>
 
                 @if (studentsProgress.IsLanguageRequired)
                 {
@@ -51,7 +51,7 @@
                     IsProgressComplete="@studentsProgress.IsDonatedHoursProgressComplete"
                     CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid'
                     CriteriaProgressDescription="@($"{studentsProgress.AmOfDonatedHoursExcludingLanguages}h / {studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages}h")"
-                    CriteriaDescription=@($"Musíš mít tolik předmětů (kromě jazyků), aby dohromady zabrali v rozvrhu {GetHoursWithGrammar(studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages)}")/>
+                    CriteriaDescription=@($"Musíš mít tolik předmětů (kromě jazyků), aby dohromady zabraly v rozvrhu {GetHoursWithGrammar(studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages)}")/>
                 <HxListGroupItem> Nebo </HxListGroupItem>
                 <ElectiveProgressComponent
                     CriteriaName='Druhý cizí jazyk'
