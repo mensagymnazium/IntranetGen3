@@ -17,6 +17,7 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 	private readonly IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository;
 	private readonly ISubjectRepository subjectRepository;
 	private readonly IStudentRepository studentRepository;
+	private readonly IGradeRepository gradeRepository;
 
 	public SubjectRegistrationsManagerService(
 		ITimeService timeService,
@@ -24,7 +25,8 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 		IUnitOfWork unitOfWork,
 		IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository,
 		ISubjectRepository subjectRepository,
-		IStudentRepository studentRepository)
+		IStudentRepository studentRepository,
+		IGradeRepository gradeRepository)
 	{
 		this.timeService = timeService;
 		this.applicationSettingsEntries = applicationSettingsEntries;
@@ -32,6 +34,7 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 		this.studentSubjectRegistrationRepository = studentSubjectRegistrationRepository;
 		this.subjectRepository = subjectRepository;
 		this.studentRepository = studentRepository;
+		this.gradeRepository = gradeRepository;
 	}
 	public bool IsRegistrationPeriodActive()
 	{
@@ -91,12 +94,18 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 		return registrationsForSubject >= subject.Capacity.Value;
 	}
 
-	public async Task<bool> IsStudentInAssignableGrade(int studentId, int subjectId)
+	public async Task<bool> IsStudentInAssignableGrade(
+		int studentId,
+		int subjectId,
+		CancellationToken cancellationToken = default)
 	{
-		var subject = await subjectRepository.GetObjectAsync(subjectId);
-		var student = await studentRepository.GetObjectAsync(studentId);
+		var subject = await subjectRepository.GetObjectAsync(subjectId, cancellationToken);
+		var student = await studentRepository.GetObjectAsync(studentId, cancellationToken);
 
-		return subject.Grades.Contains(student.Grade);
+		// We must consider the future grade.
+		var futureGrade = await gradeRepository.GetObjectAsync(student.GradeId - 1, cancellationToken); // -1, because ids are negative
+
+		return subject.Grades.Contains(futureGrade);
 	}
 
 	public async Task<bool> IsSubjectRegisteredForStudentAsync(int subjectId, int callerStudentId, CancellationToken cancellationToken = default)

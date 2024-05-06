@@ -67,7 +67,8 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		}
 
 		// Verify student isn't already registered for this subject
-		if (await subjectRegistrationsManagerService.IsSubjectRegisteredForStudentAsync(studentSubjectRegistrationCreateDto.SubjectId.Value, currentUser.StudentId.Value, cancellationToken))
+		if (await subjectRegistrationsManagerService
+				.IsSubjectRegisteredForStudentAsync(studentSubjectRegistrationCreateDto.SubjectId.Value, currentUser.StudentId.Value, cancellationToken))
 		{
 			throw new OperationFailedException("Student už je přihlášený");
 		}
@@ -81,7 +82,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 
 		// Verify student is in correct grade
 		if (!await subjectRegistrationsManagerService
-				.IsStudentInAssignableGrade(currentUser.StudentId.Value, studentSubjectRegistrationCreateDto.SubjectId.Value))
+				.IsStudentInAssignableGrade(currentUser.StudentId.Value, studentSubjectRegistrationCreateDto.SubjectId.Value, cancellationToken))
 		{
 			throw new OperationFailedException("Předmět není určený pro váš ročník");
 		}

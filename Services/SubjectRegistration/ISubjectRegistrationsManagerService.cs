@@ -6,10 +6,7 @@ namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration;
 
 public interface ISubjectRegistrationsManagerService
 {
-	/// <summary>
-	/// Returns, whether there can be a registration performed now. Based on dates inside <see cref="IApplicationSettingsEntries"/>
-	/// </summary>
-	/// <returns></returns>
+	/// <returns>Whether there can be a registration performed now. Based on dates inside <see cref="IApplicationSettingsEntries"/></returns>
 	public bool IsRegistrationPeriodActive();
 
 	// Xopa: Todo: Does registration conflict with other registrations? (time-wise)
@@ -39,5 +36,7 @@ public interface ISubjectRegistrationsManagerService
 
 	/// <returns>True, if the student has already registered for this subject</returns>
 	Task<bool> IsSubjectRegisteredForStudentAsync(int subjectId, int studentId, CancellationToken cancellationToken = default);
-	Task<bool> IsStudentInAssignableGrade(int studentId, int subjectId);
+
+	/// <returns>True, if the students next year grade is within the subjects grade criteria</returns>
+	Task<bool> IsStudentInAssignableGrade(int studentId, int subjectId, CancellationToken cancellationToken = default);
 }
