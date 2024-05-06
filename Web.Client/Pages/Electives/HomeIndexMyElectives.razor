@@ -5,13 +5,18 @@
         {
             <b> - Máš splněné své registrace! 🥳</b>
         }
+        else
+        {
+            <b> - Ještě nemáš hotovo - </b>
+            <HxIcon Icon='BootstrapIcon.XCircleFill' CssClass="me-2 text-danger"/>
+        }
     </h5>
     @if (studentsProgress is not null) 
     {
         // Loaded, show data
         @if (studentsProgress.CanUseLanguageInsteadOfDonatedHours)
         {
-            <p><b>Profesionální rada</b>: Tvůj ročník umožňuje zapsat druhý cizí jazyk namísto volitelného předmětu 😎</p>
+            <p><b>Profesionální rada</b>: Tvůj ročník umožňuje zapsat druhý cizí jazyk namísto volitelného předmětu 😎 (ale ne obojí zároveň)</p>
         }
 
         <HxListGroup 
@@ -22,18 +27,18 @@
 
                 <ElectiveProgressComponent
                     CriteriaName='Celkový počet hodin'
-                    MeetsCriteria="@studentsProgress.MeetsDonatedHoursCriteria"
+                    IsProgressComplete="@studentsProgress.IsDonatedHoursProgressComplete"
                     CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid'
-                    CriteriaProgress="@($"{studentsProgress.AmOfDonatedHoursExcludingLanguages}h / {studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages}h")"
+                    CriteriaProgressDescription="@($"{studentsProgress.AmOfDonatedHoursExcludingLanguages}h / {studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages}h")"
                     CriteriaDescription=@($"Musíš mít tolik předmětů (kromě jazyků), aby dohromady zabrali v rozvrhu {GetHoursWithGrammar(studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages)}")/>
 
                 @if (studentsProgress.IsLanguageRequired)
                 {
                     <ElectiveProgressComponent
                         CriteriaName='Druhý cizí jazyk'
-                        MeetsCriteria="@studentsProgress.MeetsLanguageCriteria"
+                        IsProgressComplete="@studentsProgress.HasRegisteredLanguage"
                         CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid'
-                        CriteriaProgress="@(studentsProgress.HasRegisteredLanguage ? "Splněno - Máš zapsaný jazyk" : "Chybí - Potřebuješ zapsat jazyk")"
+                        CriteriaProgressDescription="@(studentsProgress.HasRegisteredLanguage ? "Splněno - Máš zapsaný jazyk" : "Chybí - Potřebuješ zapsat jazyk")"
                         CriteriaDescription="Musíš mít zapsaný cizí jazyk"/>
                 }
             }
@@ -43,16 +48,16 @@
 
                 <ElectiveProgressComponent
                     CriteriaName='Celkový počet hodin'
-                    MeetsCriteria="@studentsProgress.MeetsDonatedHoursCriteria"
+                    IsProgressComplete="@studentsProgress.IsDonatedHoursProgressComplete"
                     CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid'
-                    CriteriaProgress="@($"{studentsProgress.AmOfDonatedHoursExcludingLanguages}h / {studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages}h")"
+                    CriteriaProgressDescription="@($"{studentsProgress.AmOfDonatedHoursExcludingLanguages}h / {studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages}h")"
                     CriteriaDescription=@($"Musíš mít tolik předmětů (kromě jazyků), aby dohromady zabrali v rozvrhu {GetHoursWithGrammar(studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages)}")/>
                 <HxListGroupItem> Nebo </HxListGroupItem>
                 <ElectiveProgressComponent
                     CriteriaName='Druhý cizí jazyk'
-                    MeetsCriteria="@studentsProgress.MeetsLanguageCriteria"
+                    IsProgressComplete="@studentsProgress.HasRegisteredLanguage"
                     CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid'
-                    CriteriaProgress="@(studentsProgress.HasRegisteredLanguage ? "Splněno - Máš zapsaný jazyk" : "Chybí - Potřebuješ zapsat jazyk")"
+                    CriteriaProgressDescription="@(studentsProgress.HasRegisteredLanguage ? "Splněno - Máš zapsaný jazyk" : "Chybí - Potřebuješ zapsat jazyk")"
                     CriteriaDescription="Musíš mít zapsaný cizí jazyk"/>
             }
 
@@ -60,10 +65,10 @@
             {
                 <ElectiveProgressComponent
                     CriteriaName='Člověk & svět práce nebo Člověk & příroda'
-                    MeetsCriteria="@studentsProgress.MeetsCsOrCpCriteria"
+                    IsProgressComplete="@studentsProgress.IsCsOrCpProgressComplete"
                     CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid'
-                    CriteriaProgress="@($"{studentsProgress.AmOfDonatedHoursInCspOrCp}h / {studentsProgress.RequiredAmOfDonatedHoursInCspOrCp}h")"
-                    CriteriaDescription=@($"Alespoň {GetHoursWithGrammar(studentsProgress.RequiredAmOfDonatedHoursInCspOrCp)} musí být ze vzdělávacích oblastí „Člověk aspolečnost“ či „Člověk a příroda“")/>
+                    CriteriaProgressDescription="@($"{studentsProgress.AmOfDonatedHoursInCspOrCp}h / {studentsProgress.RequiredMinimalAmOfDonatedHoursInCspOrCp}h")"
+                    CriteriaDescription=@($"Alespoň {GetHoursWithGrammar(studentsProgress.RequiredMinimalAmOfDonatedHoursInCspOrCp)} musí být ze vzdělávacích oblastí „Člověk aspolečnost“ či „Člověk a příroda“")/>
             }
         </HxListGroup>
     }

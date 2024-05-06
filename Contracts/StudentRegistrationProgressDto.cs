@@ -6,27 +6,25 @@ public record StudentRegistrationProgressDto
 		bool isRegistrationValid,
 		int amOfDonatedHoursExcludingLanguages,
 		int requiredAmOfDonatedHoursExcludingLanguages,
-		bool meetsDonatedHoursCriteria,
+		bool isDonatedHoursProgressComplete,
 		bool requiresCspOrCpValidation,
 		int amOfDonatedHoursInCspOrCp,
-		int requiredAmOfDonatedHoursInCspOrCp,
-		bool meetsCsOrCpCriteria,
+		int requiredMinimalAmOfDonatedHoursInCspOrCp,
+		bool isCsOrCpProgressComplete,
 		bool isLanguageRequired,
 		bool hasRegisteredLanguage,
-		bool meetsLanguageCriteria,
 		bool canUseLanguageInsteadOfDonatedHours)
 	{
 		IsRegistrationValid = isRegistrationValid;
 		RequiresCspOrCpValidation = requiresCspOrCpValidation;
 		AmOfDonatedHoursInCspOrCp = amOfDonatedHoursInCspOrCp;
-		RequiredAmOfDonatedHoursInCspOrCp = requiredAmOfDonatedHoursInCspOrCp;
-		MeetsCsOrCpCriteria = meetsCsOrCpCriteria;
+		RequiredMinimalAmOfDonatedHoursInCspOrCp = requiredMinimalAmOfDonatedHoursInCspOrCp;
+		IsCsOrCpProgressComplete = isCsOrCpProgressComplete;
 		IsLanguageRequired = isLanguageRequired;
 		HasRegisteredLanguage = hasRegisteredLanguage;
-		MeetsLanguageCriteria = meetsLanguageCriteria;
 		AmOfDonatedHoursExcludingLanguages = amOfDonatedHoursExcludingLanguages;
 		RequiredAmOfDonatedHoursExcludingLanguages = requiredAmOfDonatedHoursExcludingLanguages;
-		MeetsDonatedHoursCriteria = meetsDonatedHoursCriteria;
+		IsDonatedHoursProgressComplete = isDonatedHoursProgressComplete;
 		CanUseLanguageInsteadOfDonatedHours = canUseLanguageInsteadOfDonatedHours;
 	}
 
@@ -44,15 +42,14 @@ public record StudentRegistrationProgressDto
 
 	public int AmOfDonatedHoursExcludingLanguages { get; set; }
 	public int RequiredAmOfDonatedHoursExcludingLanguages { get; set; }
-	public bool MeetsDonatedHoursCriteria { get; set; }
+	public bool IsDonatedHoursProgressComplete { get; set; }
 
 	public bool RequiresCspOrCpValidation { get; set; }
 	public int AmOfDonatedHoursInCspOrCp { get; set; }
-	public int RequiredAmOfDonatedHoursInCspOrCp { get; set; }
-	public bool MeetsCsOrCpCriteria { get; set; }
+	public int RequiredMinimalAmOfDonatedHoursInCspOrCp { get; set; }
+	public bool IsCsOrCpProgressComplete { get; set; }
 
 	public bool IsLanguageRequired { get; set; }
 	public bool HasRegisteredLanguage { get; set; }
-	public bool MeetsLanguageCriteria { get; set; }
 	public bool CanUseLanguageInsteadOfDonatedHours { get; set; }
 }

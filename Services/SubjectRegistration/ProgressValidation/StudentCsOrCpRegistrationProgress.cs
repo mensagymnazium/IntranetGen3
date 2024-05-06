@@ -1,17 +1,16 @@
 ﻿namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration.ProgressValidation;
 
+/// <param name="DoesRequireCsOrCpValidation">
+/// Does the rule about needing N subjects from fields CSP or CP apply?
+/// For 2023-2024 this applied to Septima, Oktava
+/// </param>
+/// <param name="AmountOfDonatedHoursInCsOrCp"></param>
+/// <param name="RequiredMinimalAmountOfDonatedHoursInCsOrCp"></param>
 public readonly record struct StudentCsOrCpRegistrationProgress(
 	bool DoesRequireCsOrCpValidation,
 	int AmountOfDonatedHoursInCsOrCp,
-	int RequiredAmountOfDonatedHoursInCsOrCp)
+	int RequiredMinimalAmountOfDonatedHoursInCsOrCp)
 {
-	/// <summary>
-	/// Does the rule about needing N subjects from fields CSP or CP apply?
-	/// For 2023-2024 this applied to Septima, Oktava
-	/// </summary>
-	public bool DoesRequireCsOrCpValidation { get; init; } = DoesRequireCsOrCpValidation;
-
-	public bool MeetsCriteria =>
-		((DoesRequireCsOrCpValidation) && (AmountOfDonatedHoursInCsOrCp >= RequiredAmountOfDonatedHoursInCsOrCp))
-		|| (!DoesRequireCsOrCpValidation);
+	public bool IsProgressComplete =>
+		AmountOfDonatedHoursInCsOrCp >= RequiredMinimalAmountOfDonatedHoursInCsOrCp;
 }

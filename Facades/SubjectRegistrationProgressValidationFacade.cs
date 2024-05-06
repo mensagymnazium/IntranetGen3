@@ -45,16 +45,15 @@ public class SubjectRegistrationProgressValidationFacade : ISubjectRegistrationP
 
 			obj.DonatedHoursProgress.AmountOfDonatedHoursExcludingLanguages,
 			obj.DonatedHoursProgress.RequiredAmountOfDonatedHoursExcludingLanguages,
-			obj.DonatedHoursProgress.MeetsCriteria,
+			obj.DonatedHoursProgress.IsProgressComplete,
 
 			obj.CsOrCpRegistrationProgress.DoesRequireCsOrCpValidation,
 			obj.CsOrCpRegistrationProgress.AmountOfDonatedHoursInCsOrCp,
-			obj.CsOrCpRegistrationProgress.RequiredAmountOfDonatedHoursInCsOrCp,
-			obj.CsOrCpRegistrationProgress.MeetsCriteria,
+			obj.CsOrCpRegistrationProgress.RequiredMinimalAmountOfDonatedHoursInCsOrCp,
+			obj.CsOrCpRegistrationProgress.IsProgressComplete,
 
 			obj.LanguageRegistrationProgress.IsLanguageRequired,
 			obj.LanguageRegistrationProgress.HasRegisteredLanguage,
-			obj.LanguageRegistrationProgress.MeetsCriteria,
 
 			obj.CanUseLanguageInsteadOfDonatedHours
 		);

@@ -4,6 +4,6 @@ public record StudentDonatedHoursProgress(
 	int AmountOfDonatedHoursExcludingLanguages,
 	int RequiredAmountOfDonatedHoursExcludingLanguages)
 {
-	public bool MeetsCriteria =>
+	public bool IsProgressComplete =>
 		AmountOfDonatedHoursExcludingLanguages == RequiredAmountOfDonatedHoursExcludingLanguages;
 }

@@ -115,7 +115,7 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		return new StudentCsOrCpRegistrationProgress(
 			DoesRequireCsOrCpValidation: true,
 			AmountOfDonatedHoursInCsOrCp: ammOfHoursInCsOrCp,
-			RequiredAmountOfDonatedHoursInCsOrCp: requiredAmountOfDonatedHoursInCspOrCp);
+			RequiredMinimalAmountOfDonatedHoursInCsOrCp: requiredAmountOfDonatedHoursInCspOrCp);
 	}
 
 	/// <summary>
@@ -154,18 +154,33 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		StudentCsOrCpRegistrationProgress csOrCpProgress,
 		StudentLanguageRegistrationProgress languageProgress)
 	{
-		var meetsBaseCriteria = csOrCpProgress.MeetsCriteria && languageProgress.MeetsCriteria;
+		var isRegistrationValid = true;
 
-		if (forGrade.RegistrationCriteria.CanUseForeignLanguageInsteadOfDonatedHours)
+		// Determine based on csOrCp
+		if (csOrCpProgress.DoesRequireCsOrCpValidation)
 		{
-			// If language progress is sufficient, we can skip donated hours
-			if (meetsBaseCriteria)
-			{
-				return true;
-			}
+			isRegistrationValid &= csOrCpProgress.IsProgressComplete;
 		}
 
-		// -> Cannot skip donated hours validation
-		return meetsBaseCriteria && donatedHoursProgress.MeetsCriteria;
+		// Determine based on if student can use language instead of donated hours
+		if (forGrade.RegistrationCriteria.CanUseForeignLanguageInsteadOfDonatedHours
+			&& languageProgress.HasRegisteredLanguage)
+		{
+			// If language progress is sufficient, we should check, that the student doesn't have any other donated hours
+			isRegistrationValid &= donatedHoursProgress.AmountOfDonatedHoursExcludingLanguages == 0;
+		}
+		else
+		{
+			// -> Cannot skip donated hours validation (more common)
+			isRegistrationValid &= donatedHoursProgress.IsProgressComplete;
+		}
+
+		// Determine based on language
+		if (languageProgress.IsLanguageRequired)
+		{
+			isRegistrationValid &= languageProgress.HasRegisteredLanguage;
+		}
+
+		return isRegistrationValid;
 	}
 }
