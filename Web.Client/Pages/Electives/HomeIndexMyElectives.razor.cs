@@ -1,4 +1,5 @@
 ﻿using MensaGymnazium.IntranetGen3.Contracts;
+using MensaGymnazium.IntranetGen3.Primitives;
 using MensaGymnazium.IntranetGen3.Web.Client.Services;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
@@ -13,7 +14,7 @@ public partial class HomeIndexMyElectives
 	protected override async Task OnInitializedAsync()
 	{
 		var user = await ClientAuthService.GetCurrentClaimsPrincipal();
-		if (!user.IsInRole("Student"))
+		if (!user.IsInRole(nameof(Role.Student)))
 		{
 			return;
 		}

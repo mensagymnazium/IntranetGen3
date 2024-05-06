@@ -56,6 +56,9 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.SubjectId != default);
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.RegistrationType != default);
 
+		var currentUser = applicationAuthenticationService.GetCurrentUser();
+		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
+
 		// Verify registration date
 		if (!subjectRegistrationsManagerService.IsRegistrationPeriodActive())
 		{
@@ -64,7 +67,6 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		}
 
 		// Verify student isn't already registered for this subject
-		var currentUser = applicationAuthenticationService.GetCurrentUser();
 		if (await subjectRegistrationsManagerService.IsSubjectRegisteredForStudentAsync(studentSubjectRegistrationCreateDto.SubjectId.Value, currentUser.StudentId.Value, cancellationToken))
 		{
 			throw new OperationFailedException("Student už je přihlášený");
@@ -76,9 +78,6 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		{
 			throw new OperationFailedException("Předmět je již plný");
 		}
-
-		// Create registration
-		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
 
 		// Verify student is in correct grade
 		if (!await subjectRegistrationsManagerService

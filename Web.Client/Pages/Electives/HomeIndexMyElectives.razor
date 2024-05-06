@@ -1,7 +1,7 @@
 ﻿<AuthorizeView Roles="@nameof(Role.Student)">
-    <h5 class="mt-3">
-        <text>Postup tvé registrace předmětů</text>
-        @if (studentsProgress is not null && studentsProgress.IsRegistrationValid)
+    <h5 class="mt-5">
+        Postup tvé registrace předmětů
+        @if ((studentsProgress is not null) && studentsProgress.IsRegistrationValid)
         {
             <b> - Máš splněné své registrace! 🥳</b>
         }

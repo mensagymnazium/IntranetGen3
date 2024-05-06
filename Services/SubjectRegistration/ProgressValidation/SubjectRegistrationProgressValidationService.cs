@@ -1,6 +1,8 @@
-﻿using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
+﻿using Havit;
+using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
 using MensaGymnazium.IntranetGen3.Model;
+using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration.ProgressValidation;
 
@@ -22,17 +24,18 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 
 	public async Task<StudentRegistrationProgress> GetRegistrationProgressOfStudentAsync(int studentId, CancellationToken cancellationToken = default)
 	{
+		Contract.Requires<ArgumentException>(studentId != default);
+
 		var student = await studentRepository.GetObjectAsync(studentId, cancellationToken);
-		Contract.Requires<ArgumentNullException>(student is not null);
+		Contract.Requires<OperationFailedException>(student.GradeId != (int)GradeEntry.Oktava, "Student nemá žádný další ročník");
 
 		// Logically we want to validate the rules for the next grade
-		// Todo: what if someone from oktava (no future grade) calls this method?
 		var futureGrade = await gradeRepository.GetObjectAsync(student.GradeId - 1, cancellationToken);
 		var studentsRegistrations = await subjectRegistrationRepository.GetRegistrationsByStudentAsync(studentId, cancellationToken);
 
-		Contract.Requires<ArgumentNullException>(studentsRegistrations is not null);
-		Contract.Requires<ArgumentNullException>(futureGrade is not null);
-		Contract.Requires<ArgumentNullException>(futureGrade.RegistrationCriteria is not null);
+		Contract.Requires<InvalidOperationException>(studentsRegistrations is not null);
+		Contract.Requires<InvalidOperationException>(futureGrade is not null);
+		Contract.Requires<InvalidOperationException>(futureGrade.RegistrationCriteria is not null);
 
 		var donatedHoursProgress = GetDonatedHoursProgress(futureGrade, studentsRegistrations);
 		var csOrCpProgress = GetCsOrCpRegistrationProgress(futureGrade, studentsRegistrations);
@@ -116,7 +119,7 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 	}
 
 	/// <summary>
-	/// Reponsible for creating the <see cref="StudentSubjectRegistration"/>.
+	/// Responsible for creating the <see cref="StudentSubjectRegistration"/>.
 	/// Determines, whether the combination of "rule progresses" (i.e. <see cref="StudentCsOrCpRegistrationProgress"/>)
 	/// results in a valid registration (<see cref="StudentRegistrationProgress.IsRegistrationValid"/>).
 	/// 
