@@ -10,11 +10,11 @@ namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration;
 [Service]
 internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrationsManagerService
 {
-	private readonly ITimeService timeService;
-	private readonly IApplicationSettingsEntries applicationSettingsEntries;
-	private readonly IUnitOfWork unitOfWork;
-	private readonly IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository;
-	private readonly ISubjectRepository subjectRepository;
+	private readonly ITimeService _timeService;
+	private readonly IApplicationSettingsEntries _applicationSettingsEntries;
+	private readonly IUnitOfWork _unitOfWork;
+	private readonly IStudentSubjectRegistrationRepository _studentSubjectRegistrationRepository;
+	private readonly ISubjectRepository _subjectRepository;
 
 	public SubjectRegistrationsManagerService(
 		ITimeService timeService,
@@ -23,17 +23,17 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 		IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository,
 		ISubjectRepository subjectRepository)
 	{
-		this.timeService = timeService;
-		this.applicationSettingsEntries = applicationSettingsEntries;
-		this.unitOfWork = unitOfWork;
-		this.studentSubjectRegistrationRepository = studentSubjectRegistrationRepository;
-		this.subjectRepository = subjectRepository;
+		_timeService = timeService;
+		_applicationSettingsEntries = applicationSettingsEntries;
+		_unitOfWork = unitOfWork;
+		_studentSubjectRegistrationRepository = studentSubjectRegistrationRepository;
+		_subjectRepository = subjectRepository;
 	}
 	public bool IsRegistrationPeriodActive()
 	{
-		var allowedFrom = applicationSettingsEntries.Current.SubjectRegistrationAllowedFrom;
-		var allowedTo = applicationSettingsEntries.Current.SubjectRegistrationAllowedTo;
-		var today = timeService.GetCurrentDate();
+		var allowedFrom = _applicationSettingsEntries.Current.SubjectRegistrationAllowedFrom;
+		var allowedTo = _applicationSettingsEntries.Current.SubjectRegistrationAllowedTo;
+		var today = _timeService.GetCurrentDate();
 
 		if (allowedFrom is not null && today < allowedFrom)
 		{
@@ -60,36 +60,36 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 			RegistrationType = registrationType,
 		};
 
-		unitOfWork.AddForInsert(studentSubjectRegistration);
+		_unitOfWork.AddForInsert(studentSubjectRegistration);
 
 		return studentSubjectRegistration;
 	}
 
 	public async Task CancelRegistrationAsync(int registrationId, int callerStudentId, CancellationToken cancellationToken)
 	{
-		var studentSubjectRegistration = await studentSubjectRegistrationRepository.GetObjectAsync(registrationId, cancellationToken);
+		var studentSubjectRegistration = await _studentSubjectRegistrationRepository.GetObjectAsync(registrationId, cancellationToken);
 
 		Contract.Requires<SecurityException>(studentSubjectRegistration.StudentId == callerStudentId);
 
-		unitOfWork.AddForDelete(studentSubjectRegistration);
+		_unitOfWork.AddForDelete(studentSubjectRegistration);
 	}
 
 	public async Task<bool> IsSubjectCapacityFullAsync(int subjectId)
 	{
-		var subject = await subjectRepository.GetObjectAsync(subjectId);
+		var subject = await _subjectRepository.GetObjectAsync(subjectId);
 		if (subject.Capacity is null)
 		{
 			return false; // No capacity => no limit
 		}
 
-		var registrationsForSubject = await studentSubjectRegistrationRepository.CountMainRegistrationsForSubjectAsync(subjectId);
+		var registrationsForSubject = await _studentSubjectRegistrationRepository.CountMainRegistrationsForSubjectAsync(subjectId);
 
 		return registrationsForSubject >= subject.Capacity.Value;
 	}
 
 	public async Task<bool> IsSubjectRegisteredForStudent(int subjectId, int callerStudentId)
 	{
-		var registrationsForStudent = await studentSubjectRegistrationRepository.GetRegistrationsByStudent(callerStudentId);
+		var registrationsForStudent = await _studentSubjectRegistrationRepository.GetRegistrationsByStudent(callerStudentId);
 
 		foreach (var registration in registrationsForStudent)
 		{

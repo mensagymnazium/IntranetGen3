@@ -8,16 +8,16 @@ namespace MensaGymnazium.IntranetGen3.Facades.Security;
 [Authorize]
 public class StudentFacade : IStudentFacade
 {
-	private readonly IStudentRepository studentRepository;
+	private readonly IStudentRepository _studentRepository;
 
 	public StudentFacade(IStudentRepository studentRepository)
 	{
-		this.studentRepository = studentRepository;
+		_studentRepository = studentRepository;
 	}
 
 	public async Task<List<StudentReferenceDto>> GetAllStudentReferencesAsync(CancellationToken cancellationToken = default)
 	{
-		var data = await studentRepository.GetAllIncludingDeletedAsync(cancellationToken);
+		var data = await _studentRepository.GetAllIncludingDeletedAsync(cancellationToken);
 		return data.Select(s => new StudentReferenceDto()
 		{
 			Id = s.Id,

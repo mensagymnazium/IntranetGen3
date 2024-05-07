@@ -12,16 +12,16 @@ namespace MensaGymnazium.IntranetGen3.Web.Server;
 
 public class Startup
 {
-	private readonly IConfiguration configuration;
+	private readonly IConfiguration _configuration;
 
 	public Startup(IConfiguration configuration)
 	{
-		this.configuration = configuration;
+		_configuration = configuration;
 	}
 
 	public void ConfigureServices(IServiceCollection services)
 	{
-		services.ConfigureForWebServer(configuration);
+		services.ConfigureForWebServer(_configuration);
 
 		services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -29,18 +29,18 @@ public class Startup
 
 		services.AddOptions();
 
-		services.AddCustomizedMailing(configuration);
+		services.AddCustomizedMailing(_configuration);
 
 		// SmtpExceptionMonitoring to errors@havit.cz
-		services.AddExceptionMonitoring(configuration);
+		services.AddExceptionMonitoring(_configuration);
 
 		// Application Insights
-		services.AddApplicationInsightsTelemetry(configuration);
+		services.AddApplicationInsightsTelemetry(_configuration);
 		services.AddSingleton<ITelemetryInitializer, GrpcRequestStatusTelemetryInitializer>();
 		services.AddSingleton<ITelemetryInitializer, EnrichmentTelemetryInitializer>();
 		services.ConfigureTelemetryModule<DependencyTrackingTelemetryModule>((module, o) => { module.EnableSqlCommandTextInstrumentation = true; });
 
-		services.AddCustomizedAuth(configuration);
+		services.AddCustomizedAuth(_configuration);
 
 		// server-side UI
 		services.AddControllersWithViews();

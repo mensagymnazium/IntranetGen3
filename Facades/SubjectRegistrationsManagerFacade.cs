@@ -11,18 +11,18 @@ namespace MensaGymnazium.IntranetGen3.Facades;
 [Authorize]
 public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFacade
 {
-	private readonly IApplicationAuthenticationService applicationAuthenticationService;
-	private readonly IUnitOfWork unitOfWork;
-	private readonly ISubjectRegistrationsManagerService subjectRegistrationsManagerService;
+	private readonly IApplicationAuthenticationService _applicationAuthenticationService;
+	private readonly IUnitOfWork _unitOfWork;
+	private readonly ISubjectRegistrationsManagerService _subjectRegistrationsManagerService;
 
 
 	public SubjectRegistrationsManagerFacade(
 		IApplicationAuthenticationService applicationAuthenticationService,
 		IUnitOfWork unitOfWork, ISubjectRegistrationsManagerService subjectRegistrationsManagerService)
 	{
-		this.applicationAuthenticationService = applicationAuthenticationService;
-		this.unitOfWork = unitOfWork;
-		this.subjectRegistrationsManagerService = subjectRegistrationsManagerService;
+		_applicationAuthenticationService = applicationAuthenticationService;
+		_unitOfWork = unitOfWork;
+		_subjectRegistrationsManagerService = subjectRegistrationsManagerService;
 	}
 
 
@@ -34,18 +34,18 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationId.Value != default);
 
 		// Verify registration date
-		if (!subjectRegistrationsManagerService.IsRegistrationPeriodActive())
+		if (!_subjectRegistrationsManagerService.IsRegistrationPeriodActive())
 		{
 			throw new OperationFailedException(
 				"Přihlášku není možné zrušit. Je před, nebo již po termínu přihlašování");
 		}
 
 		// Cancel
-		var currentUser = applicationAuthenticationService.GetCurrentUser();
+		var currentUser = _applicationAuthenticationService.GetCurrentUser();
 		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
-		await subjectRegistrationsManagerService.CancelRegistrationAsync(studentSubjectRegistrationId.Value, currentUser.StudentId.Value, cancellationToken);
+		await _subjectRegistrationsManagerService.CancelRegistrationAsync(studentSubjectRegistrationId.Value, currentUser.StudentId.Value, cancellationToken);
 
-		await unitOfWork.CommitAsync(cancellationToken);
+		await _unitOfWork.CommitAsync(cancellationToken);
 	}
 
 	[Authorize(Roles = nameof(Role.Student))]
@@ -57,21 +57,21 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.RegistrationType != default);
 
 		// Verify registration date
-		if (!subjectRegistrationsManagerService.IsRegistrationPeriodActive())
+		if (!_subjectRegistrationsManagerService.IsRegistrationPeriodActive())
 		{
 			throw new OperationFailedException(
 								"Přihlášku není možné vytvořit. Je před, nebo již po termínu přihlašování");
 		}
 
 		// Verify student isn't already registered for this subject
-		var currentUser = applicationAuthenticationService.GetCurrentUser();
-		if (await subjectRegistrationsManagerService.IsSubjectRegisteredForStudent(studentSubjectRegistrationCreateDto.SubjectId.Value, currentUser.StudentId.Value))
+		var currentUser = _applicationAuthenticationService.GetCurrentUser();
+		if (await _subjectRegistrationsManagerService.IsSubjectRegisteredForStudent(studentSubjectRegistrationCreateDto.SubjectId.Value, currentUser.StudentId.Value))
 		{
 			throw new OperationFailedException("Student už je přihlášený");
 		}
 
 		// Verify subject isn't full
-		if (await subjectRegistrationsManagerService
+		if (await _subjectRegistrationsManagerService
 				.IsSubjectCapacityFullAsync(studentSubjectRegistrationCreateDto.SubjectId.Value))
 		{
 			throw new OperationFailedException("Předmět je již plný");
@@ -80,11 +80,11 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		// Create registration
 		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
 
-		subjectRegistrationsManagerService.CreateNewSubjectRegistration(
+		_subjectRegistrationsManagerService.CreateNewSubjectRegistration(
 			studentId: currentUser.StudentId.Value,
 			subjectId: studentSubjectRegistrationCreateDto.SubjectId.Value,
 			registrationType: studentSubjectRegistrationCreateDto.RegistrationType.Value);
 
-		await unitOfWork.CommitAsync(cancellationToken);
+		await _unitOfWork.CommitAsync(cancellationToken);
 	}
 }

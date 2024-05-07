@@ -7,16 +7,16 @@ namespace MensaGymnazium.IntranetGen3.Facades;
 [Authorize]
 public class GradeFacade : IGradeFacade
 {
-	private readonly IGradeRepository gradeRepository;
+	private readonly IGradeRepository _gradeRepository;
 
 	public GradeFacade(IGradeRepository gradeRepository)
 	{
-		this.gradeRepository = gradeRepository;
+		_gradeRepository = gradeRepository;
 	}
 
 	public async Task<List<GradeDto>> GetAllGradesAsync(CancellationToken cancellationToken = default)
 	{
-		var data = await gradeRepository.GetAllAsync(cancellationToken);
+		var data = await _gradeRepository.GetAllAsync(cancellationToken);
 
 
 		return data

@@ -7,13 +7,13 @@ namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authorizat
 [Service]
 public class ApplicationAuthorizationService : IApplicationAuthorizationService
 {
-	private readonly IApplicationAuthenticationService applicationAuthenticationService;
-	private readonly IAuthorizationService authorizationService;
+	private readonly IApplicationAuthenticationService _applicationAuthenticationService;
+	private readonly IAuthorizationService _authorizationService;
 
 	public ApplicationAuthorizationService(IApplicationAuthenticationService applicationAuthenticationService, IAuthorizationService authorizationService)
 	{
-		this.applicationAuthenticationService = applicationAuthenticationService;
-		this.authorizationService = authorizationService;
+		_applicationAuthenticationService = applicationAuthenticationService;
+		_authorizationService = authorizationService;
 	}
 
 	public bool IsAuthorized(ClaimsPrincipal user, IAuthorizationRequirement requirement, object resource = null)
@@ -21,7 +21,7 @@ public class ApplicationAuthorizationService : IApplicationAuthorizationService
 		Contract.Requires<ArgumentNullException>(user != null);
 		Contract.Requires<ArgumentNullException>(requirement != null);
 
-		return authorizationService.AuthorizeAsync(user, resource, requirement).GetAwaiter().GetResult().Succeeded;
+		return _authorizationService.AuthorizeAsync(user, resource, requirement).GetAwaiter().GetResult().Succeeded;
 	}
 
 	public void VerifyAuthorization(ClaimsPrincipal user, IAuthorizationRequirement requirement, object resource = null)
@@ -34,16 +34,16 @@ public class ApplicationAuthorizationService : IApplicationAuthorizationService
 
 	public bool IsCurrentUserAuthorized(IAuthorizationRequirement requirement, object resource = null)
 	{
-		return IsAuthorized(applicationAuthenticationService.GetCurrentClaimsPrincipal(), requirement, resource);
+		return IsAuthorized(_applicationAuthenticationService.GetCurrentClaimsPrincipal(), requirement, resource);
 	}
 
 	public void VerifyCurrentUserAuthorization(IAuthorizationRequirement requirement, object resource = null)
 	{
-		VerifyAuthorization(applicationAuthenticationService.GetCurrentClaimsPrincipal(), requirement, resource);
+		VerifyAuthorization(_applicationAuthenticationService.GetCurrentClaimsPrincipal(), requirement, resource);
 	}
 
 	public bool IsCurrentUserAuthorized(IAuthorizationRequirement requirement)
 	{
-		return IsAuthorized(applicationAuthenticationService.GetCurrentClaimsPrincipal(), null, requirement);
+		return IsAuthorized(_applicationAuthenticationService.GetCurrentClaimsPrincipal(), null, requirement);
 	}
 }

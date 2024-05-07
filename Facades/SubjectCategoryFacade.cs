@@ -7,16 +7,16 @@ namespace MensaGymnazium.IntranetGen3.Facades;
 [Authorize]
 public class SubjectCategoryFacade : ISubjectCategoryFacade
 {
-	private readonly ISubjectCategoryRepository subjectCategoryRepository;
+	private readonly ISubjectCategoryRepository _subjectCategoryRepository;
 
 	public SubjectCategoryFacade(ISubjectCategoryRepository subjectCategoryRepository)
 	{
-		this.subjectCategoryRepository = subjectCategoryRepository;
+		_subjectCategoryRepository = subjectCategoryRepository;
 	}
 
 	public async Task<List<SubjectCategoryDto>> GetAllSubjectCategoriesAsync(CancellationToken cancellationToken = default)
 	{
-		var data = await subjectCategoryRepository.GetAllAsync(cancellationToken);
+		var data = await _subjectCategoryRepository.GetAllAsync(cancellationToken);
 		return data
 			.Select(c => new SubjectCategoryDto()
 			{

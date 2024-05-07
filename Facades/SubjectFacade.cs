@@ -13,13 +13,13 @@ namespace MensaGymnazium.IntranetGen3.Facades;
 [Authorize]
 public class SubjectFacade : ISubjectFacade
 {
-	private readonly ISubjectListQuery subjectListQuery;
-	private readonly ISubjectRepository subjectRepository;
-	private readonly IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository;
-	private readonly IUnitOfWork unitOfWork;
-	private readonly IApplicationAuthenticationService applicationAuthenticationService;
-	private readonly IUserManager userManager;
-	private readonly ISubjectMapper subjectMapper;
+	private readonly ISubjectListQuery _subjectListQuery;
+	private readonly ISubjectRepository _subjectRepository;
+	private readonly IStudentSubjectRegistrationRepository _studentSubjectRegistrationRepository;
+	private readonly IUnitOfWork _unitOfWork;
+	private readonly IApplicationAuthenticationService _applicationAuthenticationService;
+	private readonly IUserManager _userManager;
+	private readonly ISubjectMapper _subjectMapper;
 
 	public SubjectFacade(
 		ISubjectListQuery subjectListQuery,
@@ -30,32 +30,32 @@ public class SubjectFacade : ISubjectFacade
 		IUserManager userManager,
 		ISubjectMapper subjectMapper)
 	{
-		this.subjectListQuery = subjectListQuery;
-		this.subjectRepository = subjectRepository;
-		this.studentSubjectRegistrationRepository = studentSubjectRegistrationRepository;
-		this.unitOfWork = unitOfWork;
-		this.applicationAuthenticationService = applicationAuthenticationService;
-		this.userManager = userManager;
-		this.subjectMapper = subjectMapper;
+		_subjectListQuery = subjectListQuery;
+		_subjectRepository = subjectRepository;
+		_studentSubjectRegistrationRepository = studentSubjectRegistrationRepository;
+		_unitOfWork = unitOfWork;
+		_applicationAuthenticationService = applicationAuthenticationService;
+		_userManager = userManager;
+		_subjectMapper = subjectMapper;
 	}
 
 	public async Task<DataFragmentResult<SubjectListItemDto>> GetSubjectListAsync(DataFragmentRequest<SubjectListQueryFilter> subjectListRequest, CancellationToken cancellationToken = default)
 	{
 		Contract.Requires<ArgumentNullException>(subjectListRequest is not null);
 
-		subjectListQuery.Filter = subjectListRequest.Filter;
-		subjectListQuery.Sorting = subjectListRequest.Sorting;
+		_subjectListQuery.Filter = subjectListRequest.Filter;
+		_subjectListQuery.Sorting = subjectListRequest.Sorting;
 
-		return await subjectListQuery.GetDataFragmentAsync(subjectListRequest.StartIndex, subjectListRequest.Count, cancellationToken);
+		return await _subjectListQuery.GetDataFragmentAsync(subjectListRequest.StartIndex, subjectListRequest.Count, cancellationToken);
 	}
 
 	public async Task<SubjectDto> GetSubjectDetailAsync(Dto<int> subjectIdDto, CancellationToken cancellationToken = default)
 	{
 		Contract.Requires<ArgumentException>(subjectIdDto.Value != default);
 
-		var subject = await subjectRepository.GetObjectAsync(subjectIdDto.Value, cancellationToken);
+		var subject = await _subjectRepository.GetObjectAsync(subjectIdDto.Value, cancellationToken);
 
-		return await subjectMapper.MapToSubjectDtoAsync(subject);
+		return await _subjectMapper.MapToSubjectDtoAsync(subject);
 	}
 
 	[Authorize(Roles = nameof(Role.Administrator))]
@@ -65,10 +65,10 @@ public class SubjectFacade : ISubjectFacade
 		Contract.Requires<ArgumentException>(subjectDto.Id == default);
 
 		var subject = new Subject();
-		await subjectMapper.MapFromSubjectDtoAsync(subjectDto, subject, cancellationToken);
+		await _subjectMapper.MapFromSubjectDtoAsync(subjectDto, subject, cancellationToken);
 
-		unitOfWork.AddForInsert(subject);
-		await unitOfWork.CommitAsync(cancellationToken);
+		_unitOfWork.AddForInsert(subject);
+		await _unitOfWork.CommitAsync(cancellationToken);
 
 		return Dto.FromValue(subject.Id);
 	}
@@ -79,7 +79,7 @@ public class SubjectFacade : ISubjectFacade
 		Contract.Requires<ArgumentNullException>(subjectDto != null);
 		Contract.Requires<ArgumentException>(subjectDto.Id != default);
 
-		var subject = await subjectRepository.GetObjectAsync(subjectDto.Id, cancellationToken);
+		var subject = await _subjectRepository.GetObjectAsync(subjectDto.Id, cancellationToken);
 
 		// TODO FUTURE - Teacher can edit own subjects
 		//var currentUser = applicationAuthenticationService.GetCurrentUser();
@@ -91,27 +91,27 @@ public class SubjectFacade : ISubjectFacade
 		//	}
 		//}
 
-		await subjectMapper.MapFromSubjectDtoAsync(subjectDto, subject, cancellationToken);
+		await _subjectMapper.MapFromSubjectDtoAsync(subjectDto, subject, cancellationToken);
 
-		unitOfWork.AddForUpdate(subject);
-		await unitOfWork.CommitAsync(cancellationToken);
+		_unitOfWork.AddForUpdate(subject);
+		await _unitOfWork.CommitAsync(cancellationToken);
 	}
 
 	[Authorize(Roles = nameof(Role.Administrator))]
 	public async Task DeleteSubjectAsync(Dto<int> subjectIdDto, CancellationToken cancellationToken = default)
 	{
-		var subject = await subjectRepository.GetObjectAsync(subjectIdDto.Value, cancellationToken);
-		unitOfWork.AddForDelete(subject);
+		var subject = await _subjectRepository.GetObjectAsync(subjectIdDto.Value, cancellationToken);
+		_unitOfWork.AddForDelete(subject);
 
-		var registrations = await studentSubjectRegistrationRepository.GetBySubjectAsync(subjectIdDto.Value, cancellationToken);
-		unitOfWork.AddRangeForDelete(registrations);
+		var registrations = await _studentSubjectRegistrationRepository.GetBySubjectAsync(subjectIdDto.Value, cancellationToken);
+		_unitOfWork.AddRangeForDelete(registrations);
 
-		await unitOfWork.CommitAsync(cancellationToken);
+		await _unitOfWork.CommitAsync(cancellationToken);
 	}
 
 	public async Task<List<SubjectReferenceDto>> GetAllSubjectReferencesAsync(CancellationToken cancellationToken = default)
 	{
-		return (await subjectRepository.GetAllIncludingDeletedAsync(cancellationToken))
+		return (await _subjectRepository.GetAllIncludingDeletedAsync(cancellationToken))
 			.Select(s => new SubjectReferenceDto()
 			{
 				Id = s.Id,
