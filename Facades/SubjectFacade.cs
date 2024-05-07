@@ -1,4 +1,6 @@
-﻿using MensaGymnazium.IntranetGen3.Contracts;
+﻿using System.Security;
+using System.Security.Claims;
+using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.DataLayer.Queries;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
@@ -73,7 +75,7 @@ public class SubjectFacade : ISubjectFacade
 		return Dto.FromValue(subject.Id);
 	}
 
-	[Authorize(Roles = nameof(Role.Administrator))]
+	[Authorize(Roles = $"{nameof(Role.Administrator)},{nameof(Role.Teacher)}")]
 	public async Task UpdateSubjectAsync(SubjectDto subjectDto, CancellationToken cancellationToken = default)
 	{
 		Contract.Requires<ArgumentNullException>(subjectDto != null);
@@ -82,14 +84,16 @@ public class SubjectFacade : ISubjectFacade
 		var subject = await subjectRepository.GetObjectAsync(subjectDto.Id, cancellationToken);
 
 		// TODO FUTURE - Teacher can edit own subjects
-		//var currentUser = applicationAuthenticationService.GetCurrentUser();
-		//if (!await userManager.IsInRolesAsync(currentUser, Role.Administrator))
-		//{
-		//	if (!subject.Teachers.Any(t => t.Id == currentUser.TeacherId))
-		//	{
-		//		throw new SecurityException("Access Denied. Not your subject.");
-		//	}
-		//}
+		var currentUser = applicationAuthenticationService.GetCurrentUser();
+		var roles = await userManager.GetRolesAsync(currentUser, ClaimsPrincipal.Current);
+		if (!roles.Contains(Role.Administrator))
+		{
+			if (!subject.Teachers.Any(t => t.Id == currentUser.TeacherId))
+			{
+				throw new SecurityException("Access Denied. Not your subject.");
+			}
+		}
+
 
 		await subjectMapper.MapFromSubjectDtoAsync(subjectDto, subject, cancellationToken);
 
