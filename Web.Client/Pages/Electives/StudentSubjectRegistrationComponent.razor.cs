@@ -31,7 +31,7 @@ public partial class StudentSubjectRegistrationComponent
 	/// <returns>True if the registration isn't possible</returns>
 	public bool IsRegistrationNotPossible()
 	{
-		return studentsProgress.AmOfDonatedHoursExcludingLanguages >= studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages;
+		return studentsProgress.AmOfHoursPerWeekExcludingLanguages >= studentsProgress.RequiredAmOfHoursPerWeekExcludingLanguages;
 	}
 
 	protected override async Task OnInitializedAsync()

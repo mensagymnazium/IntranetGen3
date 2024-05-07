@@ -37,13 +37,13 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		Contract.Requires<InvalidOperationException>(futureGrade is not null);
 		Contract.Requires<InvalidOperationException>(futureGrade.RegistrationCriteria is not null);
 
-		var donatedHoursProgress = GetDonatedHoursProgress(futureGrade, studentsRegistrations);
+		var HoursPerWeekProgress = GetHoursPerWeekProgress(futureGrade, studentsRegistrations);
 		var csOrCpProgress = GetCsOrCpRegistrationProgress(futureGrade, studentsRegistrations);
 		var languageProgress = GetLanguageRegistrationProgress(futureGrade, studentsRegistrations);
 
 		var registrationProgress = ConstructRegistrationProgress(
 			futureGrade,
-			donatedHoursProgress,
+			HoursPerWeekProgress,
 			csOrCpProgress,
 			languageProgress);
 
@@ -62,7 +62,7 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 			doesStudentHaveLanguage);
 	}
 
-	private StudentDonatedHoursProgress GetDonatedHoursProgress(
+	private StudentHoursPerWeekProgress GetHoursPerWeekProgress(
 		Grade forGrade,
 		List<StudentSubjectRegistration> forRegistrations)
 	{
@@ -75,12 +75,12 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 					? total
 					: total + reg.Subject.HoursPerWeek);
 
-		var requiredAmountOfDonatedHoursExcludingLanguages =
-			forGrade.RegistrationCriteria.RequiredTotalAmountOfDonatedHoursExcludingLanguage;
+		var requiredAmountOfHoursPerWeekExcludingLanguages =
+			forGrade.RegistrationCriteria.RequiredTotalAmountOfHoursPerWeekExcludingLanguage;
 
-		return new StudentDonatedHoursProgress(
-			AmountOfDonatedHoursExcludingLanguages: amOfHoursExcludingLanguages,
-			RequiredAmountOfDonatedHoursExcludingLanguages: requiredAmountOfDonatedHoursExcludingLanguages);
+		return new StudentHoursPerWeekProgress(
+			AmountOfHoursPerWeekExcludingLanguages: amOfHoursExcludingLanguages,
+			RequiredAmountOfHoursPerWeekExcludingLanguages: requiredAmountOfHoursPerWeekExcludingLanguages);
 	}
 
 	private StudentCsOrCpRegistrationProgress GetCsOrCpRegistrationProgress(
@@ -108,14 +108,14 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 					? total + reg.Subject.HoursPerWeek
 					: total);
 
-		var requiredAmountOfDonatedHoursInCspOrCp =
-			forGrade.RegistrationCriteria.RequiredAmountOfDonatedHoursInAreaCspOrCp;
+		var requiredAmountOfHoursPerWeekInCspOrCp =
+			forGrade.RegistrationCriteria.RequiredAmountOfHoursPerWeekInAreaCspOrCp;
 
 
 		return new StudentCsOrCpRegistrationProgress(
 			DoesRequireCsOrCpValidation: true,
-			AmountOfDonatedHoursInCsOrCp: ammOfHoursInCsOrCp,
-			RequiredMinimalAmountOfDonatedHoursInCsOrCp: requiredAmountOfDonatedHoursInCspOrCp);
+			AmountOfHoursPerWeekInCsOrCp: ammOfHoursInCsOrCp,
+			RequiredMinimalAmountOfHoursPerWeekInCsOrCp: requiredAmountOfHoursPerWeekInCspOrCp);
 	}
 
 	/// <summary>
@@ -130,27 +130,27 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 	/// <returns></returns>
 	private StudentRegistrationProgress ConstructRegistrationProgress(
 		Grade forGrade,
-		StudentDonatedHoursProgress donatedHoursProgress,
+		StudentHoursPerWeekProgress HoursPerWeekProgress,
 		StudentCsOrCpRegistrationProgress csOrCpProgress,
 		StudentLanguageRegistrationProgress languageRegistrationProgress)
 	{
 		bool isRegistrationValid = IsRegistrationValid(
 			forGrade,
-			donatedHoursProgress,
+			HoursPerWeekProgress,
 			csOrCpProgress,
 			languageRegistrationProgress);
 
 		return new StudentRegistrationProgress(
 			isRegistrationValid,
-			donatedHoursProgress,
+			HoursPerWeekProgress,
 			csOrCpProgress,
 			languageRegistrationProgress,
-			forGrade.RegistrationCriteria.CanUseForeignLanguageInsteadOfDonatedHours);
+			forGrade.RegistrationCriteria.CanUseForeignLanguageInsteadOfHoursPerWeek);
 	}
 
 	private static bool IsRegistrationValid(
 		Grade forGrade,
-		StudentDonatedHoursProgress donatedHoursProgress,
+		StudentHoursPerWeekProgress HoursPerWeekProgress,
 		StudentCsOrCpRegistrationProgress csOrCpProgress,
 		StudentLanguageRegistrationProgress languageProgress)
 	{
@@ -163,16 +163,16 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		}
 
 		// Determine based on if student can use language instead of donated hours
-		if (forGrade.RegistrationCriteria.CanUseForeignLanguageInsteadOfDonatedHours
+		if (forGrade.RegistrationCriteria.CanUseForeignLanguageInsteadOfHoursPerWeek
 			&& languageProgress.HasRegisteredLanguage)
 		{
 			// If language progress is sufficient, we should check, that the student doesn't have any other donated hours
-			isRegistrationValid &= donatedHoursProgress.AmountOfDonatedHoursExcludingLanguages == 0;
+			isRegistrationValid &= HoursPerWeekProgress.AmountOfHoursPerWeekExcludingLanguages == 0;
 		}
 		else
 		{
 			// -> Cannot skip donated hours validation (more common)
-			isRegistrationValid &= donatedHoursProgress.IsProgressComplete;
+			isRegistrationValid &= HoursPerWeekProgress.IsProgressComplete;
 		}
 
 		// Determine based on language

@@ -4,28 +4,28 @@ public record StudentRegistrationProgressDto
 {
 	public StudentRegistrationProgressDto(
 		bool isRegistrationValid,
-		int amOfDonatedHoursExcludingLanguages,
-		int requiredAmOfDonatedHoursExcludingLanguages,
-		bool isDonatedHoursProgressComplete,
+		int amOfHoursPerWeekExcludingLanguages,
+		int requiredAmOfHoursPerWeekExcludingLanguages,
+		bool isHoursPerWeekProgressComplete,
 		bool requiresCspOrCpValidation,
-		int amOfDonatedHoursInCspOrCp,
-		int requiredMinimalAmOfDonatedHoursInCspOrCp,
+		int amOfHoursPerWeekInCspOrCp,
+		int requiredMinimalAmOfHoursPerWeekInCspOrCp,
 		bool isCsOrCpProgressComplete,
 		bool isLanguageRequired,
 		bool hasRegisteredLanguage,
-		bool canUseLanguageInsteadOfDonatedHours)
+		bool canUseLanguageInsteadOfHoursPerWeek)
 	{
 		IsRegistrationValid = isRegistrationValid;
 		RequiresCspOrCpValidation = requiresCspOrCpValidation;
-		AmOfDonatedHoursInCspOrCp = amOfDonatedHoursInCspOrCp;
-		RequiredMinimalAmOfDonatedHoursInCspOrCp = requiredMinimalAmOfDonatedHoursInCspOrCp;
+		AmOfHoursPerWeekInCspOrCp = amOfHoursPerWeekInCspOrCp;
+		RequiredMinimalAmOfHoursPerWeekInCspOrCp = requiredMinimalAmOfHoursPerWeekInCspOrCp;
 		IsCsOrCpProgressComplete = isCsOrCpProgressComplete;
 		IsLanguageRequired = isLanguageRequired;
 		HasRegisteredLanguage = hasRegisteredLanguage;
-		AmOfDonatedHoursExcludingLanguages = amOfDonatedHoursExcludingLanguages;
-		RequiredAmOfDonatedHoursExcludingLanguages = requiredAmOfDonatedHoursExcludingLanguages;
-		IsDonatedHoursProgressComplete = isDonatedHoursProgressComplete;
-		CanUseLanguageInsteadOfDonatedHours = canUseLanguageInsteadOfDonatedHours;
+		AmOfHoursPerWeekExcludingLanguages = amOfHoursPerWeekExcludingLanguages;
+		RequiredAmOfHoursPerWeekExcludingLanguages = requiredAmOfHoursPerWeekExcludingLanguages;
+		IsHoursPerWeekProgressComplete = isHoursPerWeekProgressComplete;
+		CanUseLanguageInsteadOfHoursPerWeek = canUseLanguageInsteadOfHoursPerWeek;
 	}
 
 	private StudentRegistrationProgressDto()
@@ -40,16 +40,16 @@ public record StudentRegistrationProgressDto
 	/// </summary>
 	public bool IsRegistrationValid { get; set; }
 
-	public int AmOfDonatedHoursExcludingLanguages { get; set; }
-	public int RequiredAmOfDonatedHoursExcludingLanguages { get; set; }
-	public bool IsDonatedHoursProgressComplete { get; set; }
+	public int AmOfHoursPerWeekExcludingLanguages { get; set; }
+	public int RequiredAmOfHoursPerWeekExcludingLanguages { get; set; }
+	public bool IsHoursPerWeekProgressComplete { get; set; }
 
 	public bool RequiresCspOrCpValidation { get; set; }
-	public int AmOfDonatedHoursInCspOrCp { get; set; }
-	public int RequiredMinimalAmOfDonatedHoursInCspOrCp { get; set; }
+	public int AmOfHoursPerWeekInCspOrCp { get; set; }
+	public int RequiredMinimalAmOfHoursPerWeekInCspOrCp { get; set; }
 	public bool IsCsOrCpProgressComplete { get; set; }
 
 	public bool IsLanguageRequired { get; set; }
 	public bool HasRegisteredLanguage { get; set; }
-	public bool CanUseLanguageInsteadOfDonatedHours { get; set; }
+	public bool CanUseLanguageInsteadOfHoursPerWeek { get; set; }
 }

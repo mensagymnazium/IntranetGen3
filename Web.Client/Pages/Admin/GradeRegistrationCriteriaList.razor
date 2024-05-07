@@ -14,20 +14,20 @@
                               SortKeySelector="i => -i.GradeId"
                               IsDefaultSortColumn="true"/>
                 <HxGridColumn HeaderText="Počet hodin v rozvrhu (kromě jazyků)"
-                              ItemTextSelector="i => i.RequiredTotalAmountOfDonatedHoursExcludingLanguage.ToString()"
-                              SortKeySelector="i => i.RequiredTotalAmountOfDonatedHoursExcludingLanguage"/>
+                              ItemTextSelector="i => i.RequiredTotalAmountOfHoursPerWeekExcludingLanguage.ToString()"
+                              SortKeySelector="i => i.RequiredTotalAmountOfHoursPerWeekExcludingLanguage"/>
                 <HxGridColumn HeaderText="Vyžaduje cizí jazyk?"
                               ItemTextSelector="@(i => i.RequiresForeignLanguage ? "ano" : "ne")"
                               SortKeySelector="i => i.RequiresForeignLanguage"/>
                 <HxGridColumn HeaderText="Cizí jazyk místo hodin?"
-							  ItemTextSelector="@(i => i.CanUseForeignLanguageInsteadOfDonatedHours ? "ano" : "ne")"
-                              SortKeySelector="i => i.CanUseForeignLanguageInsteadOfDonatedHours"/>
+							  ItemTextSelector="@(i => i.CanUseForeignLanguageInsteadOfHoursPerWeek ? "ano" : "ne")"
+                              SortKeySelector="i => i.CanUseForeignLanguageInsteadOfHoursPerWeek"/>
                 <HxGridColumn HeaderText="Kontrola ČSP/ČS?"
                               ItemTextSelector="@(i => i.RequiresCspOrCpValidation ? "ano" : "ne")"
                               SortKeySelector="i => i.RequiresCspOrCpValidation"/>
                 <HxGridColumn HeaderText="Alespoň hodin z ČSP/ČS"
-                              ItemTextSelector="i => i.RequiredAmountOfDonatedHoursInAreaCspOrCp.ToString()"
-                              SortKeySelector="i => i.RequiredAmountOfDonatedHoursInAreaCspOrCp"/>
+                              ItemTextSelector="i => i.RequiredAmountOfHoursPerWeekInAreaCspOrCp.ToString()"
+                              SortKeySelector="i => i.RequiredAmountOfHoursPerWeekInAreaCspOrCp"/>
             </Columns>
         </HxGrid>
     </DataTemplate>

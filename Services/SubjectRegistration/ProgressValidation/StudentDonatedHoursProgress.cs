@@ -1,9 +1,9 @@
 ﻿namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration.ProgressValidation;
 
-public record StudentDonatedHoursProgress(
-	int AmountOfDonatedHoursExcludingLanguages,
-	int RequiredAmountOfDonatedHoursExcludingLanguages)
+public record StudentHoursPerWeekProgress(
+	int AmountOfHoursPerWeekExcludingLanguages,
+	int RequiredAmountOfHoursPerWeekExcludingLanguages)
 {
 	public bool IsProgressComplete =>
-		AmountOfDonatedHoursExcludingLanguages == RequiredAmountOfDonatedHoursExcludingLanguages;
+		AmountOfHoursPerWeekExcludingLanguages == RequiredAmountOfHoursPerWeekExcludingLanguages;
 }

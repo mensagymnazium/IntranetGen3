@@ -43,14 +43,14 @@ public class GradeFacade : IGradeFacade
 				GradeId =
 					g.Id,
 
-				CanUseForeignLanguageInsteadOfDonatedHours =
-					g.RegistrationCriteria.CanUseForeignLanguageInsteadOfDonatedHours,
+				CanUseForeignLanguageInsteadOfHoursPerWeek =
+					g.RegistrationCriteria.CanUseForeignLanguageInsteadOfHoursPerWeek,
 
-				RequiredAmountOfDonatedHoursInAreaCspOrCp =
-					g.RegistrationCriteria.RequiredAmountOfDonatedHoursInAreaCspOrCp,
+				RequiredAmountOfHoursPerWeekInAreaCspOrCp =
+					g.RegistrationCriteria.RequiredAmountOfHoursPerWeekInAreaCspOrCp,
 
-				RequiredTotalAmountOfDonatedHoursExcludingLanguage =
-					g.RegistrationCriteria.RequiredTotalAmountOfDonatedHoursExcludingLanguage,
+				RequiredTotalAmountOfHoursPerWeekExcludingLanguage =
+					g.RegistrationCriteria.RequiredTotalAmountOfHoursPerWeekExcludingLanguage,
 
 				RequiresCspOrCpValidation =
 					g.RegistrationCriteria.RequiresCspOrCpValidation,
@@ -65,7 +65,7 @@ public class GradeFacade : IGradeFacade
 	public async Task UpdateGradeRegistrationCriteriaAsync(GradeRegistrationCriteriaDto model, CancellationToken cancellationToken = default)
 	{
 		Contract.Requires<ArgumentNullException>(model is not null);
-		if (model.CanUseForeignLanguageInsteadOfDonatedHours && model.RequiresForeignLanguage)
+		if (model.CanUseForeignLanguageInsteadOfHoursPerWeek && model.RequiresForeignLanguage)
 		{
 			// Xopa: Maybe app logic is leaking and this should be a service?
 			throw new InvalidOperationException("Ročník nemůže vyžadovat jazyk a zároveň ho využít namísto hodin v rozvrhu");
@@ -81,9 +81,9 @@ public class GradeFacade : IGradeFacade
 
 	private void MapRegistrationCriteriaFromDTO(GradeRegistrationCriteriaDto dto, GradeRegistrationCriteria criteria)
 	{
-		criteria.CanUseForeignLanguageInsteadOfDonatedHours = dto.CanUseForeignLanguageInsteadOfDonatedHours;
-		criteria.RequiredAmountOfDonatedHoursInAreaCspOrCp = dto.RequiredAmountOfDonatedHoursInAreaCspOrCp;
-		criteria.RequiredTotalAmountOfDonatedHoursExcludingLanguage = dto.RequiredTotalAmountOfDonatedHoursExcludingLanguage;
+		criteria.CanUseForeignLanguageInsteadOfHoursPerWeek = dto.CanUseForeignLanguageInsteadOfHoursPerWeek;
+		criteria.RequiredAmountOfHoursPerWeekInAreaCspOrCp = dto.RequiredAmountOfHoursPerWeekInAreaCspOrCp;
+		criteria.RequiredTotalAmountOfHoursPerWeekExcludingLanguage = dto.RequiredTotalAmountOfHoursPerWeekExcludingLanguage;
 		criteria.RequiresCspOrCpValidation = dto.RequiresCspOrCpValidation;
 		criteria.RequiresForeginLanguage = dto.RequiresForeignLanguage;
 	}

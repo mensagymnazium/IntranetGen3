@@ -8,13 +8,13 @@
         <EditForm EditContext="editContext">
             <FluentValidationValidator/>
             
-            <HxInputNumber Label="Počet hodin v rozvrhu (kromě jazyků)" TValue="int" @bind-Value="model.RequiredTotalAmountOfDonatedHoursExcludingLanguage" />
+            <HxInputNumber Label="Počet hodin v rozvrhu (kromě jazyků)" TValue="int" @bind-Value="model.RequiredTotalAmountOfHoursPerWeekExcludingLanguage" />
             
             <HxSwitch Text="Vyžaduje cizí jazyk?" @bind-Value="model.RequiresForeignLanguage"/>
-			<HxSwitch Text="Cizí jazyk místo hodin?" @bind-Value="model.CanUseForeignLanguageInsteadOfDonatedHours" />
+			<HxSwitch Text="Cizí jazyk místo hodin?" @bind-Value="model.CanUseForeignLanguageInsteadOfHoursPerWeek" />
 
 			<HxSwitch Text="Kontrola ČSP/ČS?" @bind-Value="model.RequiresCspOrCpValidation" />
-            <HxInputNumber Label="Alespoň hodin z ČSP/ČS" TValue="int" @bind-Value="model.RequiredAmountOfDonatedHoursInAreaCspOrCp" />
+            <HxInputNumber Label="Alespoň hodin z ČSP/ČS" TValue="int" @bind-Value="model.RequiredAmountOfHoursPerWeekInAreaCspOrCp" />
         </EditForm>
     </BodyTemplate>
     <FooterTemplate>

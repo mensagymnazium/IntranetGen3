@@ -12,52 +12,52 @@ public class GradeRegistrationCriteriaSeed : DataSeed<CoreProfile>
 			new GradeRegistrationCriteria()
 			{
 				Id = (int)GradeEntry.Prima,
-				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 0,
+				RequiredTotalAmountOfHoursPerWeekExcludingLanguage = 0,
 			},
 			new GradeRegistrationCriteria()
 			{
 				Id = (int)GradeEntry.Sekunda,
-				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 2,
-				CanUseForeignLanguageInsteadOfDonatedHours = true
+				RequiredTotalAmountOfHoursPerWeekExcludingLanguage = 2,
+				CanUseForeignLanguageInsteadOfHoursPerWeek = true
 			},
 			new GradeRegistrationCriteria()
 			{
 				Id = (int)GradeEntry.Tercie,
-				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 2,
+				RequiredTotalAmountOfHoursPerWeekExcludingLanguage = 2,
 				RequiresForeginLanguage = true,
 			},
 			new GradeRegistrationCriteria()
 			{
 				Id = (int)GradeEntry.Kvarta,
-				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 2,
+				RequiredTotalAmountOfHoursPerWeekExcludingLanguage = 2,
 				RequiresForeginLanguage = true,
 			},
 			new GradeRegistrationCriteria()
 			{
 				Id = (int)GradeEntry.Kvinta,
-				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 4,
+				RequiredTotalAmountOfHoursPerWeekExcludingLanguage = 4,
 				RequiresForeginLanguage = true,
 			},
 			new GradeRegistrationCriteria()
 			{
 				Id = (int)GradeEntry.Sexta,
-				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 4,
+				RequiredTotalAmountOfHoursPerWeekExcludingLanguage = 4,
 				RequiresForeginLanguage = true,
 			},
 			new GradeRegistrationCriteria()
 			{
 				Id = (int)GradeEntry.Septima,
-				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 10,
+				RequiredTotalAmountOfHoursPerWeekExcludingLanguage = 10,
 				RequiresCspOrCpValidation = true,
-				RequiredAmountOfDonatedHoursInAreaCspOrCp = 4,
+				RequiredAmountOfHoursPerWeekInAreaCspOrCp = 4,
 				RequiresForeginLanguage = true,
 			},
 			new GradeRegistrationCriteria()
 			{
 				Id = (int)GradeEntry.Oktava,
-				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 12,
+				RequiredTotalAmountOfHoursPerWeekExcludingLanguage = 12,
 				RequiresCspOrCpValidation = true,
-				RequiredAmountOfDonatedHoursInAreaCspOrCp = 4,
+				RequiredAmountOfHoursPerWeekInAreaCspOrCp = 4,
 				RequiresForeginLanguage = true,
 			},
 		};

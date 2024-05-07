@@ -18,7 +18,7 @@ public record SubjectDto : SubjectListItemDto
 			RuleFor(x => x.CategoryId).NotEmpty().WithName("Kategorie");
 			RuleFor(x => x.ScheduleDayOfWeek).NotEmpty().WithName("Den");
 			RuleFor(x => x.ScheduleSlotInDay).NotEmpty().WithName("Čas");
-			RuleFor(x => x.HoursPerWeek).Must(BeWithinDonatedHoursRange).WithName("Hodiny");
+			RuleFor(x => x.HoursPerWeek).Must(BeWithinHoursPerWeekRange).WithName("Hodiny");
 			RuleFor(x => x.MinStudentsToOpen).Must(BeMoreThanZero).WithName("Minimální počet účastníků pro otevření");
 		}
 
@@ -28,7 +28,7 @@ public record SubjectDto : SubjectListItemDto
 		}
 
 
-		private bool BeWithinDonatedHoursRange(int arg)
+		private bool BeWithinHoursPerWeekRange(int arg)
 		{
 			return arg is > 0 and < 5;
 		}

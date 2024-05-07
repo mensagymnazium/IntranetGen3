@@ -4,13 +4,13 @@
 /// Does the rule about needing N subjects from fields CSP or CP apply?
 /// For 2023-2024 this applied to Septima, Oktava
 /// </param>
-/// <param name="AmountOfDonatedHoursInCsOrCp"></param>
-/// <param name="RequiredMinimalAmountOfDonatedHoursInCsOrCp"></param>
+/// <param name="AmountOfHoursPerWeekInCsOrCp"></param>
+/// <param name="RequiredMinimalAmountOfHoursPerWeekInCsOrCp"></param>
 public readonly record struct StudentCsOrCpRegistrationProgress(
 	bool DoesRequireCsOrCpValidation,
-	int AmountOfDonatedHoursInCsOrCp,
-	int RequiredMinimalAmountOfDonatedHoursInCsOrCp)
+	int AmountOfHoursPerWeekInCsOrCp,
+	int RequiredMinimalAmountOfHoursPerWeekInCsOrCp)
 {
 	public bool IsProgressComplete =>
-		AmountOfDonatedHoursInCsOrCp >= RequiredMinimalAmountOfDonatedHoursInCsOrCp;
+		AmountOfHoursPerWeekInCsOrCp >= RequiredMinimalAmountOfHoursPerWeekInCsOrCp;
 }

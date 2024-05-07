@@ -14,23 +14,23 @@
     @if (studentsProgress is not null) 
     {
         // Loaded, show data
-        @if (studentsProgress.CanUseLanguageInsteadOfDonatedHours)
+        @if (studentsProgress.CanUseLanguageInsteadOfHoursPerWeek)
         {
             <p><b>Profesionální rada</b>: Tvůj ročník umožňuje zapsat druhý cizí jazyk namísto volitelného předmětu 😎 (ale ne obojí zároveň)</p>
         }
 
         <HxListGroup 
             CssClass='contained-width'>
-            @if (!studentsProgress.CanUseLanguageInsteadOfDonatedHours)
+            @if (!studentsProgress.CanUseLanguageInsteadOfHoursPerWeek)
             {
                 // Cannot use language instead of donated hours (more common)
 
                 <ElectiveProgressComponent
                     CriteriaName='Celkový počet hodin'
-                    IsProgressComplete="@studentsProgress.IsDonatedHoursProgressComplete"
+                    IsProgressComplete="@studentsProgress.IsHoursPerWeekProgressComplete"
                     CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid'
-                    CriteriaProgressDescription="@($"{studentsProgress.AmOfDonatedHoursExcludingLanguages}h / {studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages}h")"
-                    CriteriaDescription=@($"Musíš mít tolik předmětů (kromě jazyků), aby dohromady zabraly v rozvrhu {GetHoursWithGrammar(studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages)}")/>
+                    CriteriaProgressDescription="@($"{studentsProgress.AmOfHoursPerWeekExcludingLanguages}h / {studentsProgress.RequiredAmOfHoursPerWeekExcludingLanguages}h")"
+                    CriteriaDescription=@($"Musíš mít tolik předmětů (kromě jazyků), aby dohromady zabraly v rozvrhu {GetHoursWithGrammar(studentsProgress.RequiredAmOfHoursPerWeekExcludingLanguages)}")/>
 
                 @if (studentsProgress.IsLanguageRequired)
                 {
@@ -48,10 +48,10 @@
 
                 <ElectiveProgressComponent
                     CriteriaName='Celkový počet hodin'
-                    IsProgressComplete="@studentsProgress.IsDonatedHoursProgressComplete"
+                    IsProgressComplete="@studentsProgress.IsHoursPerWeekProgressComplete"
                     CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid'
-                    CriteriaProgressDescription="@($"{studentsProgress.AmOfDonatedHoursExcludingLanguages}h / {studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages}h")"
-                    CriteriaDescription=@($"Musíš mít tolik předmětů (kromě jazyků), aby dohromady zabraly v rozvrhu {GetHoursWithGrammar(studentsProgress.RequiredAmOfDonatedHoursExcludingLanguages)}")/>
+                    CriteriaProgressDescription="@($"{studentsProgress.AmOfHoursPerWeekExcludingLanguages}h / {studentsProgress.RequiredAmOfHoursPerWeekExcludingLanguages}h")"
+                    CriteriaDescription=@($"Musíš mít tolik předmětů (kromě jazyků), aby dohromady zabraly v rozvrhu {GetHoursWithGrammar(studentsProgress.RequiredAmOfHoursPerWeekExcludingLanguages)}")/>
                 <HxListGroupItem> Nebo </HxListGroupItem>
                 <ElectiveProgressComponent
                     CriteriaName='Druhý cizí jazyk'
@@ -67,8 +67,8 @@
                     CriteriaName='Člověk & svět práce nebo Člověk & příroda'
                     IsProgressComplete="@studentsProgress.IsCsOrCpProgressComplete"
                     CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid'
-                    CriteriaProgressDescription="@($"{studentsProgress.AmOfDonatedHoursInCspOrCp}h / {studentsProgress.RequiredMinimalAmOfDonatedHoursInCspOrCp}h")"
-                    CriteriaDescription=@($"Alespoň {GetHoursWithGrammar(studentsProgress.RequiredMinimalAmOfDonatedHoursInCspOrCp)} musí být ze vzdělávacích oblastí „Člověk aspolečnost“ či „Člověk a příroda“")/>
+                    CriteriaProgressDescription="@($"{studentsProgress.AmOfHoursPerWeekInCspOrCp}h / {studentsProgress.RequiredMinimalAmOfHoursPerWeekInCspOrCp}h")"
+                    CriteriaDescription=@($"Alespoň {GetHoursWithGrammar(studentsProgress.RequiredMinimalAmOfHoursPerWeekInCspOrCp)} musí být ze vzdělávacích oblastí „Člověk aspolečnost“ či „Člověk a příroda“")/>
             }
         </HxListGroup>
     }

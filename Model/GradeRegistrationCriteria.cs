@@ -11,7 +11,7 @@ public record GradeRegistrationCriteria
 	/// What is total of donated hours needed.
 	/// The hours donated by languages are not counted in!
 	/// </summary>
-	public int RequiredTotalAmountOfDonatedHoursExcludingLanguage { get; set; }
+	public int RequiredTotalAmountOfHoursPerWeekExcludingLanguage { get; set; }
 
 	/// <summary>
 	/// Does the rule about needing N subjects from ČSP or ČP areas apply?
@@ -22,12 +22,12 @@ public record GradeRegistrationCriteria
 	/// <summary>
 	/// How many hours in educational field Csp/cP
 	/// </summary>
-	public int RequiredAmountOfDonatedHoursInAreaCspOrCp { get; set; }
+	public int RequiredAmountOfHoursPerWeekInAreaCspOrCp { get; set; }
 
 	/// <summary>
 	/// Does the student need to have a foreign language
 	/// </summary>
 	public bool RequiresForeginLanguage { get; set; }
 
-	public bool CanUseForeignLanguageInsteadOfDonatedHours { get; set; }
+	public bool CanUseForeignLanguageInsteadOfHoursPerWeek { get; set; }
 }
