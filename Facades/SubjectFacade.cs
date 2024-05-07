@@ -83,7 +83,6 @@ public class SubjectFacade : ISubjectFacade
 
 		var subject = await subjectRepository.GetObjectAsync(subjectDto.Id, cancellationToken);
 
-		// TODO FUTURE - Teacher can edit own subjects
 		var currentUser = applicationAuthenticationService.GetCurrentUser();
 		var roles = await userManager.GetRolesAsync(currentUser, ClaimsPrincipal.Current);
 		if (!roles.Contains(Role.Administrator))
