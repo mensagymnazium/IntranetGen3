@@ -4,25 +4,39 @@ using Microsoft.AspNetCore.Components;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Components.Pickers;
 
-public class StudentPicker : HxSelectBase<int?, StudentReferenceDto>
+public class StudentPicker : HxAutosuggest<StudentReferenceDto, int?>
 {
-	[Parameter] public string NullText { get => NullTextImpl; set => NullTextImpl = value; }
-
 	[Inject] protected IStudentsDataStore StudentsDataStore { get; set; }
 
 	public StudentPicker()
 	{
-		this.NullableImpl = true;
-		this.NullDataTextImpl = "načítám";
-		this.NullTextImpl = "-vyberte-";
-		this.ValueSelectorImpl = (c => c.Id);
-		this.TextSelectorImpl = (c => c.Name);
+		this.DataProvider = GetSuggestions;
+		this.ItemFromValueResolver = ResolveItemFromId;
+		this.ValueSelector = (c => c.Id);
+		this.TextSelector = (c => c.Name);
 	}
 
-	protected override async Task OnInitializedAsync()
+	private async Task<AutosuggestDataProviderResult<StudentReferenceDto>> GetSuggestions(AutosuggestDataProviderRequest request)
 	{
-		await base.OnInitializedAsync();
+		var data = await StudentsDataStore.GetAllAsync();
+		return new AutosuggestDataProviderResult<StudentReferenceDto>()
+		{
+			Data = data
+				.Where(c => !c.IsDeleted)
+				.OrderBy(c => c.Name.StartsWith(request.UserInput, StringComparison.OrdinalIgnoreCase) ? 0 : 1)
+				.ThenBy(c => c.Name)
+				.Take(5)
+				.ToList(),
+		};
+	}
 
-		this.DataImpl = (await StudentsDataStore.GetAllAsync()).Where(t => !t.IsDeleted).ToList();
+	private async Task<StudentReferenceDto> ResolveItemFromId(int? id)
+	{
+		if (id == null)
+		{
+			return null;
+		}
+
+		return await StudentsDataStore.GetByKeyAsync(id.Value);
 	}
 }
