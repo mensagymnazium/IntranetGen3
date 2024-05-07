@@ -34,7 +34,8 @@ public class TeacherFacade : ITeacherFacade
 			TeacherId = t.Id,
 			UserId = t.User.Id,
 			Name = t.User.Name,
-			IsDeleted = (t.Deleted != null)
+			IsDeleted = (t.Deleted != null),
+			FunFact = t.FunFact
 		}).ToList();
 	}
 

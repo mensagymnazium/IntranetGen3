@@ -10,14 +10,34 @@
 					   height: fit-content;">
 			<h1>Chyba 404</h1>
 			Je nám líto, ale hledanou stránku se nepodařilo najít.<br />
+		
+				
+			@if (teacherName != null )
+			{
+				@teacherName <br />
+			}
+			@if (teacherFunFact != null)
+			{
+				@teacherFunFact <br />
+			}
+			else
+			{
+				<text> O tomto učiteli zatím funfact nevíme.</text> <br />
+			}
+
+			
+
+				
+				
+			
+			
+
 			<HxButton Text="Zpět na hlavní stránku" Color="ThemeColor.Secondary" OnClick="HandleBackClick" CssClass="mt-5" />
 		</p>
 	</center>
 
 </LayoutView>
 
-@code {
-	public void HandleBackClick() {
-		NavigationManager.NavigateTo("/");
-	}
-}
+
+FUNFACTS
+
