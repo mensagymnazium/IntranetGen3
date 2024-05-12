@@ -1,4 +1,5 @@
-﻿using MensaGymnazium.IntranetGen3.Contracts.Security;
+﻿using Havit.Text.RegularExpressions;
+using MensaGymnazium.IntranetGen3.Contracts.Security;
 using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 using Microsoft.AspNetCore.Components;
 
@@ -23,6 +24,7 @@ public class StudentPicker : HxAutosuggest<StudentReferenceDto, int?>
 		{
 			Data = data
 				.Where(c => !c.IsDeleted)
+				.Where(c => RegexPatterns.IsWildcardMatch("*" + request.UserInput + "*", c.Name))
 				.OrderBy(c => c.Name.StartsWith(request.UserInput, StringComparison.OrdinalIgnoreCase) ? 0 : 1)
 				.ThenBy(c => c.Name)
 				.Take(5)
