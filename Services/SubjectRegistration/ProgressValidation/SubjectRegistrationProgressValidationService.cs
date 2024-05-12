@@ -37,13 +37,13 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		Contract.Requires<InvalidOperationException>(futureGrade is not null);
 		Contract.Requires<InvalidOperationException>(futureGrade.RegistrationCriteria is not null);
 
-		var HoursPerWeekProgress = GetHoursPerWeekProgress(futureGrade, studentsRegistrations);
+		var hoursPerWeekProgress = GetHoursPerWeekProgress(futureGrade, studentsRegistrations);
 		var csOrCpProgress = GetCsOrCpRegistrationProgress(futureGrade, studentsRegistrations);
 		var languageProgress = GetLanguageRegistrationProgress(futureGrade, studentsRegistrations);
 
 		var registrationProgress = ConstructRegistrationProgress(
 			futureGrade,
-			HoursPerWeekProgress,
+			hoursPerWeekProgress,
 			csOrCpProgress,
 			languageProgress);
 
@@ -130,19 +130,19 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 	/// <returns></returns>
 	private StudentRegistrationProgress ConstructRegistrationProgress(
 		Grade forGrade,
-		StudentHoursPerWeekProgress HoursPerWeekProgress,
+		StudentHoursPerWeekProgress hoursPerWeekProgress,
 		StudentCsOrCpRegistrationProgress csOrCpProgress,
 		StudentLanguageRegistrationProgress languageRegistrationProgress)
 	{
 		bool isRegistrationValid = IsRegistrationValid(
 			forGrade,
-			HoursPerWeekProgress,
+			hoursPerWeekProgress,
 			csOrCpProgress,
 			languageRegistrationProgress);
 
 		return new StudentRegistrationProgress(
 			isRegistrationValid,
-			HoursPerWeekProgress,
+			hoursPerWeekProgress,
 			csOrCpProgress,
 			languageRegistrationProgress,
 			forGrade.RegistrationCriteria.CanUseForeignLanguageInsteadOfHoursPerWeek);
@@ -150,7 +150,7 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 
 	private static bool IsRegistrationValid(
 		Grade forGrade,
-		StudentHoursPerWeekProgress HoursPerWeekProgress,
+		StudentHoursPerWeekProgress hoursPerWeekProgress,
 		StudentCsOrCpRegistrationProgress csOrCpProgress,
 		StudentLanguageRegistrationProgress languageProgress)
 	{
@@ -167,12 +167,12 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 			&& languageProgress.HasRegisteredLanguage)
 		{
 			// If language progress is sufficient, we should check, that the student doesn't have any other donated hours
-			isRegistrationValid &= HoursPerWeekProgress.AmountOfHoursPerWeekExcludingLanguages == 0;
+			isRegistrationValid &= hoursPerWeekProgress.AmountOfHoursPerWeekExcludingLanguages == 0;
 		}
 		else
 		{
 			// -> Cannot skip donated hours validation (more common)
-			isRegistrationValid &= HoursPerWeekProgress.IsProgressComplete;
+			isRegistrationValid &= hoursPerWeekProgress.IsProgressComplete;
 		}
 
 		// Determine based on language
