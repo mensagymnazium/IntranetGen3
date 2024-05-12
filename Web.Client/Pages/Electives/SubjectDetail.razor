@@ -56,7 +56,10 @@
                 <HxCardTitle>Zápis předmětu</HxCardTitle>
             </HeaderTemplate>
             <BodyTemplate>
-                <StudentSubjectRegistrationComponent SubjectId="@SubjectId" OnRegistrationChanged="HandleRegistrationChanged" />
+                <StudentSubjectRegistrationComponent 
+                    SubjectId="@SubjectId" 
+                    OnRegistrationChanged="HandleRegistrationChanged"
+                    Subject="@subject"/>
             </BodyTemplate>
         </HxCard>
     </AuthorizeView>
