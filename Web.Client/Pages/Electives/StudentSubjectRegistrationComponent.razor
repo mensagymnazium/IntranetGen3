@@ -1,33 +1,46 @@
-﻿@if (studentsProgress is not null)
+﻿@if (studentsRegistrationForThisSubject is not null)
 {
-    @if (studentsRegistrationForThisSubject is not null)
+    // Registered already
+    <HxButton 
+        Text="Zrušit primární zápis"
+        OnClick="HandleCancelRegistrationClicked"
+        Color="ThemeColor.Primary"
+        Outline="true" 
+        Size="ButtonSize.Small" 
+        Icon="BootstrapIcon.Trash" />
+}
+else
+{
+    // No registration yet, display registration options
+    // Xopa: Now only handling primary registrations, maybe secondary in future aswel
+
+    @if (canCreateMainRegistrationResult is not null)
     {
-        // Registered already
-        <HxButton 
-            Text="Zrušit primární zápis"
-            OnClick="async () => await HandleCancelRegistrationClicked()"
-            Color="ThemeColor.Primary"
-            Outline="true" 
-            Size="ButtonSize.Small" 
-            Icon="BootstrapIcon.Trash" />
-    }
-    else if (!isRegistrationPossible)
-    {
-        // Registration not possible
-        <b>Už máte naplněné podmínky registrace</b>
+        // Result loaded
+        @if (canCreateMainRegistrationResult.IsRegistrationPossible)
+        {
+            // User can create a main registration
+            <HxButton
+                Text="Zapsat jako primární"
+                OnClick="async () => await HandleCreateRegistrationClicked(StudentRegistrationType.Main)" 
+                Color="ThemeColor.Primary"
+                Size="ButtonSize.Small"
+                Icon="BootstrapIcon.Basket" />
+        }
+        else
+        {
+            // Cannot create a main registration
+            <p class="text-danger">Nelze zapsat jako primární, důvod: @canCreateMainRegistrationResult.Reason</p>
+        }
     }
     else
     {
-        // No registration
-        <HxButton
+        // Result not loaded
+        <HxSpinner Size='SpinnerSize.Small'/>
+        <HxPlaceholderButton
             Text="Zapsat jako primární"
-            OnClick="async () => await HandleCreateRegistrationClicked(StudentRegistrationType.Main)" 
             Color="ThemeColor.Primary"
             Size="ButtonSize.Small"
             Icon="BootstrapIcon.Basket" />
     }
-}
-else
-{
-    <HxSpinner Color="ThemeColor.Primary" Size="SpinnerSize.Small" />
 }

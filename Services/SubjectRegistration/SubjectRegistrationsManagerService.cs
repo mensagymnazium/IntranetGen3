@@ -72,7 +72,10 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 		return studentSubjectRegistration;
 	}
 
-	public async Task CancelRegistrationAsync(int registrationId, int callerStudentId, CancellationToken cancellationToken)
+	public async Task CancelRegistrationAsync(
+		int registrationId,
+		int callerStudentId,
+		CancellationToken cancellationToken)
 	{
 		var studentSubjectRegistration = await studentSubjectRegistrationRepository.GetObjectAsync(registrationId, cancellationToken);
 
@@ -81,7 +84,9 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 		unitOfWork.AddForDelete(studentSubjectRegistration);
 	}
 
-	public async Task<bool> IsSubjectCapacityFullAsync(int subjectId, CancellationToken cancellationToken = default)
+	public async Task<bool> IsSubjectCapacityFullAsync(
+		int subjectId,
+		CancellationToken cancellationToken = default)
 	{
 		var subject = await subjectRepository.GetObjectAsync(subjectId, cancellationToken);
 		if (subject.Capacity is null)
@@ -108,7 +113,41 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 		return subject.Grades.Contains(futureGrade);
 	}
 
-	public async Task<bool> IsSubjectRegisteredForStudentAsync(int subjectId, int callerStudentId, CancellationToken cancellationToken = default)
+	public async Task<bool> DidStudentAlreadyReachHoursPerWeekLimit(
+		int studentId,
+		int subjectId,
+		CancellationToken cancellationToken = default)
+	{
+		var student = await studentRepository.GetObjectAsync(studentId, cancellationToken);
+		var studentsNextYearGrade = await gradeRepository.GetObjectAsync(student.GradeId - 1, cancellationToken); // Negative values
+		var subject = await subjectRepository.GetObjectAsync(subjectId, cancellationToken);
+
+		if (SubjectCategory.IsEntry(subject.Category, SubjectCategory.Entry.ForeignLanguage))
+		{
+			return false; // Languages don't count towards the limit
+		}
+
+		// Student never has > 10 registrations, so we can safely load this.
+		var registrationsForStudent = await studentSubjectRegistrationRepository.GetRegistrationsByStudentAsync(studentId, cancellationToken);
+
+		// (Now omitting main/secondary registration, just count them all)
+		static bool IsSubjectALanguage(Subject subject)
+			=> SubjectCategory.IsEntry(subject.Category, SubjectCategory.Entry.ForeignLanguage);
+
+		var amOfHoursExcludingLanguages = registrationsForStudent
+			.Aggregate(0, (total, reg) =>
+				IsSubjectALanguage(reg.Subject)
+					? total
+					: total + reg.Subject.HoursPerWeek);
+
+		return amOfHoursExcludingLanguages >=
+			   studentsNextYearGrade.RegistrationCriteria.RequiredTotalAmountOfHoursPerWeekExcludingLanguage;
+	}
+
+	public async Task<bool> IsSubjectRegisteredForStudentAsync(
+		int subjectId,
+		int callerStudentId,
+		CancellationToken cancellationToken = default)
 	{
 		var registrationsForStudent = await studentSubjectRegistrationRepository.GetRegistrationsByStudentAsync(callerStudentId, cancellationToken);
 
