@@ -11,7 +11,7 @@
         </div>
 
 
-        <AuthorizeView Roles="@nameof(Role.Administrator)">
+        <AuthorizeView Roles="@($"{nameof(Role.Administrator)}, {nameof(Role.Teacher)}")">
             <div class="col text-end">
                 <HxButton Color="ThemeColor.Secondary" OnClick="HandleEditClick" CssClass="mb-4">Upravit definici předmětu</HxButton>
             </div>
