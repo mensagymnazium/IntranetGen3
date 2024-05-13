@@ -17,20 +17,20 @@ else
     @if (canCreateMainRegistrationResult is not null)
     {
         // Result loaded
-        @if (canCreateMainRegistrationResult.IsRegistrationPossible)
-        {
-            // User can create a main registration
-            <HxButton
-                Text="Zapsat jako primární"
-                OnClick="async () => await HandleCreateRegistrationClicked(StudentRegistrationType.Main)" 
-                Color="ThemeColor.Primary"
-                Size="ButtonSize.Small"
-                Icon="BootstrapIcon.Basket" />
-        }
-        else
+        <HxButton
+            Text="Zapsat jako primární"
+            OnClick="async () => await HandleCreateRegistrationClicked(StudentRegistrationType.Main)" 
+            Color="ThemeColor.Primary"
+            Size="ButtonSize.Small"
+            Icon="BootstrapIcon.Basket" 
+            Enabled='@canCreateMainRegistrationResult.IsRegistrationPossible'/>
+        @if (!canCreateMainRegistrationResult.IsRegistrationPossible)
         {
             // Cannot create a main registration
-            <p class="text-danger">Nelze zapsat jako primární, důvod: @canCreateMainRegistrationResult.Reason</p>
+            <small>
+                <span> - Nelze zapsat jako primární, důvod:</span>
+                <b class='text-danger'>@canCreateMainRegistrationResult.Reason</b>
+            </small>
         }
     }
     else

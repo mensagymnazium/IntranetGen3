@@ -98,7 +98,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		if (await subjectRegistrationsManagerService
 				.IsSubjectRegisteredForStudentAsync(studentSubjectRegistrationCreateDto.SubjectId.Value, currentUser.StudentId.Value, cancellationToken))
 		{
-			return CanCreateRegistrationResponse.NotPossible("Již jste přihlášený do tohoto předmětu");
+			return CanCreateRegistrationResponse.NotPossible("Na předmět již máte přihlášku");
 		}
 
 		// Verify subject isn't full
@@ -112,7 +112,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		if (!await subjectRegistrationsManagerService
 				.IsStudentInAssignableGrade(currentUser.StudentId.Value, studentSubjectRegistrationCreateDto.SubjectId.Value, cancellationToken))
 		{
-			return CanCreateRegistrationResponse.NotPossible("Nemáte správný ročník pro tento předmět");
+			return CanCreateRegistrationResponse.NotPossible("Předmět není určený pro váš ročník");
 		}
 
 		// Verify student doesn't already have reached `hours per week` limit
