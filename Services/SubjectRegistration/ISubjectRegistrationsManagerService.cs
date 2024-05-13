@@ -39,4 +39,10 @@ public interface ISubjectRegistrationsManagerService
 
 	/// <returns>True, if the students next year grade is within the subjects grade criteria</returns>
 	Task<bool> IsStudentInAssignableGrade(int studentId, int subjectId, CancellationToken cancellationToken = default);
+
+	/// <returns>
+	/// True, if the student has already reached the maximum number of registrations per week.
+	/// Takes languages into account: If the subject is a language, this rule doesn't apply.
+	/// </returns>
+	Task<bool> DidStudentAlreadyReachHoursPerWeekLimit(int studentId, int subjectId, CancellationToken cancellationToken = default);
 }

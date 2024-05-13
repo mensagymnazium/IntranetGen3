@@ -12,12 +12,15 @@ public partial class SubjectDbRepository : ISubjectRepository
 	}
 	protected override IEnumerable<Expression<Func<Subject, object>>> GetLoadReferences()
 	{
-		yield return x => x.GradeRelations;
+		yield return s => s.Category;
+		yield return s => s.GradeRelations;
 	}
 
 	protected override async Task LoadReferencesAsync(Subject[] entities, CancellationToken cancellationToken = default)
 	{
 		await base.LoadReferencesAsync(entities, cancellationToken);
-		await DataLoader.LoadAllAsync(entities, x => x.GradeRelations).ThenLoadAsync(x => x.Grade);
+		await DataLoader
+			.LoadAllAsync(entities, s => s.GradeRelations, cancellationToken)
+			.ThenLoadAsync(x => x.Grade, cancellationToken);
 	}
 }

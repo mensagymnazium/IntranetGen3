@@ -8,7 +8,6 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
 public partial class StudentSubjectRegistrationComponent
 {
 	[Parameter] public int? SubjectId { get; set; } // Xopa: why is this nullable?
-	[Parameter] public SubjectDto Subject { get; set; }
 
 	[Parameter] public EventCallback OnRegistrationChanged { get; set; }
 
@@ -25,44 +24,28 @@ public partial class StudentSubjectRegistrationComponent
 	/// </summary>
 	private StudentSubjectRegistrationDto studentsRegistrationForThisSubject = null;
 
-	private StudentRegistrationProgressDto studentsProgress = null;
 	/// <summary>
-	/// Predicted, determined by <see cref="LoadIsRegistrationePossibleAsync"/>
+	/// Null when not yet loaded.
 	/// </summary>
-	private bool isRegistrationPossible;
+	private CanCreateRegistrationResponse canCreateMainRegistrationResult = null;
 
 	protected override async Task OnInitializedAsync()
 	{
+		await LoadIsRegistrationPossibleAsync();
 		await LoadStudentRegistrationAsync();
-		studentsProgress = await SubjectRegistrationProgressValidationFacade.GetProgressOfCurrentStudentAsync();
-		await LoadIsRegistrationePossibleAsync();
 	}
 
-	/// <summary>
-	/// Predicatively determines, whether the student can create a registration
-	/// </summary>
-	private async Task LoadIsRegistrationePossibleAsync()
+	private async Task LoadIsRegistrationPossibleAsync()
 	{
-		if (Subject is null)
+		// Test for main registration
+		StudentSubjectRegistrationCreateDto mainRegistrationRequest = new StudentSubjectRegistrationCreateDto()
 		{
-			isRegistrationPossible = true;
-			return;
-		}
+			RegistrationType = StudentRegistrationType.Main,
+			SubjectId = SubjectId
+		};
 
-		await SubjectCategoriesDataStore.EnsureDataAsync();
-		var subjectCategory = await SubjectCategoriesDataStore.GetByKeyAsync(Subject.CategoryId!.Value);
-
-		// Student should be able to register a language if he is missing one
-		if (!studentsProgress.HasRegisteredLanguage
-			&& subjectCategory.Entry == SubjectCategoryDto.DtoEntry.ForeignLanguage)
-		{
-			isRegistrationPossible = true;
-			return;
-		}
-
-		// Check based on missing hours
-		isRegistrationPossible = studentsProgress.AmOfHoursPerWeekExcludingLanguages
-								 < studentsProgress.RequiredAmOfHoursPerWeekExcludingLanguages;
+		canCreateMainRegistrationResult = await SubjectRegistrationsManagerFacade
+			.CanStudentCreateRegistrationAsync(mainRegistrationRequest);
 	}
 
 	private async Task LoadStudentRegistrationAsync()
@@ -87,10 +70,9 @@ public partial class StudentSubjectRegistrationComponent
 
 				// Invalidate data store
 				StudentSubjectRegistrationsDataStore.Clear();
-				studentsProgress = await SubjectRegistrationProgressValidationFacade.GetProgressOfCurrentStudentAsync();
 
 				await LoadStudentRegistrationAsync();
-				await LoadIsRegistrationePossibleAsync();
+				await LoadIsRegistrationPossibleAsync();
 
 				await OnRegistrationChanged.InvokeAsync();
 			}
@@ -116,10 +98,9 @@ public partial class StudentSubjectRegistrationComponent
 
 				//Invalidate data store
 				StudentSubjectRegistrationsDataStore.Clear();
-				studentsProgress = await SubjectRegistrationProgressValidationFacade.GetProgressOfCurrentStudentAsync();
 
 				await LoadStudentRegistrationAsync();
-				await LoadIsRegistrationePossibleAsync();
+				await LoadIsRegistrationPossibleAsync();
 
 				await OnRegistrationChanged.InvokeAsync();
 			}
