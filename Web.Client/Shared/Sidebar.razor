@@ -12,12 +12,11 @@
         <HxSidebarItem Text="Volitelné předměty" Icon="@BootstrapIcon.CalendarRange">
             <HxSidebarItem Text="Předměty" Href="@Routes.Electives.Subjects" />
             <HxSidebarItem Text="Zapsaní studenti" Href="@Routes.Electives.StudentSubjectRegistrationList" />
-            <HxSidebarItem Text="Zápisová pravidla" Href="@Routes.Electives.SigningRuleList" />
-            <HxSidebarItem Text="Přehled plnění" Href="@Routes.Electives.StudentWithSigningRuleList" />
         </HxSidebarItem>
         <AuthorizeView Roles="@nameof(Role.Administrator)">
             <HxSidebarItem Text="Nastavení" Icon="@BootstrapIcon.Gear">
                 <HxSidebarItem Text="Učitelé" Href="@Routes.Administration.Teachers" />
+                <HxSidebarItem Text="Volitelné předměty" Href="@Routes.Administration.GradeRegistrationCriterias" />
                 <HxSidebarItem Text="Administrace" Href="@Routes.Administration.Index" Match="NavLinkMatch.All" />
             </HxSidebarItem>
         </AuthorizeView>
@@ -36,6 +35,9 @@
                 <HxSidebarItem Text="Robert Haken" Href="/development/robert-haken" />
                 <HxSidebarItem Text="Placeholder 1" Href="/development/placeholder1" />
                 <HxSidebarItem Text="Placeholder 2" Href="/development/placeholder2" />
+                <HxSidebarItem Text="Martin Fiala" Href="/development/martin-fiala" />
+                <HxSidebarItem Icon="@BootstrapIcon.MinecartLoaded" Text=" Pohřební Služba" Href="/development/maxjarsky" />
+                <HxSidebarItem Text="Vjačeslav Nikiforov" Href="/development/vjaceslav-nikiforov" />
                 <HxSidebarItem Text="Ostatní" Href="/development" Match="NavLinkMatch.All" />
             </HxSidebarItem>
         </DebugView>

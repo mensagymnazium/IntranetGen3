@@ -16,7 +16,8 @@ public class IntranetGen3DbContextTests
 		IntranetGen3DbContext dbContext = new IntranetGen3DbContext(options);
 
 		// Act
-		Havit.Data.EntityFrameworkCore.ModelValidation.ModelValidator modelValidator = new Havit.Data.EntityFrameworkCore.ModelValidation.ModelValidator();
+		Havit.Data.EntityFrameworkCore.ModelValidation.ModelValidator modelValidator = new();
+
 		string errors = modelValidator.Validate(dbContext);
 
 		// Assert

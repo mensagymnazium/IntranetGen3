@@ -18,8 +18,8 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
 public abstract class SubjectCategoryDbRepositoryBase : DbRepository<MensaGymnazium.IntranetGen3.Model.SubjectCategory>
 {
-	protected SubjectCategoryDbRepositoryBase(IDbContext dbContext, MensaGymnazium.IntranetGen3.DataLayer.DataSources.ISubjectCategoryDataSource dataSource, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.SubjectCategory, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager)
-		: base(dbContext, dataSource, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager)
+	protected SubjectCategoryDbRepositoryBase(IDbContext dbContext, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.SubjectCategory, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager, IRepositoryQueryProvider repositoryQueryProvider)
+		: base(dbContext, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager, repositoryQueryProvider)
 	{
 	}
 

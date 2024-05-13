@@ -1,0 +1,23 @@
+﻿@attribute [Authorize(Roles = nameof(Role.Administrator))]
+
+<HxOffcanvas @ref="hxOffcanvas" 
+             Title="@($"Kritéria - {GradesDataStore.GetByKeyOrDefault(model.GradeId)?.Name}")"
+             OnClosed="this.OnClosed"
+             Size='OffcanvasSize.Large'>
+    <BodyTemplate>
+        <EditForm EditContext="editContext">
+            <FluentValidationValidator/>
+            
+            <HxInputNumber Label="Počet hodin v rozvrhu (kromě jazyků)" TValue="int" @bind-Value="model.RequiredTotalAmountOfHoursPerWeekExcludingLanguage" />
+            
+            <HxSwitch Text="Vyžaduje cizí jazyk?" @bind-Value="model.RequiresForeignLanguage"/>
+			<HxSwitch Text="Cizí jazyk místo hodin?" @bind-Value="model.CanUseForeignLanguageInsteadOfHoursPerWeek" />
+
+			<HxSwitch Text="Kontrola ČSP/ČS?" @bind-Value="model.RequiresCspOrCpValidation" />
+            <HxInputNumber Label="Alespoň hodin z ČSP/ČS" TValue="int" @bind-Value="model.RequiredAmountOfHoursPerWeekInAreaCspOrCp" />
+        </EditForm>
+    </BodyTemplate>
+    <FooterTemplate>
+        <SaveButton EditContext="editContext" OnValidClick="HandleValidSubmit"/>
+    </FooterTemplate>
+</HxOffcanvas>

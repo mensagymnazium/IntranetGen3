@@ -2,19 +2,14 @@
 
 <div>
     @* CSS Isolation *@
-
+    @if (showRocnikovkaWarning)
+    {
+        <HxAlert Color="ThemeColor.Danger"><HxIcon Icon="@BootstrapIcon.ExclamationTriangleFill" /> Téma jednoho z vybraných předmětů se musí shodovat s tématem vaší <strong>ročníkové práce</strong>.</HxAlert>
+    }
     <HxListLayout Title="Předměty"
                   TFilterModel="SubjectListQueryFilter"
-                  FilterModel="subjectListFilter"
-                  FilterModelChanged="HandleFilterModelChanged">
-        <SearchTemplate>
-            <strong class="d-none d-sm-block">Zápisové pravidlo:</strong>
-            <SigningRulePicker Value="subjectListFilter.SigningRuleId"
-                               ValueChanged="HandleSigningRuleFilterChanged"
-                               ValueExpression="() => subjectListFilter.SigningRuleId"
-                               RestrictStudentGrade="true"
-                               NullText="-neurčeno-" />
-        </SearchTemplate>
+                  @bind-FilterModel='subjectListFilter'
+                  @bind-FilterModel:after='subjectsGrid.RefreshDataAsync'>
         <CommandsTemplate>
             <AuthorizeView Roles="@nameof(Role.Administrator)">
                 <HxButton Text="Nový předmět" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />
@@ -22,8 +17,9 @@
         </CommandsTemplate>
         <FilterTemplate>
             <HxInputText @bind-Value="@context.Name" Label="Název" />
+            <GradePicker @bind-Value='@context.GradeId' Label='Ročník'/>
             <SubjectCategoryPicker @bind-Value="context.SubjectCategoryId" Label="Skupina" />
-            <SubjectTypePicker @bind-Value="@context.SubjectTypeId" Label="Vzdělávací oblast" />
+            <EducationalAreaPicker @bind-Value="@context.EducationalAreaId" Label="Vzdělávací oblast" />
             <TeacherPicker @bind-Value="context.TeacherId" Label="Vyučující" />
         </FilterTemplate>
         <DataTemplate>
@@ -47,7 +43,7 @@
                     </HxGridColumn>
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Ročník(y)" ItemTextSelector="@(item => GetGrades(item.GradeIds))" SortString="@nameof(SubjectListItemDto.GradeIds)" />
                     <HxGridColumn TItem="SubjectListItemDto" HeaderText="Skupina" ItemTextSelector="@(item => SubjectCategoriesDataStore.GetByKey(item.CategoryId.Value)?.Name)" SortString="@nameof(SubjectListItemDto.CategoryId)" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vzdělávací oblast(i)" ItemTextSelector="@(item => GetSubjectTypes(item.SubjectTypeIds))" SortString="@nameof(SubjectListItemDto.SubjectTypeIds)" />
+                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vzdělávací oblast(i)" ItemTextSelector="@(item => GetEducationalAreas(item.EducationalAreaIds))" SortString="@nameof(SubjectListItemDto.EducationalAreaIds)" />
                     <HxContextMenuGridColumn Context="item">
                         <AuthorizeView Roles="@nameof(Role.Administrator)">
                             <HxContextMenu>

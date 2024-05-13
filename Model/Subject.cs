@@ -46,15 +46,27 @@ public class Subject
 	}
 
 
-	public List<SubjectTypeRelation> TypeRelations { get; } = new List<SubjectTypeRelation>();
+	public List<EducationalAreaRelation> EducationalAreaRelations { get; } = new List<EducationalAreaRelation>();
 
 	[NotMapped]
-	public IEnumerable<SubjectType> Types
+	public IEnumerable<EducationalArea> EducationalAreas
 	{
 		get
 		{
-			Contract.Requires<InvalidOperationException>(TypeRelations.TrueForAll(m => m.SubjectType is not null), $"Unable to access {nameof(Types)} without loading the {nameof(TypeRelations)}.");
-			return TypeRelations.Select(m => m.SubjectType);
+			Contract.Requires<InvalidOperationException>(EducationalAreaRelations.TrueForAll(m => m.EducationalArea is not null), $"Unable to access {nameof(EducationalAreas)} without loading the {nameof(EducationalAreaRelations)}.");
+			return EducationalAreaRelations.Select(m => m.EducationalArea);
+		}
+	}
+
+	public List<GraduationSubjectRelation> GraduationSubjectRelations { get; } = new List<GraduationSubjectRelation>();
+
+	[NotMapped]
+	public IEnumerable<GraduationSubject> GraduationSubjects
+	{
+		get
+		{
+			Contract.Requires<InvalidOperationException>(GraduationSubjectRelations.TrueForAll(m => m.GraduationSubject is not null), $"Unable to access {nameof(GraduationSubjects)} without loading the {nameof(GraduationSubjectRelations)}.");
+			return GraduationSubjectRelations.Select(m => m.GraduationSubject);
 		}
 	}
 
@@ -66,6 +78,12 @@ public class Subject
 
 	[MaxLength(50)]
 	public string SeedIdentifier { get; set; }
+
+	public bool CanRegisterRepeatedly { get; set; }
+
+	public int HoursPerWeek { get; set; } = 2;
+
+	public int MinStudentsToOpen { get; set; } = 5;
 
 	public DateTime Created { get; set; } = DateTime.Now;
 	public DateTime? Deleted { get; set; }

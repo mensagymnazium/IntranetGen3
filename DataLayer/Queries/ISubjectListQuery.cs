@@ -8,5 +8,5 @@ public interface ISubjectListQuery
 	SubjectListQueryFilter Filter { get; set; }
 	SortItem[] Sorting { get; set; }
 
-	Task<DataFragmentResult<SubjectListItemDto>> GetDataFragmentAsync(int startIndex, int? count, CancellationToken cancellationToken = default);
+	Task<DataFragmentResult<SubjectListItemDto>> GetDataFragmentResultAsync(int startIndex, int? count, CancellationToken cancellationToken = default);
 }

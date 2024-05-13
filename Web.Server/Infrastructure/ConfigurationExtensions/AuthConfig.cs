@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
+using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.Net.Http.Headers;
 
 namespace MensaGymnazium.IntranetGen3.Web.Server.Infrastructure.ConfigurationExtensions;
@@ -20,7 +21,7 @@ public static class AuthConfig
 		services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 			.AddMicrosoftIdentityWebApi(configuration.GetSection("AzureAd"));
 
-		JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+		JsonWebTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
 		services.Configure<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme, options =>
 		{

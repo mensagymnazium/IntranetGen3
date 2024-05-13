@@ -1,29 +1,36 @@
-﻿using Havit.Collections;
-using MensaGymnazium.IntranetGen3.Contracts;
+﻿using MensaGymnazium.IntranetGen3.Contracts;
+using MensaGymnazium.IntranetGen3.Primitives;
+using MensaGymnazium.IntranetGen3.Web.Client.Services;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
 
 public partial class HomeIndexMyElectives
 {
-	[Inject] protected ISubjectRegistrationsManagerFacade SubjectRegistrationsManagerFacade { get; set; }
+	[Inject] protected ISubjectRegistrationProgressValidationFacade SubjectRegistrationProgressValidationFacade { get; set; }
+	[Inject] protected IClientAuthService ClientAuthService { get; set; }
 
-	private async Task<GridDataProviderResult<StudentWithSigningRuleListItemDto>> GetStudentWithSigningRuleGridData(GridDataProviderRequest<StudentWithSigningRuleListItemDto> request)
+	private StudentRegistrationProgressDto studentsProgress;
+
+	protected override async Task OnInitializedAsync()
 	{
-		var facadeRequest = new DataFragmentRequest<StudentWithSigningRuleListQueryFilter>()
+		var user = await ClientAuthService.GetCurrentClaimsPrincipal();
+		if (!user.IsInRole(nameof(Role.Student)))
 		{
-			Filter = new() { CurrentStudentOnly = true },
-			StartIndex = request.StartIndex,
-			Count = request.Count,
-			Sorting = request.Sorting?.Select(s => new SortItem(s.SortString, s.SortDirection)).ToArray()
-		};
+			return;
+		}
 
-		var signingRuleListResult = await SubjectRegistrationsManagerFacade.GetStudentWithSigningRuleListAsync(facadeRequest, request.CancellationToken);
-
-		return new()
-		{
-			Data = signingRuleListResult.Data ?? new(),
-			TotalCount = signingRuleListResult.TotalCount
-		};
+		studentsProgress = await SubjectRegistrationProgressValidationFacade.GetProgressOfCurrentStudentAsync();
 	}
 
+	private string GetHoursWithGrammar(int hours)
+	{
+		var word = hours switch
+		{
+			1 => "hodinu",
+			2 or 3 or 4 => "hodiny",
+			_ => "hodin"
+		};
+
+		return $"{hours} {word}";
+	}
 }

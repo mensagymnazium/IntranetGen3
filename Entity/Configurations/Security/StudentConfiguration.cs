@@ -1,4 +1,5 @@
-﻿using MensaGymnazium.IntranetGen3.Model.Security;
+﻿using Havit.Data.EntityFrameworkCore.Metadata;
+using MensaGymnazium.IntranetGen3.Model.Security;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MensaGymnazium.IntranetGen3.Entity.Configurations.Security;
@@ -13,5 +14,8 @@ public class StudentConfiguration : IEntityTypeConfiguration<Student>
 			.HasForeignKey(student => student.GradeId)
 			.IsRequired()
 			.OnDelete(DeleteBehavior.Restrict);
+
+		builder.Property(s => s.SeedEntityId)
+			.SuppressModelValidatorRule(ModelValidatorRule.OnlyForeignKeyPropertiesCanEndWithId);
 	}
 }

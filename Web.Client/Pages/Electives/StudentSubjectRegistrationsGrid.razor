@@ -1,40 +1,37 @@
 ﻿<HxGrid @ref="gridComponent"
-        TItem="StudentSubjectRegistrationDto"
-        SelectionEnabled="this.SelectionEnabled"
-        SelectedDataItem="this.SelectedDataItem"
-        SelectedDataItemChanged="HandleSelectedDataItemChanged"
-        DataProvider="this.DataProvider"
-        Responsive="true">
-    <Columns>
-        <HxGridColumn HeaderText="Předmět"
-                      ItemTextSelector="i => SubjectsDataStore.GetByKeyOrDefault(i.SubjectId.Value)?.Name"
-                      SortString="@nameof(StudentSubjectRegistrationDto.SubjectId)"
-                      Visible="this.ShowSubjectColumn"
-                      TItem="StudentSubjectRegistrationDto" />
-        <HxGridColumn HeaderText="Student"
-                      ItemTextSelector="i => StudentsDataStore.GetByKeyOrDefault(i.StudentId.Value)?.Name"
-                      SortString="@nameof(StudentSubjectRegistrationDto.StudentId)"
-                      TItem="StudentSubjectRegistrationDto" />
-        <HxGridColumn HeaderText="Ročník"
-                      ItemTextSelector="i => GetStudentGradeName(i)"
-                      SortString="StudentGradeId"
-                      TItem="StudentSubjectRegistrationDto" />
-        <HxGridColumn HeaderText="Typ zápisu"
-                      ItemTextSelector="i => i.RegistrationType.AsEnumValueDescription()"
-                      SortString="@nameof(StudentSubjectRegistrationDto.RegistrationType)"
-                      TItem="StudentSubjectRegistrationDto" />
-        <HxGridColumn HeaderText="Zápisové pravidlo"
-                      ItemTextSelector="i => SigningRulesDataStore.GetByKey(i.SigningRuleId.Value)?.Name"
-                      SortString="@nameof(StudentSubjectRegistrationDto.SigningRuleId)"
-                      TItem="StudentSubjectRegistrationDto" />
-        <HxContextMenuGridColumn Context="item">
-            <AuthorizeView Roles="@nameof(Role.Administrator)">
-                <HxContextMenu>
-                    <HxContextMenuItem Text="Smazat"
-                                       OnClick="async () => await HandleDeleteItemClicked(item)"
-                                       ConfirmationQuestion="Opravdu si přejete zápis smazat?" />
-                </HxContextMenu>
-            </AuthorizeView>
-        </HxContextMenuGridColumn>
-    </Columns>
+		TItem="StudentSubjectRegistrationDto"
+		SelectionEnabled="this.SelectionEnabled"
+		SelectedDataItem="this.SelectedDataItem"
+		SelectedDataItemChanged="HandleSelectedDataItemChanged"
+		DataProvider="this.DataProvider"
+		Responsive="true">
+	<Columns>
+		<HxGridColumn HeaderText="Předmět"
+					  ItemTextSelector="i => SubjectsDataStore.GetByKeyOrDefault(i.SubjectId.Value)?.Name"
+					  SortString="@nameof(StudentSubjectRegistrationDto.SubjectId)"
+					  Visible="this.ShowSubjectColumn"
+					  TItem="StudentSubjectRegistrationDto" />
+		<HxGridColumn HeaderText="Student"
+					  ItemTextSelector="i => StudentsDataStore.GetByKeyOrDefault(i.StudentId.Value)?.Name"
+					  SortString="@nameof(StudentSubjectRegistrationDto.StudentId)"
+					  TItem="StudentSubjectRegistrationDto" />
+		<HxGridColumn HeaderText="Ročník"
+					  ItemTextSelector="i => GetStudentGradeName(i)"
+					  SortString="StudentGradeId"
+					  TItem="StudentSubjectRegistrationDto" />
+		<HxGridColumn HeaderText="Typ zápisu"
+					  ItemTextSelector="i => i.RegistrationType.AsEnumValueDescription()"
+					  SortString="@nameof(StudentSubjectRegistrationDto.RegistrationType)"
+					  TItem="StudentSubjectRegistrationDto"
+					  Visible="false" />
+		<HxContextMenuGridColumn Context="item">
+			<AuthorizeView Roles="@nameof(Role.Administrator)">
+				<HxContextMenu>
+					<HxContextMenuItem Text="Smazat"
+									   OnClick="async () => await HandleDeleteItemClicked(item)"
+									   ConfirmationQuestion="Opravdu si přejete zápis smazat?" />
+				</HxContextMenu>
+			</AuthorizeView>
+		</HxContextMenuGridColumn>
+	</Columns>
 </HxGrid>

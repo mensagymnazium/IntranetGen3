@@ -11,9 +11,9 @@
         </div>
 
 
-        <AuthorizeView Roles="@nameof(Role.Administrator)">
+        <AuthorizeView Roles="@($"{nameof(Role.Administrator)}, {nameof(Role.Teacher)}")">
             <div class="col text-end">
-                <HxButton Color="ThemeColor.Secondary" OnClick="HandleEditClick" CssClass="mb-4">Editovat definici předmětu</HxButton>
+                <HxButton Color="ThemeColor.Secondary" OnClick="HandleEditClick" CssClass="mb-4">Upravit definici předmětu</HxButton>
             </div>
         </AuthorizeView>
     </div>
@@ -35,10 +35,17 @@
             <HxCardText>
                 <TextValue Label="Vyučující" Value="@GetTeachers(subject.TeacherIds)" />
                 <TextValue Label="Rozvrh" Value="@ValueFormatter.GetScheduleTimeSlot(subject.ScheduleDayOfWeek, subject.ScheduleSlotInDay)" />
-                <TextValue Label="Počet zápisů primárních (+náhradních)" Value="@($"{subject.StudentRegistrationsCountMain} / {subject.Capacity?.ToString() ?? "\x221E"} (+{subject.StudentRegistrationsCountSecondary})")" />
+                <TextValue Label="Počet hodin týdně" Value="@($"{subject.HoursPerWeek}h")" />
+                <TextValue Label="Počet zapsaných / kapacita" Value="@($"{subject.StudentRegistrationsCountMain} / {subject.Capacity?.ToString() ?? "\x221E"}")" />
+				<TextValue Label="Minimální počet účastníků potřebný pro otevření" Value="@subject.MinStudentsToOpen.ToString()" />
+				<TextValue Label="Lze zapsat opakovaně?" Value="@(subject.CanRegisterRepeatedly ? "ano" : "ne")" />
                 <TextValue Label="@(subject.GradeIds.Count != 1 ? "Ročníky" : "Ročník")" Value="@GetGrades(subject.GradeIds)" />
                 <TextValue Label="Skupina" Value="@SubjectCategoriesDataStore.GetByKey(subject.CategoryId.Value)?.Name" />
-                <TextValue Label="@(subject.SubjectTypeIds.Count != 1 ? "Vzdělávací oblasti" : "Vzdělávací oblast")" Value="@GetSubjectTypes(subject.SubjectTypeIds)" />
+                <TextValue Label="@(subject.EducationalAreaIds.Count != 1 ? "Vzdělávací oblasti" : "Vzdělávací oblast")" Value="@GetEducationalAreas(subject.EducationalAreaIds)" />
+				@if (subject.GraduationSubjectIds.Any())
+				{
+					<TextValue Label="@(subject.GraduationSubjectIds.Count != 1 ? "Maturitní předměty" : "Maturitní předmět")" Value="@GetGraduationSubjects(subject.GraduationSubjectIds)" />
+				}
             </HxCardText>
         </BodyTemplate>
     </HxCard>
@@ -49,7 +56,9 @@
                 <HxCardTitle>Zápis předmětu</HxCardTitle>
             </HeaderTemplate>
             <BodyTemplate>
-                <StudentSubjectRegistrationComponent SubjectId="@SubjectId" OnRegistrationChanged="HandleRegistrationChanged" />
+                <StudentSubjectRegistrationComponent 
+                    SubjectId="@SubjectId" 
+                    OnRegistrationChanged="HandleRegistrationChanged"/>
             </BodyTemplate>
         </HxCard>
     </AuthorizeView>

@@ -30,8 +30,9 @@ public class SubjectMapper : ISubjectMapper
 		if (subject.Id != default)
 		{
 			await dataLoader.LoadAsync(subject, s => s.TeacherRelations, cancellationToken);
-			await dataLoader.LoadAsync(subject, s => s.TypeRelations, cancellationToken);
+			await dataLoader.LoadAsync(subject, s => s.EducationalAreaRelations, cancellationToken);
 			await dataLoader.LoadAsync(subject, s => s.GradeRelations, cancellationToken);
+			await dataLoader.LoadAsync(subject, s => s.GraduationSubjectRelations, cancellationToken);
 		}
 
 		subject.Name = subjectDto.Name;
@@ -40,6 +41,9 @@ public class SubjectMapper : ISubjectMapper
 		subject.Capacity = subjectDto.Capacity;
 		subject.ScheduleDayOfWeek = subjectDto.ScheduleDayOfWeek.Value;
 		subject.ScheduleSlotInDay = subjectDto.ScheduleSlotInDay.Value;
+		subject.CanRegisterRepeatedly = subjectDto.CanRegisterRepeatedly;
+		subject.HoursPerWeek = subjectDto.HoursPerWeek;
+		subject.MinStudentsToOpen = subjectDto.MinStudentsToOpen;
 
 		var teacherRelationsUpdateFromResult = subject.TeacherRelations.UpdateFrom(subjectDto.TeacherIds,
 			targetKeySelector: t => t.TeacherId,
@@ -49,13 +53,21 @@ public class SubjectMapper : ISubjectMapper
 			removeItemAction: t => { });
 		unitOfWork.AddUpdateFromResult(teacherRelationsUpdateFromResult);
 
-		var typeRelationsUpdateFromResult = subject.TypeRelations.UpdateFrom(subjectDto.SubjectTypeIds,
-			targetKeySelector: t => t.SubjectTypeId,
+		var typeRelationsUpdateFromResult = subject.EducationalAreaRelations.UpdateFrom(subjectDto.EducationalAreaIds,
+			targetKeySelector: t => t.EducationalAreaId,
 			sourceKeySelector: s => s,
-			newItemCreateFunc: s => new SubjectTypeRelation { SubjectId = subject.Id, SubjectTypeId = s },
-			updateItemAction: (s, t) => t.SubjectTypeId = s,
+			newItemCreateFunc: s => new EducationalAreaRelation { SubjectId = subject.Id, EducationalAreaId = s },
+			updateItemAction: (s, t) => t.EducationalAreaId = s,
 			removeItemAction: t => { });
 		unitOfWork.AddUpdateFromResult(typeRelationsUpdateFromResult);
+
+		var graduationSubjectRelationsUpdateFromResult = subject.GraduationSubjectRelations.UpdateFrom(subjectDto.GraduationSubjectIds,
+			targetKeySelector: t => t.GraduationSubjectId,
+			sourceKeySelector: s => s,
+			newItemCreateFunc: s => new GraduationSubjectRelation { SubjectId = subject.Id, GraduationSubjectId = s },
+			updateItemAction: (s, t) => t.GraduationSubjectId = s,
+			removeItemAction: t => { });
+		unitOfWork.AddUpdateFromResult(graduationSubjectRelationsUpdateFromResult);
 
 		var gradeRelationsUpdateFromResult = subject.GradeRelations.UpdateFrom(subjectDto.GradeIds,
 			targetKeySelector: t => t.GradeId,
@@ -73,7 +85,8 @@ public class SubjectMapper : ISubjectMapper
 
 		await dataLoader.LoadAsync(subject, s => s.TeacherRelations, cancellationToken);
 		await dataLoader.LoadAsync(subject, s => s.GradeRelations, cancellationToken);
-		await dataLoader.LoadAsync(subject, s => s.TypeRelations, cancellationToken);
+		await dataLoader.LoadAsync(subject, s => s.EducationalAreaRelations, cancellationToken);
+		await dataLoader.LoadAsync(subject, s => s.GraduationSubjectRelations, cancellationToken);
 
 		var studentRegistrations = await studentSubjectRegistrationRepository.GetBySubjectAsync(subject.Id, cancellationToken);
 
@@ -83,7 +96,8 @@ public class SubjectMapper : ISubjectMapper
 			Name = subject.Name,
 			Description = subject.Description,
 			CategoryId = subject.CategoryId,
-			SubjectTypeIds = subject.TypeRelations.Select(tr => tr.SubjectTypeId).ToList(),
+			EducationalAreaIds = subject.EducationalAreaRelations.Select(tr => tr.EducationalAreaId).ToList(),
+			GraduationSubjectIds = subject.GraduationSubjectRelations.Select(tr => tr.GraduationSubjectId).ToList(),
 			Capacity = subject.Capacity,
 			StudentRegistrationsCountMain = studentRegistrations.Count(ssr => ssr.RegistrationType == StudentRegistrationType.Main),
 			StudentRegistrationsCountSecondary = studentRegistrations.Count(ssr => ssr.RegistrationType == StudentRegistrationType.Secondary),
@@ -91,6 +105,9 @@ public class SubjectMapper : ISubjectMapper
 			TeacherIds = subject.TeacherRelations.Select(tr => tr.TeacherId).ToList(),
 			ScheduleSlotInDay = subject.ScheduleSlotInDay,
 			ScheduleDayOfWeek = subject.ScheduleDayOfWeek,
+			CanRegisterRepeatedly = subject.CanRegisterRepeatedly,
+			HoursPerWeek = subject.HoursPerWeek,
+			MinStudentsToOpen = subject.MinStudentsToOpen
 		};
 	}
 }

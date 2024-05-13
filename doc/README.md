@@ -1,6 +1,11 @@
 ﻿# Dokumentace
 
-## Vývoj
+## Architektura projektu
+<a href="https://github.com/mensagymnazium/IntranetGen3/blob/master/doc/ProjectArchitecture.png">
+	<img src="https://raw.githubusercontent.com/mensagymnazium/IntranetGen3/master/doc/ProjectArchitecture.png">
+</a>
+
+## Užitečné zdroje
 
 * [ASP.NET Blazor - Microsoft Docs](https://docs.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-5.0) - technologie pro implementaci UI
 * [HAVIT Blazor](https://havit.blazor.eu) - používané UI komponenty
@@ -15,3 +20,8 @@
 ### Authentizace, autorizace
 * https://docs.microsoft.com/en-us/aspnet/core/blazor/security/webassembly/hosted-with-azure-active-directory
 * https://docs.microsoft.com/en-us/aspnet/core/blazor/security/webassembly/azure-active-directory-groups-and-roles
+
+## Github workflow
+<a href="https://raw.githubusercontent.com/mensagymnazium/IntranetGen3/master/doc/GithubWorkflow.png">
+	<img src="https://raw.githubusercontent.com/mensagymnazium/IntranetGen3/master/doc/GithubWorkflow.png">
+</a>

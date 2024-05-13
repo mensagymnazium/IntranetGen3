@@ -17,5 +17,6 @@ public class Grade
 
 	public ICollection<Student> Students { get; } = new List<Student>();
 
-	public List<SigningRule> SigningRules { get; } = new List<SigningRule>();
+	public GradeRegistrationCriteria RegistrationCriteria { get; set; }
+	public int? RegistrationCriteriaId { get; set; }
 }
