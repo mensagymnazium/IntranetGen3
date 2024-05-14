@@ -23,6 +23,3 @@ Ale v plánu je zprovoznit i:
 
 Pokud jsi členem teamu SemprgX, nebo chceš v projektu něco změnit,
 určitě si usnadníš práci, když se podíváš do [dokumentace](/doc/README.md).
-
-
--test-
