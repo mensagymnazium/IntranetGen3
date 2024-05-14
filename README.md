@@ -15,7 +15,7 @@ Aplikace je domovem pro:
 
 Ale v plánu je zprovoznit i:
 
-- [ ] Trackování KBH
+- [ ] Tracking KBH
 - [ ] Vedení ročníkových prací
 - [ ] Přihlašování na Mensa fórum
 
