@@ -12,17 +12,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Havit.Core" Version="2.0.30" />
-		<PackageReference Include="Havit.Data.EntityFrameworkCore" Version="2.8.8" />
-		<PackageReference Include="Havit.Data.EntityFrameworkCore.CodeGenerator" Version="2.8.3" />
-		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+		<PackageReference Include="Havit.Core" />
+		<PackageReference Include="Havit.Data.EntityFrameworkCore" />
+		<PackageReference Include="Havit.Data.EntityFrameworkCore.CodeGenerator" />
+		<PackageReference Include="Microsoft.Data.SqlClient" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" />
 	</ItemGroup>
 
 	<ItemGroup>
