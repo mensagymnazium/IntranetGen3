@@ -40,7 +40,6 @@
         <PackageVersion Include="Microsoft.Extensions.Configuration.FileExtensions" Version="8.0.0" />
 		<PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
 		<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
         <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
 		<PackageVersion Include="Microsoft.Extensions.Identity.Core" Version="8.0.4" />
 		<PackageVersion Include="Microsoft.Extensions.Logging.AzureAppServices" Version="8.0.4" />
