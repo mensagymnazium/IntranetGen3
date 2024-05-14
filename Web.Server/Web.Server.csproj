@@ -10,13 +10,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Havit.Blazor.Grpc.Server" Version="1.5.5" />
-		<PackageReference Include="Havit.Core" Version="2.0.30" />
-		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.4" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.AzureAppServices" Version="8.0.4" />
-		<PackageReference Include="Microsoft.Identity.Web" Version="2.18.1" />
+		<PackageReference Include="Havit.Blazor.Grpc.Server" />
+		<PackageReference Include="Havit.Core" />
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+		<PackageReference Include="Microsoft.Extensions.Logging.AzureAppServices" />
+		<PackageReference Include="Microsoft.Identity.Web" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -31,12 +31,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.4" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
 	</ItemGroup>
 
 	<Target Name="TfsPublish" AfterTargets="AfterPublish" Condition="'$(PublishDirectory)' != ''">

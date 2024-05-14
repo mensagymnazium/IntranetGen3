@@ -8,11 +8,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentValidation" Version="11.9.1" />
-		<PackageReference Include="Havit.Blazor.Grpc.Core" Version="1.5.5" />
-		<PackageReference Include="Havit.Core" Version="2.0.30" />
-		<PackageReference Include="protobuf-net" Version="3.2.30" />
-		<PackageReference Include="protobuf-net.Grpc" Version="1.1.1" />
+		<PackageReference Include="FluentValidation" />
+		<PackageReference Include="Havit.Blazor.Grpc.Core" />
+		<PackageReference Include="Havit.Core" />
+		<PackageReference Include="protobuf-net" />
+		<PackageReference Include="protobuf-net.Grpc" />
 	</ItemGroup>
 
 	<ItemGroup>

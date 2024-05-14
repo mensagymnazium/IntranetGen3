@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Havit.Extensions.Localization" Version="1.0.2" />
-    <PackageReference Include="Havit.SourceGenerators.StrongApiStringLocalizers" Version="1.0.5" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Havit.Extensions.Localization" />
+    <PackageReference Include="Havit.SourceGenerators.StrongApiStringLocalizers" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>
