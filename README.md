@@ -18,7 +18,7 @@ Ale v plánu je zprovoznit i:
 - [ ] Trackování KBH
 - [ ] Vedení ročníkových prací
 - [ ] Přihlašování na Mensa fórum
-
+dd
 ### Docs
 
 Pokud jsi členem teamu SemprgX, nebo chceš v projektu něco změnit,
