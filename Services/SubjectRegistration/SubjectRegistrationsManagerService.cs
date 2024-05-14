@@ -4,6 +4,7 @@ using MensaGymnazium.IntranetGen3.DataLayer.DataEntries.Common;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
 using MensaGymnazium.IntranetGen3.Model;
+using MensaGymnazium.IntranetGen3.Model.Security;
 using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration;
@@ -108,7 +109,7 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 		var student = await studentRepository.GetObjectAsync(studentId, cancellationToken);
 
 		// We must consider the future grade.
-		var futureGrade = await gradeRepository.GetObjectAsync(student.GradeId - 1, cancellationToken); // -1, because ids are negative
+		var futureGrade = await gradeRepository.GetObjectAsync((int)((GradeEntry)student.GradeId).NextGrade(), cancellationToken); // -1, because ids are negative
 
 		return subject.Grades.Contains(futureGrade);
 	}
@@ -119,7 +120,7 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 		CancellationToken cancellationToken = default)
 	{
 		var student = await studentRepository.GetObjectAsync(studentId, cancellationToken);
-		var studentsNextYearGrade = await gradeRepository.GetObjectAsync(student.GradeId - 1, cancellationToken); // Negative values
+		var studentsNextYearGrade = await gradeRepository.GetObjectAsync((int)((GradeEntry)student.GradeId).NextGrade(), cancellationToken); // Negative values
 		var subject = await subjectRepository.GetObjectAsync(subjectId, cancellationToken);
 
 		if (SubjectCategory.IsEntry(subject.Category, SubjectCategory.Entry.ForeignLanguage))

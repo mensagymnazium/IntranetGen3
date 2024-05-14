@@ -1,4 +1,5 @@
-﻿using Havit;
+﻿using System.IO.Compression;
+using Havit;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
 using MensaGymnazium.IntranetGen3.Model;
@@ -30,7 +31,7 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		Contract.Requires<OperationFailedException>(student.GradeId != (int)GradeEntry.Oktava, "Student nemá žádný další ročník");
 
 		// Logically we want to validate the rules for the next grade
-		var futureGrade = await gradeRepository.GetObjectAsync(student.GradeId - 1, cancellationToken);
+		var futureGrade = await gradeRepository.GetObjectAsync((int)((GradeEntry)student.GradeId).NextGrade(), cancellationToken);
 		var studentsRegistrations = await subjectRegistrationRepository.GetRegistrationsByStudentAsync(studentId, cancellationToken);
 
 		Contract.Requires<InvalidOperationException>(studentsRegistrations is not null);
