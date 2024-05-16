@@ -128,7 +128,7 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 		}
 
 		// Student never has > 10 registrations, so we can safely load this.
-		var registrationsForStudent = await studentSubjectRegistrationRepository.GetRegistrationsByStudentAsync(studentId, cancellationToken);
+		var registrationsForStudent = await studentSubjectRegistrationRepository.GetActiveRegistrationsByStudentAsync(studentId, cancellationToken);
 
 		var amOfHoursExcludingLanguages = registrationsForStudent
 			.Where(r => !SubjectCategory.IsEntry(r.Subject.Category, SubjectCategoryEntry.ForeignLanguage))
@@ -143,7 +143,7 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 		int callerStudentId,
 		CancellationToken cancellationToken = default)
 	{
-		var registrationsForStudent = await studentSubjectRegistrationRepository.GetRegistrationsByStudentAsync(callerStudentId, cancellationToken);
+		var registrationsForStudent = await studentSubjectRegistrationRepository.GetActiveRegistrationsByStudentAsync(callerStudentId, cancellationToken);
 
 		foreach (var registration in registrationsForStudent)
 		{

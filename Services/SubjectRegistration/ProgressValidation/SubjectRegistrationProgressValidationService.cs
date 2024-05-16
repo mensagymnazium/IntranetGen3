@@ -31,7 +31,7 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 
 		// Logically we want to validate the rules for the next grade
 		var futureGrade = await gradeRepository.GetObjectAsync((int)((GradeEntry)student.GradeId).NextGrade(), cancellationToken);
-		var studentsRegistrations = await subjectRegistrationRepository.GetRegistrationsByStudentAsync(studentId, cancellationToken);
+		var studentsRegistrations = await subjectRegistrationRepository.GetActiveRegistrationsByStudentAsync(studentId, cancellationToken);
 
 		Contract.Requires<InvalidOperationException>(studentsRegistrations is not null);
 		Contract.Requires<InvalidOperationException>(futureGrade is not null);

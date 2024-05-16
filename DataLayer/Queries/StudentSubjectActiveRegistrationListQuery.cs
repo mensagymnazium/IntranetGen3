@@ -4,11 +4,11 @@ using MensaGymnazium.IntranetGen3.DataLayer.DataSources;
 namespace MensaGymnazium.IntranetGen3.DataLayer.Queries;
 
 [Service]
-public class StudentSubjectRegistrationListQuery : QueryBase<StudentSubjectRegistrationDto>, IStudentSubjectRegistrationListQuery
+public class StudentSubjectActiveRegistrationListQuery : QueryBase<StudentSubjectRegistrationDto>, IStudentSubjectActiveRegistrationListQuery
 {
 	private readonly IStudentSubjectRegistrationDataSource studentSubjectRegistrationDataSource;
 
-	public StudentSubjectRegistrationListQuery(IStudentSubjectRegistrationDataSource studentSubjectRegistrationDataSource)
+	public StudentSubjectActiveRegistrationListQuery(IStudentSubjectRegistrationDataSource studentSubjectRegistrationDataSource)
 	{
 		this.studentSubjectRegistrationDataSource = studentSubjectRegistrationDataSource;
 	}
@@ -23,16 +23,15 @@ public class StudentSubjectRegistrationListQuery : QueryBase<StudentSubjectRegis
 		return studentSubjectRegistrationDataSource.Data
 			.WhereIf(Filter.SubjectId is not null, ssr => ssr.SubjectId == Filter.SubjectId)
 			.WhereIf(Filter.GradeId is not null, ssr => ssr.Student.GradeId == Filter.GradeId)
-			//.WhereIf(Filter.SigningRuleId is not null, ssr => ssr.UsedSigningRuleId == Filter.SigningRuleId)
 			.WhereIf(Filter.StudentId is not null, ssr => ssr.StudentId == Filter.StudentId)
 			.WhereIf(Filter.RegistrationType is not null, ssr => ssr.RegistrationType == Filter.RegistrationType)
 			.OrderByMultiple(Sorting, sortingExpression => sortingExpression switch
 			{
-				nameof(StudentSubjectRegistrationDto.SubjectId) => new() { s => s.Subject.Name, s => s.Student.User.Name },
-				nameof(StudentSubjectRegistrationDto.StudentId) => new() { s => s.Student.User.Name, s => s.Subject.Name },
-				nameof(StudentSubjectRegistrationDto.RegistrationType) => new() { s => s.RegistrationType, s => s.Subject.Name, s => s.Student.User.Name },
-				//nameof(StudentSubjectRegistrationDto.SigningRuleId) => new() { s => s.UsedSigningRule.Name, s => s.Subject.Name, s => s.Student.User.Name },
-				"StudentGradeId" => new() { s => -s.Student.GradeId },
+				nameof(StudentSubjectRegistrationDto.SubjectId) => [s => s.Subject.Name, s => s.Student.User.Name],
+				nameof(StudentSubjectRegistrationDto.StudentId) => [s => s.Student.User.Name, s => s.Subject.Name],
+				nameof(StudentSubjectRegistrationDto.RegistrationType) =>
+					[s => s.RegistrationType, s => s.Subject.Name, s => s.Student.User.Name],
+				"StudentGradeId" => [s => -s.Student.GradeId],
 				_ => throw new InvalidOperationException($"Unknown SortingItem.Expression {sortingExpression}.")
 			})
 			.Select(ssr => new StudentSubjectRegistrationDto()
@@ -41,7 +40,6 @@ public class StudentSubjectRegistrationListQuery : QueryBase<StudentSubjectRegis
 				StudentId = ssr.StudentId,
 				SubjectId = ssr.SubjectId,
 				RegistrationType = ssr.RegistrationType,
-				//SigningRuleId = ssr.UsedSigningRuleId,
 				Created = ssr.Created,
 			});
 	}

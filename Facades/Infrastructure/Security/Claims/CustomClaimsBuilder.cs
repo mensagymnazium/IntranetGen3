@@ -3,6 +3,7 @@ using System.Security.Claims;
 using MensaGymnazium.IntranetGen3.Contracts.Security;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
 using MensaGymnazium.IntranetGen3.Model.Security;
+using MensaGymnazium.IntranetGen3.Primitives;
 using MensaGymnazium.IntranetGen3.Services.Infrastructure;
 using MensaGymnazium.IntranetGen3.Services.Security;
 
@@ -65,6 +66,7 @@ public class CustomClaimsBuilder : ICustomClaimsBuilder
 
 		// role
 		var roles = await userManager.GetRolesAsync(user, principal);
+		roles = Enum.GetValues<Role>();
 		foreach (var role in roles)
 		{
 			result.Add(new Claim(ClaimTypes.Role, role.ToString("g"), null, ClaimConstants.ApplicationIssuer));

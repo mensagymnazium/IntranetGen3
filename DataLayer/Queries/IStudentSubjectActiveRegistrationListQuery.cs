@@ -2,7 +2,7 @@
 
 namespace MensaGymnazium.IntranetGen3.DataLayer.Queries;
 
-public interface IStudentSubjectRegistrationListQuery
+public interface IStudentSubjectActiveRegistrationListQuery
 {
 	StudentSubjectRegistrationListQueryFilter Filter { get; set; }
 	SortItem[] Sorting { get; set; }
