@@ -48,16 +48,16 @@ public class GradeRegistrationCriteriaSeed : DataSeed<CoreProfile>
 			{
 				Id = (int)GradeEntry.Septima,
 				RequiredTotalAmountOfHoursPerWeekExcludingLanguage = 10,
-				RequiresCspOrCpValidation = true,
-				RequiredAmountOfHoursPerWeekInAreaCspOrCp = 4,
+				RequiresCsOrCpValidation = true,
+				RequiredAmountOfHoursPerWeekInAreaCsOrCp = 4,
 				RequiresForeginLanguage = true,
 			},
 			new GradeRegistrationCriteria()
 			{
 				Id = (int)GradeEntry.Oktava,
 				RequiredTotalAmountOfHoursPerWeekExcludingLanguage = 12,
-				RequiresCspOrCpValidation = true,
-				RequiredAmountOfHoursPerWeekInAreaCspOrCp = 4,
+				RequiresCsOrCpValidation = true,
+				RequiredAmountOfHoursPerWeekInAreaCsOrCp = 4,
 				RequiresForeginLanguage = true,
 			},
 		};

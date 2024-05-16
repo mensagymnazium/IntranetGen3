@@ -82,12 +82,12 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		Grade forGrade,
 		List<StudentSubjectRegistration> forRegistrations)
 	{
-		static bool IsRegistrationWithinAreaCspOrCp(StudentSubjectRegistration registration)
+		static bool IsRegistrationWithinAreaCsOrCp(StudentSubjectRegistration registration)
 			=> registration.Subject.EducationalAreas.Any(area =>
 				EducationalArea.IsEntry(area, EducationalArea.Entry.HumanSociety)
 				|| EducationalArea.IsEntry(area, EducationalArea.Entry.HumanNature));
 
-		if (!forGrade.RegistrationCriteria.RequiresCspOrCpValidation)
+		if (!forGrade.RegistrationCriteria.RequiresCsOrCpValidation)
 		{
 			// Validation not needed here
 			return new StudentCsOrCpRegistrationProgress()
@@ -97,17 +97,17 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		}
 
 		var ammOfHoursInCsOrCp = forRegistrations
-			.Where(IsRegistrationWithinAreaCspOrCp)
+			.Where(IsRegistrationWithinAreaCsOrCp)
 			.Sum(r => r.Subject.HoursPerWeek);
 
-		var requiredAmountOfHoursPerWeekInCspOrCp =
-			forGrade.RegistrationCriteria.RequiredAmountOfHoursPerWeekInAreaCspOrCp;
+		var requiredAmountOfHoursPerWeekInCsOrCp =
+			forGrade.RegistrationCriteria.RequiredAmountOfHoursPerWeekInAreaCsOrCp;
 
 
 		return new StudentCsOrCpRegistrationProgress(
 			DoesRequireCsOrCpValidation: true,
 			AmountOfHoursPerWeekInCsOrCp: ammOfHoursInCsOrCp,
-			RequiredMinimalAmountOfHoursPerWeekInCsOrCp: requiredAmountOfHoursPerWeekInCspOrCp);
+			RequiredMinimalAmountOfHoursPerWeekInCsOrCp: requiredAmountOfHoursPerWeekInCsOrCp);
 	}
 
 	/// <summary>

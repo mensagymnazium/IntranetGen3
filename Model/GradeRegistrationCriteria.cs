@@ -14,15 +14,15 @@ public record GradeRegistrationCriteria
 	public int RequiredTotalAmountOfHoursPerWeekExcludingLanguage { get; set; }
 
 	/// <summary>
-	/// Does the rule about needing N subjects from ČSP or ČP areas apply?
+	/// Does the rule about needing N subjects from ČS or ČP areas apply?
 	/// For 2023-2024 this applied to Septima, Oktava
 	/// </summary>
-	public bool RequiresCspOrCpValidation { get; set; }
+	public bool RequiresCsOrCpValidation { get; set; }
 
 	/// <summary>
-	/// How many hours in educational field Csp/cP
+	/// How many hours in educational field Cs/Cp
 	/// </summary>
-	public int RequiredAmountOfHoursPerWeekInAreaCspOrCp { get; set; }
+	public int RequiredAmountOfHoursPerWeekInAreaCsOrCp { get; set; }
 
 	/// <summary>
 	/// Does the student need to have a foreign language

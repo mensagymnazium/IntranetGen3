@@ -46,14 +46,14 @@ public class GradeFacade : IGradeFacade
 				CanUseForeignLanguageInsteadOfHoursPerWeek =
 					g.RegistrationCriteria.CanUseForeignLanguageInsteadOfHoursPerWeek,
 
-				RequiredAmountOfHoursPerWeekInAreaCspOrCp =
-					g.RegistrationCriteria.RequiredAmountOfHoursPerWeekInAreaCspOrCp,
+				RequiredAmountOfHoursPerWeekInAreaCsOrCp =
+					g.RegistrationCriteria.RequiredAmountOfHoursPerWeekInAreaCsOrCp,
 
 				RequiredTotalAmountOfHoursPerWeekExcludingLanguage =
 					g.RegistrationCriteria.RequiredTotalAmountOfHoursPerWeekExcludingLanguage,
 
-				RequiresCspOrCpValidation =
-					g.RegistrationCriteria.RequiresCspOrCpValidation,
+				RequiresCsOrCpValidation =
+					g.RegistrationCriteria.RequiresCsOrCpValidation,
 
 				RequiresForeignLanguage =
 					g.RegistrationCriteria.RequiresForeginLanguage
@@ -82,9 +82,9 @@ public class GradeFacade : IGradeFacade
 	private void MapRegistrationCriteriaFromDTO(GradeRegistrationCriteriaDto dto, GradeRegistrationCriteria criteria)
 	{
 		criteria.CanUseForeignLanguageInsteadOfHoursPerWeek = dto.CanUseForeignLanguageInsteadOfHoursPerWeek;
-		criteria.RequiredAmountOfHoursPerWeekInAreaCspOrCp = dto.RequiredAmountOfHoursPerWeekInAreaCspOrCp;
+		criteria.RequiredAmountOfHoursPerWeekInAreaCsOrCp = dto.RequiredAmountOfHoursPerWeekInAreaCsOrCp;
 		criteria.RequiredTotalAmountOfHoursPerWeekExcludingLanguage = dto.RequiredTotalAmountOfHoursPerWeekExcludingLanguage;
-		criteria.RequiresCspOrCpValidation = dto.RequiresCspOrCpValidation;
+		criteria.RequiresCsOrCpValidation = dto.RequiresCsOrCpValidation;
 		criteria.RequiresForeginLanguage = dto.RequiresForeignLanguage;
 	}
 }
