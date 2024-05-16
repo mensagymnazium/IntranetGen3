@@ -5,8 +5,8 @@ public record GradeRegistrationCriteriaDto
 {
 	public int GradeId { get; set; }
 	public int RequiredTotalAmountOfHoursPerWeekExcludingLanguage { get; set; }
-	public bool RequiresCspOrCpValidation { get; set; }
-	public int RequiredAmountOfHoursPerWeekInAreaCspOrCp { get; set; }
+	public bool RequiresCsOrCpValidation { get; set; }
+	public int RequiredAmountOfHoursPerWeekInAreaCsOrCp { get; set; }
 	public bool RequiresForeignLanguage { get; set; }
 	public bool CanUseForeignLanguageInsteadOfHoursPerWeek { get; set; }
 
@@ -18,9 +18,9 @@ public record GradeRegistrationCriteriaDto
 				.GreaterThanOrEqualTo(0)
 				.WithName("Hodiny v rozvrhu (kromě jazyků)");
 
-			RuleFor(c => c.RequiredAmountOfHoursPerWeekInAreaCspOrCp)
+			RuleFor(c => c.RequiredAmountOfHoursPerWeekInAreaCsOrCp)
 				.GreaterThanOrEqualTo(0)
-				.WithName("Hodiny v oblasti ČSP/ČP");
+				.WithName("Hodiny v oblasti ČS/ČP");
 
 			RuleFor(c => c.CanUseForeignLanguageInsteadOfHoursPerWeek)
 				.NotEqual(true)

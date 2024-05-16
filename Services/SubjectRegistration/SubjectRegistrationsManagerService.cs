@@ -4,7 +4,6 @@ using MensaGymnazium.IntranetGen3.DataLayer.DataEntries.Common;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
 using MensaGymnazium.IntranetGen3.Model;
-using MensaGymnazium.IntranetGen3.Model.Security;
 using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration;
@@ -131,15 +130,9 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 		// Student never has > 10 registrations, so we can safely load this.
 		var registrationsForStudent = await studentSubjectRegistrationRepository.GetRegistrationsByStudentAsync(studentId, cancellationToken);
 
-		// (Now omitting main/secondary registration, just count them all)
-		static bool IsSubjectALanguage(Subject subject)
-			=> SubjectCategory.IsEntry(subject.Category, SubjectCategoryEntry.ForeignLanguage);
-
 		var amOfHoursExcludingLanguages = registrationsForStudent
-			.Aggregate(0, (total, reg) =>
-				IsSubjectALanguage(reg.Subject)
-					? total
-					: total + reg.Subject.HoursPerWeek);
+			.Where(r => !SubjectCategory.IsEntry(r.Subject.Category, SubjectCategoryEntry.ForeignLanguage))
+			.Sum(r => r.Subject.HoursPerWeek);
 
 		return amOfHoursExcludingLanguages >=
 			   studentsNextYearGrade.RegistrationCriteria.RequiredTotalAmountOfHoursPerWeekExcludingLanguage;

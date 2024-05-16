@@ -1,5 +1,4 @@
-﻿using System.IO.Compression;
-using Havit;
+﻿using Havit;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
 using MensaGymnazium.IntranetGen3.Model;
@@ -67,14 +66,9 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		Grade forGrade,
 		List<StudentSubjectRegistration> forRegistrations)
 	{
-		static bool IsSubjectALanguage(Subject subject)
-			=> SubjectCategory.IsEntry(subject.Category, SubjectCategoryEntry.ForeignLanguage);
-
 		var amOfHoursExcludingLanguages = forRegistrations
-			.Aggregate(0, (total, reg) =>
-				IsSubjectALanguage(reg.Subject)
-					? total
-					: total + reg.Subject.HoursPerWeek);
+			.Where(r => !SubjectCategory.IsEntry(r.Subject.Category, SubjectCategoryEntry.ForeignLanguage))
+			.Sum(r => r.Subject.HoursPerWeek);
 
 		var requiredAmountOfHoursPerWeekExcludingLanguages =
 			forGrade.RegistrationCriteria.RequiredTotalAmountOfHoursPerWeekExcludingLanguage;
@@ -88,12 +82,12 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		Grade forGrade,
 		List<StudentSubjectRegistration> forRegistrations)
 	{
-		static bool IsRegistrationWithinAreaCspOrCp(StudentSubjectRegistration registration)
+		static bool IsRegistrationWithinAreaCsOrCp(StudentSubjectRegistration registration)
 			=> registration.Subject.EducationalAreas.Any(area =>
 				EducationalArea.IsEntry(area, EducationalArea.Entry.HumanSociety)
 				|| EducationalArea.IsEntry(area, EducationalArea.Entry.HumanNature));
 
-		if (!forGrade.RegistrationCriteria.RequiresCspOrCpValidation)
+		if (!forGrade.RegistrationCriteria.RequiresCsOrCpValidation)
 		{
 			// Validation not needed here
 			return new StudentCsOrCpRegistrationProgress()
@@ -102,21 +96,18 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 			};
 		}
 
-		// Calculate the sum of hours in those fields
 		var ammOfHoursInCsOrCp = forRegistrations
-			.Aggregate(0, (total, reg) =>
-				IsRegistrationWithinAreaCspOrCp(reg)
-					? total + reg.Subject.HoursPerWeek
-					: total);
+			.Where(IsRegistrationWithinAreaCsOrCp)
+			.Sum(r => r.Subject.HoursPerWeek);
 
-		var requiredAmountOfHoursPerWeekInCspOrCp =
-			forGrade.RegistrationCriteria.RequiredAmountOfHoursPerWeekInAreaCspOrCp;
+		var requiredAmountOfHoursPerWeekInCsOrCp =
+			forGrade.RegistrationCriteria.RequiredAmountOfHoursPerWeekInAreaCsOrCp;
 
 
 		return new StudentCsOrCpRegistrationProgress(
 			DoesRequireCsOrCpValidation: true,
 			AmountOfHoursPerWeekInCsOrCp: ammOfHoursInCsOrCp,
-			RequiredMinimalAmountOfHoursPerWeekInCsOrCp: requiredAmountOfHoursPerWeekInCspOrCp);
+			RequiredMinimalAmountOfHoursPerWeekInCsOrCp: requiredAmountOfHoursPerWeekInCsOrCp);
 	}
 
 	/// <summary>

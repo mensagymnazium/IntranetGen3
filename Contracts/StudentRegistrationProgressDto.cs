@@ -7,18 +7,18 @@ public record StudentRegistrationProgressDto
 		int amOfHoursPerWeekExcludingLanguages,
 		int requiredAmOfHoursPerWeekExcludingLanguages,
 		bool isHoursPerWeekProgressComplete,
-		bool requiresCspOrCpValidation,
-		int amOfHoursPerWeekInCspOrCp,
-		int requiredMinimalAmOfHoursPerWeekInCspOrCp,
+		bool requiresCsOrCpValidation,
+		int amOfHoursPerWeekInCsOrCp,
+		int requiredMinimalAmOfHoursPerWeekInCsOrCp,
 		bool isCsOrCpProgressComplete,
 		bool isLanguageRequired,
 		bool hasRegisteredLanguage,
 		bool canUseLanguageInsteadOfHoursPerWeek)
 	{
 		IsRegistrationValid = isRegistrationValid;
-		RequiresCspOrCpValidation = requiresCspOrCpValidation;
-		AmOfHoursPerWeekInCspOrCp = amOfHoursPerWeekInCspOrCp;
-		RequiredMinimalAmOfHoursPerWeekInCspOrCp = requiredMinimalAmOfHoursPerWeekInCspOrCp;
+		RequiresCsOrCpValidation = requiresCsOrCpValidation;
+		AmOfHoursPerWeekInCsOrCp = amOfHoursPerWeekInCsOrCp;
+		RequiredMinimalAmOfHoursPerWeekInCsOrCp = requiredMinimalAmOfHoursPerWeekInCsOrCp;
 		IsCsOrCpProgressComplete = isCsOrCpProgressComplete;
 		IsLanguageRequired = isLanguageRequired;
 		HasRegisteredLanguage = hasRegisteredLanguage;
@@ -44,9 +44,9 @@ public record StudentRegistrationProgressDto
 	public int RequiredAmOfHoursPerWeekExcludingLanguages { get; set; }
 	public bool IsHoursPerWeekProgressComplete { get; set; }
 
-	public bool RequiresCspOrCpValidation { get; set; }
-	public int AmOfHoursPerWeekInCspOrCp { get; set; }
-	public int RequiredMinimalAmOfHoursPerWeekInCspOrCp { get; set; }
+	public bool RequiresCsOrCpValidation { get; set; }
+	public int AmOfHoursPerWeekInCsOrCp { get; set; }
+	public int RequiredMinimalAmOfHoursPerWeekInCsOrCp { get; set; }
 	public bool IsCsOrCpProgressComplete { get; set; }
 
 	public bool IsLanguageRequired { get; set; }

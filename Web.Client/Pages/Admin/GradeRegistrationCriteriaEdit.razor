@@ -13,8 +13,8 @@
             <HxSwitch Text="Vyžaduje cizí jazyk?" @bind-Value="model.RequiresForeignLanguage"/>
 			<HxSwitch Text="Cizí jazyk místo hodin?" @bind-Value="model.CanUseForeignLanguageInsteadOfHoursPerWeek" />
 
-			<HxSwitch Text="Kontrola ČSP/ČS?" @bind-Value="model.RequiresCspOrCpValidation" />
-            <HxInputNumber Label="Alespoň hodin z ČSP/ČS" TValue="int" @bind-Value="model.RequiredAmountOfHoursPerWeekInAreaCspOrCp" />
+			<HxSwitch Text="Kontrola ČS/ČS?" @bind-Value="model.RequiresCsOrCpValidation" />
+            <HxInputNumber Label="Alespoň hodin z ČS/ČP" TValue="int" @bind-Value="model.RequiredAmountOfHoursPerWeekInAreaCsOrCp" />
         </EditForm>
     </BodyTemplate>
     <FooterTemplate>

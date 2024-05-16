@@ -31,21 +31,29 @@ public partial class StudentSubjectRegistrationComponent
 	/// Registration was made by current user (student) for this subject
 	/// If null: no registration
 	/// </summary>
-	private StudentSubjectRegistrationDto studentsRegistrationForThisSubject = null;
+	private StudentSubjectRegistrationDto studentsRegistrationForThisSubject;
 
 	/// <summary>
 	/// Null when not yet loaded.
 	/// </summary>
-	private CanCreateRegistrationResponse canCreateMainRegistrationResult = null;
+	private StudentSubjectRegistrationPossibilityDto studentSubjectMainRegistrationPossibilityResult;
 
 	protected override async Task OnInitializedAsync()
 	{
 		await SubjectDataStore.EnsureDataAsync();
+	}
 
-		await LoadIsRegistrationPossibleAsync();
-		await LoadStudentRegistrationAsync();
+	protected override async Task OnParametersSetAsync()
+	{
+		await RefreshDataAsync();
 
 		shouldShowExtensionSeminarWarning = await GetShouldShowExtensionSeminarWarning();
+	}
+
+	private async Task RefreshDataAsync()
+	{
+		await LoadIsRegistrationPossibleForSubjectAsync();
+		await LoadStudentRegistrationForSubjectAsync();
 	}
 
 	private async Task<bool> GetShouldShowExtensionSeminarWarning()
@@ -73,7 +81,7 @@ public partial class StudentSubjectRegistrationComponent
 		return nextGrade is GradeEntry.Kvinta or GradeEntry.Sexta;
 	}
 
-	private async Task LoadIsRegistrationPossibleAsync()
+	private async Task LoadIsRegistrationPossibleForSubjectAsync()
 	{
 		// Test for main registration
 		StudentSubjectRegistrationCreateDto mainRegistrationRequest = new StudentSubjectRegistrationCreateDto()
@@ -82,11 +90,11 @@ public partial class StudentSubjectRegistrationComponent
 			SubjectId = SubjectId
 		};
 
-		canCreateMainRegistrationResult = await SubjectRegistrationsManagerFacade
+		studentSubjectMainRegistrationPossibilityResult = await SubjectRegistrationsManagerFacade
 			.CanStudentCreateRegistrationAsync(mainRegistrationRequest);
 	}
 
-	private async Task LoadStudentRegistrationAsync()
+	private async Task LoadStudentRegistrationForSubjectAsync()
 	{
 		await StudentSubjectRegistrationsDataStore.EnsureDataAsync();
 		studentsRegistrationForThisSubject =
@@ -109,8 +117,7 @@ public partial class StudentSubjectRegistrationComponent
 				// Invalidate data store
 				StudentSubjectRegistrationsDataStore.Clear();
 
-				await LoadStudentRegistrationAsync();
-				await LoadIsRegistrationPossibleAsync();
+				await RefreshDataAsync();
 
 				await OnRegistrationChanged.InvokeAsync();
 			}
@@ -137,8 +144,7 @@ public partial class StudentSubjectRegistrationComponent
 				//Invalidate data store
 				StudentSubjectRegistrationsDataStore.Clear();
 
-				await LoadStudentRegistrationAsync();
-				await LoadIsRegistrationPossibleAsync();
+				await RefreshDataAsync();
 
 				await OnRegistrationChanged.InvokeAsync();
 			}

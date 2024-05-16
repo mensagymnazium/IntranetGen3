@@ -23,11 +23,11 @@
 							  ItemTextSelector="@(i => i.CanUseForeignLanguageInsteadOfHoursPerWeek ? "ano" : "ne")"
                               SortKeySelector="i => i.CanUseForeignLanguageInsteadOfHoursPerWeek"/>
                 <HxGridColumn HeaderText="Kontrola ČSP/ČS?"
-                              ItemTextSelector="@(i => i.RequiresCspOrCpValidation ? "ano" : "ne")"
-                              SortKeySelector="i => i.RequiresCspOrCpValidation"/>
+                              ItemTextSelector="@(i => i.RequiresCsOrCpValidation ? "ano" : "ne")"
+                              SortKeySelector="i => i.RequiresCsOrCpValidation"/>
                 <HxGridColumn HeaderText="Alespoň hodin z ČSP/ČS"
-                              ItemTextSelector="i => i.RequiredAmountOfHoursPerWeekInAreaCspOrCp.ToString()"
-                              SortKeySelector="i => i.RequiredAmountOfHoursPerWeekInAreaCspOrCp"/>
+                              ItemTextSelector="i => i.RequiredAmountOfHoursPerWeekInAreaCsOrCp.ToString()"
+                              SortKeySelector="i => i.RequiredAmountOfHoursPerWeekInAreaCsOrCp"/>
             </Columns>
         </HxGrid>
     </DataTemplate>
