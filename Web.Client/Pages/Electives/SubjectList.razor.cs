@@ -27,6 +27,7 @@ public partial class SubjectList
 	private List<StudentSubjectRegistrationDto> registeredSubjects = new(); // Never null, may be empty...
 	private SubjectListQueryFilter subjectListFilter = new();
 	private bool showRocnikovkaWarning = false;
+	private bool showExtensionSeminarWarning = false;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -45,8 +46,15 @@ public partial class SubjectList
 			// Xopa: Todo: the filter was used, but I couldn't make it appear in the UI. I didn't find a way to refresh the list layout filter ui.
 			//subjectListFilter.GradeId = (int)gradeId.Value;
 
-			// Determine "rocnikovka warning"
-			showRocnikovkaWarning = (gradeId == GradeEntry.Kvinta || gradeId == GradeEntry.Sexta);
+			var nextGradeId = gradeId.Value.NextGrade();
+			if (nextGradeId is not null)
+			{
+ 				// Determine "rocnikovka warning"
+				showRocnikovkaWarning = (nextGradeId is GradeEntry.Sexta or GradeEntry.Septima);
+
+				// Determine "extension seminar warning"
+				showExtensionSeminarWarning = (nextGradeId is GradeEntry.Kvinta or GradeEntry.Sexta);
+			}
 
 			// Get registered subjects
 			await StudentSubjectRegistrationsDataStore.EnsureDataAsync();

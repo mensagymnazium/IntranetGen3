@@ -1,4 +1,14 @@
-﻿@if (studentsRegistrationForThisSubject is not null)
+﻿@if (shouldShowExtensionSeminarWarning)
+{
+    <HxAlert Color="ThemeColor.Danger">
+        <HxIcon Icon="@BootstrapIcon.ExclamationTriangleFill"/>
+        <span>
+            Předmět si lze vybrat jako nadstavbový (ačkoliv je specializační), ale je potřeba <b>EXPLICITNÍ DOMLUVA</b> s někým z vedení.
+        </span>
+    </HxAlert>
+}
+
+@if (studentsRegistrationForThisSubject is not null)
 {
     // Registered already
     <HxButton 
@@ -12,7 +22,7 @@
 else
 {
     // No registration yet, display registration options
-    // Xopa: Now only handling primary registrations, maybe secondary in future aswel
+    // Xopa: Now only handling primary registrations, maybe secondary in future as well
 
     @if (canCreateMainRegistrationResult is not null)
     {

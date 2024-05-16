@@ -57,7 +57,7 @@ public class SubjectFacade : ISubjectFacade
 
 		var subject = await subjectRepository.GetObjectAsync(subjectIdDto.Value, cancellationToken);
 
-		return await subjectMapper.MapToSubjectDtoAsync(subject);
+		return await subjectMapper.MapToSubjectDtoAsync(subject, cancellationToken);
 	}
 
 	[Authorize(Roles = nameof(Role.Administrator))]
@@ -84,7 +84,7 @@ public class SubjectFacade : ISubjectFacade
 		var subject = await subjectRepository.GetObjectAsync(subjectDto.Id, cancellationToken);
 
 		var currentUser = applicationAuthenticationService.GetCurrentUser();
-		var roles = await userManager.GetRolesAsync(currentUser, ClaimsPrincipal.Current);
+		var roles = await userManager.GetRolesAsync(currentUser, ClaimsPrincipal.Current, cancellationToken);
 		if (!roles.Contains(Role.Administrator))
 		{
 			if (!subject.Teachers.Any(t => t.Id == currentUser.TeacherId))
@@ -119,7 +119,8 @@ public class SubjectFacade : ISubjectFacade
 			{
 				Id = s.Id,
 				Name = s.Name,
-				IsDeleted = s.Deleted is not null
+				IsDeleted = s.Deleted is not null,
+				CategoryId = s.CategoryId
 			})
 			.ToList();
 	}

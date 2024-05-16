@@ -122,7 +122,7 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 		var studentsNextYearGrade = await gradeRepository.GetObjectAsync(student.GradeId - 1, cancellationToken); // Negative values
 		var subject = await subjectRepository.GetObjectAsync(subjectId, cancellationToken);
 
-		if (SubjectCategory.IsEntry(subject.Category, SubjectCategory.Entry.ForeignLanguage))
+		if (SubjectCategory.IsEntry(subject.Category, SubjectCategoryEntry.ForeignLanguage))
 		{
 			return false; // Languages don't count towards the limit
 		}
@@ -132,7 +132,7 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 
 		// (Now omitting main/secondary registration, just count them all)
 		static bool IsSubjectALanguage(Subject subject)
-			=> SubjectCategory.IsEntry(subject.Category, SubjectCategory.Entry.ForeignLanguage);
+			=> SubjectCategory.IsEntry(subject.Category, SubjectCategoryEntry.ForeignLanguage);
 
 		var amOfHoursExcludingLanguages = registrationsForStudent
 			.Aggregate(0, (total, reg) =>
