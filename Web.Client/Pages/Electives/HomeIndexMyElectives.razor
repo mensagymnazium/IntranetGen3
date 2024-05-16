@@ -79,4 +79,13 @@
         <b>Načítání postupu</b>
         <HxSpinner Color="ThemeColor.Primary" Size="SpinnerSize.Small" />
     }
+
+    @if (subjectsCollide)
+    {
+        <h3><HxIcon Icon="@BootstrapIcon.HandThumbsDown" CssClass="display-3" /> Překrývá se ti rozvrh!</h3>
+    }
+    @if (!subjectsCollide)
+    {
+        <h3><HxIcon Icon="@BootstrapIcon.HandThumbsUp" CssClass="display-3" /> Žádný předmět se ti (asi) nepřekrývá!</h3>
+    }
 </AuthorizeView>

@@ -1,4 +1,6 @@
-﻿namespace MensaGymnazium.IntranetGen3.Contracts;
+﻿using MensaGymnazium.IntranetGen3.Primitives;
+
+namespace MensaGymnazium.IntranetGen3.Contracts;
 
 public record SubjectReferenceDto
 {
@@ -6,4 +8,6 @@ public record SubjectReferenceDto
 	public string Name { get; set; }
 	public bool IsDeleted { get; set; }
 	public int? CategoryId { get; set; }
+	public DayOfWeek? ScheduleDayOfWeek { get; set; }
+	public ScheduleSlotInDay? ScheduleSlotInDay { get; set; }
 }
