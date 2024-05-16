@@ -4,7 +4,22 @@
     @* CSS Isolation *@
     @if (showRocnikovkaWarning)
     {
-        <HxAlert Color="ThemeColor.Danger"><HxIcon Icon="@BootstrapIcon.ExclamationTriangleFill" /> Téma jednoho z vybraných předmětů se musí shodovat s tématem vaší <strong>ročníkové práce</strong>.</HxAlert>
+        <HxAlert Color="ThemeColor.Danger">
+            <HxIcon Icon="@BootstrapIcon.ExclamationTriangleFill"/> 
+            <span>
+                Téma jednoho z vybraných předmětů se musí shodovat s tématem vaší <strong>ročníkové práce</strong>.
+            </span>
+        </HxAlert>
+    }
+    @if (showExtensionSeminarWarning)
+    {
+        <HxAlert Color="ThemeColor.Danger">
+            <HxIcon Icon="@BootstrapIcon.ExclamationTriangleFill"/> 
+            <span>
+                Upozorňujeme studenty nynější <b>kvarty a kvinty</b>, že do kvinty a sexty je potřeba zvolit jeden dvouletý <b>nadstavbový seminář</b>.
+                Po předchozí dohodě s vedením školy lze jako nadstavbový seminář zapsat i jakýkoliv jiný typ semináře.
+            </span>
+        </HxAlert>        
     }
     <HxListLayout Title="Předměty"
                   TFilterModel="SubjectListQueryFilter"

@@ -1,6 +1,7 @@
 ﻿using Havit;
 using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Primitives;
+using MensaGymnazium.IntranetGen3.Web.Client.Services;
 using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
@@ -17,6 +18,14 @@ public partial class StudentSubjectRegistrationComponent
 	[Inject] protected IStudentSubjectRegistrationsDataStore StudentSubjectRegistrationsDataStore { get; set; }
 	[Inject] protected ISubjectRegistrationProgressValidationFacade SubjectRegistrationProgressValidationFacade { get; set; }
 	[Inject] protected ISubjectCategoriesDataStore SubjectCategoriesDataStore { get; set; }
+	[Inject] protected IClientAuthService ClientAuthService { get; set; }
+	[Inject] protected ISubjectsDataStore SubjectDataStore { get; set; }
+
+	/// <summary>
+	/// Show text about the rule, that some specialization seminars may be chosen as
+	/// extension seminars after an agreement.
+	/// </summary>
+	private bool shouldShowExtensionSeminarWarning = false; // Todo: this probably won't be needed in the future
 
 	/// <summary>
 	/// Registration was made by current user (student) for this subject
@@ -31,8 +40,37 @@ public partial class StudentSubjectRegistrationComponent
 
 	protected override async Task OnInitializedAsync()
 	{
+		await SubjectDataStore.EnsureDataAsync();
+
 		await LoadIsRegistrationPossibleAsync();
 		await LoadStudentRegistrationAsync();
+
+		shouldShowExtensionSeminarWarning = await GetShouldShowExtensionSeminarWarning();
+	}
+
+	private async Task<bool> GetShouldShowExtensionSeminarWarning()
+	{
+		var claims = await ClientAuthService.GetCurrentClaimsPrincipal();
+
+		// Check if is student
+		if (!claims.IsInRole(nameof(Role.Student)))
+		{
+			return false;
+		}
+
+		// Don't show if seminar is an extension seminar already
+		var subject = await SubjectDataStore.GetByKeyAsync(SubjectId!.Value);
+		var subjectCategory = await SubjectCategoriesDataStore.GetByKeyAsync(subject.CategoryId!.Value);
+		if ((SubjectCategoryEntry)subjectCategory.Id == SubjectCategoryEntry.ExtensionSeminar)
+		{
+			return false;
+		}
+
+		// Check based on grade
+		var grade = await ClientAuthService.GetCurrentStudentGradeIdAsync();
+		var nextGrade = grade!.Value.NextGrade();
+
+		return nextGrade is GradeEntry.Kvinta or GradeEntry.Sexta;
 	}
 
 	private async Task LoadIsRegistrationPossibleAsync()

@@ -56,7 +56,7 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		List<StudentSubjectRegistration> studentsRegistrations)
 	{
 		var doesStudentHaveLanguage = studentsRegistrations
-			.Any(r => SubjectCategory.IsEntry(r.Subject.Category, SubjectCategory.Entry.ForeignLanguage));
+			.Any(r => SubjectCategory.IsEntry(r.Subject.Category, SubjectCategoryEntry.ForeignLanguage));
 
 		return new StudentLanguageRegistrationProgress(
 			IsLanguageRequired: forGrade.RegistrationCriteria.RequiresForeginLanguage,
@@ -68,7 +68,7 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		List<StudentSubjectRegistration> forRegistrations)
 	{
 		static bool IsSubjectALanguage(Subject subject)
-			=> SubjectCategory.IsEntry(subject.Category, SubjectCategory.Entry.ForeignLanguage);
+			=> SubjectCategory.IsEntry(subject.Category, SubjectCategoryEntry.ForeignLanguage);
 
 		var amOfHoursExcludingLanguages = forRegistrations
 			.Aggregate(0, (total, reg) =>
