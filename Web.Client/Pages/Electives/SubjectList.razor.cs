@@ -49,7 +49,7 @@ public partial class SubjectList
 			var nextGradeId = gradeId.Value.NextGrade();
 			if (nextGradeId is not null)
 			{
- 				// Determine "rocnikovka warning"
+				// Determine "rocnikovka warning"
 				showRocnikovkaWarning = (nextGradeId is GradeEntry.Sexta or GradeEntry.Septima);
 
 				// Determine "extension seminar warning"

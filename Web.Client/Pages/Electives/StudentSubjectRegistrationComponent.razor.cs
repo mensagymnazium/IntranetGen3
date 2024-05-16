@@ -59,8 +59,8 @@ public partial class StudentSubjectRegistrationComponent
 		}
 
 		// Don't show if seminar is an extension seminar already
-		var subject = await SubjectDataStore.GetByKeyAsync(SubjectId!.Value);
-		var subjectCategory = await SubjectCategoriesDataStore.GetByKeyAsync(subject.CategoryId!.Value);
+		var subject = await SubjectDataStore.GetByKeyAsync(SubjectId.Value);
+		var subjectCategory = await SubjectCategoriesDataStore.GetByKeyAsync(subject.CategoryId.Value);
 		if ((SubjectCategoryEntry)subjectCategory.Id == SubjectCategoryEntry.ExtensionSeminar)
 		{
 			return false;
@@ -68,7 +68,7 @@ public partial class StudentSubjectRegistrationComponent
 
 		// Check based on grade
 		var grade = await ClientAuthService.GetCurrentStudentGradeIdAsync();
-		var nextGrade = grade!.Value.NextGrade();
+		var nextGrade = grade.Value.NextGrade();
 
 		return nextGrade is GradeEntry.Kvinta or GradeEntry.Sexta;
 	}
@@ -90,7 +90,7 @@ public partial class StudentSubjectRegistrationComponent
 	{
 		await StudentSubjectRegistrationsDataStore.EnsureDataAsync();
 		studentsRegistrationForThisSubject =
-			await StudentSubjectRegistrationsDataStore.GetByKeyOrDefaultAsync(SubjectId!.Value);
+			await StudentSubjectRegistrationsDataStore.GetByKeyOrDefaultAsync(SubjectId.Value);
 	}
 
 	private async Task HandleCancelRegistrationClicked()
@@ -130,7 +130,7 @@ public partial class StudentSubjectRegistrationComponent
 				await SubjectRegistrationsManagerFacade.CreateRegistrationAsync(
 					new StudentSubjectRegistrationCreateDto()
 					{
-						SubjectId = SubjectId!.Value,
+						SubjectId = SubjectId.Value,
 						RegistrationType = registrationType
 					});
 
