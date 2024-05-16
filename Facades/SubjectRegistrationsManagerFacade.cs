@@ -79,7 +79,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		await unitOfWork.CommitAsync(cancellationToken);
 	}
 
-	public async Task<CanCreateRegistrationResponse> CanStudentCreateRegistrationAsync(
+	public async Task<StudentSubjectRegistrationPossibilityDto> CanStudentCreateRegistrationAsync(
 		StudentSubjectRegistrationCreateDto studentSubjectRegistrationCreateDto,
 		CancellationToken cancellationToken = default)
 	{
@@ -91,28 +91,28 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		// Verify registration date
 		if (!subjectRegistrationsManagerService.IsRegistrationPeriodActive())
 		{
-			return CanCreateRegistrationResponse.NotPossible("Přihlášku není možné vytvořit. Je před, nebo již po termínu přihlašování");
+			return StudentSubjectRegistrationPossibilityDto.CreateNotPossible("Přihlášku není možné vytvořit. Je před, nebo již po termínu přihlašování");
 		}
 
 		// Verify student isn't already registered for this subject
 		if (await subjectRegistrationsManagerService
 				.IsSubjectRegisteredForStudentAsync(studentSubjectRegistrationCreateDto.SubjectId.Value, currentUser.StudentId.Value, cancellationToken))
 		{
-			return CanCreateRegistrationResponse.NotPossible("Na předmět již máte přihlášku");
+			return StudentSubjectRegistrationPossibilityDto.CreateNotPossible("Na předmět již máte přihlášku");
 		}
 
 		// Verify subject isn't full
 		if (await subjectRegistrationsManagerService
 				.IsSubjectCapacityFullAsync(studentSubjectRegistrationCreateDto.SubjectId.Value, cancellationToken))
 		{
-			return CanCreateRegistrationResponse.NotPossible("Předmět je již plný");
+			return StudentSubjectRegistrationPossibilityDto.CreateNotPossible("Předmět je již plný");
 		}
 
 		// Verify student is in correct grade
 		if (!await subjectRegistrationsManagerService
 				.IsStudentInAssignableGrade(currentUser.StudentId.Value, studentSubjectRegistrationCreateDto.SubjectId.Value, cancellationToken))
 		{
-			return CanCreateRegistrationResponse.NotPossible("Předmět není určený pro váš ročník");
+			return StudentSubjectRegistrationPossibilityDto.CreateNotPossible("Předmět není určený pro váš ročník");
 		}
 
 		// Verify student doesn't already have reached `hours per week` limit
@@ -120,9 +120,9 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 				.DidStudentAlreadyReachHoursPerWeekLimit(currentUser.StudentId.Value,
 					studentSubjectRegistrationCreateDto.SubjectId.Value, cancellationToken))
 		{
-			return CanCreateRegistrationResponse.NotPossible("Již jste dosáhl maximálního počtu hodin za týden");
+			return StudentSubjectRegistrationPossibilityDto.CreateNotPossible("Již jste dosáhl maximálního počtu hodin za týden");
 		}
 
-		return CanCreateRegistrationResponse.YesPossible();
+		return StudentSubjectRegistrationPossibilityDto.CreateYesPossible();
 	}
 }

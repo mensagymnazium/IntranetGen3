@@ -24,7 +24,7 @@ else
     // No registration yet, display registration options
     // Xopa: Now only handling primary registrations, maybe secondary in future as well
 
-    @if (canCreateMainRegistrationResult is not null)
+    @if (studentSubjectMainRegistrationPossibilityResult is not null)
     {
         // Result loaded
         <HxButton
@@ -33,13 +33,13 @@ else
             Color="ThemeColor.Primary"
             Size="ButtonSize.Small"
             Icon="BootstrapIcon.Basket" 
-            Enabled='@canCreateMainRegistrationResult.IsRegistrationPossible'/>
-        @if (!canCreateMainRegistrationResult.IsRegistrationPossible)
+            Enabled='@studentSubjectMainRegistrationPossibilityResult.IsRegistrationPossible'/>
+        @if (!studentSubjectMainRegistrationPossibilityResult.IsRegistrationPossible)
         {
             // Cannot create a main registration
             <small>
                 <span> - Nelze zapsat jako primární, důvod:</span>
-                <b class='text-danger'>@canCreateMainRegistrationResult.Reason</b>
+                <b class='text-danger'>@studentSubjectMainRegistrationPossibilityResult.Reason</b>
             </small>
         }
     }
