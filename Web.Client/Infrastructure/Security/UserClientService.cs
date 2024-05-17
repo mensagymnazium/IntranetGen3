@@ -29,7 +29,7 @@ public class UserClientService : IUserClientService
 			var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "/user-claims");
 			httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token.Value);
 			var response = await _httpClient.SendAsync(request: httpRequestMessage, cancellationToken);
-			var claims = await response.Content.ReadFromJsonAsync<List<KeyValuePair<string, string>>>();
+			var claims = await response.Content.ReadFromJsonAsync<List<KeyValuePair<string, string>>>(cancellationToken);
 			return claims.Select(c => new Claim(c.Key, c.Value ?? String.Empty));
 		}
 
