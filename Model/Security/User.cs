@@ -13,6 +13,7 @@ public class User
 	[MaxLength(64)] // Same as in AD
 	public string Name { get; set; }
 
+	[MaxLength(64)]
 	public string Lastname { get; set; }
 
 	[MaxLength(320)]
