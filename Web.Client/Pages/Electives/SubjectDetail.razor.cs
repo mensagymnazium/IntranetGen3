@@ -48,7 +48,7 @@ public partial class SubjectDetail
 
 	private async Task<GridDataProviderResult<StudentSubjectRegistrationDto>> GetStudentRegistrations(GridDataProviderRequest<StudentSubjectRegistrationDto> request)
 	{
-		var response = await StudentSubjectRegistrationFacade.GetStudentSubjectRegistrationListAsync(
+		var response = await StudentSubjectRegistrationFacade.GetStudentSubjectActiveRegistrationsListAsync(
 			new DataFragmentRequest<StudentSubjectRegistrationListQueryFilter>()
 			{
 				Filter = new StudentSubjectRegistrationListQueryFilter() { SubjectId = SubjectId },

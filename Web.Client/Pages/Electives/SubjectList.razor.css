@@ -2,6 +2,14 @@
 	background-color: rgba(var(--bs-success-rgb), 0.3);
 }
 
+
 ::deep .reg-secondary {
 	background-color: rgba(var(--bs-success-rgb), 0.1);
+}
+
+/* Make sure color applies to HxGrid row children as well (they were overriding it) */
+::deep .reg-main td,
+::deep .reg-secondary td
+{
+    background-color: inherit;
 }

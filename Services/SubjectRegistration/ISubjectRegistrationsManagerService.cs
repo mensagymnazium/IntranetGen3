@@ -6,10 +6,7 @@ namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration;
 
 public interface ISubjectRegistrationsManagerService
 {
-	/// <summary>
-	/// Returns, whether there can be a registration performed now. Based on dates inside <see cref="IApplicationSettingsEntries"/>
-	/// </summary>
-	/// <returns></returns>
+	/// <returns>Whether there can be a registration performed now. Based on dates inside <see cref="IApplicationSettingsEntries"/></returns>
 	public bool IsRegistrationPeriodActive();
 
 	// Xopa: Todo: Does registration conflict with other registrations? (time-wise)
@@ -35,8 +32,17 @@ public interface ISubjectRegistrationsManagerService
 	public Task CancelRegistrationAsync(int registrationId, int callerStudentId, CancellationToken cancellationToken = default);
 
 	/// <returns>True, if the number of registrations for this subject reached the subject's capacity</returns>
-	Task<bool> IsSubjectCapacityFullAsync(int subjectId);
+	Task<bool> IsSubjectCapacityFullAsync(int subjectId, CancellationToken cancellationToken = default);
 
 	/// <returns>True, if the student has already registered for this subject</returns>
-	Task<bool> IsSubjectRegisteredForStudent(int subjectId, int callerStudentId);
+	Task<bool> IsSubjectRegisteredForStudentAsync(int subjectId, int studentId, CancellationToken cancellationToken = default);
+
+	/// <returns>True, if the students next year grade is within the subjects grade criteria</returns>
+	Task<bool> IsStudentInAssignableGrade(int studentId, int subjectId, CancellationToken cancellationToken = default);
+
+	/// <returns>
+	/// True, if the student has already reached the maximum number of registrations per week.
+	/// Takes languages into account: If the subject is a language, this rule doesn't apply.
+	/// </returns>
+	Task<bool> DidStudentAlreadyReachHoursPerWeekLimit(int studentId, int subjectId, CancellationToken cancellationToken = default);
 }

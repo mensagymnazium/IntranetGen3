@@ -65,7 +65,7 @@ public class Subject
 	{
 		get
 		{
-			Contract.Requires<InvalidOperationException>(EducationalAreaRelations.TrueForAll(m => m.EducationalArea is not null), $"Unable to access {nameof(EducationalAreas)} without loading the {nameof(EducationalAreaRelations)}.");
+			Contract.Requires<InvalidOperationException>(GraduationSubjectRelations.TrueForAll(m => m.GraduationSubject is not null), $"Unable to access {nameof(GraduationSubjects)} without loading the {nameof(GraduationSubjectRelations)}.");
 			return GraduationSubjectRelations.Select(m => m.GraduationSubject);
 		}
 	}

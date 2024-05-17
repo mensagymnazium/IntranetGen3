@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Havit.Data.EntityFrameworkCore.Attributes;
+using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.Model;
 
@@ -11,16 +12,8 @@ public class SubjectCategory
 	[MaxLength(50)]
 	public string Name { get; set; }
 
-	public enum Entry
+	public static bool IsEntry(SubjectCategory subjectCategory, SubjectCategoryEntry subjectCategoryEntry)
 	{
-		GraduationSeminar = 1,
-		ExtensionSeminar = 2,
-		SpecialisationSeminar = 4,
-		ForeignLanguage = 8
-	}
-
-	public static bool IsEntry(SubjectCategory subjectCategory, Entry entry)
-	{
-		return subjectCategory.Id == (int)entry;
+		return subjectCategory.Id == (int)subjectCategoryEntry;
 	}
 }

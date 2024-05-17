@@ -18,5 +18,5 @@ public class Grade
 	public ICollection<Student> Students { get; } = new List<Student>();
 
 	public GradeRegistrationCriteria RegistrationCriteria { get; set; }
-	public int RegistrationCriteriaId { get; set; }
+	public int? RegistrationCriteriaId { get; set; }
 }

@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Components.Web
+@using Havit.Blazor.Components.Web.Bootstrap
 @namespace MensaGymnazium.IntranetGen3.Web.Server.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <!DOCTYPE html>
@@ -13,7 +14,7 @@
     <title>Intranet</title>
     <base href="/" />
 
-    <link href="_content/Havit.Blazor.Components.Web.Bootstrap/bootstrap.css" rel="stylesheet" asp-append-version="true" />
+	@Html.Raw(HxSetup.RenderBootstrapCssReference())
     <link href="_content/Havit.Blazor.Components.Web.Bootstrap/defaults.css" rel="stylesheet" asp-append-version="true" />
     <link href="MensaGymnazium.IntranetGen3.Web.Client.styles.css" rel="stylesheet" asp-append-version="true"/> <!-- CSS Isolation -->
     <link href="css/site.css" rel="stylesheet" asp-append-version="true" />
@@ -48,7 +49,7 @@
 
     <script src="_content/Microsoft.Authentication.WebAssembly.Msal/AuthenticationService.js" asp-append-version="true"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false" asp-append-version="true"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+	@Html.Raw(HxSetup.RenderBootstrapJavaScriptReference())
     <script src="_content/BlazorApplicationInsights/JsInterop.js" asp-append-version="true"></script>
     <script>
         Blazor.start({

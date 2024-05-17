@@ -3,7 +3,7 @@ using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.DataLayer.Seeds.Core;
 
-public class GradeSeedRegistrationCriteria : DataSeed<CoreProfile>
+public class GradeRegistrationCriteriaSeed : DataSeed<CoreProfile>
 {
 	public override void SeedData()
 	{
@@ -11,50 +11,57 @@ public class GradeSeedRegistrationCriteria : DataSeed<CoreProfile>
 		{
 			new GradeRegistrationCriteria()
 			{
-				Id = (int) GradeEntry.Prima,
-				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 0,
+				Id = (int)GradeEntry.Prima,
+				RequiredTotalAmountOfHoursPerWeekExcludingLanguage = 0,
 			},
 			new GradeRegistrationCriteria()
 			{
-				Id = (int) GradeEntry.Sekunda,
-				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 2,
+				Id = (int)GradeEntry.Sekunda,
+				RequiredTotalAmountOfHoursPerWeekExcludingLanguage = 2,
+				CanUseForeignLanguageInsteadOfHoursPerWeek = true
 			},
 			new GradeRegistrationCriteria()
 			{
-				Id = (int) GradeEntry.Tercie,
-				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 2,
+				Id = (int)GradeEntry.Tercie,
+				RequiredTotalAmountOfHoursPerWeekExcludingLanguage = 2,
+				RequiresForeginLanguage = true,
 			},
 			new GradeRegistrationCriteria()
 			{
-				Id = (int) GradeEntry.Kvarta,
-				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 2,
+				Id = (int)GradeEntry.Kvarta,
+				RequiredTotalAmountOfHoursPerWeekExcludingLanguage = 2,
+				RequiresForeginLanguage = true,
 			},
 			new GradeRegistrationCriteria()
 			{
-				Id = (int) GradeEntry.Kvinta,
-				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 4,
+				Id = (int)GradeEntry.Kvinta,
+				RequiredTotalAmountOfHoursPerWeekExcludingLanguage = 4,
+				RequiresForeginLanguage = true,
 			},
 			new GradeRegistrationCriteria()
 			{
-				Id = (int) GradeEntry.Sexta,
-				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 4,
+				Id = (int)GradeEntry.Sexta,
+				RequiredTotalAmountOfHoursPerWeekExcludingLanguage = 4,
+				RequiresForeginLanguage = true,
 			},
 			new GradeRegistrationCriteria()
 			{
-				Id = (int) GradeEntry.Septima,
-				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 10,
-				RequiresCspOrCpValidation = true,
-				RequiredAmountOfDonatedHoursInAreaCspOrCp = 4
+				Id = (int)GradeEntry.Septima,
+				RequiredTotalAmountOfHoursPerWeekExcludingLanguage = 10,
+				RequiresCsOrCpValidation = true,
+				RequiredAmountOfHoursPerWeekInAreaCsOrCp = 4,
+				RequiresForeginLanguage = true,
 			},
 			new GradeRegistrationCriteria()
 			{
-				Id = (int) GradeEntry.Oktava,
-				RequiredTotalAmountOfDonatedHoursExcludingLanguage = 12,
-				RequiresCspOrCpValidation = true,
-				RequiredAmountOfDonatedHoursInAreaCspOrCp = 4
+				Id = (int)GradeEntry.Oktava,
+				RequiredTotalAmountOfHoursPerWeekExcludingLanguage = 12,
+				RequiresCsOrCpValidation = true,
+				RequiredAmountOfHoursPerWeekInAreaCsOrCp = 4,
+				RequiresForeginLanguage = true,
 			},
 		};
 
-		Seed(For(data).PairBy(grade => grade.Id)); // TODO WithoutUpdate nebo bez AadGroupId? 
+		Seed(For(data).PairBy(grc => grc.Id));
 	}
 }

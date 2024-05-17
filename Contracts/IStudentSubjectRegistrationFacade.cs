@@ -1,6 +1,4 @@
-﻿using MensaGymnazium.IntranetGen3.Contracts.Security;
-
-namespace MensaGymnazium.IntranetGen3.Contracts;
+﻿namespace MensaGymnazium.IntranetGen3.Contracts;
 
 [ApiContract]
 public interface IStudentSubjectRegistrationFacade
@@ -8,6 +6,8 @@ public interface IStudentSubjectRegistrationFacade
 	Task<Dto<int>> CreateRegistrationAsync(StudentSubjectRegistrationDto registrationDto, CancellationToken cancellationToken = default);
 	Task UpdateRegistrationAsync(StudentSubjectRegistrationDto registrationDto, CancellationToken cancellationToken = default);
 	Task DeleteRegistrationAsync(Dto<int> registrationIdDto, CancellationToken cancellationToken = default);
-	Task<DataFragmentResult<StudentSubjectRegistrationDto>> GetStudentSubjectRegistrationListAsync(DataFragmentRequest<StudentSubjectRegistrationListQueryFilter> studentSubjectRegistrationListRequest, CancellationToken cancellationToken = default);
-	Task<List<StudentSubjectRegistrationDto>> GetAllRegistrationsOfCurrentStudent(); // Xopa: Todo? Change to query? It was too entangled with signing rules, but now it could be done? 
+	Task<DataFragmentResult<StudentSubjectRegistrationDto>> GetStudentSubjectActiveRegistrationsListAsync(DataFragmentRequest<StudentSubjectRegistrationListQueryFilter> studentSubjectRegistrationListRequest, CancellationToken cancellationToken = default);
+
+	// Xopa: Todo? Rename this method to GetAllActiveRegistrationsOfCurrentStudentAsync (now I don't want to cause MERGE CONFLICTS for KL3P :D)
+	Task<List<StudentSubjectRegistrationDto>> GetAllRegistrationsOfCurrentStudentAsync(CancellationToken cancellationToken = default);
 }

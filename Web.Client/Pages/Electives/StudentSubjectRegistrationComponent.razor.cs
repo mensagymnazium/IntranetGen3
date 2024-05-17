@@ -1,6 +1,7 @@
 ﻿using Havit;
 using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Primitives;
+using MensaGymnazium.IntranetGen3.Web.Client.Services;
 using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
@@ -15,24 +16,91 @@ public partial class StudentSubjectRegistrationComponent
 	[Inject] protected IHxMessengerService Messenger { get; set; }
 	[Inject] protected ISubjectRegistrationsManagerFacade SubjectRegistrationsManagerFacade { get; set; }
 	[Inject] protected IStudentSubjectRegistrationsDataStore StudentSubjectRegistrationsDataStore { get; set; }
+	[Inject] protected ISubjectRegistrationProgressValidationFacade SubjectRegistrationProgressValidationFacade { get; set; }
+	[Inject] protected ISubjectCategoriesDataStore SubjectCategoriesDataStore { get; set; }
+	[Inject] protected IClientAuthService ClientAuthService { get; set; }
+	[Inject] protected ISubjectsDataStore SubjectDataStore { get; set; }
+
+	/// <summary>
+	/// Show text about the rule, that some specialization seminars may be chosen as
+	/// extension seminars after an agreement.
+	/// </summary>
+	private bool shouldShowExtensionSeminarWarning = false; // Todo: this probably won't be needed in the future
 
 	/// <summary>
 	/// Registration was made by current user (student) for this subject
 	/// If null: no registration
 	/// </summary>
-	private StudentSubjectRegistrationDto studentsRegistrationForThisSubject = null;
+	private StudentSubjectRegistrationDto studentsRegistrationForThisSubject;
+
+	/// <summary>
+	/// Null when not yet loaded.
+	/// </summary>
+	private StudentSubjectRegistrationPossibilityDto studentSubjectMainRegistrationPossibilityResult;
 
 	protected override async Task OnInitializedAsync()
 	{
-		await LoadStudentRegistrationAsync();
+		await SubjectDataStore.EnsureDataAsync();
 	}
 
-	private async Task LoadStudentRegistrationAsync()
+	protected override async Task OnParametersSetAsync()
+	{
+		await RefreshDataAsync();
+
+		shouldShowExtensionSeminarWarning = await GetShouldShowExtensionSeminarWarning();
+	}
+
+	private async Task RefreshDataAsync()
+	{
+		await LoadIsRegistrationPossibleForSubjectAsync();
+		await LoadStudentRegistrationForSubjectAsync();
+	}
+
+	private async Task<bool> GetShouldShowExtensionSeminarWarning()
+	{
+		var claims = await ClientAuthService.GetCurrentClaimsPrincipal();
+
+		// Check if is student
+		if (!claims.IsInRole(nameof(Role.Student)))
+		{
+			return false;
+		}
+
+		// Don't show if seminar is an extension seminar already
+		var subject = await SubjectDataStore.GetByKeyAsync(SubjectId.Value);
+		var subjectCategory = await SubjectCategoriesDataStore.GetByKeyAsync(subject.CategoryId.Value);
+		if ((SubjectCategoryEntry)subjectCategory.Id == SubjectCategoryEntry.ExtensionSeminar)
+		{
+			return false;
+		}
+
+		// Check based on grade
+		var grade = await ClientAuthService.GetCurrentStudentGradeIdAsync();
+		var nextGrade = grade.Value.NextGrade();
+
+		return nextGrade is GradeEntry.Kvinta or GradeEntry.Sexta;
+	}
+
+	private async Task LoadIsRegistrationPossibleForSubjectAsync()
+	{
+		// Test for main registration
+		StudentSubjectRegistrationCreateDto mainRegistrationRequest = new StudentSubjectRegistrationCreateDto()
+		{
+			RegistrationType = StudentRegistrationType.Main,
+			SubjectId = SubjectId
+		};
+
+		studentSubjectMainRegistrationPossibilityResult = await SubjectRegistrationsManagerFacade
+			.CanStudentCreateRegistrationAsync(mainRegistrationRequest);
+	}
+
+	private async Task LoadStudentRegistrationForSubjectAsync()
 	{
 		await StudentSubjectRegistrationsDataStore.EnsureDataAsync();
 		studentsRegistrationForThisSubject =
-			await StudentSubjectRegistrationsDataStore.GetByKeyOrDefaultAsync(SubjectId!.Value);
+			await StudentSubjectRegistrationsDataStore.GetByKeyOrDefaultAsync(SubjectId.Value);
 	}
+
 	private async Task HandleCancelRegistrationClicked()
 	{
 		if (studentsRegistrationForThisSubject is null)
@@ -49,8 +117,7 @@ public partial class StudentSubjectRegistrationComponent
 				// Invalidate data store
 				StudentSubjectRegistrationsDataStore.Clear();
 
-				// Reload from cache (Xopa: maybe unnecessarily expensive?)
-				await LoadStudentRegistrationAsync();
+				await RefreshDataAsync();
 
 				await OnRegistrationChanged.InvokeAsync();
 			}
@@ -70,15 +137,14 @@ public partial class StudentSubjectRegistrationComponent
 				await SubjectRegistrationsManagerFacade.CreateRegistrationAsync(
 					new StudentSubjectRegistrationCreateDto()
 					{
-						SubjectId = SubjectId!.Value,
+						SubjectId = SubjectId.Value,
 						RegistrationType = registrationType
 					});
 
 				//Invalidate data store
 				StudentSubjectRegistrationsDataStore.Clear();
 
-				// Reload from cache (Xopa: maybe unnecessarily expensive?)
-				await LoadStudentRegistrationAsync();
+				await RefreshDataAsync();
 
 				await OnRegistrationChanged.InvokeAsync();
 			}

@@ -15,12 +15,12 @@ public class StudentSubjectRegistrationsDataStore : DictionaryStaticDataStore<in
 		this.studentSubjectRegistrationFacade = studentSubjectRegistrationFacade;
 	}
 
-	protected override Func<StudentSubjectRegistrationDto, int> KeySelector => registration => registration.SubjectId!.Value;
+	protected override Func<StudentSubjectRegistrationDto, int> KeySelector => registration => registration.SubjectId.Value;
 	protected override bool ShouldRefresh() => false; // Cleared by component causing changes
 
 	protected override async Task<IEnumerable<StudentSubjectRegistrationDto>> LoadDataAsync()
 	{
-		var dto = await studentSubjectRegistrationFacade.GetAllRegistrationsOfCurrentStudent();
+		var dto = await studentSubjectRegistrationFacade.GetAllRegistrationsOfCurrentStudentAsync();
 
 		return dto ?? new();
 	}

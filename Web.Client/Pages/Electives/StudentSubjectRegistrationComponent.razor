@@ -1,71 +1,56 @@
-﻿@if (studentsRegistrationForThisSubject is null)
+﻿@if (shouldShowExtensionSeminarWarning)
 {
-    // No registration
-    <HxButton 
-        Text="Zapsat jako primární"
-        OnClick="() => HandleCreateRegistrationClicked(StudentRegistrationType.Main)" 
-        Color="ThemeColor.Primary"
-        Size="ButtonSize.Small"
-        Icon="BootstrapIcon.Basket" />
-} else
+    <HxAlert Color="ThemeColor.Danger">
+        <HxIcon Icon="@BootstrapIcon.ExclamationTriangleFill"/>
+        <span>
+            Předmět si lze vybrat jako nadstavbový (ačkoliv je specializační), ale je potřeba <b>EXPLICITNÍ DOMLUVA</b> s někým z vedení.
+        </span>
+    </HxAlert>
+}
+
+@if (studentsRegistrationForThisSubject is not null)
 {
     // Registered already
     <HxButton 
         Text="Zrušit primární zápis"
-        OnClick="() => HandleCancelRegistrationClicked()"
+        OnClick="HandleCancelRegistrationClicked"
         Color="ThemeColor.Primary"
         Outline="true" 
         Size="ButtonSize.Small" 
         Icon="BootstrapIcon.Trash" />
 }
+else
+{
+    // No registration yet, display registration options
+    // Xopa: Now only handling primary registrations, maybe secondary in future as well
 
-
-@* 
-
-<HxGrid @ref="gridComponent"
-        TItem="SigningRuleStudentRegistrationsDto"
-        DataProvider="GetGridData"
-        SelectionEnabled="false"
-        ShowFooterWhenEmptyData="false">
-    <Columns>
-        <HxGridColumn HeaderText="Zápisové pravidlo" ItemTextSelector="i => i.Name" TItem="SigningRuleStudentRegistrationsDto" />
-        <HxGridColumn HeaderText="Primární zápis" TItem="SigningRuleStudentRegistrationsDto">
-            <ItemTemplate>
-                @if (context.MainRegistration is not null)
-                {
-                    <div class="me-2">Zapsáno @context.MainRegistration.Created</div>
-                    <HxButton Text="Zrušit primární zápis" OnClick="() => HandleCancelRegistrationClicked(context.MainRegistration.Id)" Color="ThemeColor.Primary" Outline="true" Size="ButtonSize.Small" Icon="BootstrapIcon.Trash" />
-
-                }
-                else if (context.MainRegistrationAllowed)
-                {
-                    <HxButton Text="Zapsat jako primární" OnClick="() => HandleCreateRegistrationClicked(context.Id, StudentRegistrationType.Main)" Color="ThemeColor.Primary" Size="ButtonSize.Small" Icon="BootstrapIcon.Basket" />
-                }
-                else
-                {
-                    <text>@context.MainRegistrationNotAllowedReason</text>
-                }
-            </ItemTemplate>
-        </HxGridColumn>
-        <HxGridColumn HeaderText="Náhradní zápis" TItem="SigningRuleStudentRegistrationsDto">
-            <ItemTemplate>
-                @if (context.SecondaryRegistration is not null)
-                {
-                    <div class="me-2">Zapsáno @context.SecondaryRegistration.Created</div>
-                    <HxButton Text="Zrušit náhradní zápis" OnClick="() => HandleCancelRegistrationClicked(context.SecondaryRegistration.Id)" Color="ThemeColor.Secondary" Outline="true" Size="ButtonSize.Small" Icon="BootstrapIcon.Trash" />
-                }
-                else if (context.SecondaryRegistrationAllowed)
-                {
-                    <HxButton Text="Zapsat jako náhradní" OnClick="() => HandleCreateRegistrationClicked(context.Id, StudentRegistrationType.Secondary)" Color="ThemeColor.Secondary" Size="ButtonSize.Small" Icon="BootstrapIcon.Basket" />
-                }
-                else
-                {
-                    <text>@context.SecondaryRegistrationNotAllowedReason</text>
-                }
-            </ItemTemplate>
-        </HxGridColumn>
-    </Columns>
-    <EmptyDataTemplate>
-        Tento předmět neodpovídá žádnému vašemu zápisovému pravidlu.
-    </EmptyDataTemplate>
-</HxGrid> *@
+    @if (studentSubjectMainRegistrationPossibilityResult is not null)
+    {
+        // Result loaded
+        <HxButton
+            Text="Zapsat jako primární"
+            OnClick="async () => await HandleCreateRegistrationClicked(StudentRegistrationType.Main)" 
+            Color="ThemeColor.Primary"
+            Size="ButtonSize.Small"
+            Icon="BootstrapIcon.Basket" 
+            Enabled='@studentSubjectMainRegistrationPossibilityResult.IsRegistrationPossible'/>
+        @if (!studentSubjectMainRegistrationPossibilityResult.IsRegistrationPossible)
+        {
+            // Cannot create a main registration
+            <small>
+                <span> - Nelze zapsat jako primární, důvod:</span>
+                <b class='text-danger'>@studentSubjectMainRegistrationPossibilityResult.Reason</b>
+            </small>
+        }
+    }
+    else
+    {
+        // Result not loaded
+        <HxSpinner Size='SpinnerSize.Small'/>
+        <HxPlaceholderButton
+            Text="Zapsat jako primární"
+            Color="ThemeColor.Primary"
+            Size="ButtonSize.Small"
+            Icon="BootstrapIcon.Basket" />
+    }
+}

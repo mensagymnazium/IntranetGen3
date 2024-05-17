@@ -1,6 +1,8 @@
-﻿using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
+﻿using Havit;
+using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
 using MensaGymnazium.IntranetGen3.Model;
+using MensaGymnazium.IntranetGen3.Primitives;
 
 namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration.ProgressValidation;
 
@@ -20,62 +22,72 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		this.gradeRepository = gradeRepository;
 	}
 
-	public async Task<StudentRegistrationProgress> GetRegistrationProgressOfStudentAsync(int studentId)
+	public async Task<StudentRegistrationProgress> GetRegistrationProgressOfStudentAsync(int studentId, CancellationToken cancellationToken = default)
 	{
-		var student = await studentRepository.GetObjectAsync(studentId);
-		Contract.Requires<ArgumentNullException>(student is not null);
+		Contract.Requires<ArgumentException>(studentId != default);
+
+		var student = await studentRepository.GetObjectAsync(studentId, cancellationToken);
+		Contract.Requires<OperationFailedException>(student.GradeId != (int)GradeEntry.Oktava, "Student nemá žádný další ročník");
 
 		// Logically we want to validate the rules for the next grade
-		// Todo: what if someone from oktava (no future grade) calls this method?
-		var futureGrade = await gradeRepository.GetObjectAsync(student.GradeId - 1);
-		var studentsRegistrations = await subjectRegistrationRepository.GetRegistrationsByStudent(studentId);
+		var futureGrade = await gradeRepository.GetObjectAsync((int)((GradeEntry)student.GradeId).NextGrade(), cancellationToken);
+		var studentsRegistrations = await subjectRegistrationRepository.GetActiveRegistrationsByStudentAsync(studentId, cancellationToken);
 
-		Contract.Requires<ArgumentNullException>(studentsRegistrations is not null);
-		Contract.Requires<ArgumentNullException>(futureGrade is not null);
-		Contract.Requires<ArgumentNullException>(futureGrade.RegistrationCriteria is not null);
+		Contract.Requires<InvalidOperationException>(studentsRegistrations is not null);
+		Contract.Requires<InvalidOperationException>(futureGrade is not null);
+		Contract.Requires<InvalidOperationException>(futureGrade.RegistrationCriteria is not null);
 
-		var donatedHoursProgress = GetDonatedHoursProgress(futureGrade, studentsRegistrations);
+		var hoursPerWeekProgress = GetHoursPerWeekProgress(futureGrade, studentsRegistrations);
 		var csOrCpProgress = GetCsOrCpRegistrationProgress(futureGrade, studentsRegistrations);
+		var languageProgress = GetLanguageRegistrationProgress(futureGrade, studentsRegistrations);
 
 		var registrationProgress = ConstructRegistrationProgress(
 			futureGrade,
-			donatedHoursProgress,
-			csOrCpProgress);
+			hoursPerWeekProgress,
+			csOrCpProgress,
+			languageProgress);
 
 		return registrationProgress;
 	}
 
-	private StudentDonatedHoursProgress GetDonatedHoursProgress(
+	private StudentLanguageRegistrationProgress GetLanguageRegistrationProgress(
+		Grade forGrade,
+		List<StudentSubjectRegistration> studentsRegistrations)
+	{
+		var doesStudentHaveLanguage = studentsRegistrations
+			.Any(r => SubjectCategory.IsEntry(r.Subject.Category, SubjectCategoryEntry.ForeignLanguage));
+
+		return new StudentLanguageRegistrationProgress(
+			IsLanguageRequired: forGrade.RegistrationCriteria.RequiresForeginLanguage,
+			doesStudentHaveLanguage);
+	}
+
+	private StudentHoursPerWeekProgress GetHoursPerWeekProgress(
 		Grade forGrade,
 		List<StudentSubjectRegistration> forRegistrations)
 	{
-		static bool IsSubjectALanguage(Subject subject)
-			=> SubjectCategory.IsEntry(subject.Category, SubjectCategory.Entry.ForeignLanguage);
-
 		var amOfHoursExcludingLanguages = forRegistrations
-			.Aggregate(0, (total, reg) =>
-				IsSubjectALanguage(reg.Subject)
-					? total
-					: total + reg.Subject.HoursPerWeek);
+			.Where(r => !SubjectCategory.IsEntry(r.Subject.Category, SubjectCategoryEntry.ForeignLanguage))
+			.Sum(r => r.Subject.HoursPerWeek);
 
-		var requiredAmountOfDonatedHoursExcludingLanguages =
-			forGrade.RegistrationCriteria.RequiredTotalAmountOfDonatedHoursExcludingLanguage;
+		var requiredAmountOfHoursPerWeekExcludingLanguages =
+			forGrade.RegistrationCriteria.RequiredTotalAmountOfHoursPerWeekExcludingLanguage;
 
-		return new StudentDonatedHoursProgress(
-			AmountOfDonatedHoursExcludingLanguages: amOfHoursExcludingLanguages,
-			RequiredAmountOfDonatedHoursExcludingLanguages: requiredAmountOfDonatedHoursExcludingLanguages);
+		return new StudentHoursPerWeekProgress(
+			AmountOfHoursPerWeekExcludingLanguages: amOfHoursExcludingLanguages,
+			RequiredAmountOfHoursPerWeekExcludingLanguages: requiredAmountOfHoursPerWeekExcludingLanguages);
 	}
 
 	private StudentCsOrCpRegistrationProgress GetCsOrCpRegistrationProgress(
 		Grade forGrade,
 		List<StudentSubjectRegistration> forRegistrations)
 	{
-		static bool IsRegistrationWithinAreaCspOrCp(StudentSubjectRegistration registration)
+		static bool IsRegistrationWithinAreaCsOrCp(StudentSubjectRegistration registration)
 			=> registration.Subject.EducationalAreas.Any(area =>
 				EducationalArea.IsEntry(area, EducationalArea.Entry.HumanSociety)
 				|| EducationalArea.IsEntry(area, EducationalArea.Entry.HumanNature));
 
-		if (!forGrade.RegistrationCriteria.RequiresCspOrCpValidation)
+		if (!forGrade.RegistrationCriteria.RequiresCsOrCpValidation)
 		{
 			// Validation not needed here
 			return new StudentCsOrCpRegistrationProgress()
@@ -84,25 +96,22 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 			};
 		}
 
-		// Calculate the sum of hours in those fields
 		var ammOfHoursInCsOrCp = forRegistrations
-			.Aggregate(0, (total, reg) =>
-				IsRegistrationWithinAreaCspOrCp(reg)
-					? total + reg.Subject.HoursPerWeek
-					: total);
+			.Where(IsRegistrationWithinAreaCsOrCp)
+			.Sum(r => r.Subject.HoursPerWeek);
 
-		var requiredAmountOfDonatedHoursInCspOrCp =
-			forGrade.RegistrationCriteria.RequiredAmountOfDonatedHoursInAreaCspOrCp;
+		var requiredAmountOfHoursPerWeekInCsOrCp =
+			forGrade.RegistrationCriteria.RequiredAmountOfHoursPerWeekInAreaCsOrCp;
 
 
 		return new StudentCsOrCpRegistrationProgress(
 			DoesRequireCsOrCpValidation: true,
-			AmountOfDonatedHoursInCsOrCp: ammOfHoursInCsOrCp,
-			RequiredAmountOfDonatedHoursInCsOrCp: requiredAmountOfDonatedHoursInCspOrCp);
+			AmountOfHoursPerWeekInCsOrCp: ammOfHoursInCsOrCp,
+			RequiredMinimalAmountOfHoursPerWeekInCsOrCp: requiredAmountOfHoursPerWeekInCsOrCp);
 	}
 
 	/// <summary>
-	/// Reponsible for creating the <see cref="StudentSubjectRegistration"/>.
+	/// Responsible for creating the <see cref="StudentSubjectRegistration"/>.
 	/// Determines, whether the combination of "rule progresses" (i.e. <see cref="StudentCsOrCpRegistrationProgress"/>)
 	/// results in a valid registration (<see cref="StudentRegistrationProgress.IsRegistrationValid"/>).
 	/// 
@@ -113,16 +122,57 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 	/// <returns></returns>
 	private StudentRegistrationProgress ConstructRegistrationProgress(
 		Grade forGrade,
-		StudentDonatedHoursProgress donatedHoursProgress,
-		StudentCsOrCpRegistrationProgress csOrCpProgress)
+		StudentHoursPerWeekProgress hoursPerWeekProgress,
+		StudentCsOrCpRegistrationProgress csOrCpProgress,
+		StudentLanguageRegistrationProgress languageRegistrationProgress)
 	{
-		var isRegistrationValid =
-			(donatedHoursProgress.MeetsCriteria)
-			&& (csOrCpProgress.MeetsCriteria);
+		bool isRegistrationValid = IsRegistrationValid(
+			forGrade,
+			hoursPerWeekProgress,
+			csOrCpProgress,
+			languageRegistrationProgress);
 
 		return new StudentRegistrationProgress(
 			isRegistrationValid,
-			donatedHoursProgress,
-			csOrCpProgress);
+			hoursPerWeekProgress,
+			csOrCpProgress,
+			languageRegistrationProgress,
+			forGrade.RegistrationCriteria.CanUseForeignLanguageInsteadOfHoursPerWeek);
+	}
+
+	private static bool IsRegistrationValid(
+		Grade forGrade,
+		StudentHoursPerWeekProgress hoursPerWeekProgress,
+		StudentCsOrCpRegistrationProgress csOrCpProgress,
+		StudentLanguageRegistrationProgress languageProgress)
+	{
+		var isRegistrationValid = true;
+
+		// Determine based on csOrCp
+		if (csOrCpProgress.DoesRequireCsOrCpValidation)
+		{
+			isRegistrationValid &= csOrCpProgress.IsProgressComplete;
+		}
+
+		// Determine based on if student can use language instead of donated hours
+		if (forGrade.RegistrationCriteria.CanUseForeignLanguageInsteadOfHoursPerWeek
+			&& languageProgress.HasRegisteredLanguage)
+		{
+			// If language progress is sufficient, we should check, that the student doesn't have any other donated hours
+			isRegistrationValid &= hoursPerWeekProgress.AmountOfHoursPerWeekExcludingLanguages == 0;
+		}
+		else
+		{
+			// -> Cannot skip donated hours validation (more common)
+			isRegistrationValid &= hoursPerWeekProgress.IsProgressComplete;
+		}
+
+		// Determine based on language
+		if (languageProgress.IsLanguageRequired)
+		{
+			isRegistrationValid &= languageProgress.HasRegisteredLanguage;
+		}
+
+		return isRegistrationValid;
 	}
 }

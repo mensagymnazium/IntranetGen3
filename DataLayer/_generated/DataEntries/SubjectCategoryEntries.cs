@@ -15,10 +15,10 @@ public class SubjectCategoryEntries : Havit.Data.Patterns.DataEntries.DataEntrie
 	private MensaGymnazium.IntranetGen3.Model.SubjectCategory graduationSeminar;
 	private MensaGymnazium.IntranetGen3.Model.SubjectCategory specialisationSeminar;
 
-	public MensaGymnazium.IntranetGen3.Model.SubjectCategory ExtensionSeminar => extensionSeminar ??= GetEntry(MensaGymnazium.IntranetGen3.Model.SubjectCategory.Entry.ExtensionSeminar);
-	public MensaGymnazium.IntranetGen3.Model.SubjectCategory ForeignLanguage => foreignLanguage ??= GetEntry(MensaGymnazium.IntranetGen3.Model.SubjectCategory.Entry.ForeignLanguage);
-	public MensaGymnazium.IntranetGen3.Model.SubjectCategory GraduationSeminar => graduationSeminar ??= GetEntry(MensaGymnazium.IntranetGen3.Model.SubjectCategory.Entry.GraduationSeminar);
-	public MensaGymnazium.IntranetGen3.Model.SubjectCategory SpecialisationSeminar => specialisationSeminar ??= GetEntry(MensaGymnazium.IntranetGen3.Model.SubjectCategory.Entry.SpecialisationSeminar);
+	public MensaGymnazium.IntranetGen3.Model.SubjectCategory ExtensionSeminar => extensionSeminar ??= GetEntry(MensaGymnazium.IntranetGen3.Primitives.SubjectCategoryEntry.ExtensionSeminar);
+	public MensaGymnazium.IntranetGen3.Model.SubjectCategory ForeignLanguage => foreignLanguage ??= GetEntry(MensaGymnazium.IntranetGen3.Primitives.SubjectCategoryEntry.ForeignLanguage);
+	public MensaGymnazium.IntranetGen3.Model.SubjectCategory GraduationSeminar => graduationSeminar ??= GetEntry(MensaGymnazium.IntranetGen3.Primitives.SubjectCategoryEntry.GraduationSeminar);
+	public MensaGymnazium.IntranetGen3.Model.SubjectCategory SpecialisationSeminar => specialisationSeminar ??= GetEntry(MensaGymnazium.IntranetGen3.Primitives.SubjectCategoryEntry.SpecialisationSeminar);
 
 	public SubjectCategoryEntries(MensaGymnazium.IntranetGen3.DataLayer.Repositories.ISubjectCategoryRepository repository)
 		: base(repository)

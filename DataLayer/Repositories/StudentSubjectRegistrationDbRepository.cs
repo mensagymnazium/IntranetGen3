@@ -10,20 +10,19 @@ public partial class StudentSubjectRegistrationDbRepository : IStudentSubjectReg
 		return Data.Where(ssr => ssr.SubjectId == subjectId).ToListAsync(cancellationToken);
 	}
 
-	public Task<List<StudentSubjectRegistration>> GetRegistrationsByStudent(int studentId)
+	public Task<List<StudentSubjectRegistration>> GetActiveRegistrationsByStudentAsync(int studentId, CancellationToken cancellationToken = default)
 	{
 		return Data
 			.Include(ssr => ssr.Subject)
 			.ThenInclude(s => s.EducationalAreaRelations)
 			.ThenInclude(r => r.EducationalArea)
 			.Include(ssr => ssr.Subject.Category)
-			.Where(ssr => ssr.StudentId == studentId).ToListAsync();
+			.Where(ssr => ssr.StudentId == studentId)
+			.ToListAsync(cancellationToken);
 	}
 
-	public async Task<int> CountMainRegistrationsForSubjectAsync(int subjectId)
+	public async Task<int> CountMainRegistrationsForSubjectAsync(int subjectId, CancellationToken cancellationToken = default)
 	{
-		return await Data.CountAsync(
-			ssr => ssr.SubjectId == subjectId
-			&& ssr.RegistrationType == StudentRegistrationType.Main);
+		return await Data.CountAsync(ssr => (ssr.SubjectId == subjectId) && (ssr.RegistrationType == StudentRegistrationType.Main), cancellationToken);
 	}
 }

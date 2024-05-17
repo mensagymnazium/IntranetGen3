@@ -2,11 +2,29 @@
 
 <div>
     @* CSS Isolation *@
-
+    @if (showRocnikovkaWarning)
+    {
+        <HxAlert Color="ThemeColor.Danger">
+            <HxIcon Icon="@BootstrapIcon.ExclamationTriangleFill"/> 
+            <span>
+                Téma jednoho z vybraných předmětů se musí shodovat s tématem vaší <strong>ročníkové práce</strong>.
+            </span>
+        </HxAlert>
+    }
+    @if (showExtensionSeminarWarning)
+    {
+        <HxAlert Color="ThemeColor.Danger">
+            <HxIcon Icon="@BootstrapIcon.ExclamationTriangleFill"/> 
+            <span>
+                Upozorňujeme studenty nynější <b>kvarty a kvinty</b>, že do kvinty a sexty je potřeba zvolit jeden dvouletý <b>nadstavbový seminář</b>.
+                Po předchozí dohodě s vedením školy lze jako nadstavbový seminář zapsat i jakýkoliv jiný typ semináře.
+            </span>
+        </HxAlert>        
+    }
     <HxListLayout Title="Předměty"
                   TFilterModel="SubjectListQueryFilter"
-                  FilterModel="subjectListFilter"
-                  FilterModelChanged="HandleFilterModelChanged">
+                  @bind-FilterModel='subjectListFilter'
+                  @bind-FilterModel:after='subjectsGrid.RefreshDataAsync'>
         <CommandsTemplate>
             <AuthorizeView Roles="@nameof(Role.Administrator)">
                 <HxButton Text="Nový předmět" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />
@@ -14,6 +32,7 @@
         </CommandsTemplate>
         <FilterTemplate>
             <HxInputText @bind-Value="@context.Name" Label="Název" />
+            <GradePicker @bind-Value='@context.GradeId' Label='Ročník'/>
             <SubjectCategoryPicker @bind-Value="context.SubjectCategoryId" Label="Skupina" />
             <EducationalAreaPicker @bind-Value="@context.EducationalAreaId" Label="Vzdělávací oblast" />
             <TeacherPicker @bind-Value="context.TeacherId" Label="Vyučující" />

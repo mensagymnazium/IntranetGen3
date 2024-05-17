@@ -11,15 +11,23 @@ public record GradeRegistrationCriteria
 	/// What is total of donated hours needed.
 	/// The hours donated by languages are not counted in!
 	/// </summary>
-	public int RequiredTotalAmountOfDonatedHoursExcludingLanguage { get; set; }
+	public int RequiredTotalAmountOfHoursPerWeekExcludingLanguage { get; set; }
 
 	/// <summary>
-	/// Does the rule about needing N subjects from fields CSP or CP apply?
+	/// Does the rule about needing N subjects from ČS or ČP areas apply?
 	/// For 2023-2024 this applied to Septima, Oktava
 	/// </summary>
-	public bool RequiresCspOrCpValidation { get; set; }
+	public bool RequiresCsOrCpValidation { get; set; }
+
 	/// <summary>
-	/// How many hours in educational field Csp/cP
+	/// How many hours in educational field Cs/Cp
 	/// </summary>
-	public int RequiredAmountOfDonatedHoursInAreaCspOrCp { get; set; }
+	public int RequiredAmountOfHoursPerWeekInAreaCsOrCp { get; set; }
+
+	/// <summary>
+	/// Does the student need to have a foreign language
+	/// </summary>
+	public bool RequiresForeginLanguage { get; set; }
+
+	public bool CanUseForeignLanguageInsteadOfHoursPerWeek { get; set; }
 }

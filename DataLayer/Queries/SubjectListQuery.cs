@@ -26,9 +26,11 @@ public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 	{
 		var data = subjectDataSource.Data
 			.WhereIf(!String.IsNullOrWhiteSpace(Filter.Name), s => s.Name.Contains(Filter.Name))
-			.WhereIf(Filter.EducationalAreaId != null, s => s.EducationalAreaRelations.Any(r => r.EducationalAreaId == Filter.EducationalAreaId))
+			.WhereIf(Filter.EducationalAreaId != null,
+				s => s.EducationalAreaRelations.Any(r => r.EducationalAreaId == Filter.EducationalAreaId))
 			.WhereIf(Filter.SubjectCategoryId != null, s => s.CategoryId == Filter.SubjectCategoryId)
-			.WhereIf(Filter.TeacherId != null, s => s.TeacherRelations.Any(tr => tr.TeacherId == Filter.TeacherId));
+			.WhereIf(Filter.TeacherId != null, s => s.TeacherRelations.Any(tr => tr.TeacherId == Filter.TeacherId))
+			.WhereIf(Filter.GradeId is not null, s => s.GradeRelations.Any(g => g.GradeId == Filter.GradeId));
 
 		data = data
 			.OrderByMultiple(Sorting, sortingExpression => sortingExpression switch
@@ -61,12 +63,9 @@ public class SubjectListQuery : QueryBase<SubjectListItemDto>, ISubjectListQuery
 		return result;
 	}
 
-	public async Task<DataFragmentResult<SubjectListItemDto>> GetDataFragmentAsync(int startIndex, int? count, CancellationToken cancellationToken = default)
+	public async Task<DataFragmentResult<SubjectListItemDto>> GetDataFragmentResultAsync(int startIndex, int? count, CancellationToken cancellationToken = default)
 	{
-		return new()
-		{
-			Data = await SelectDataFragmentAsync(startIndex, count, cancellationToken),
-			TotalCount = await CountAsync(cancellationToken)
-		};
+		var dataFragment = await GetDataFragmentAsync(startIndex, count, cancellationToken);
+		return dataFragment.ToDataFragmentResult();
 	}
 }

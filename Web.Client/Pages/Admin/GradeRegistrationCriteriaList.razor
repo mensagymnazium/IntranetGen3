@@ -1,0 +1,39 @@
+﻿@attribute [Route(Routes.Administration.GradeRegistrationCriterias)]
+@attribute [Authorize(Roles = nameof(Role.Administrator))]
+
+<HxListLayout Title="Podmínky zápisů volitelných předmětů" TFilterModel="HxListLayout.NoFilter">
+    <DataTemplate>
+        <HxGrid @ref="gridComponent"
+                @bind-SelectedDataItem="itemSelected"
+				@bind-SelectedDataItem:after="HandleSelectedDataItemChanged"
+                DataProvider="GetData"
+                Responsive="true">
+            <Columns>
+                <HxGridColumn HeaderText="Ročník"
+                              ItemTextSelector="i => GetGradeName(i.GradeId)"
+                              SortKeySelector="i => -i.GradeId"
+                              IsDefaultSortColumn="true"/>
+                <HxGridColumn HeaderText="Počet hodin v rozvrhu (kromě jazyků)"
+                              ItemTextSelector="i => i.RequiredTotalAmountOfHoursPerWeekExcludingLanguage.ToString()"
+                              SortKeySelector="i => i.RequiredTotalAmountOfHoursPerWeekExcludingLanguage"/>
+                <HxGridColumn HeaderText="Vyžaduje cizí jazyk?"
+                              ItemTextSelector="@(i => i.RequiresForeignLanguage ? "ano" : "ne")"
+                              SortKeySelector="i => i.RequiresForeignLanguage"/>
+                <HxGridColumn HeaderText="Cizí jazyk místo hodin?"
+							  ItemTextSelector="@(i => i.CanUseForeignLanguageInsteadOfHoursPerWeek ? "ano" : "ne")"
+                              SortKeySelector="i => i.CanUseForeignLanguageInsteadOfHoursPerWeek"/>
+                <HxGridColumn HeaderText="Kontrola ČSP/ČS?"
+                              ItemTextSelector="@(i => i.RequiresCsOrCpValidation ? "ano" : "ne")"
+                              SortKeySelector="i => i.RequiresCsOrCpValidation"/>
+                <HxGridColumn HeaderText="Alespoň hodin z ČSP/ČS"
+                              ItemTextSelector="i => i.RequiredAmountOfHoursPerWeekInAreaCsOrCp.ToString()"
+                              SortKeySelector="i => i.RequiredAmountOfHoursPerWeekInAreaCsOrCp"/>
+            </Columns>
+        </HxGrid>
+    </DataTemplate>
+    <DetailTemplate>
+        <GradeRegistrationCriteriaEdit @ref="editComponent"
+                                       @bind-Value="itemInEdit"
+                                       OnClosed="HandleEditClosed"/>
+    </DetailTemplate>
+</HxListLayout>

@@ -14,8 +14,8 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                 name: "RegistrationCriteriaId",
                 table: "Grade",
                 type: "int",
-                nullable: false,
-                defaultValue: 0);
+                nullable: true,
+                defaultValue: null);
 
             migrationBuilder.CreateTable(
                 name: "GradeRegistrationCriteria",

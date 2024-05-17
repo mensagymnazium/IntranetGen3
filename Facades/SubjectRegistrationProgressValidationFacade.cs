@@ -43,13 +43,19 @@ public class SubjectRegistrationProgressValidationFacade : ISubjectRegistrationP
 		return new StudentRegistrationProgressDto(
 			obj.IsRegistrationValid,
 
-			obj.DonatedHoursProgress.AmountOfDonatedHoursExcludingLanguages,
-			obj.DonatedHoursProgress.RequiredAmountOfDonatedHoursExcludingLanguages,
-			obj.DonatedHoursProgress.MeetsCriteria,
+			obj.HoursPerWeekProgress.AmountOfHoursPerWeekExcludingLanguages,
+			obj.HoursPerWeekProgress.RequiredAmountOfHoursPerWeekExcludingLanguages,
+			obj.HoursPerWeekProgress.IsProgressComplete,
 
 			obj.CsOrCpRegistrationProgress.DoesRequireCsOrCpValidation,
-			obj.CsOrCpRegistrationProgress.AmountOfDonatedHoursInCsOrCp,
-			obj.CsOrCpRegistrationProgress.RequiredAmountOfDonatedHoursInCsOrCp,
-			obj.CsOrCpRegistrationProgress.MeetsCriteria);
+			obj.CsOrCpRegistrationProgress.AmountOfHoursPerWeekInCsOrCp,
+			obj.CsOrCpRegistrationProgress.RequiredMinimalAmountOfHoursPerWeekInCsOrCp,
+			obj.CsOrCpRegistrationProgress.IsProgressComplete,
+
+			obj.LanguageRegistrationProgress.IsLanguageRequired,
+			obj.LanguageRegistrationProgress.HasRegisteredLanguage,
+
+			obj.CanUseLanguageInsteadOfHoursPerWeek
+		);
 	}
 }

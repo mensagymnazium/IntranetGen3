@@ -17,7 +17,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.5")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -97,14 +97,15 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
 
                     b.Property<string>("AadGroupId")
                         .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                        .HasColumnType("nvarchar(36)")
+                        .HasAnnotation("SuppressModelValidatorRule_OnlyForeignKeyPropertiesCanEndWithId", true);
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("RegistrationCriteriaId")
+                    b.Property<int?>("RegistrationCriteriaId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -123,13 +124,19 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.Property<int>("Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("RequiredAmountOfDonatedHoursInAreaCspOrCp")
+                    b.Property<bool>("CanUseForeignLanguageInsteadOfHoursPerWeek")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RequiredAmountOfHoursPerWeekInAreaCsOrCp")
                         .HasColumnType("int");
 
-                    b.Property<int>("RequiredTotalAmountOfDonatedHoursExcludingLanguage")
+                    b.Property<int>("RequiredTotalAmountOfHoursPerWeekExcludingLanguage")
                         .HasColumnType("int");
 
-                    b.Property<bool>("RequiresCspOrCpValidation")
+                    b.Property<bool>("RequiresCsOrCpValidation")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("RequiresForeginLanguage")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
@@ -196,7 +203,8 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("SeedEntityId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SuppressModelValidatorRule_OnlyForeignKeyPropertiesCanEndWithId", true);
 
                     b.HasKey("Id");
 
@@ -228,7 +236,8 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("SeededEntityId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasAnnotation("SuppressModelValidatorRule_OnlyForeignKeyPropertiesCanEndWithId", true);
 
                     b.HasKey("Id");
 
@@ -454,8 +463,7 @@ namespace MensaGymnazium.IntranetGen3.Entity.Migrations
                     b.HasOne("MensaGymnazium.IntranetGen3.Model.GradeRegistrationCriteria", "RegistrationCriteria")
                         .WithMany()
                         .HasForeignKey("RegistrationCriteriaId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("RegistrationCriteria");
                 });

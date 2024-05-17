@@ -49,42 +49,80 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 	}
 
 	[Authorize(Roles = nameof(Role.Student))]
-	public async Task CreateRegistrationAsync(StudentSubjectRegistrationCreateDto studentSubjectRegistrationCreateDto, CancellationToken cancellationToken = default)
+	public async Task CreateRegistrationAsync(
+		StudentSubjectRegistrationCreateDto studentSubjectRegistrationCreateDto,
+		CancellationToken cancellationToken = default)
 	{
 		// Verify request
 		Contract.Requires<ArgumentNullException>(studentSubjectRegistrationCreateDto is not null);
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.SubjectId != default);
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.RegistrationType != default);
 
-		// Verify registration date
-		if (!_subjectRegistrationsManagerService.IsRegistrationPeriodActive())
-		{
-			throw new OperationFailedException(
-								"Přihlášku není možné vytvořit. Je před, nebo již po termínu přihlašování");
-		}
-
-		// Verify student isn't already registered for this subject
+		// Get student
 		var currentUser = _applicationAuthenticationService.GetCurrentUser();
-		if (await _subjectRegistrationsManagerService.IsSubjectRegisteredForStudent(studentSubjectRegistrationCreateDto.SubjectId.Value, currentUser.StudentId.Value))
-		{
-			throw new OperationFailedException("Student už je přihlášený");
-		}
+		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
 
-		// Verify subject isn't full
-		if (await _subjectRegistrationsManagerService
-				.IsSubjectCapacityFullAsync(studentSubjectRegistrationCreateDto.SubjectId.Value))
+		// Check that student can make the registration
+		var canCreateRegistrationResult =
+			await CanStudentCreateRegistrationAsync(studentSubjectRegistrationCreateDto, cancellationToken);
+		if (!canCreateRegistrationResult.IsRegistrationPossible)
 		{
-			throw new OperationFailedException("Předmět je již plný");
+			throw new OperationFailedException(canCreateRegistrationResult.Reason);
 		}
 
 		// Create registration
-		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
-
 		_subjectRegistrationsManagerService.CreateNewSubjectRegistration(
 			studentId: currentUser.StudentId.Value,
 			subjectId: studentSubjectRegistrationCreateDto.SubjectId.Value,
 			registrationType: studentSubjectRegistrationCreateDto.RegistrationType.Value);
 
 		await _unitOfWork.CommitAsync(cancellationToken);
+	}
+
+	public async Task<StudentSubjectRegistrationPossibilityDto> CanStudentCreateRegistrationAsync(
+		StudentSubjectRegistrationCreateDto studentSubjectRegistrationCreateDto,
+		CancellationToken cancellationToken = default)
+	{
+		var currentUser = _applicationAuthenticationService.GetCurrentUser();
+		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
+		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.SubjectId != default);
+		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.RegistrationType != default);
+
+		// Verify registration date
+		if (!_subjectRegistrationsManagerService.IsRegistrationPeriodActive())
+		{
+			return StudentSubjectRegistrationPossibilityDto.CreateNotPossible("Přihlášku není možné vytvořit. Je před, nebo již po termínu přihlašování");
+		}
+
+		// Verify student isn't already registered for this subject
+		if (await _subjectRegistrationsManagerService
+				.IsSubjectRegisteredForStudentAsync(studentSubjectRegistrationCreateDto.SubjectId.Value, currentUser.StudentId.Value, cancellationToken))
+		{
+			return StudentSubjectRegistrationPossibilityDto.CreateNotPossible("Na předmět již máte přihlášku");
+		}
+
+		// Verify subject isn't full
+		if (await _subjectRegistrationsManagerService
+				.IsSubjectCapacityFullAsync(studentSubjectRegistrationCreateDto.SubjectId.Value, cancellationToken))
+		{
+			return StudentSubjectRegistrationPossibilityDto.CreateNotPossible("Předmět je již plný");
+		}
+
+		// Verify student is in correct grade
+		if (!await _subjectRegistrationsManagerService
+				.IsStudentInAssignableGrade(currentUser.StudentId.Value, studentSubjectRegistrationCreateDto.SubjectId.Value, cancellationToken))
+		{
+			return StudentSubjectRegistrationPossibilityDto.CreateNotPossible("Předmět není určený pro váš ročník");
+		}
+
+		// Verify student doesn't already have reached `hours per week` limit
+		if (await _subjectRegistrationsManagerService
+				.DidStudentAlreadyReachHoursPerWeekLimit(currentUser.StudentId.Value,
+					studentSubjectRegistrationCreateDto.SubjectId.Value, cancellationToken))
+		{
+			return StudentSubjectRegistrationPossibilityDto.CreateNotPossible("Již jste dosáhl maximálního počtu hodin za týden");
+		}
+
+		return StudentSubjectRegistrationPossibilityDto.CreateYesPossible();
 	}
 }

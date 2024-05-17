@@ -21,4 +21,9 @@ public class GradeSeed : DataSeed<CoreProfile>
 
 		Seed(For(data).PairBy(grade => grade.Id)); // TODO WithoutUpdate nebo bez AadGroupId? 
 	}
+
+	public override IEnumerable<Type> GetPrerequisiteDataSeeds()
+	{
+		yield return typeof(GradeRegistrationCriteriaSeed);
+	}
 }
