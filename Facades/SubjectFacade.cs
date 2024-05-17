@@ -120,7 +120,9 @@ public class SubjectFacade : ISubjectFacade
 				Id = s.Id,
 				Name = s.Name,
 				IsDeleted = s.Deleted is not null,
-				CategoryId = s.CategoryId
+				CategoryId = s.CategoryId,
+				ScheduleDayOfWeek = s.ScheduleDayOfWeek,
+				ScheduleSlotInDay = s.ScheduleSlotInDay
 			})
 			.ToList();
 	}
