@@ -9,18 +9,18 @@ namespace MensaGymnazium.IntranetGen3.Facades;
 [Authorize]
 public class GradeFacade : IGradeFacade
 {
-	private readonly IGradeRepository gradeRepository;
-	private readonly IUnitOfWork unitOfWork;
+	private readonly IGradeRepository _gradeRepository;
+	private readonly IUnitOfWork _unitOfWork;
 
 	public GradeFacade(IGradeRepository gradeRepository, IUnitOfWork unitOfWork)
 	{
-		this.gradeRepository = gradeRepository;
-		this.unitOfWork = unitOfWork;
+		_gradeRepository = gradeRepository;
+		_unitOfWork = unitOfWork;
 	}
 
 	public async Task<List<GradeDto>> GetAllGradesAsync(CancellationToken cancellationToken = default)
 	{
-		var data = await gradeRepository.GetAllAsync(cancellationToken);
+		var data = await _gradeRepository.GetAllAsync(cancellationToken);
 
 		return data
 			.Select(g => new GradeDto()
@@ -35,7 +35,7 @@ public class GradeFacade : IGradeFacade
 	public async Task<List<GradeRegistrationCriteriaDto>> GetGradeRegistrationCriteriasAsync(CancellationToken cancellationToken = default)
 	{
 		// Only ever get 8 elements, so we can load all to memory
-		var grades = await gradeRepository.GetAllAsync(cancellationToken);
+		var grades = await _gradeRepository.GetAllAsync(cancellationToken);
 
 		return grades
 			.Select(g => new GradeRegistrationCriteriaDto()
@@ -71,12 +71,12 @@ public class GradeFacade : IGradeFacade
 			throw new InvalidOperationException("Ročník nemůže vyžadovat jazyk a zároveň ho využít namísto hodin v rozvrhu");
 		}
 
-		var grade = await gradeRepository.GetObjectAsync(model.GradeId, cancellationToken);
+		var grade = await _gradeRepository.GetObjectAsync(model.GradeId, cancellationToken);
 
 		MapRegistrationCriteriaFromDTO(model, grade.RegistrationCriteria);
 
-		unitOfWork.AddForUpdate(grade);
-		await unitOfWork.CommitAsync(cancellationToken);
+		_unitOfWork.AddForUpdate(grade);
+		await _unitOfWork.CommitAsync(cancellationToken);
 	}
 
 	private void MapRegistrationCriteriaFromDTO(GradeRegistrationCriteriaDto dto, GradeRegistrationCriteria criteria)

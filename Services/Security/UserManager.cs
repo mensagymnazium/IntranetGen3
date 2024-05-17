@@ -9,11 +9,11 @@ namespace MensaGymnazium.IntranetGen3.Services.Security;
 [Service]
 public class UserManager : IUserManager
 {
-	private readonly IApplicationAuthenticationService applicationAuthenticationService;
+	private readonly IApplicationAuthenticationService _applicationAuthenticationService;
 
 	public UserManager(IApplicationAuthenticationService applicationAuthenticationService)
 	{
-		this.applicationAuthenticationService = applicationAuthenticationService;
+		_applicationAuthenticationService = applicationAuthenticationService;
 	}
 
 	public Task<IList<Role>> GetRolesAsync(User user, ClaimsPrincipal principal = null, CancellationToken cancellationToken = default)
@@ -32,7 +32,7 @@ public class UserManager : IUserManager
 			roles.Add(Role.Teacher);
 		}
 
-		principal ??= applicationAuthenticationService.GetCurrentClaimsPrincipal();
+		principal ??= _applicationAuthenticationService.GetCurrentClaimsPrincipal();
 		if (principal.HasClaim(ClaimConstants.GroupClaimType, AadGroupIds.Administrators))
 		{
 			roles.Add(Role.Administrator);

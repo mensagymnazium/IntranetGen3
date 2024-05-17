@@ -8,18 +8,18 @@ namespace MensaGymnazium.IntranetGen3.Services;
 [Service]
 public class SubjectMapper : ISubjectMapper
 {
-	private readonly IDataLoader dataLoader;
-	private readonly IUnitOfWork unitOfWork;
-	private readonly IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository;
+	private readonly IDataLoader _dataLoader;
+	private readonly IUnitOfWork _unitOfWork;
+	private readonly IStudentSubjectRegistrationRepository _studentSubjectRegistrationRepository;
 
 	public SubjectMapper(
 		IDataLoader dataLoader,
 		IUnitOfWork unitOfWork,
 		IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository)
 	{
-		this.dataLoader = dataLoader;
-		this.unitOfWork = unitOfWork;
-		this.studentSubjectRegistrationRepository = studentSubjectRegistrationRepository;
+		_dataLoader = dataLoader;
+		_unitOfWork = unitOfWork;
+		_studentSubjectRegistrationRepository = studentSubjectRegistrationRepository;
 	}
 
 	public async Task MapFromSubjectDtoAsync(SubjectDto subjectDto, Subject subject, CancellationToken cancellationToken = default)
@@ -29,10 +29,10 @@ public class SubjectMapper : ISubjectMapper
 
 		if (subject.Id != default)
 		{
-			await dataLoader.LoadAsync(subject, s => s.TeacherRelations, cancellationToken);
-			await dataLoader.LoadAsync(subject, s => s.EducationalAreaRelations, cancellationToken);
-			await dataLoader.LoadAsync(subject, s => s.GradeRelations, cancellationToken);
-			await dataLoader.LoadAsync(subject, s => s.GraduationSubjectRelations, cancellationToken);
+			await _dataLoader.LoadAsync(subject, s => s.TeacherRelations, cancellationToken);
+			await _dataLoader.LoadAsync(subject, s => s.EducationalAreaRelations, cancellationToken);
+			await _dataLoader.LoadAsync(subject, s => s.GradeRelations, cancellationToken);
+			await _dataLoader.LoadAsync(subject, s => s.GraduationSubjectRelations, cancellationToken);
 		}
 
 		subject.Name = subjectDto.Name;
@@ -51,7 +51,7 @@ public class SubjectMapper : ISubjectMapper
 			newItemCreateFunc: s => new SubjectTeacherRelation { SubjectId = subject.Id, TeacherId = s },
 			updateItemAction: (s, t) => t.TeacherId = s,
 			removeItemAction: t => { });
-		unitOfWork.AddUpdateFromResult(teacherRelationsUpdateFromResult);
+		_unitOfWork.AddUpdateFromResult(teacherRelationsUpdateFromResult);
 
 		var typeRelationsUpdateFromResult = subject.EducationalAreaRelations.UpdateFrom(subjectDto.EducationalAreaIds,
 			targetKeySelector: t => t.EducationalAreaId,
@@ -59,7 +59,7 @@ public class SubjectMapper : ISubjectMapper
 			newItemCreateFunc: s => new EducationalAreaRelation { SubjectId = subject.Id, EducationalAreaId = s },
 			updateItemAction: (s, t) => t.EducationalAreaId = s,
 			removeItemAction: t => { });
-		unitOfWork.AddUpdateFromResult(typeRelationsUpdateFromResult);
+		_unitOfWork.AddUpdateFromResult(typeRelationsUpdateFromResult);
 
 		var graduationSubjectRelationsUpdateFromResult = subject.GraduationSubjectRelations.UpdateFrom(subjectDto.GraduationSubjectIds,
 			targetKeySelector: t => t.GraduationSubjectId,
@@ -67,7 +67,7 @@ public class SubjectMapper : ISubjectMapper
 			newItemCreateFunc: s => new GraduationSubjectRelation { SubjectId = subject.Id, GraduationSubjectId = s },
 			updateItemAction: (s, t) => t.GraduationSubjectId = s,
 			removeItemAction: t => { });
-		unitOfWork.AddUpdateFromResult(graduationSubjectRelationsUpdateFromResult);
+		_unitOfWork.AddUpdateFromResult(graduationSubjectRelationsUpdateFromResult);
 
 		var gradeRelationsUpdateFromResult = subject.GradeRelations.UpdateFrom(subjectDto.GradeIds,
 			targetKeySelector: t => t.GradeId,
@@ -75,7 +75,7 @@ public class SubjectMapper : ISubjectMapper
 			newItemCreateFunc: s => new SubjectGradeRelation { SubjectId = subject.Id, GradeId = s },
 			updateItemAction: (s, t) => t.GradeId = s,
 			removeItemAction: t => { });
-		unitOfWork.AddUpdateFromResult(gradeRelationsUpdateFromResult);
+		_unitOfWork.AddUpdateFromResult(gradeRelationsUpdateFromResult);
 
 	}
 
@@ -83,12 +83,12 @@ public class SubjectMapper : ISubjectMapper
 	{
 		Contract.Requires<ArgumentNullException>(subject is not null);
 
-		await dataLoader.LoadAsync(subject, s => s.TeacherRelations, cancellationToken);
-		await dataLoader.LoadAsync(subject, s => s.GradeRelations, cancellationToken);
-		await dataLoader.LoadAsync(subject, s => s.EducationalAreaRelations, cancellationToken);
-		await dataLoader.LoadAsync(subject, s => s.GraduationSubjectRelations, cancellationToken);
+		await _dataLoader.LoadAsync(subject, s => s.TeacherRelations, cancellationToken);
+		await _dataLoader.LoadAsync(subject, s => s.GradeRelations, cancellationToken);
+		await _dataLoader.LoadAsync(subject, s => s.EducationalAreaRelations, cancellationToken);
+		await _dataLoader.LoadAsync(subject, s => s.GraduationSubjectRelations, cancellationToken);
 
-		var studentRegistrations = await studentSubjectRegistrationRepository.GetBySubjectAsync(subject.Id, cancellationToken);
+		var studentRegistrations = await _studentSubjectRegistrationRepository.GetBySubjectAsync(subject.Id, cancellationToken);
 
 		return new SubjectDto
 		{
