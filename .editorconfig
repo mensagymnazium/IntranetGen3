@@ -1,4 +1,14 @@
-﻿# C# files
+﻿# ALL FILES
+[*]
+
+indent_style = tab
+indent_size = 4
+trim_trailing_whitespace = true
+spelling_languages = en-us,cs-cz
+spelling_exclusion_path = ./exclusion.dic
+
+
+# C# files
 [*.cs]
 
 ####################################
@@ -40,6 +50,7 @@ csharp_prefer_braces = true:warning
 
 # 'using' directive preferences
 csharp_using_directive_placement = outside_namespace:warning
+csharp_style_namespace_declarations = file_scoped:suggestion
 
 ####################################
 # C# Formatting Rules              #
@@ -55,7 +66,85 @@ csharp_indent_block_contents = true:warning
 # Naming Conventions               #
 ####################################
 
-#Default rules apply! (IDE1006 severity makes them mandatory) https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/naming-rules#default-naming-styles
+# Naming rules
+## constant fields should be PascalCase
+dotnet_naming_rule.constant_fields_should_be_pascal_case.severity = warning
+dotnet_naming_rule.constant_fields_should_be_pascal_case.symbols  = constant_fields
+dotnet_naming_rule.constant_fields_should_be_pascal_case.style    = pascal_case
+
+dotnet_naming_rule.interface_should_be_begins_with_i.severity = warning
+dotnet_naming_rule.interface_should_be_begins_with_i.symbols = interface
+dotnet_naming_rule.interface_should_be_begins_with_i.style = begins_with_i
+
+# Disabled for now, does not allow underscore in names (e.g. Product_Category)
+#dotnet_naming_rule.types_should_be_pascal_case.severity = warning
+#dotnet_naming_rule.types_should_be_pascal_case.symbols = types
+#dotnet_naming_rule.types_should_be_pascal_case.style = pascal_case
+
+dotnet_naming_rule.property_should_be_pascal_case.severity = warning
+dotnet_naming_rule.property_should_be_pascal_case.symbols = property
+dotnet_naming_rule.property_should_be_pascal_case.style = pascal_case
+
+dotnet_naming_rule.non_field_members_should_be_pascal_case.severity = warning
+dotnet_naming_rule.non_field_members_should_be_pascal_case.symbols = non_field_members
+dotnet_naming_rule.non_field_members_should_be_pascal_case.style = pascal_case
+
+dotnet_naming_rule.private_or_internal_field_should_be_s_camelcase.severity = warning
+dotnet_naming_rule.private_or_internal_field_should_be_s_camelcase.symbols = private_or_internal_static_field
+dotnet_naming_rule.private_or_internal_field_should_be_s_camelcase.style = s_camelcase
+
+dotnet_naming_rule.private_or_internal_field_should_be__camelcase.severity = warning
+dotnet_naming_rule.private_or_internal_field_should_be__camelcase.symbols = private_or_internal_field
+dotnet_naming_rule.private_or_internal_field_should_be__camelcase.style = _camelcase
+
+# Symbol specifications
+dotnet_naming_symbols.constant_fields.applicable_kinds   = field
+dotnet_naming_symbols.constant_fields.required_modifiers = const
+
+dotnet_naming_symbols.interface.applicable_kinds = interface
+dotnet_naming_symbols.interface.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.interface.required_modifiers = 
+
+dotnet_naming_symbols.property.applicable_kinds = property
+dotnet_naming_symbols.property.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.property.required_modifiers = 
+
+dotnet_naming_symbols.private_or_internal_static_field.applicable_kinds = field
+dotnet_naming_symbols.private_or_internal_static_field.applicable_accessibilities = internal, private, private_protected
+dotnet_naming_symbols.private_or_internal_static_field.required_modifiers = static
+
+dotnet_naming_symbols.private_or_internal_field.applicable_kinds = field
+dotnet_naming_symbols.private_or_internal_field.applicable_accessibilities = internal, private, private_protected
+dotnet_naming_symbols.private_or_internal_field.required_modifiers = 
+
+dotnet_naming_symbols.types.applicable_kinds = class, struct, interface, enum
+dotnet_naming_symbols.types.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.types.required_modifiers = 
+
+dotnet_naming_symbols.non_field_members.applicable_kinds = property, event, method
+dotnet_naming_symbols.non_field_members.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.non_field_members.required_modifiers = 
+
+# Naming styles
+dotnet_naming_style.pascal_case.required_prefix = 
+dotnet_naming_style.pascal_case.required_suffix = 
+dotnet_naming_style.pascal_case.word_separator = 
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+dotnet_naming_style.begins_with_i.required_prefix = I
+dotnet_naming_style.begins_with_i.required_suffix = 
+dotnet_naming_style.begins_with_i.word_separator = 
+dotnet_naming_style.begins_with_i.capitalization = pascal_case
+
+dotnet_naming_style._camelcase.required_prefix = _
+dotnet_naming_style._camelcase.required_suffix = 
+dotnet_naming_style._camelcase.word_separator = 
+dotnet_naming_style._camelcase.capitalization = camel_case
+
+dotnet_naming_style.s_camelcase.required_prefix = s_
+dotnet_naming_style.s_camelcase.required_suffix = 
+dotnet_naming_style.s_camelcase.word_separator = 
+dotnet_naming_style.s_camelcase.capitalization = camel_case
 
 ###############################
 #### IDE analyzers options ####
@@ -64,16 +153,15 @@ csharp_indent_block_contents = true:warning
 dotnet_diagnostic.IDE0009.severity = warning # Member access should be qualified
 dotnet_diagnostic.IDE0011.severity = warning # Add braces
 dotnet_diagnostic.IDE0035.severity = warning # Unreachable code detected
+dotnet_diagnostic.IDE0037.severity = none    # Use inferred member name
 dotnet_diagnostic.IDE0040.severity = warning # Use accessibility modifiers
 dotnet_diagnostic.IDE0048.severity = warning # Add parenthesis for clarity
 dotnet_diagnostic.IDE0055.severity = warning # Fix formating
 dotnet_diagnostic.IDE0065.severity = warning # Misplaced using directive
-dotnet_diagnostic.IDE1006.severity = warning # Naming Styles
+dotnet_diagnostic.IDE1006.severity = suggestion # Naming Styles
 
 
 #### FxCop analyzers options ####
-# Adopted from:
-# \\topol.havit.local\Library\VS2019\CodeAnalysis\HavitMain.ruleset
 
 dotnet_diagnostic.CA1010.severity=warning
 dotnet_diagnostic.CA1012.severity=warning
@@ -94,9 +182,29 @@ dotnet_diagnostic.CA1065.severity=warning
 dotnet_diagnostic.CA1500.severity=warning
 dotnet_diagnostic.CA1504.severity=warning
 
+# CA1707: Identifiers should not contain underscores
+dotnet_diagnostic.CA1707.severity=none
+
 # CA1822: Member '{0}' does not access instance data and can be marked as static
 dotnet_diagnostic.CA1822.severity=none
-csharp_style_namespace_declarations=file_scoped:silent
+
+# CA2016: Forward the CancellationToken parameter to methods that take one
+dotnet_diagnostic.CA2016.severity = warning
+
+# RCS1036: Remove unnecessary blank line.
+dotnet_diagnostic.RCS1036.severity = none
+
+# RCS1032: Remove redundant parentheses.
+dotnet_diagnostic.RCS1032.severity = none
+
+# RCS1021: Convert lambda expression body to expression body.
+dotnet_diagnostic.RCS1021.severity = silent
+
+# IDE0090: Use 'new(...)'
+dotnet_diagnostic.IDE0090.severity = silent
+
+# IDE0063: Use simple 'using' statement
+dotnet_diagnostic.IDE0063.severity = silent
 
 [*/Migrations/*.cs]
 generated_code=true

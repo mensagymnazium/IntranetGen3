@@ -12,39 +12,39 @@ namespace MensaGymnazium.IntranetGen3.Facades;
 [Authorize]
 public class StudentSubjectRegistrationFacade : IStudentSubjectRegistrationFacade
 {
-	private readonly IStudentSubjectActiveRegistrationListQuery studentSubjectActiveActiveRegistrationsListQuery;
-	private readonly IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository;
-	private readonly IUnitOfWork unitOfWork;
-	private readonly IApplicationAuthenticationService applicationAuthenticationService;
+	private readonly IStudentSubjectActiveRegistrationListQuery _studentSubjectActiveActiveRegistrationsListQuery;
+	private readonly IStudentSubjectRegistrationRepository _studentSubjectRegistrationRepository;
+	private readonly IUnitOfWork _unitOfWork;
+	private readonly IApplicationAuthenticationService _applicationAuthenticationService;
 
 	public StudentSubjectRegistrationFacade(
 		IStudentSubjectActiveRegistrationListQuery studentSubjectActiveActiveRegistrationsListQuery,
 		IStudentSubjectRegistrationRepository studentSubjectRegistrationRepository,
 		IUnitOfWork unitOfWork, IApplicationAuthenticationService applicationAuthenticationService)
 	{
-		this.studentSubjectActiveActiveRegistrationsListQuery = studentSubjectActiveActiveRegistrationsListQuery;
-		this.studentSubjectRegistrationRepository = studentSubjectRegistrationRepository;
-		this.unitOfWork = unitOfWork;
-		this.applicationAuthenticationService = applicationAuthenticationService;
+		_studentSubjectActiveActiveRegistrationsListQuery = studentSubjectActiveActiveRegistrationsListQuery;
+		_studentSubjectRegistrationRepository = studentSubjectRegistrationRepository;
+		_unitOfWork = unitOfWork;
+		_applicationAuthenticationService = applicationAuthenticationService;
 	}
 
 	public async Task<DataFragmentResult<StudentSubjectRegistrationDto>> GetStudentSubjectActiveRegistrationsListAsync(DataFragmentRequest<StudentSubjectRegistrationListQueryFilter> studentSubjectRegistrationListRequest, CancellationToken cancellationToken = default)
 	{
 		Contract.Requires<ArgumentNullException>(studentSubjectRegistrationListRequest is not null);
 
-		studentSubjectActiveActiveRegistrationsListQuery.Filter = studentSubjectRegistrationListRequest.Filter;
-		studentSubjectActiveActiveRegistrationsListQuery.Sorting = studentSubjectRegistrationListRequest.Sorting;
+		_studentSubjectActiveActiveRegistrationsListQuery.Filter = studentSubjectRegistrationListRequest.Filter;
+		_studentSubjectActiveActiveRegistrationsListQuery.Sorting = studentSubjectRegistrationListRequest.Sorting;
 
-		return await studentSubjectActiveActiveRegistrationsListQuery.GetDataFragmentResultAsync(studentSubjectRegistrationListRequest.StartIndex, studentSubjectRegistrationListRequest.Count, cancellationToken);
+		return await _studentSubjectActiveActiveRegistrationsListQuery.GetDataFragmentResultAsync(studentSubjectRegistrationListRequest.StartIndex, studentSubjectRegistrationListRequest.Count, cancellationToken);
 	}
 
 	[Authorize(Roles = nameof(Role.Student))]
 	public async Task<List<StudentSubjectRegistrationDto>> GetAllRegistrationsOfCurrentStudentAsync(CancellationToken cancellationToken = default)
 	{
-		var currentUser = applicationAuthenticationService.GetCurrentUser();
+		var currentUser = _applicationAuthenticationService.GetCurrentUser();
 		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
 
-		var registrations = await studentSubjectRegistrationRepository.GetActiveRegistrationsByStudentAsync(currentUser.StudentId.Value, cancellationToken);
+		var registrations = await _studentSubjectRegistrationRepository.GetActiveRegistrationsByStudentAsync(currentUser.StudentId.Value, cancellationToken);
 
 		// Map
 		var response = registrations.Select(r => new StudentSubjectRegistrationDto()
@@ -67,8 +67,8 @@ public class StudentSubjectRegistrationFacade : IStudentSubjectRegistrationFacad
 		var registration = new StudentSubjectRegistration();
 		MapRegistrationFromDto(registrationDto, registration);
 
-		unitOfWork.AddForInsert(registration);
-		await unitOfWork.CommitAsync(cancellationToken);
+		_unitOfWork.AddForInsert(registration);
+		await _unitOfWork.CommitAsync(cancellationToken);
 
 		return Dto.FromValue(registration.Id);
 	}
@@ -79,12 +79,12 @@ public class StudentSubjectRegistrationFacade : IStudentSubjectRegistrationFacad
 		Contract.Requires<ArgumentNullException>(registrationDto != null);
 		Contract.Requires<ArgumentException>(registrationDto.Id != default);
 
-		var registration = await studentSubjectRegistrationRepository.GetObjectAsync(registrationDto.Id, cancellationToken);
+		var registration = await _studentSubjectRegistrationRepository.GetObjectAsync(registrationDto.Id, cancellationToken);
 
 		MapRegistrationFromDto(registrationDto, registration);
 
-		unitOfWork.AddForUpdate(registration);
-		await unitOfWork.CommitAsync(cancellationToken);
+		_unitOfWork.AddForUpdate(registration);
+		await _unitOfWork.CommitAsync(cancellationToken);
 	}
 
 	private void MapRegistrationFromDto(StudentSubjectRegistrationDto registrationDto, StudentSubjectRegistration registration)
@@ -97,9 +97,9 @@ public class StudentSubjectRegistrationFacade : IStudentSubjectRegistrationFacad
 	[Authorize(Roles = nameof(Role.Administrator))]
 	public async Task DeleteRegistrationAsync(Dto<int> registrationIdDto, CancellationToken cancellationToken = default)
 	{
-		var registration = await studentSubjectRegistrationRepository.GetObjectAsync(registrationIdDto.Value, cancellationToken);
-		unitOfWork.AddForDelete(registration);
+		var registration = await _studentSubjectRegistrationRepository.GetObjectAsync(registrationIdDto.Value, cancellationToken);
+		_unitOfWork.AddForDelete(registration);
 
-		await unitOfWork.CommitAsync(cancellationToken);
+		await _unitOfWork.CommitAsync(cancellationToken);
 	}
 }

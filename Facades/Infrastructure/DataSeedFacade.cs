@@ -16,15 +16,15 @@ namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure;
 
 public class DataSeedFacade : IDataSeedFacade
 {
-	private readonly IDataSeedRunner dataSeedRunner;
-	private readonly ICacheService cacheService;
+	private readonly IDataSeedRunner _dataSeedRunner;
+	private readonly ICacheService _cacheService;
 
 	public DataSeedFacade(
 		IDataSeedRunner dataSeedRunner,
 		ICacheService cacheService)
 	{
-		this.dataSeedRunner = dataSeedRunner;
-		this.cacheService = cacheService;
+		_dataSeedRunner = dataSeedRunner;
+		_cacheService = cacheService;
 	}
 
 	/// <summary>
@@ -42,9 +42,9 @@ public class DataSeedFacade : IDataSeedFacade
 			throw new OperationFailedException($"Profil {profileName} nebyl nalezen.");
 		}
 
-		dataSeedRunner.SeedData(type, forceRun: true);
+		_dataSeedRunner.SeedData(type, forceRun: true);
 
-		cacheService.Clear();
+		_cacheService.Clear();
 
 		return Task.CompletedTask;
 	}

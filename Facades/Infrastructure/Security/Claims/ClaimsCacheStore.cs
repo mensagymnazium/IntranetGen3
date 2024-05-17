@@ -5,30 +5,31 @@ using Microsoft.Extensions.Caching.Memory;
 namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Claims;
 
 /// <summary>
-/// (In-memory) cache claimů. 
+/// (In-memory) cache claimů.
 /// </summary>
 [Service(Profile = ServiceProfiles.WebServer)]
 public class ClaimsCacheStore : IClaimsCacheStore
 {
-	private readonly IMemoryCache cache;
+	private readonly IMemoryCache _cache;
 
 	public ClaimsCacheStore(Microsoft.Extensions.Caching.Memory.IMemoryCache cache)
 	{
-		this.cache = cache;
+		_cache = cache;
 	}
 
 	public List<Claim> GetClaims(UserContextInfo userContextInfo)
 	{
-		if (cache.TryGetValue(GetCacheKey(userContextInfo), out List<Claim> result))
+		if (_cache.TryGetValue(GetCacheKey(userContextInfo), out List<Claim> result))
 		{
 			return result;
 		}
+
 		return null;
 	}
 
 	public void StoreClaims(UserContextInfo userContextInfo, List<Claim> claims)
 	{
-		cache.Set(GetCacheKey(userContextInfo), claims, new MemoryCacheEntryOptions
+		_cache.Set(GetCacheKey(userContextInfo), claims, new MemoryCacheEntryOptions
 		{
 			Priority = CacheItemPriority.Low,
 			AbsoluteExpirationRelativeToNow = new TimeSpan(0, 15, 0) /* 15 minut */

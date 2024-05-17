@@ -10,18 +10,18 @@ namespace MensaGymnazium.IntranetGen3.Services.Security;
 [Service]
 public class UserOnboarder : IUserOnboarder
 {
-	private readonly IUserRepository userRepository;
-	private readonly IGradeRepository gradeRepository;
-	private readonly IUnitOfWork unitOfWork;
+	private readonly IUserRepository _userRepository;
+	private readonly IGradeRepository _gradeRepository;
+	private readonly IUnitOfWork _unitOfWork;
 
 	public UserOnboarder(
 		IUserRepository userRepository,
 		IGradeRepository gradeRepository,
 		IUnitOfWork unitOfWork)
 	{
-		this.userRepository = userRepository;
-		this.gradeRepository = gradeRepository;
-		this.unitOfWork = unitOfWork;
+		_userRepository = userRepository;
+		_gradeRepository = gradeRepository;
+		_unitOfWork = unitOfWork;
 	}
 
 	/// <inheritdoc />
@@ -36,23 +36,23 @@ public class UserOnboarder : IUserOnboarder
 			throw new SecurityException("Email uživatele se nepodařilo vyhodnotit.");
 		}
 
-		var user = await userRepository.GetByEmailAsync(email, cancellationToken);
+		var user = await _userRepository.GetByEmailAsync(email, cancellationToken);
 		if (user != null)
 		{
-			unitOfWork.AddForUpdate(user);
+			_unitOfWork.AddForUpdate(user);
 		}
 		else
 		{
 			user = new User();
-			unitOfWork.AddForInsert(user);
+			_unitOfWork.AddForInsert(user);
 		}
 
 		user.Oid = oid;
 		await UpdateUserCoreAsync(user, principal);
 
-		unitOfWork.AddForUpdate(user);
+		_unitOfWork.AddForUpdate(user);
 
-		await unitOfWork.CommitAsync(cancellationToken);
+		await _unitOfWork.CommitAsync(cancellationToken);
 
 		return user;
 	}
@@ -61,8 +61,8 @@ public class UserOnboarder : IUserOnboarder
 	{
 		await UpdateUserCoreAsync(user, principal);
 
-		unitOfWork.AddForUpdate(user);
-		await unitOfWork.CommitAsync();
+		_unitOfWork.AddForUpdate(user);
+		await _unitOfWork.CommitAsync();
 	}
 
 	private async Task UpdateUserCoreAsync(User user, ClaimsPrincipal principal)
@@ -85,12 +85,12 @@ public class UserOnboarder : IUserOnboarder
 		{
 			if (user.StudentId != default)
 			{
-				unitOfWork.AddForDelete(user.Student);
+				_unitOfWork.AddForDelete(user.Student);
 			}
 			return;
 		}
 
-		var grades = await gradeRepository.GetAllAsync();
+		var grades = await _gradeRepository.GetAllAsync();
 		var grade = grades.FirstOrDefault(g => principal.HasClaim(ClaimConstants.GroupClaimType, g.AadGroupId));
 
 		if (grade != null)
@@ -106,7 +106,7 @@ public class UserOnboarder : IUserOnboarder
 		{
 			if (user.StudentId != default)
 			{
-				unitOfWork.AddForDelete(user.Student);
+				_unitOfWork.AddForDelete(user.Student);
 			}
 		}
 	}
@@ -125,7 +125,7 @@ public class UserOnboarder : IUserOnboarder
 		{
 			if (user.Teacher is not null)
 			{
-				unitOfWork.AddForDelete(user.Teacher);
+				_unitOfWork.AddForDelete(user.Teacher);
 			}
 		}
 
