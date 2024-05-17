@@ -12,23 +12,23 @@ namespace MensaGymnazium.IntranetGen3.Facades.Security;
 [Authorize]
 public class TeacherFacade : ITeacherFacade
 {
-	private readonly ITeacherRepository teacherRepository;
-	private readonly IUserRepository userRepository;
-	private readonly IUnitOfWork unitOfWork;
+	private readonly ITeacherRepository _teacherRepository;
+	private readonly IUserRepository _userRepository;
+	private readonly IUnitOfWork _unitOfWork;
 
 	public TeacherFacade(
 		ITeacherRepository teacherRepository,
 		IUserRepository userRepository,
 		IUnitOfWork unitOfWork)
 	{
-		this.teacherRepository = teacherRepository;
-		this.userRepository = userRepository;
-		this.unitOfWork = unitOfWork;
+		_teacherRepository = teacherRepository;
+		_userRepository = userRepository;
+		_unitOfWork = unitOfWork;
 	}
 
 	public async Task<List<TeacherReferenceDto>> GetAllTeacherReferencesAsync(CancellationToken cancellationToken = default)
 	{
-		var data = await teacherRepository.GetAllIncludingDeletedAsync(cancellationToken);
+		var data = await _teacherRepository.GetAllIncludingDeletedAsync(cancellationToken);
 		return data.Select(t => new TeacherReferenceDto()
 		{
 			TeacherId = t.Id,
@@ -42,7 +42,7 @@ public class TeacherFacade : ITeacherFacade
 	public async Task<List<TeacherDto>> GetAllAsync(CancellationToken cancellationToken = default)
 	{
 		// GetAllAsync() is not able to handle loading User reference (backreference not supported by DataLoader)
-		var data = await teacherRepository.GetAllIncludingDeletedAsync(cancellationToken);
+		var data = await _teacherRepository.GetAllIncludingDeletedAsync(cancellationToken);
 		return data
 			.Where(t => t.Deleted is null)
 			.Select(t => new TeacherDto()
@@ -59,10 +59,10 @@ public class TeacherFacade : ITeacherFacade
 	[Authorize(Roles = nameof(Role.Administrator))]
 	public async Task DeleteTeacherAsync(Dto<int> teacherId, CancellationToken cancellationToken = default)
 	{
-		var teacher = await teacherRepository.GetObjectAsync(teacherId.Value, cancellationToken);
-		unitOfWork.AddForDelete(teacher);
+		var teacher = await _teacherRepository.GetObjectAsync(teacherId.Value, cancellationToken);
+		_unitOfWork.AddForDelete(teacher);
 
-		await unitOfWork.CommitAsync(cancellationToken);
+		await _unitOfWork.CommitAsync(cancellationToken);
 	}
 
 	[Authorize(Roles = nameof(Role.Administrator))]
@@ -74,8 +74,8 @@ public class TeacherFacade : ITeacherFacade
 		var teacher = new Teacher();
 		MapTeacherFromDto(teacherDto, teacher);
 
-		unitOfWork.AddForInsert(teacher);
-		await unitOfWork.CommitAsync(cancellationToken);
+		_unitOfWork.AddForInsert(teacher);
+		await _unitOfWork.CommitAsync(cancellationToken);
 
 		return Dto.FromValue(teacher.Id);
 	}
@@ -87,12 +87,12 @@ public class TeacherFacade : ITeacherFacade
 		Contract.Requires<ArgumentException>(teacherDto.Id != default);
 		Contract.Requires<ArgumentException>(teacherDto.UserId != default);
 
-		var user = await userRepository.GetObjectAsync(teacherDto.UserId, cancellationToken);
+		var user = await _userRepository.GetObjectAsync(teacherDto.UserId, cancellationToken);
 
 		MapTeacherFromDto(teacherDto, user.Teacher);
 
-		unitOfWork.AddForUpdate(user);
-		await unitOfWork.CommitAsync(cancellationToken);
+		_unitOfWork.AddForUpdate(user);
+		await _unitOfWork.CommitAsync(cancellationToken);
 	}
 
 	private void MapTeacherFromDto(TeacherDto teacherDto, Teacher teacher)

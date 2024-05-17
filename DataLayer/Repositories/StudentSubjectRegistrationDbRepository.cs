@@ -10,7 +10,7 @@ public partial class StudentSubjectRegistrationDbRepository : IStudentSubjectReg
 		return Data.Where(ssr => ssr.SubjectId == subjectId).ToListAsync(cancellationToken);
 	}
 
-	public Task<List<StudentSubjectRegistration>> GetRegistrationsByStudentAsync(int studentId, CancellationToken cancellationToken = default)
+	public Task<List<StudentSubjectRegistration>> GetActiveRegistrationsByStudentAsync(int studentId, CancellationToken cancellationToken = default)
 	{
 		return Data
 			.Include(ssr => ssr.Subject)

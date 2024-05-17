@@ -10,7 +10,7 @@ namespace MensaGymnazium.IntranetGen3.TestHelpers;
 
 public class IntegrationTestBase
 {
-	private IDisposable scope;
+	private IDisposable _scope;
 
 	protected IServiceProvider ServiceProvider { get; private set; }
 
@@ -25,14 +25,14 @@ public class IntegrationTestBase
 		IServiceCollection services = CreateServiceCollection();
 		IServiceProvider serviceProvider = services.BuildServiceProvider();
 
-		scope = serviceProvider.CreateScope();
+		_scope = serviceProvider.CreateScope();
 
 		var dbContext = serviceProvider.GetRequiredService<IDbContext>();
 		if (DeleteDbData)
 		{
 			dbContext.Database.EnsureDeleted();
 		}
-		if (this.UseLocalDb)
+		if (UseLocalDb)
 		{
 			dbContext.Database.Migrate();
 		}
@@ -49,7 +49,7 @@ public class IntegrationTestBase
 	[TestCleanup]
 	public virtual void TestCleanup()
 	{
-		scope.Dispose();
+		_scope.Dispose();
 		if (this.ServiceProvider is IDisposable)
 		{
 			((IDisposable)this.ServiceProvider).Dispose();

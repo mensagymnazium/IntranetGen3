@@ -6,24 +6,24 @@ using Microsoft.AspNetCore.Authentication;
 namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Claims;
 
 /// <summary>
-/// Přidá do claims z JWT další claims.    
+/// Přidá do claims z JWT další claims.
 /// Jako side-efekt (v implementacích) zajistí založení LoginAccountu, pokud ještě neexistuje.
 /// Optimalizace: Claims jsou drženy v cache, aby je nebylo nutné každý request skládat znovu a znovu.
 /// </summary>
 [Service(Profile = ServiceProfiles.WebServer)]
 public class ApplicationClaimsTransformation : IClaimsTransformation
 {
-	private static CriticalSection<UserContextInfo> criticalSection = new CriticalSection<UserContextInfo>(); // statické - instanci kritické sekce potřebujeme sdílet přes všechny instance
+	private static CriticalSection<UserContextInfo> s_criticalSection = new CriticalSection<UserContextInfo>(); // statické - instanci kritické sekce potřebujeme sdílet přes všechny instance
 
-	private readonly IClaimsCacheStore claimsCacheStore;
-	private readonly IUserContextInfoBuilder contextInfoBuilder;
-	private readonly ICustomClaimsBuilder customClaimsBuilder;
+	private readonly IClaimsCacheStore _claimsCacheStore;
+	private readonly IUserContextInfoBuilder _contextInfoBuilder;
+	private readonly ICustomClaimsBuilder _customClaimsBuilder;
 
 	public ApplicationClaimsTransformation(IClaimsCacheStore claimsCacheStore, IUserContextInfoBuilder contextInfoBuilder, ICustomClaimsBuilder customClaimsBuilder)
 	{
-		this.claimsCacheStore = claimsCacheStore;
-		this.contextInfoBuilder = contextInfoBuilder;
-		this.customClaimsBuilder = customClaimsBuilder;
+		_claimsCacheStore = claimsCacheStore;
+		_contextInfoBuilder = contextInfoBuilder;
+		_customClaimsBuilder = customClaimsBuilder;
 	}
 
 	/// <summary>
@@ -31,7 +31,7 @@ public class ApplicationClaimsTransformation : IClaimsTransformation
 	/// </summary>
 	public async Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
 	{
-		UserContextInfo userContextInfo = contextInfoBuilder.GetUserContextInfo(principal);
+		UserContextInfo userContextInfo = _contextInfoBuilder.GetUserContextInfo(principal);
 
 		// pro nepřihlášeného uživatele žádnou transformaci neprovádíme
 		if (userContextInfo == null)
@@ -39,18 +39,18 @@ public class ApplicationClaimsTransformation : IClaimsTransformation
 			return await Task.FromResult(principal);
 		}
 
-		List<Claim> customClaims = claimsCacheStore.GetClaims(userContextInfo);
+		List<Claim> customClaims = _claimsCacheStore.GetClaims(userContextInfo);
 		if (customClaims == null)
 		{
-			await criticalSection.ExecuteActionAsync(userContextInfo, async () =>
+			await s_criticalSection.ExecuteActionAsync(userContextInfo, async () =>
 			{
-				customClaims = claimsCacheStore.GetClaims(userContextInfo);
+				customClaims = _claimsCacheStore.GetClaims(userContextInfo);
 				if (customClaims == null)
 				{
 					// pokud nejsou žádné claims v cache, získáme je a do cache uložíme,
 					// ať je pro stejný context další request rychlejší
-					customClaims = await customClaimsBuilder.GetCustomClaimsAsync(principal);
-					claimsCacheStore.StoreClaims(userContextInfo, customClaims);
+					customClaims = await _customClaimsBuilder.GetCustomClaimsAsync(principal);
+					_claimsCacheStore.StoreClaims(userContextInfo, customClaims);
 				}
 			});
 		}
