@@ -71,6 +71,7 @@ public class UserOnboarder : IUserOnboarder
 
 		user.Email = principal.FindFirst(x => x.Type == ClaimConstants.EmailClaimType)?.Value;
 		user.Name = principal.FindFirst(x => x.Type == ClaimConstants.NameClaimType)?.Value;
+		user.Lastname = user.Name?.Split(' ').Last();
 
 		await UpdateTeacherAsync(user, principal);
 		await UpdateStudentAsync(user, principal);
