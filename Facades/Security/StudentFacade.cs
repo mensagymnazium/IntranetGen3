@@ -23,6 +23,7 @@ public class StudentFacade : IStudentFacade
 			Id = s.Id,
 			UserId = s.User.Id,
 			Name = s.User.Name,
+			LastName = s.User.Lastname,
 			GradeId = s.GradeId,
 			IsDeleted = (s.Deleted != null)
 		}).ToList();

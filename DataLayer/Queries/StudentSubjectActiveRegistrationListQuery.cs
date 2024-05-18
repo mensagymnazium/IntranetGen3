@@ -27,11 +27,12 @@ public class StudentSubjectActiveRegistrationListQuery : QueryBase<StudentSubjec
 			.WhereIf(Filter.RegistrationType is not null, ssr => ssr.RegistrationType == Filter.RegistrationType)
 			.OrderByMultiple(Sorting, sortingExpression => sortingExpression switch
 			{
-				nameof(StudentSubjectRegistrationDto.SubjectId) => [s => s.Subject.Name, s => s.Student.User.Name],
+				nameof(StudentSubjectRegistrationDto.SubjectId) => [s => s.Subject.Name, s => s.Student.User.Lastname],
 				nameof(StudentSubjectRegistrationDto.StudentId) => [s => s.Student.User.Name, s => s.Subject.Name],
 				nameof(StudentSubjectRegistrationDto.RegistrationType) =>
-					[s => s.RegistrationType, s => s.Subject.Name, s => s.Student.User.Name],
-				"StudentGradeId" => [s => -s.Student.GradeId],
+					[s => s.RegistrationType, s => s.Subject.Name, s => s.Student.User.Lastname],
+				"StudentGradeId" => [s => -s.Student.GradeId, s => s.Student.User.Lastname],
+				"StudentLastName" => [s => s.Student.User.Lastname, s => s.Subject.Name],
 				_ => throw new InvalidOperationException($"Unknown SortingItem.Expression {sortingExpression}.")
 			})
 			.Select(ssr => new StudentSubjectRegistrationDto()
