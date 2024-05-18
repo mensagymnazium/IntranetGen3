@@ -38,11 +38,11 @@ public interface ISubjectRegistrationsManagerService
 	Task<bool> IsSubjectRegisteredForStudentAsync(int subjectId, int studentId, CancellationToken cancellationToken = default);
 
 	/// <returns>True, if the students next year grade is within the subjects grade criteria</returns>
-	Task<bool> IsStudentInAssignableGrade(int studentId, int subjectId, CancellationToken cancellationToken = default);
+	Task<bool> IsStudentInAssignableGradeAsync(int studentId, int subjectId, CancellationToken cancellationToken = default);
 
 	/// <returns>
 	/// True, if the student has already reached the maximum number of registrations per week.
 	/// Takes languages into account: If the subject is a language, this rule doesn't apply.
 	/// </returns>
-	Task<bool> DidStudentAlreadyReachHoursPerWeekLimit(int studentId, int subjectId, CancellationToken cancellationToken = default);
+	Task<bool> DidStudentAlreadyReachHoursPerWeekLimitAsync(int studentId, int subjectId, CancellationToken cancellationToken = default);
 }

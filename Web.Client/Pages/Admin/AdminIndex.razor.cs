@@ -12,11 +12,11 @@ public partial class AdminIndex : ComponentBase
 
 	private DataSeeds dataSeedsComponent;
 
-	private async Task HandleClearCache()
+	private async Task HandleClearCacheClick()
 	{
 		if (await MessageBox.ConfirmAsync("Opravdu chcete smazat cache serverové části aplikace?"))
 		{
-			await MaintenanceFacade.ClearCache();
+			await MaintenanceFacade.ClearCacheAsync();
 			Messenger.AddInformation("Serverová cache vyčištěna.");
 		}
 	}

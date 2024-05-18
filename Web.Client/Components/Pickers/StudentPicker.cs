@@ -11,13 +11,13 @@ public class StudentPicker : HxAutosuggest<StudentReferenceDto, int?>
 
 	public StudentPicker()
 	{
-		this.DataProvider = GetSuggestions;
-		this.ItemFromValueResolver = ResolveItemFromId;
+		this.DataProvider = GetSuggestionsAsync;
+		this.ItemFromValueResolver = ResolveItemFromIdAsync;
 		this.ValueSelector = (c => c.Id);
 		this.TextSelector = (c => c.Name);
 	}
 
-	private async Task<AutosuggestDataProviderResult<StudentReferenceDto>> GetSuggestions(AutosuggestDataProviderRequest request)
+	private async Task<AutosuggestDataProviderResult<StudentReferenceDto>> GetSuggestionsAsync(AutosuggestDataProviderRequest request)
 	{
 		var data = await StudentsDataStore.GetAllAsync();
 		return new AutosuggestDataProviderResult<StudentReferenceDto>()
@@ -32,7 +32,7 @@ public class StudentPicker : HxAutosuggest<StudentReferenceDto, int?>
 		};
 	}
 
-	private async Task<StudentReferenceDto> ResolveItemFromId(int? id)
+	private async Task<StudentReferenceDto> ResolveItemFromIdAsync(int? id)
 	{
 		if (id == null)
 		{

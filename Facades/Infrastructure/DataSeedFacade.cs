@@ -31,7 +31,7 @@ public class DataSeedFacade : IDataSeedFacade
 	/// Provede seedování dat daného profilu.
 	/// Pokud jde produkční prostředí a profil není pro produkční prostředí povolen, vrací BadRequest.
 	/// </summary>
-	public Task SeedDataProfile(string profileName)
+	public Task SeedDataProfileAsync(string profileName)
 	{
 		// applicationAuthorizationService.VerifyCurrentUserAuthorization(Operations.SystemAdministration); // TODO alternative authorization approach
 
@@ -50,9 +50,9 @@ public class DataSeedFacade : IDataSeedFacade
 	}
 
 	/// <summary>
-	/// Returns list of available data seed profiles (names are ready for use as parameter to <see cref="SeedDataProfile"/> method).
+	/// Returns list of available data seed profiles (names are ready for use as parameter to <see cref="SeedDataProfileAsync"/> method).
 	/// </summary>
-	public Task<List<string>> GetDataSeedProfiles()
+	public Task<List<string>> GetDataSeedProfilesAsync()
 	{
 		return Task.FromResult(GetProfileTypes()
 						.Select(t => t.Name)

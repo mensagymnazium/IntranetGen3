@@ -36,7 +36,7 @@ public partial class SubjectList
 		await TeachersDataStore.EnsureDataAsync();
 		await GradesDataStore.EnsureDataAsync();
 
-		if ((await ClientAuthService.GetCurrentClaimsPrincipal()).IsInRole(nameof(Role.Student)))
+		if ((await ClientAuthService.GetCurrentClaimsPrincipalAsync()).IsInRole(nameof(Role.Student)))
 		{
 			// Get grade (shouldn't be null, user is student)
 			var gradeId = await ClientAuthService.GetCurrentStudentGradeIdAsync();
@@ -87,7 +87,7 @@ public partial class SubjectList
 		return null;
 	}
 
-	private async Task<GridDataProviderResult<SubjectListItemDto>> LoadSubjects(GridDataProviderRequest<SubjectListItemDto> request)
+	private async Task<GridDataProviderResult<SubjectListItemDto>> LoadSubjectsAsync(GridDataProviderRequest<SubjectListItemDto> request)
 	{
 		var subjectListRequest = new DataFragmentRequest<SubjectListQueryFilter>()
 		{

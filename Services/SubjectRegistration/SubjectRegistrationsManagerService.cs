@@ -99,7 +99,7 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 		return registrationsForSubject >= subject.Capacity.Value;
 	}
 
-	public async Task<bool> IsStudentInAssignableGrade(
+	public async Task<bool> IsStudentInAssignableGradeAsync(
 		int studentId,
 		int subjectId,
 		CancellationToken cancellationToken = default)
@@ -113,7 +113,7 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 		return subject.Grades.Contains(futureGrade);
 	}
 
-	public async Task<bool> DidStudentAlreadyReachHoursPerWeekLimit(
+	public async Task<bool> DidStudentAlreadyReachHoursPerWeekLimitAsync(
 		int studentId,
 		int subjectId,
 		CancellationToken cancellationToken = default)

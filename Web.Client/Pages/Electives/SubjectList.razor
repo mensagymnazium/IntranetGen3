@@ -40,7 +40,7 @@
         <DataTemplate>
             <HxGrid @ref="subjectsGrid"
                     TItem="SubjectListItemDto"
-                    DataProvider="LoadSubjects"
+                    DataProvider="LoadSubjectsAsync"
                     SelectedDataItem="subjectSelected"
                     SelectedDataItemChanged="HandleSelectedDataItemChanged"
                     ItemRowCssClassSelector="item => GetRowCssClass(item)"

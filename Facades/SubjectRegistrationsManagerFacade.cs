@@ -110,14 +110,14 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 
 		// Verify student is in correct grade
 		if (!await _subjectRegistrationsManagerService
-				.IsStudentInAssignableGrade(currentUser.StudentId.Value, studentSubjectRegistrationCreateDto.SubjectId.Value, cancellationToken))
+				.IsStudentInAssignableGradeAsync(currentUser.StudentId.Value, studentSubjectRegistrationCreateDto.SubjectId.Value, cancellationToken))
 		{
 			return StudentSubjectRegistrationPossibilityDto.CreateNotPossible("Předmět není určený pro váš ročník");
 		}
 
 		// Verify student doesn't already have reached `hours per week` limit
 		if (await _subjectRegistrationsManagerService
-				.DidStudentAlreadyReachHoursPerWeekLimit(currentUser.StudentId.Value,
+				.DidStudentAlreadyReachHoursPerWeekLimitAsync(currentUser.StudentId.Value,
 					studentSubjectRegistrationCreateDto.SubjectId.Value, cancellationToken))
 		{
 			return StudentSubjectRegistrationPossibilityDto.CreateNotPossible("Již jste dosáhl maximálního počtu hodin za týden");

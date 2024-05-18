@@ -5,7 +5,7 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Services;
 
 public interface IClientAuthService
 {
-	Task<ClaimsPrincipal> GetCurrentClaimsPrincipal();
+	Task<ClaimsPrincipal> GetCurrentClaimsPrincipalAsync();
 	Task<GradeEntry?> GetCurrentStudentGradeIdAsync();
 	Task<int?> GetCurrentUserIdAsync();
 }

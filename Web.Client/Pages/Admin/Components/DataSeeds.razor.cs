@@ -17,7 +17,7 @@ public partial class DataSeeds : ComponentBase
 	{
 		if (selectedSeedProfile is not null && await MessageBox.ConfirmAsync($"Do you really want to seed {selectedSeedProfile}?"))
 		{
-			await DataSeedFacade.SeedDataProfile(selectedSeedProfile);
+			await DataSeedFacade.SeedDataProfileAsync(selectedSeedProfile);
 			Messenger.AddInformation($"Seed successful: {selectedSeedProfile}");
 
 			await offcanvasComponent.HideAsync();
@@ -26,7 +26,7 @@ public partial class DataSeeds : ComponentBase
 
 	public async Task ShowAsync()
 	{
-		seedProfiles ??= await DataSeedFacade.GetDataSeedProfiles();
+		seedProfiles ??= await DataSeedFacade.GetDataSeedProfilesAsync();
 
 		await offcanvasComponent.ShowAsync();
 	}

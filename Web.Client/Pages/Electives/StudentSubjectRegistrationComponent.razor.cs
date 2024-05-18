@@ -47,7 +47,7 @@ public partial class StudentSubjectRegistrationComponent
 	{
 		await RefreshDataAsync();
 
-		shouldShowExtensionSeminarWarning = await GetShouldShowExtensionSeminarWarning();
+		shouldShowExtensionSeminarWarning = await GetShouldShowExtensionSeminarWarningAsync();
 	}
 
 	private async Task RefreshDataAsync()
@@ -56,9 +56,9 @@ public partial class StudentSubjectRegistrationComponent
 		await LoadStudentRegistrationForSubjectAsync();
 	}
 
-	private async Task<bool> GetShouldShowExtensionSeminarWarning()
+	private async Task<bool> GetShouldShowExtensionSeminarWarningAsync()
 	{
-		var claims = await ClientAuthService.GetCurrentClaimsPrincipal();
+		var claims = await ClientAuthService.GetCurrentClaimsPrincipalAsync();
 
 		// Check if is student
 		if (!claims.IsInRole(nameof(Role.Student)))

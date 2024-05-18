@@ -17,7 +17,7 @@ public partial class HomeIndexMyElectives
 
 	protected override async Task OnInitializedAsync()
 	{
-		var user = await ClientAuthService.GetCurrentClaimsPrincipal();
+		var user = await ClientAuthService.GetCurrentClaimsPrincipalAsync();
 		if (!user.IsInRole(nameof(Role.Student)))
 		{
 			return;

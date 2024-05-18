@@ -15,7 +15,7 @@ public class MaintenanceFacade : IMaintenanceFacade
 		_cacheService = cacheService;
 	}
 
-	public Task ClearCache(CancellationToken cancellationToken = default)
+	public Task ClearCacheAsync(CancellationToken cancellationToken = default)
 	{
 		cancellationToken.ThrowIfCancellationRequested();
 
