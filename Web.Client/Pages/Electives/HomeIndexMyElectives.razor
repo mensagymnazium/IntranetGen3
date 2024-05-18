@@ -1,65 +1,63 @@
-﻿<AuthorizeView Roles="@nameof(Role.Student)">
-	<div class='contained-width'>
-	    <h5 class="mt-5">
-		    Postup tvé registrace předmětů
-		    @if ((studentsProgress is not null) && studentsProgress.IsRegistrationValid)
-		    {
-			    <b> - Máš splněné své registrace! 🥳</b>
-		    }
-		    else
-		    {
-			    <b> - Ještě nemáš hotovo - </b>
-			    <HxIcon Icon='BootstrapIcon.XCircleFill' CssClass="me-2 text-danger" />
-		    }
-	    </h5>
-	    @if (subjectsCollide)
+﻿<div class='contained-width'>
+    <h5 class="mt-5">
+	    Postup tvé registrace předmětů
+	    @if ((studentsProgress is not null) && studentsProgress.IsRegistrationValid)
 	    {
-		    <h6 class="mt-1"><HxIcon Icon="@BootstrapIcon.HandThumbsDown" /> Překrývá se ti rozvrh!</h6>
+		    <b> - Máš splněné své registrace! 🥳</b>
 	    }
 	    else
 	    {
-		    <h6 class="mt-1"><HxIcon Icon="@BootstrapIcon.HandThumbsUp" /> Žádný předmět se ti (asi) nepřekrývá!</h6>
+		    <b> - Ještě nemáš hotovo - </b>
+		    <HxIcon Icon='BootstrapIcon.XCircleFill' CssClass="me-2 text-danger" />
 	    }
-        @if (studentsProgress is not null)
+    </h5>
+    @if (subjectsCollide)
+    {
+	    <h6 class="mt-1"><HxIcon Icon="@BootstrapIcon.HandThumbsDown" /> Překrývá se ti rozvrh!</h6>
+    }
+    else
+    {
+	    <h6 class="mt-1"><HxIcon Icon="@BootstrapIcon.HandThumbsUp" /> Žádný předmět se ti (asi) nepřekrývá!</h6>
+    }
+    @if (studentsProgress is not null)
+    {
+        // Loaded, show data
+        @if (studentsProgress.CanUseLanguageInsteadOfHoursPerWeek)
         {
-            // Loaded, show data
-            @if (studentsProgress.CanUseLanguageInsteadOfHoursPerWeek)
+            <p><b>Profesionální rada</b>: Tvůj ročník umožňuje zapsat druhý cizí jazyk namísto volitelného předmětu 😎 (ale ne obojí zároveň)</p>
+        }
+        <HxListGroup>
+            @if (!studentsProgress.CanUseLanguageInsteadOfHoursPerWeek)
             {
-                <p><b>Profesionální rada</b>: Tvůj ročník umožňuje zapsat druhý cizí jazyk namísto volitelného předmětu 😎 (ale ne obojí zároveň)</p>
-            }
-            <HxListGroup>
-                @if (!studentsProgress.CanUseLanguageInsteadOfHoursPerWeek)
+                // Cannot use language instead of donated hours (more common)
+
+                <ElectiveProgressComponent CriteriaName='Celkový počet hodin' IsProgressComplete="@studentsProgress.IsHoursPerWeekProgressComplete" CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid' CriteriaProgressDescription="@($"{studentsProgress.AmOfHoursPerWeekExcludingLanguages}h / {studentsProgress.RequiredAmOfHoursPerWeekExcludingLanguages}h")" CriteriaDescription=@($"Musíš mít tolik předmětů (kromě jazyků), aby dohromady zabraly v rozvrhu {GetHoursWithGrammar(studentsProgress.RequiredAmOfHoursPerWeekExcludingLanguages)}") />
+
+                @if (studentsProgress.IsLanguageRequired)
                 {
-                    // Cannot use language instead of donated hours (more common)
-
-                    <ElectiveProgressComponent CriteriaName='Celkový počet hodin' IsProgressComplete="@studentsProgress.IsHoursPerWeekProgressComplete" CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid' CriteriaProgressDescription="@($"{studentsProgress.AmOfHoursPerWeekExcludingLanguages}h / {studentsProgress.RequiredAmOfHoursPerWeekExcludingLanguages}h")" CriteriaDescription=@($"Musíš mít tolik předmětů (kromě jazyků), aby dohromady zabraly v rozvrhu {GetHoursWithGrammar(studentsProgress.RequiredAmOfHoursPerWeekExcludingLanguages)}") />
-
-                    @if (studentsProgress.IsLanguageRequired)
-                    {
-                        <ElectiveProgressComponent CriteriaName='Druhý cizí jazyk' IsProgressComplete="@studentsProgress.HasRegisteredLanguage" CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid' CriteriaProgressDescription="@(studentsProgress.HasRegisteredLanguage ? "Splněno - Máš zapsaný jazyk" : "Chybí - Potřebuješ zapsat jazyk")" CriteriaDescription="Musíš mít zapsaný cizí jazyk" />
-                    }
-                }
-                else
-                {
-                    // Can use language instead of donated hours
-
-                    <ElectiveProgressComponent CriteriaName='Celkový počet hodin' IsProgressComplete="@studentsProgress.IsHoursPerWeekProgressComplete" CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid' CriteriaProgressDescription="@($"{studentsProgress.AmOfHoursPerWeekExcludingLanguages}h / {studentsProgress.RequiredAmOfHoursPerWeekExcludingLanguages}h")" CriteriaDescription=@($"Musíš mít tolik předmětů (kromě jazyků), aby dohromady zabraly v rozvrhu {GetHoursWithGrammar(studentsProgress.RequiredAmOfHoursPerWeekExcludingLanguages)}") />
-                    <HxListGroupItem> Nebo </HxListGroupItem>
                     <ElectiveProgressComponent CriteriaName='Druhý cizí jazyk' IsProgressComplete="@studentsProgress.HasRegisteredLanguage" CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid' CriteriaProgressDescription="@(studentsProgress.HasRegisteredLanguage ? "Splněno - Máš zapsaný jazyk" : "Chybí - Potřebuješ zapsat jazyk")" CriteriaDescription="Musíš mít zapsaný cizí jazyk" />
                 }
+            }
+            else
+            {
+                // Can use language instead of donated hours
 
-                @if (studentsProgress.RequiresCsOrCpValidation)
-                {
-                    <ElectiveProgressComponent CriteriaName='Člověk & společnost nebo Člověk & příroda' IsProgressComplete="@studentsProgress.IsCsOrCpProgressComplete" CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid' CriteriaProgressDescription="@($"{studentsProgress.AmOfHoursPerWeekInCsOrCp}h / {studentsProgress.RequiredMinimalAmOfHoursPerWeekInCsOrCp}h")" CriteriaDescription=@($"Alespoň {GetHoursWithGrammar(studentsProgress.RequiredMinimalAmOfHoursPerWeekInCsOrCp)} musí být ze vzdělávacích oblastí „Člověk a společnost“ či „Člověk a příroda“") />
-                }
-            </HxListGroup>
-        }
-        else
-        {
-            // Not loaded, show placeholder
+                <ElectiveProgressComponent CriteriaName='Celkový počet hodin' IsProgressComplete="@studentsProgress.IsHoursPerWeekProgressComplete" CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid' CriteriaProgressDescription="@($"{studentsProgress.AmOfHoursPerWeekExcludingLanguages}h / {studentsProgress.RequiredAmOfHoursPerWeekExcludingLanguages}h")" CriteriaDescription=@($"Musíš mít tolik předmětů (kromě jazyků), aby dohromady zabraly v rozvrhu {GetHoursWithGrammar(studentsProgress.RequiredAmOfHoursPerWeekExcludingLanguages)}") />
+                <HxListGroupItem> Nebo </HxListGroupItem>
+                <ElectiveProgressComponent CriteriaName='Druhý cizí jazyk' IsProgressComplete="@studentsProgress.HasRegisteredLanguage" CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid' CriteriaProgressDescription="@(studentsProgress.HasRegisteredLanguage ? "Splněno - Máš zapsaný jazyk" : "Chybí - Potřebuješ zapsat jazyk")" CriteriaDescription="Musíš mít zapsaný cizí jazyk" />
+            }
 
-            <b>Načítání postupu</b>
-            <HxSpinner Color="ThemeColor.Primary" Size="SpinnerSize.Small" />
-        }
-	</div>
-</AuthorizeView>
+            @if (studentsProgress.RequiresCsOrCpValidation)
+            {
+                <ElectiveProgressComponent CriteriaName='Člověk & společnost nebo Člověk & příroda' IsProgressComplete="@studentsProgress.IsCsOrCpProgressComplete" CompleteRegistrationIsValid='studentsProgress.IsRegistrationValid' CriteriaProgressDescription="@($"{studentsProgress.AmOfHoursPerWeekInCsOrCp}h / {studentsProgress.RequiredMinimalAmOfHoursPerWeekInCsOrCp}h")" CriteriaDescription=@($"Alespoň {GetHoursWithGrammar(studentsProgress.RequiredMinimalAmOfHoursPerWeekInCsOrCp)} musí být ze vzdělávacích oblastí „Člověk a společnost“ či „Člověk a příroda“") />
+            }
+        </HxListGroup>
+    }
+    else
+    {
+        // Not loaded, show placeholder
+
+        <b>Načítání postupu</b>
+        <HxSpinner Color="ThemeColor.Primary" Size="SpinnerSize.Small" />
+    }
+</div>

@@ -12,7 +12,7 @@ public class ClaimsCacheStore : IClaimsCacheStore
 {
 	private readonly IMemoryCache _cache;
 
-	public ClaimsCacheStore(Microsoft.Extensions.Caching.Memory.IMemoryCache cache)
+	public ClaimsCacheStore(IMemoryCache cache)
 	{
 		_cache = cache;
 	}
@@ -38,7 +38,7 @@ public class ClaimsCacheStore : IClaimsCacheStore
 
 	private object GetCacheKey(UserContextInfo userContextInfo)
 	{
-		// implementace má přetížen GetHashCode i Equals
+		// implementace má přetížení GetHashCode i Equals
 		return userContextInfo;
 	}
 }

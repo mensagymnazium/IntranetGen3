@@ -9,4 +9,6 @@
     kam můžete <a href="https://github.com/mensagymnazium/IntranetGen3/issues">zapsat i případné náměty či zjištěné chyby</a>.
 </p>
 
-<HomeIndexMyElectives />
+<AuthorizeView Policy='@nameof(ClientAuthorizationPolicyNames.StudentBeforeOktava)'>
+	<HomeIndexMyElectives />
+</AuthorizeView>
