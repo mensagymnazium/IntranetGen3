@@ -35,7 +35,7 @@ public partial class StudentSubjectRegistrationList
 	{
 		filterModel = newFilterModel;
 		await gridComponent.RefreshDataAsync();
-	} 
+	}
 
 	private async Task HandleSelectedDataItemChanged(StudentSubjectRegistrationDto selection)
 	{
