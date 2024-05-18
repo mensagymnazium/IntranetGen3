@@ -39,7 +39,7 @@ public class StudentSubjectRegistrationFacade : IStudentSubjectRegistrationFacad
 	}
 
 	[Authorize(Roles = nameof(Role.Student))]
-	public async Task<List<StudentSubjectRegistrationDto>> GetAllRegistrationsOfCurrentStudentAsync(CancellationToken cancellationToken = default)
+	public async Task<List<StudentSubjectRegistrationDto>> GetAllActiveRegistrationsOfCurrentStudentAsync(CancellationToken cancellationToken = default)
 	{
 		var currentUser = _applicationAuthenticationService.GetCurrentUser();
 		Contract.Requires<SecurityException>(currentUser.StudentId is not null);

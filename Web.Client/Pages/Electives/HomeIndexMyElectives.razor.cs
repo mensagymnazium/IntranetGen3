@@ -26,8 +26,13 @@ public partial class HomeIndexMyElectives
 
 		studentsProgress = await SubjectRegistrationProgressValidationFacade.GetProgressOfCurrentStudentAsync();
 
+		await CheckIfSubjectsCollideAsync();
+	}
+
+	private async Task CheckIfSubjectsCollideAsync()
+	{
 		var subjects = new List<SubjectReferenceDto>();
-		var subjectIds = await StudentSubjectRegistrationFacade.GetAllRegistrationsOfCurrentStudentAsync();
+		var subjectIds = await StudentSubjectRegistrationFacade.GetAllActiveRegistrationsOfCurrentStudentAsync();
 		foreach (var subjectId in subjectIds)
 		{
 			var subject = await SubjectDataStore.GetByKeyAsync(subjectId.SubjectId.Value);
