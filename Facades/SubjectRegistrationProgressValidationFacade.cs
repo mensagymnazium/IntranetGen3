@@ -21,21 +21,22 @@ public class SubjectRegistrationProgressValidationFacade : ISubjectRegistrationP
 	}
 
 	[Authorize(Roles = nameof(Role.Student))]
-	public async Task<StudentRegistrationProgressDto> GetProgressOfCurrentStudentAsync()
+	public async Task<StudentRegistrationProgressDto> GetProgressOfCurrentStudentAsync(CancellationToken cancellationToken = default)
 	{
 		var currentUser = _applicationAuthenticationService.GetCurrentUser();
 		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
 
-		var progress = await _subjectRegistrationProgressValidationService.GetRegistrationProgressOfStudentAsync(currentUser.StudentId.Value);
+		var progress = await _subjectRegistrationProgressValidationService.GetRegistrationProgressOfStudentAsync(
+			currentUser.StudentId.Value,
+			cancellationToken);
 
 		return MapToDto(progress);
 	}
 
 	[Authorize(Roles = nameof(Role.Administrator))]
-	public Task<StudentRegistrationProgressDto> GetProgressOfStudentAsync(Dto<int> studentId)
+	public Task<List<StudentRegistrationProgressListItemDto>> GetStudentRegistrationProgressListAsync(CancellationToken cancellationToken = default)
 	{
-		//Todo: Implement
-		throw new NotImplementedException();
+		var 
 	}
 
 	private StudentRegistrationProgressDto MapToDto(StudentRegistrationProgress obj)

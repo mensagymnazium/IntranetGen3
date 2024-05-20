@@ -8,4 +8,5 @@ namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration.ProgressValid
 public interface ISubjectRegistrationProgressValidationService
 {
 	Task<StudentRegistrationProgress> GetRegistrationProgressOfStudentAsync(int studentId, CancellationToken cancellationToken = default);
+	Task<> GetStudentRegistrationProgressListAsync(CancellationToken cancellationToken = default);
 }

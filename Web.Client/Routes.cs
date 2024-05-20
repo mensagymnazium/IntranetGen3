@@ -9,6 +9,7 @@ public static class Routes
 		public const string Subjects = "/electives/subjects";
 		public const string SubjectDetail = "/electives/subjects/{SubjectId:int}";
 		public const string StudentSubjectRegistrationList = "/electives/registrations";
+		public const string StudentSubjectRegistrationProgressList = "/electives/registrations-progress";
 		public static string GetSubjectDetail(int subjectId) => $"/electives/subjects/{subjectId}";
 
 	}
