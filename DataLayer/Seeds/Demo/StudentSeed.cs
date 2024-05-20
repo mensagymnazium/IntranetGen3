@@ -17,6 +17,7 @@ public class StudentSeed : DataSeed<DemoProfile>
 			new Student() { SeedEntityId = 6, GradeId = (int)GradeEntry.Sexta, User = new User() { Email = "sona.sextova@mensagymnazium.dev", Name = "Soňa Sextová", Lastname = "Sextová"} },
 			new Student() { SeedEntityId = 7, GradeId = (int)GradeEntry.Septima, User = new User() { Email = "sep.septimovic@mensagymnazium.dev", Name = "Sep Septimovič", Lastname = "Septimovič"} },
 			new Student() { SeedEntityId = 8, GradeId = (int)GradeEntry.Oktava, User = new User() { Email = "olin.oktavian@mensagymnazium.dev", Name = "Olin Oktavián", Lastname = "Oktavián"} },
+			new Student() { SeedEntityId = 9, GradeId = (int)GradeEntry.Oktava, User = new User() { Email = "akalin.oktavian@mensagymnazium.dev", Name = "Akalin Oktavián", Lastname = "Oktavián"} },
 		};
 
 		Seed(For(students).PairBy(student => student.SeedEntityId)
