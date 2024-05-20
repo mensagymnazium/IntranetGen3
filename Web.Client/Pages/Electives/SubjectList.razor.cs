@@ -24,10 +24,20 @@ public partial class SubjectList
 	private SubjectListItemDto subjectSelected;
 	private SubjectEdit subjectEditComponent;
 
-	private List<StudentSubjectRegistrationDto> registeredSubjects = new(); // Never null, may be empty...
 	private SubjectListQueryFilter subjectListFilter = new();
+	private static SubjectListQueryFilter s_rememberedSubjectListFilter; // Null by default
+
+	private List<StudentSubjectRegistrationDto> registeredSubjects = new(); // Never null, may be empty...
 	private bool showRocnikovkaWarning = false;
 	private bool showExtensionSeminarWarning = false;
+
+	protected override void OnInitialized()
+	{
+		if (s_rememberedSubjectListFilter is not null)
+		{
+			subjectListFilter = s_rememberedSubjectListFilter;
+		}
+	}
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -42,18 +52,19 @@ public partial class SubjectList
 			var gradeId = await ClientAuthService.GetCurrentStudentGradeIdAsync();
 			Debug.Assert(gradeId != null, nameof(gradeId) + " != null");
 
-			// Use grade filter
-			// Xopa: Todo: the filter was used, but I couldn't make it appear in the UI. I didn't find a way to refresh the list layout filter ui.
-			//subjectListFilter.GradeId = (int)gradeId.Value;
+			var nextGradeId = gradeId.Value.NextGrade(); // Should have a value (octava isn't allowed on this page)
 
-			var nextGradeId = gradeId.Value.NextGrade();
-			if (nextGradeId is not null)
+			// Determine "rocnikovka warning"
+			showRocnikovkaWarning = (nextGradeId is GradeEntry.Sexta or GradeEntry.Septima);
+
+			// Determine "extension seminar warning"
+			showExtensionSeminarWarning = (nextGradeId is GradeEntry.Kvinta or GradeEntry.Sexta);
+
+			// Set grade filter to next grade
+			if (s_rememberedSubjectListFilter is null)
 			{
-				// Determine "rocnikovka warning"
-				showRocnikovkaWarning = (nextGradeId is GradeEntry.Sexta or GradeEntry.Septima);
-
-				// Determine "extension seminar warning"
-				showExtensionSeminarWarning = (nextGradeId is GradeEntry.Kvinta or GradeEntry.Sexta);
+				subjectListFilter.GradeId = (int?)nextGradeId;
+				s_rememberedSubjectListFilter = subjectListFilter;
 			}
 
 			// Get registered subjects
@@ -89,12 +100,14 @@ public partial class SubjectList
 
 	private async Task<GridDataProviderResult<SubjectListItemDto>> LoadSubjectsAsync(GridDataProviderRequest<SubjectListItemDto> request)
 	{
+		var sorting = request.Sorting?.Select(s => new SortItem(s.SortString, s.SortDirection)).ToArray();
+
 		var subjectListRequest = new DataFragmentRequest<SubjectListQueryFilter>()
 		{
 			Filter = subjectListFilter,
 			StartIndex = request.StartIndex,
 			Count = request.Count,
-			Sorting = request.Sorting?.Select(s => new SortItem(s.SortString, s.SortDirection)).ToArray()
+			Sorting = sorting
 		};
 
 		var subjectListResult = await SubjectFacade.GetSubjectListAsync(subjectListRequest, request.CancellationToken);
@@ -146,5 +159,11 @@ public partial class SubjectList
 	{
 		return String.Join(", ", teacherIds.Select(id => TeachersDataStore.GetByKeyOrDefault(id)?.Name))
 			.Trim(',', ' ');
+	}
+
+	private Task HandleFilterChanged()
+	{
+		s_rememberedSubjectListFilter = subjectListFilter;
+		return subjectsGrid.RefreshDataAsync();
 	}
 }

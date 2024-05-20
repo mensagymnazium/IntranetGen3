@@ -1,4 +1,5 @@
 ﻿@attribute [Route(Routes.Electives.Subjects)]
+@attribute [Authorize(Policy = ClientAuthorizationPolicyNames.StudentBeforeOktava)]
 
 <div>
     @* CSS Isolation *@
@@ -24,19 +25,26 @@
     <HxListLayout Title="Předměty"
                   TFilterModel="SubjectListQueryFilter"
                   @bind-FilterModel='subjectListFilter'
-                  @bind-FilterModel:after='subjectsGrid.RefreshDataAsync'>
+                  @bind-FilterModel:after='HandleFilterChanged'>
         <CommandsTemplate>
             <AuthorizeView Roles="@nameof(Role.Administrator)">
                 <HxButton Text="Nový předmět" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />
             </AuthorizeView>
         </CommandsTemplate>
         <FilterTemplate>
-            <HxInputText @bind-Value="@context.Name" Label="Název" />
-            <GradePicker @bind-Value='@context.GradeId' Label='Ročník'/>
-            <SubjectCategoryPicker @bind-Value="context.SubjectCategoryId" Label="Skupina" />
-            <EducationalAreaPicker @bind-Value="@context.EducationalAreaId" Label="Vzdělávací oblast" />
-            <TeacherPicker @bind-Value="context.TeacherId" Label="Vyučující" />
+	        <HxInputText @bind-Value="@context.Name" Label="Název" />
+	        <GradePicker @bind-Value='@context.GradeId' Label='Ročník'/>
+	        <SubjectCategoryPicker @bind-Value="context.SubjectCategoryId" Label="Skupina" />
+	        <EducationalAreaPicker @bind-Value="@context.EducationalAreaId" Label="Vzdělávací oblast" />
+	        <TeacherPicker @bind-Value="context.TeacherId" Label="Vyučující" />
         </FilterTemplate>
+        <SearchTemplate>
+	        <strong class="d-none d-sm-block">Ročník:</strong>
+	        <GradePicker @bind-Value='subjectListFilter.GradeId'
+	                     @bind-Value:after='HandleFilterChanged'
+	                     ExcludedGrades='[GradeEntry.Prima]'/> @*Don't show prima, it would create confusion like:
+                                                                   Why is there no subject for prima?'*@
+        </SearchTemplate>
         <DataTemplate>
             <HxGrid @ref="subjectsGrid"
                     TItem="SubjectListItemDto"
