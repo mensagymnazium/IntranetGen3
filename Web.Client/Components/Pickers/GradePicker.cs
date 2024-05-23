@@ -22,9 +22,9 @@ public class GradePicker : HxSelectBase<int?, GradeDto>
 		this.SortKeySelectorImpl = (c => -c.Id);
 	}
 
-	protected override async Task OnInitializedAsync()
+	protected override async Task OnParametersSetAsync()
 	{
-		await base.OnInitializedAsync();
+		await base.OnParametersSetAsync();
 
 		this.DataImpl = (await GradesDataStore.GetAllAsync())
 			.Where(g => !ExcludedGrades.Contains((GradeEntry)g.Id))
