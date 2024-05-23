@@ -53,7 +53,6 @@
                     HeaderRowCssClass="text-nowrap"
                     Context="item"
                     @bind-CurrentUserState='gridUserState'
-                    @bind-CurrentUserState:after='subjectsGrid.RefreshDataAsync'
                     Responsive="true">
                 <Columns>
                     <HxGridColumn Id='0' TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" SortString="@nameof(SubjectListItemDto.Name)" IsDefaultSortColumn="true" />
