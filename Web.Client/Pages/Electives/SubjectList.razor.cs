@@ -27,15 +27,24 @@ public partial class SubjectList
 	private SubjectListQueryFilter subjectListFilter = new();
 	private static SubjectListQueryFilter s_rememberedSubjectListFilter; // Null by default
 
+	private GridUserState gridUserState = new(); // Sorting
+	private static GridUserState s_rememberedGridUserState; // Null by default
+
 	private List<StudentSubjectRegistrationDto> registeredSubjects = new(); // Never null, may be empty...
 	private bool showRocnikovkaWarning = false;
 	private bool showExtensionSeminarWarning = false;
 
 	protected override void OnInitialized()
 	{
+		// Load remembered state (if we have some)
 		if (s_rememberedSubjectListFilter is not null)
 		{
 			subjectListFilter = s_rememberedSubjectListFilter;
+		}
+
+		if (s_rememberedGridUserState is not null)
+		{
+			gridUserState = s_rememberedGridUserState;
 		}
 	}
 
@@ -46,26 +55,21 @@ public partial class SubjectList
 		await TeachersDataStore.EnsureDataAsync();
 		await GradesDataStore.EnsureDataAsync();
 
-		if ((await ClientAuthService.GetCurrentClaimsPrincipalAsync()).IsInRole(nameof(Role.Student)))
+		// Student specific setup
+		if ((await ClientAuthService.GetCurrentClaimsPrincipalAsync())
+			.IsInRole(nameof(Role.Student)))
 		{
+			var gradeEntry = await ClientAuthService.GetCurrentStudentGradeIdAsync();
 			// Get grade (shouldn't be null, user is student)
-			var gradeId = await ClientAuthService.GetCurrentStudentGradeIdAsync();
-			Debug.Assert(gradeId != null, nameof(gradeId) + " != null");
+			Debug.Assert(gradeEntry != null, nameof(gradeEntry) + " != null");
 
-			var nextGradeId = gradeId.Value.NextGrade(); // Should have a value (octava isn't allowed on this page)
+			var nextGradeEntry = gradeEntry.Value.NextGrade(); // Should have a value (octava isn't allowed on this page)
 
 			// Determine "rocnikovka warning"
-			showRocnikovkaWarning = (nextGradeId is GradeEntry.Sexta or GradeEntry.Septima);
+			showRocnikovkaWarning = (nextGradeEntry is GradeEntry.Sexta or GradeEntry.Septima);
 
 			// Determine "extension seminar warning"
-			showExtensionSeminarWarning = (nextGradeId is GradeEntry.Kvinta or GradeEntry.Sexta);
-
-			// Set grade filter to next grade
-			if (s_rememberedSubjectListFilter is null)
-			{
-				subjectListFilter.GradeId = (int?)nextGradeId;
-				s_rememberedSubjectListFilter = subjectListFilter;
-			}
+			showExtensionSeminarWarning = (nextGradeEntry is GradeEntry.Kvinta or GradeEntry.Sexta);
 
 			// Get registered subjects
 			await StudentSubjectRegistrationsDataStore.EnsureDataAsync();
@@ -100,6 +104,12 @@ public partial class SubjectList
 
 	private async Task<GridDataProviderResult<SubjectListItemDto>> LoadSubjectsAsync(GridDataProviderRequest<SubjectListItemDto> request)
 	{
+		await TrySetupFilterForFirstLoad();
+
+		// Remember filter and sorting for next time coming to this page
+		s_rememberedSubjectListFilter = subjectListFilter;
+		s_rememberedGridUserState = gridUserState;
+
 		var sorting = request.Sorting?.Select(s => new SortItem(s.SortString, s.SortDirection)).ToArray();
 
 		var subjectListRequest = new DataFragmentRequest<SubjectListQueryFilter>()
@@ -117,6 +127,33 @@ public partial class SubjectList
 			Data = subjectListResult.Data ?? new(),
 			TotalCount = subjectListResult.TotalCount
 		};
+	}
+
+	/// <summary>
+	/// Presets the filter for the current user for better UX
+	/// If student, show subjects for next grade
+	/// </summary>
+	/// <returns></returns>
+	private async Task TrySetupFilterForFirstLoad()
+	{
+		// Setup filter for the first time coming into here
+		if (s_rememberedSubjectListFilter is not null)
+		{
+			// -> Not here for the first time
+			return;
+		}
+
+		// for STUDENTS - Set grade filter to next grade
+		if ((await ClientAuthService.GetCurrentClaimsPrincipalAsync())
+			.IsInRole(nameof(Role.Student)))
+		{
+			// User is a student
+			var gradeEntry = await ClientAuthService.GetCurrentStudentGradeIdAsync();
+			var nextGradeEntry = gradeEntry.Value.NextGrade(); // Should have a value (octava isn't allowed on this page)
+			subjectListFilter.GradeId = (int?)nextGradeEntry;
+		}
+
+		// maybe todo? : show teachers only their subjects?
 	}
 
 	private Task HandleSelectedDataItemChanged(SubjectListItemDto selection)
@@ -159,11 +196,5 @@ public partial class SubjectList
 	{
 		return String.Join(", ", teacherIds.Select(id => TeachersDataStore.GetByKeyOrDefault(id)?.Name))
 			.Trim(',', ' ');
-	}
-
-	private Task HandleFilterChanged()
-	{
-		s_rememberedSubjectListFilter = subjectListFilter;
-		return subjectsGrid.RefreshDataAsync();
 	}
 }
