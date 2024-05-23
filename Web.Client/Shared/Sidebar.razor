@@ -10,9 +10,7 @@
     <ItemsTemplate>
         <HxSidebarItem Text="Dashboard" Href="@Routes.Home" Icon="@BootstrapIcon.Columns" Match="NavLinkMatch.All" />
         <HxSidebarItem Text="Volitelné předměty" Icon="@BootstrapIcon.CalendarRange">
-	        <AuthorizeView Policy='@nameof(ClientAuthorizationPolicyNames.StudentBeforeOktava)'>
-				<HxSidebarItem Text="Předměty" Href="@Routes.Electives.Subjects"/>
-	        </AuthorizeView>
+	        <HxSidebarItem Text="Předměty" Href="@Routes.Electives.Subjects"/>
 	        <HxSidebarItem Text="Zapsaní studenti" Href="@Routes.Electives.StudentSubjectRegistrationList"/>
         </HxSidebarItem>
         <AuthorizeView Roles="@nameof(Role.Administrator)">

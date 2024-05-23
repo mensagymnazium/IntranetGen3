@@ -10,7 +10,6 @@
             </h1>
         </div>
 
-
         <AuthorizeView Roles="@($"{nameof(Role.Administrator)}, {nameof(Role.Teacher)}")">
             <div class="col text-end">
                 <HxButton Color="ThemeColor.Secondary" OnClick="HandleEditClick" CssClass="mb-4">Upravit definici předmětu</HxButton>
@@ -50,15 +49,13 @@
         </BodyTemplate>
     </HxCard>
 
-    <AuthorizeView Roles="@nameof(Role.Student)">
+    <AuthorizeView Policy='@nameof(ClientAuthorizationPolicyNames.StudentBeforeOktava)'>
         <HxCard CssClass="mb-4">
             <HeaderTemplate>
                 <HxCardTitle>Zápis předmětu</HxCardTitle>
             </HeaderTemplate>
             <BodyTemplate>
-                <StudentSubjectRegistrationComponent 
-                    SubjectId="@SubjectId" 
-                    OnRegistrationChanged="HandleRegistrationChanged"/>
+					<StudentSubjectRegistrationComponent SubjectId="@SubjectId" OnRegistrationChanged="HandleRegistrationChanged"/>
             </BodyTemplate>
         </HxCard>
     </AuthorizeView>
