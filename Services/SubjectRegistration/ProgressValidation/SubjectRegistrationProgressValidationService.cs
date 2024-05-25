@@ -1,37 +1,45 @@
 ﻿using Havit;
+using MensaGymnazium.IntranetGen3.Contracts;
+using MensaGymnazium.IntranetGen3.DataLayer.DataSources.Security;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 using MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
 using MensaGymnazium.IntranetGen3.Model;
 using MensaGymnazium.IntranetGen3.Primitives;
+using Microsoft.EntityFrameworkCore;
 
 namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration.ProgressValidation;
 
 [Service]
 public sealed class SubjectRegistrationProgressValidationService : ISubjectRegistrationProgressValidationService
 {
-	private readonly IStudentRepository studentRepository;
-	private readonly IStudentSubjectRegistrationRepository subjectRegistrationRepository;
-	private readonly IGradeRepository gradeRepository;
+	private readonly IStudentRepository _studentRepository;
+	private readonly IStudentSubjectRegistrationRepository _subjectRegistrationRepository;
+	private readonly IGradeRepository _gradeRepository;
+
+	private readonly IStudentDataSource _studentDatSource;
+
 	public SubjectRegistrationProgressValidationService(
 		IStudentRepository studentRepository,
 		IStudentSubjectRegistrationRepository subjectRegistrationRepository,
-		IGradeRepository gradeRepository)
+		IGradeRepository gradeRepository,
+		IStudentDataSource studentDatSource)
 	{
-		this.studentRepository = studentRepository;
-		this.subjectRegistrationRepository = subjectRegistrationRepository;
-		this.gradeRepository = gradeRepository;
+		this._studentRepository = studentRepository;
+		this._subjectRegistrationRepository = subjectRegistrationRepository;
+		this._gradeRepository = gradeRepository;
+		_studentDatSource = studentDatSource;
 	}
 
 	public async Task<StudentRegistrationProgress> GetRegistrationProgressOfStudentAsync(int studentId, CancellationToken cancellationToken = default)
 	{
 		Contract.Requires<ArgumentException>(studentId != default);
 
-		var student = await studentRepository.GetObjectAsync(studentId, cancellationToken);
+		var student = await _studentRepository.GetObjectAsync(studentId, cancellationToken);
 		Contract.Requires<OperationFailedException>(student.GradeId != (int)GradeEntry.Oktava, "Student nemá žádný další ročník");
 
-		// Logically we want to validate the rules for the next grade
-		var futureGrade = await gradeRepository.GetObjectAsync((int)((GradeEntry)student.GradeId).NextGrade(), cancellationToken);
-		var studentsRegistrations = await subjectRegistrationRepository.GetActiveRegistrationsByStudentAsync(studentId, cancellationToken);
+		// Logically, we want to validate the rules for the next grade
+		var futureGrade = await _gradeRepository.GetObjectAsync((int)((GradeEntry)student.GradeId).NextGrade(), cancellationToken);
+		var studentsRegistrations = await _subjectRegistrationRepository.GetActiveRegistrationsByStudentAsync(studentId, cancellationToken);
 
 		Contract.Requires<InvalidOperationException>(studentsRegistrations is not null);
 		Contract.Requires<InvalidOperationException>(futureGrade is not null);
@@ -48,6 +56,59 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 			languageProgress);
 
 		return registrationProgress;
+	}
+
+	public async Task<Dictionary<int, StudentRegistrationProgress>> GetRegistrationProgressOfAllStudentsAsync(
+		StudentSubjectRegistrationProgressListFilter filter,
+		CancellationToken cancellationToken = default)
+	{
+		// Filter students
+		var filteredStudentIds = await _studentDatSource.Data
+			.WhereIf(filter.StudentId is not null, s => s.Id == filter.StudentId)
+			.WhereIf(filter.GradeId is not null, s => s.GradeId == filter.GradeId)
+			.Select(s => s.Id)
+			.ToArrayAsync(cancellationToken: cancellationToken);
+
+		// Calculate progress of each and store into dict
+		var result = new Dictionary<int, StudentRegistrationProgress>(filteredStudentIds.Length);
+
+		//var gradesOfStudents = await _gradeRepository.GetGradesForStudentsAsync(filteredStudentIds, cancellationToken);
+		//var registrationsOfStudents = await _subjectRegistrationRepository.GetActiveRegistrationsForStudentsAsync(filteredStudentIds, cancellationToken);
+
+		foreach (int studentId in filteredStudentIds)
+		{
+			Contract.Requires<ArgumentException>(studentId != default);
+
+			var registrationProgress = await GetRegistrationProgressOfStudentAsync(studentId, cancellationToken);
+			//var grade = gradesOfStudents[studentId]
+			//var futureGrade = await _gradeRepository.GetObjectAsync((int)((GradeEntry)grade.Id).NextGrade(), cancellationToken);
+			//var registrations = registrationsOfStudents[studentId];
+
+			//Contract.Requires<InvalidOperationException>(registrations is not null);
+			//Contract.Requires<InvalidOperationException>(futureGrade is not null);
+			//Contract.Requires<InvalidOperationException>(futureGrade.RegistrationCriteria is not null);
+
+			//var hoursPerWeekProgress = GetHoursPerWeekProgress(futureGrade, registrations);
+			//var csOrCpProgress = GetCsOrCpRegistrationProgress(futureGrade, registrations);
+			//var languageProgress = GetLanguageRegistrationProgress(futureGrade, registrations);
+
+			//var registrationProgress = ConstructRegistrationProgress(
+			//	futureGrade,
+			//	hoursPerWeekProgress,
+			//	csOrCpProgress,
+			//	languageProgress);
+
+			// Filter based on ValidationState
+			if (filter.ValidationState is not null &&
+				filter.ValidationState != registrationProgress.IsRegistrationValid)
+			{
+				continue;
+			}
+
+			result.Add(studentId, registrationProgress);
+		}
+
+		return result;
 	}
 
 	private StudentLanguageRegistrationProgress GetLanguageRegistrationProgress(

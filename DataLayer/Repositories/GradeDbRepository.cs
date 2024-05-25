@@ -9,4 +9,10 @@ public partial class GradeDbRepository : IGradeRepository
 	{
 		yield return g => g.RegistrationCriteria;
 	}
+
+	//public Task<Dictionary<int, Grade>> GetGradesForStudentsAsync(int[] studentIds, CancellationToken cancellationToken)
+	//{
+	//	return Data
+	//		.Where())
+	//}
 }

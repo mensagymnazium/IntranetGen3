@@ -1,4 +1,6 @@
-﻿
+﻿using MensaGymnazium.IntranetGen3.Contracts;
+using MensaGymnazium.IntranetGen3.Model.Security;
+
 namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration.ProgressValidation;
 
 /// <summary>
@@ -7,6 +9,13 @@ namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration.ProgressValid
 /// </summary>
 public interface ISubjectRegistrationProgressValidationService
 {
-	Task<StudentRegistrationProgress> GetRegistrationProgressOfStudentAsync(int studentId, CancellationToken cancellationToken = default);
-	Task<> GetStudentRegistrationProgressListAsync(CancellationToken cancellationToken = default);
+	/// <returns>The progress of a single student</returns>
+	Task<StudentRegistrationProgress> GetRegistrationProgressOfStudentAsync(
+		int studentId,
+		CancellationToken cancellationToken = default);
+
+	/// <returns>Progress of multiple students. Key: <see cref="Student.Id"/>, Value: His progress</returns>
+	Task<Dictionary<int, StudentRegistrationProgress>> GetRegistrationProgressOfAllStudentsAsync(
+		StudentSubjectRegistrationProgressListFilter filter,
+		CancellationToken cancellationToken = default);
 }

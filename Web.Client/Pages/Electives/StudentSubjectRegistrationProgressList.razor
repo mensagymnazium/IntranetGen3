@@ -1,27 +1,35 @@
 ﻿@attribute [Route(Routes.Electives.StudentSubjectRegistrationProgressList)]
 
-<HxListLayout Title="Postupy registrací studentů">
+<HxListLayout Title="Postupy registrací studentů"
+              TFilterModel="StudentSubjectRegistrationProgressListFilter"
+              FilterModel="filterModel"
+              FilterModelChanged='grid.RefreshDataAsync'
+              >
 	<FilterTemplate>
 		<GradePicker Label="Ročník" @bind-Value="context.GradeId" />
 		<StudentPicker Label="Student" @bind-Value="context.StudentId" />
-		<SubjectPicker Label="Předmět" @bind-Value="context.SubjectId" />
-		<StudentRegistrationTypePicker Label="Typ zápisu" @bind-Value="context.RegistrationType" />
 	</FilterTemplate>
 	<DataTemplate>
-		<AuthorizeView Context="authenticationState">
-			<HxGrid @ref="gridComponent"
-			        TItem="StudentSubjectRegistrationDto"
+		@*<AuthorizeView Context="authenticationState">
+			<HxGrid @ref="grid"
+			        TItem="StudentSubjectRegistrationProgressListItemDto"
 			        DataProvider="this.DataProvider"
 			        Responsive="true">
 				<Columns>
 					<HxGridColumn HeaderText="Příjmení"
-					              ItemTextSelector="@(i => StudentsDataStore.GetByKeyOrDefault(i.StudentId.Value)?.LastName ?? "-příjmení nenačteno-")"
+					              ItemTextSelector="@(i => GetStudentLastName(i.StudentId))"
 					              SortString="StudentLastName"
-					              TItem="StudentSubjectRegistrationDto"
 					              IsDefaultSortColumn='true'/>
 
+					<HxGridColumn HeaderText="Ročník"
+					              ItemTextSelector="@(i => GetStudentGradeName(i.StudentId))"
+					              SortString="Grade"/>
+
+					<HxGridColumn HeaderText="Splněno A/N"
+					              ItemTextSelector="@(i => i.IsRegistrationValid ? "A" : "N")"
+					              SortString="ValidationState"/>
 				</Columns>
 			</HxGrid>
-		</AuthorizeView>
+		</AuthorizeView>*@
 	</DataTemplate>
 </HxListLayout>

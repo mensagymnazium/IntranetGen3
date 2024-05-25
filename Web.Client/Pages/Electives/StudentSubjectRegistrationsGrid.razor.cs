@@ -1,5 +1,4 @@
-﻿using Havit.Blazor.Components.Web.Bootstrap;
-using MensaGymnazium.IntranetGen3.Contracts;
+﻿using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;

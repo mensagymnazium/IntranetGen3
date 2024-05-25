@@ -1,5 +1,6 @@
 ﻿using System.Security;
 using MensaGymnazium.IntranetGen3.Contracts;
+using MensaGymnazium.IntranetGen3.DataLayer.Queries;
 using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
 using MensaGymnazium.IntranetGen3.Primitives;
 using MensaGymnazium.IntranetGen3.Services.SubjectRegistration.ProgressValidation;
@@ -12,6 +13,7 @@ public class SubjectRegistrationProgressValidationFacade : ISubjectRegistrationP
 {
 	private readonly ISubjectRegistrationProgressValidationService _subjectRegistrationProgressValidationService;
 	private readonly IApplicationAuthenticationService _applicationAuthenticationService;
+
 	public SubjectRegistrationProgressValidationFacade(
 		ISubjectRegistrationProgressValidationService subjectRegistrationProgressValidationService,
 		IApplicationAuthenticationService applicationAuthenticationService)
@@ -33,10 +35,22 @@ public class SubjectRegistrationProgressValidationFacade : ISubjectRegistrationP
 		return MapToDto(progress);
 	}
 
-	[Authorize(Roles = nameof(Role.Administrator))]
-	public Task<List<StudentRegistrationProgressListItemDto>> GetStudentRegistrationProgressListAsync(CancellationToken cancellationToken = default)
+	[Authorize]
+	public async Task<List<StudentSubjectRegistrationProgressListItemDto>> GetProgressListAsync(
+		StudentSubjectRegistrationProgressListFilter filter,
+		CancellationToken cancellationToken = default)
 	{
-		var 
+		var progresses = await _subjectRegistrationProgressValidationService.GetRegistrationProgressOfAllStudentsAsync(
+			filter,
+			cancellationToken);
+
+		return progresses
+			.Select(progressPair => new StudentSubjectRegistrationProgressListItemDto()
+			{
+				StudentId = progressPair.Key, // Key = StudentId
+				IsRegistrationValid = progressPair.Value.IsRegistrationValid
+			})
+			.ToList();
 	}
 
 	private StudentRegistrationProgressDto MapToDto(StudentRegistrationProgress obj)

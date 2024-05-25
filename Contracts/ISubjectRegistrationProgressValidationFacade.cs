@@ -6,6 +6,7 @@ public interface ISubjectRegistrationProgressValidationFacade
 	public Task<StudentRegistrationProgressDto> GetProgressOfCurrentStudentAsync(
 		CancellationToken cancellationToken = default);
 
-	public Task<List<StudentRegistrationProgressListItemDto>> GetStudentRegistrationProgressListAsync(
+	public Task<List<StudentSubjectRegistrationProgressListItemDto>> GetProgressListAsync(
+		StudentSubjectRegistrationProgressListFilter request,
 		CancellationToken cancellationToken = default);
 }
