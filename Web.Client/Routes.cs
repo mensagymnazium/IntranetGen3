@@ -3,6 +3,7 @@
 public static class Routes
 {
 	public const string Home = "/";
+	public const string NotFound = "/404";
 
 	public static class Electives
 	{

@@ -1,23 +1,20 @@
-﻿@inject NavigationManager NavigationManager
+﻿@attribute [Route(Routes.NotFound)]
+@inject NavigationManager NavigationManager
 
-<LayoutView Layout="@typeof(MainLayout)">
-
-	<center>
-		<p style="border-radius: 25px;
-					   background: var(--bs-warning);
-					   padding: 100px;
-					   width: fit-content;
-					   height: fit-content;">
-			<h1>Chyba 404</h1>
-			Je nám líto, ale hledanou stránku se nepodařilo najít.<br />
-			<HxButton Text="Zpět na hlavní stránku" Color="ThemeColor.Secondary" OnClick="HandleBackClick" CssClass="mt-5" />
-		</p>
-	</center>
-
-</LayoutView>
+<center>
+	<p style="border-radius: 25px;
+				   background: var(--bs-warning);
+				   padding: 100px;
+				   width: fit-content;
+				   height: fit-content;">
+		<h1>Chyba 404</h1>
+		Je nám líto, ale hledanou stránku se nepodařilo najít.<br />
+		<HxButton Text="Zpět na hlavní stránku" Color="ThemeColor.Secondary" OnClick="HandleReturnToHomepageClick" CssClass="mt-5" />
+	</p>
+</center>
 
 @code {
-	public void HandleBackClick() {
+	public void HandleReturnToHomepageClick() {
 		NavigationManager.NavigateTo("/");
 	}
 }
