@@ -9,8 +9,8 @@ public partial class StudentSubjectRegistrationProgressList
 	[Inject] protected IGradesDataStore GradesDataStore { get; set; }
 	[Inject] protected ISubjectRegistrationProgressValidationFacade ProgressValidationFacade { get; set; }
 
-	private HxGrid<StudentSubjectRegistrationProgressListItemDto> grid; // @ref
-	private StudentSubjectRegistrationProgressListFilter filterModel = new();
+	private HxGrid<StudentSubjectRegistrationProgressListItemDto> _grid; // @ref
+	private StudentSubjectRegistrationProgressListFilter _filterModel = new();
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -22,7 +22,7 @@ public partial class StudentSubjectRegistrationProgressList
 		GridDataProviderRequest<StudentSubjectRegistrationProgressListItemDto> request)
 	{
 		var data = await ProgressValidationFacade
-			.GetProgressListAsync(filterModel, request.CancellationToken);
+			.GetProgressListAsync(_filterModel, request.CancellationToken);
 
 		return request.ApplyTo(data);
 	}

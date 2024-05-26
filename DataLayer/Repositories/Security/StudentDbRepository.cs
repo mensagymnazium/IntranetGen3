@@ -15,5 +15,4 @@ public partial class StudentDbRepository : IStudentRepository
 		yield return s => s.User;
 		yield return s => s.Grade;
 	}
-
 }

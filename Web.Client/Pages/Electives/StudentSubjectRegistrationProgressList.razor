@@ -2,15 +2,15 @@
 
 <HxListLayout Title="Postupy registrací studentů"
               TFilterModel="StudentSubjectRegistrationProgressListFilter"
-              @bind-FilterModel="filterModel"
-              @bind-FilterModel:after='grid.RefreshDataAsync'>
+              @bind-FilterModel="_filterModel"
+              @bind-FilterModel:after='_grid.RefreshDataAsync'>
 	<FilterTemplate>
 		<GradePicker Label="Ročník" @bind-Value="context.GradeId" />
 		<StudentPicker Label="Student" @bind-Value="context.StudentId" />
 	</FilterTemplate>
 	<DataTemplate>
 		<AuthorizeView Context="authenticationState">
-			<HxGrid @ref="grid"
+			<HxGrid @ref="_grid"
 			        TItem="StudentSubjectRegistrationProgressListItemDto"
 			        DataProvider="this.DataProvider"
 			        Responsive="true">

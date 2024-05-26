@@ -74,9 +74,6 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		// Calculate progress of each and store into dict
 		var result = new Dictionary<int, StudentRegistrationProgress>(filteredStudents.Length);
 
-		//var gradesOfStudents = await _gradeRepository.GetGradesForStudentsAsync(filteredStudentIds, cancellationToken);
-		//var registrationsOfStudents = await _subjectRegistrationRepository.GetActiveRegistrationsForStudentsAsync(filteredStudentIds, cancellationToken);
-
 		foreach (var student in filteredStudents)
 		{
 			Contract.Requires<ArgumentException>(student.Id != default);
