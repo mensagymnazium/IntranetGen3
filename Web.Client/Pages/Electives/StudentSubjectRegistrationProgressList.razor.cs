@@ -24,6 +24,9 @@ public partial class StudentSubjectRegistrationProgressList
 		var data = await ProgressValidationFacade
 			.GetProgressListAsync(_filterModel, request.CancellationToken);
 
+		// Due to serialization, sometimes we receive empty lists,
+		// so 'List<>MissingCriteria' may be null
+
 		return request.ApplyTo(data);
 	}
 

@@ -43,13 +43,39 @@ public class SubjectRegistrationProgressValidationFacade : ISubjectRegistrationP
 			filter,
 			cancellationToken);
 
-		return progresses
+		var mappedProgress = progresses
 			.Select(progressPair => new StudentSubjectRegistrationProgressListItemDto()
 			{
 				StudentId = progressPair.Key, // Key = StudentId
 				IsRegistrationValid = progressPair.Value.IsRegistrationValid,
+				MissingCriteriaMessages = GetMissingCriteriaMessages(progressPair.Value)
 			})
 			.ToList();
+
+		return mappedProgress;
+	}
+
+	private List<string> GetMissingCriteriaMessages(StudentRegistrationProgress progress)
+	{
+		var missingCriteria = new List<string>();
+
+		if (!progress.HoursPerWeekProgress.IsProgressComplete)
+		{
+			missingCriteria.Add("Počet hodin týdně");
+		}
+
+		if (!progress.CsOrCpRegistrationProgress.IsProgressComplete)
+		{
+			missingCriteria.Add("Počet hodin v ČS/ČP");
+		}
+
+		if (progress.LanguageRegistrationProgress.IsLanguageRequired &&
+			!progress.LanguageRegistrationProgress.HasRegisteredLanguage)
+		{
+			missingCriteria.Add("Jazyk");
+		}
+
+		return missingCriteria;
 	}
 
 	private StudentRegistrationProgressDto MapToDto(StudentRegistrationProgress obj)

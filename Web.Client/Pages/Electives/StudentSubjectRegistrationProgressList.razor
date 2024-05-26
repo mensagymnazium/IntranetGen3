@@ -10,7 +10,13 @@
 		</FilterTemplate>
 		<DataTemplate>
 			<AuthorizeView Context="_">
-				<HxGrid @ref="_grid" TItem="StudentSubjectRegistrationProgressListItemDto" DataProvider="DataProvider" Responsive="true" ItemRowCssClassSelector='s => s.IsRegistrationValid ? "valid" : "invalid"'>
+				<HxGrid
+					@ref="_grid"
+					TItem="StudentSubjectRegistrationProgressListItemDto"
+					DataProvider="DataProvider"
+					ItemRowCssClassSelector='s => s.IsRegistrationValid ? "valid" : "invalid"'
+					SelectionEnabled='false'
+					PageSize='16'>
 					<Columns>
 						<HxGridColumn HeaderText="Příjmení"
 									  ItemTextSelector="s => GetStudentLastName(s.StudentId)"
@@ -22,8 +28,24 @@
 									  SortKeySelector="s => -GetStudentGradeId(s.StudentId)" />
 
 						<HxGridColumn HeaderText="Splněno A/N"
-									  ItemTextSelector="@(i => i.IsRegistrationValid ? "A" : "N")"
-									  SortKeySelector="s => s.IsRegistrationValid" />
+						              ItemTextSelector="@(i => i.IsRegistrationValid ? "A" : "N")"
+						              SortKeySelector="s => s.IsRegistrationValid" />
+
+						<HxGridColumn
+							HeaderText="Chybí"
+							SortKeySelector="@(s => s.MissingCriteriaMessages != null ? s.MissingCriteriaMessages.Count : 0)">
+							<ItemTemplate>
+								<ul>
+									@if (context?.MissingCriteriaMessages is not null)
+									{
+										@foreach (var message in context.MissingCriteriaMessages)
+										{
+											<li>@message</li>
+										}
+									}
+								</ul>
+							</ItemTemplate>
+						</HxGridColumn>
 					</Columns>
 				</HxGrid>
 			</AuthorizeView>
