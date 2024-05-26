@@ -16,17 +16,17 @@
 			        Responsive="true">
 				<Columns>
 					<HxGridColumn HeaderText="Příjmení"
-					              ItemTextSelector="@(i => GetStudentLastName(i.StudentId))"
-					              SortString="StudentLastName"
-					              IsDefaultSortColumn='true'/>
+					              ItemTextSelector="s => GetStudentLastName(s.StudentId)"
+					              SortKeySelector="s => GetStudentLastName(s.StudentId)"
+					              IsDefaultSortColumn="true"/>
 
 					<HxGridColumn HeaderText="Ročník"
-					              ItemTextSelector="@(i => GetStudentGradeName(i.StudentId))"
-					              SortString="Grade"/>
+					              ItemTextSelector="s => GetStudentGradeName(s.StudentId)"
+					              SortKeySelector="s => -GetStudentGradeId(s.StudentId)"/>
 
 					<HxGridColumn HeaderText="Splněno A/N"
 					              ItemTextSelector="@(i => i.IsRegistrationValid ? "A" : "N")"
-					              SortString="ValidationState"/>
+					              SortKeySelector="s => s.IsRegistrationValid"/>
 				</Columns>
 			</HxGrid>
 		</AuthorizeView>

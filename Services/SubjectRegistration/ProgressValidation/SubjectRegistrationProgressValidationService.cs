@@ -62,41 +62,41 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		StudentSubjectRegistrationProgressListFilter filter,
 		CancellationToken cancellationToken = default)
 	{
-		// Filter students
-		var filteredStudentIds = await _studentDatSource.Data
+		// Filter students:
+		// 1. Don't fetch oktava students (they are not subject to progress)
+		// 2. Fetch based on given filter
+		var filteredStudents = await _studentDatSource.Data
 			.WhereIf(filter.StudentId is not null, s => s.Id == filter.StudentId)
 			.WhereIf(filter.GradeId is not null, s => s.GradeId == filter.GradeId)
-			.Select(s => s.Id)
+			.Where(s => (GradeEntry)s.GradeId != GradeEntry.Oktava)
 			.ToArrayAsync(cancellationToken: cancellationToken);
 
 		// Calculate progress of each and store into dict
-		var result = new Dictionary<int, StudentRegistrationProgress>(filteredStudentIds.Length);
+		var result = new Dictionary<int, StudentRegistrationProgress>(filteredStudents.Length);
 
 		//var gradesOfStudents = await _gradeRepository.GetGradesForStudentsAsync(filteredStudentIds, cancellationToken);
 		//var registrationsOfStudents = await _subjectRegistrationRepository.GetActiveRegistrationsForStudentsAsync(filteredStudentIds, cancellationToken);
 
-		foreach (int studentId in filteredStudentIds)
+		foreach (var student in filteredStudents)
 		{
-			Contract.Requires<ArgumentException>(studentId != default);
+			Contract.Requires<ArgumentException>(student.Id != default);
 
-			var registrationProgress = await GetRegistrationProgressOfStudentAsync(studentId, cancellationToken);
-			//var grade = gradesOfStudents[studentId]
-			//var futureGrade = await _gradeRepository.GetObjectAsync((int)((GradeEntry)grade.Id).NextGrade(), cancellationToken);
-			//var registrations = registrationsOfStudents[studentId];
+			var futureGrade = await _gradeRepository.GetObjectAsync((int)((GradeEntry)student.GradeId).NextGrade(), cancellationToken);
+			var registrations = await _subjectRegistrationRepository.GetActiveRegistrationsByStudentAsync(student.Id, cancellationToken);
 
-			//Contract.Requires<InvalidOperationException>(registrations is not null);
-			//Contract.Requires<InvalidOperationException>(futureGrade is not null);
-			//Contract.Requires<InvalidOperationException>(futureGrade.RegistrationCriteria is not null);
+			Contract.Requires<InvalidOperationException>(registrations is not null);
+			Contract.Requires<InvalidOperationException>(futureGrade is not null);
+			Contract.Requires<InvalidOperationException>(futureGrade.RegistrationCriteria is not null);
 
-			//var hoursPerWeekProgress = GetHoursPerWeekProgress(futureGrade, registrations);
-			//var csOrCpProgress = GetCsOrCpRegistrationProgress(futureGrade, registrations);
-			//var languageProgress = GetLanguageRegistrationProgress(futureGrade, registrations);
+			var hoursPerWeekProgress = GetHoursPerWeekProgress(futureGrade, registrations);
+			var csOrCpProgress = GetCsOrCpRegistrationProgress(futureGrade, registrations);
+			var languageProgress = GetLanguageRegistrationProgress(futureGrade, registrations);
 
-			//var registrationProgress = ConstructRegistrationProgress(
-			//	futureGrade,
-			//	hoursPerWeekProgress,
-			//	csOrCpProgress,
-			//	languageProgress);
+			var registrationProgress = ConstructRegistrationProgress(
+				futureGrade,
+				hoursPerWeekProgress,
+				csOrCpProgress,
+				languageProgress);
 
 			// Filter based on ValidationState
 			if (filter.ValidationState is not null &&
@@ -105,7 +105,7 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 				continue;
 			}
 
-			result.Add(studentId, registrationProgress);
+			result.Add(student.Id, registrationProgress);
 		}
 
 		return result;

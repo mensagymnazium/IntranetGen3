@@ -12,6 +12,12 @@ public partial class StudentSubjectRegistrationProgressList
 	private HxGrid<StudentSubjectRegistrationProgressListItemDto> grid; // @ref
 	private StudentSubjectRegistrationProgressListFilter filterModel = new();
 
+	protected override async Task OnInitializedAsync()
+	{
+		await StudentsDataStore.EnsureDataAsync();
+		await GradesDataStore.EnsureDataAsync();
+	}
+
 	private async Task<GridDataProviderResult<StudentSubjectRegistrationProgressListItemDto>> DataProvider(
 		GridDataProviderRequest<StudentSubjectRegistrationProgressListItemDto> request)
 	{
@@ -32,5 +38,11 @@ public partial class StudentSubjectRegistrationProgressList
 		return gradeId is not null
 			? GradesDataStore.GetByKey(gradeId.Value)?.Name
 			: null;
+	}
+
+	private int? GetStudentGradeId(int studentId)
+	{
+		var gradeId = StudentsDataStore.GetByKeyOrDefault(studentId)?.GradeId;
+		return gradeId;
 	}
 }

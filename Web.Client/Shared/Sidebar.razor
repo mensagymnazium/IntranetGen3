@@ -12,6 +12,7 @@
         <HxSidebarItem Text="Volitelné předměty" Icon="@BootstrapIcon.CalendarRange">
 	        <HxSidebarItem Text="Předměty" Href="@Routes.Electives.Subjects"/>
 	        <HxSidebarItem Text="Zapsaní studenti" Href="@Routes.Electives.StudentSubjectRegistrationList"/>
+	        <HxSidebarItem Text="Postup registrací studentů" Href="@Routes.Electives.StudentSubjectRegistrationProgressList"/>
         </HxSidebarItem>
         <AuthorizeView Roles="@nameof(Role.Administrator)">
             <HxSidebarItem Text="Nastavení" Icon="@BootstrapIcon.Gear">
