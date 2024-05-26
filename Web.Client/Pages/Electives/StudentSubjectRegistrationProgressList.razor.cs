@@ -15,11 +15,10 @@ public partial class StudentSubjectRegistrationProgressList
 	private async Task<GridDataProviderResult<StudentSubjectRegistrationProgressListItemDto>> DataProvider(
 		GridDataProviderRequest<StudentSubjectRegistrationProgressListItemDto> request)
 	{
-		return new();
-		//var data = await ProgressValidationFacade
-		//	.GetProgressListAsync(_filterModel, request.CancellationToken);
+		var data = await ProgressValidationFacade
+			.GetProgressListAsync(filterModel, request.CancellationToken);
 
-		//return request.ApplyTo(data);
+		return request.ApplyTo(data);
 	}
 
 	private string GetStudentLastName(int studentId)
