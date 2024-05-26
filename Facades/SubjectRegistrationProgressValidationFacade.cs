@@ -1,6 +1,5 @@
 ﻿using System.Security;
 using MensaGymnazium.IntranetGen3.Contracts;
-using MensaGymnazium.IntranetGen3.DataLayer.Queries;
 using MensaGymnazium.IntranetGen3.Facades.Infrastructure.Security.Authentication;
 using MensaGymnazium.IntranetGen3.Primitives;
 using MensaGymnazium.IntranetGen3.Services.SubjectRegistration.ProgressValidation;
@@ -48,7 +47,7 @@ public class SubjectRegistrationProgressValidationFacade : ISubjectRegistrationP
 			.Select(progressPair => new StudentSubjectRegistrationProgressListItemDto()
 			{
 				StudentId = progressPair.Key, // Key = StudentId
-				IsRegistrationValid = progressPair.Value.IsRegistrationValid
+				IsRegistrationValid = progressPair.Value.IsRegistrationValid,
 			})
 			.ToList();
 	}

@@ -1,0 +1,13 @@
+﻿::deep .valid {
+	background-color: rgba(var(--bs-success-rgb), 30%);
+}
+
+
+::deep .invalid {
+	background-color: rgba(var(--bs-danger-rgb), 10%);
+}
+
+/* Make sure color applies to HxGrid row children as well (they were overriding it) */
+::deep td {
+	background-color: inherit;
+}

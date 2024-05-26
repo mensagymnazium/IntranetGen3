@@ -66,7 +66,6 @@ public class CustomClaimsBuilder : ICustomClaimsBuilder
 
 		// role
 		var roles = await _userManager.GetRolesAsync(user, principal);
-		roles = Enum.GetValues<Role>();
 		foreach (var role in roles)
 		{
 			result.Add(new Claim(ClaimTypes.Role, role.ToString("g"), null, ClaimConstants.ApplicationIssuer));

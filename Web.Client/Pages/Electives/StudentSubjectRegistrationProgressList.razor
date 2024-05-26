@@ -1,34 +1,32 @@
 ﻿@attribute [Route(Routes.Electives.StudentSubjectRegistrationProgressList)]
 
-<HxListLayout Title="Postupy registrací studentů"
-              TFilterModel="StudentSubjectRegistrationProgressListFilter"
-              @bind-FilterModel="_filterModel"
-              @bind-FilterModel:after='_grid.RefreshDataAsync'>
-	<FilterTemplate>
-		<GradePicker Label="Ročník" @bind-Value="context.GradeId" />
-		<StudentPicker Label="Student" @bind-Value="context.StudentId" />
-	</FilterTemplate>
-	<DataTemplate>
-		<AuthorizeView Context="authenticationState">
-			<HxGrid @ref="_grid"
-			        TItem="StudentSubjectRegistrationProgressListItemDto"
-			        DataProvider="this.DataProvider"
-			        Responsive="true">
-				<Columns>
-					<HxGridColumn HeaderText="Příjmení"
-					              ItemTextSelector="s => GetStudentLastName(s.StudentId)"
-					              SortKeySelector="s => GetStudentLastName(s.StudentId)"
-					              IsDefaultSortColumn="true"/>
+<div>
+	@* div purely for CSS ISOLATION *@
+	<HxListLayout Title="Postupy registrací studentů" TFilterModel="StudentSubjectRegistrationProgressListFilter" @bind-FilterModel="_filterModel" @bind-FilterModel:after='_grid.RefreshDataAsync'>
+		<FilterTemplate>
+			<GradePicker Label="Ročník" @bind-Value="context.GradeId" />
+			<StudentPicker Label="Student" @bind-Value="context.StudentId" />
+			<HxSelect Label="Splněno" TItem="bool?" TValue="bool?" @bind-Value="context.ValidationState" TextSelector="@(v => v.Value ? "Pouze splněné" : "Pouze nesplněné")" NullText='Všechny' Nullable='true' ValueSelector="v => v" Data='[true, false]' />
+		</FilterTemplate>
+		<DataTemplate>
+			<AuthorizeView Context="_">
+				<HxGrid @ref="_grid" TItem="StudentSubjectRegistrationProgressListItemDto" DataProvider="DataProvider" Responsive="true" ItemRowCssClassSelector='s => s.IsRegistrationValid ? "valid" : "invalid"'>
+					<Columns>
+						<HxGridColumn HeaderText="Příjmení"
+									  ItemTextSelector="s => GetStudentLastName(s.StudentId)"
+									  SortKeySelector="s => GetStudentLastName(s.StudentId)"
+									  IsDefaultSortColumn="true" />
 
-					<HxGridColumn HeaderText="Ročník"
-					              ItemTextSelector="s => GetStudentGradeName(s.StudentId)"
-					              SortKeySelector="s => -GetStudentGradeId(s.StudentId)"/>
+						<HxGridColumn HeaderText="Ročník"
+									  ItemTextSelector="s => GetStudentGradeName(s.StudentId)"
+									  SortKeySelector="s => -GetStudentGradeId(s.StudentId)" />
 
-					<HxGridColumn HeaderText="Splněno A/N"
-					              ItemTextSelector="@(i => i.IsRegistrationValid ? "A" : "N")"
-					              SortKeySelector="s => s.IsRegistrationValid"/>
-				</Columns>
-			</HxGrid>
-		</AuthorizeView>
-	</DataTemplate>
-</HxListLayout>
+						<HxGridColumn HeaderText="Splněno A/N"
+									  ItemTextSelector="@(i => i.IsRegistrationValid ? "A" : "N")"
+									  SortKeySelector="s => s.IsRegistrationValid" />
+					</Columns>
+				</HxGrid>
+			</AuthorizeView>
+		</DataTemplate>
+	</HxListLayout>
+</div>
