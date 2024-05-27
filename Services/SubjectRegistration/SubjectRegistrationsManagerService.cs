@@ -40,7 +40,7 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 	{
 		var allowedFrom = _applicationSettingsEntries.Current.SubjectRegistrationAllowedFrom;
 		var allowedTo = _applicationSettingsEntries.Current.SubjectRegistrationAllowedTo;
-		var now = _timeService.GetCurrentDate();
+		var now = _timeService.GetCurrentTime();
 
 		if ((allowedFrom is not null) && (now < allowedFrom))
 		{
