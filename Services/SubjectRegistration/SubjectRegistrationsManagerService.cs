@@ -40,14 +40,14 @@ internal sealed class SubjectRegistrationsManagerService : ISubjectRegistrations
 	{
 		var allowedFrom = _applicationSettingsEntries.Current.SubjectRegistrationAllowedFrom;
 		var allowedTo = _applicationSettingsEntries.Current.SubjectRegistrationAllowedTo;
-		var today = _timeService.GetCurrentDate();
+		var now = _timeService.GetCurrentDate();
 
-		if (allowedFrom is not null && today < allowedFrom)
+		if ((allowedFrom is not null) && (now < allowedFrom))
 		{
 			return false;
 		}
 
-		if (allowedTo is not null && today > allowedTo)
+		if ((allowedTo is not null) && (now > allowedTo))
 		{
 			return false;
 		}
