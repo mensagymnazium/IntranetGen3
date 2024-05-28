@@ -11,18 +11,18 @@ namespace MensaGymnazium.IntranetGen3.Facades;
 [Authorize]
 public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFacade
 {
-	private readonly IApplicationAuthenticationService applicationAuthenticationService;
-	private readonly IUnitOfWork unitOfWork;
-	private readonly ISubjectRegistrationsManagerService subjectRegistrationsManagerService;
+	private readonly IApplicationAuthenticationService _applicationAuthenticationService;
+	private readonly IUnitOfWork _unitOfWork;
+	private readonly ISubjectRegistrationsManagerService _subjectRegistrationsManagerService;
 
 
 	public SubjectRegistrationsManagerFacade(
 		IApplicationAuthenticationService applicationAuthenticationService,
 		IUnitOfWork unitOfWork, ISubjectRegistrationsManagerService subjectRegistrationsManagerService)
 	{
-		this.applicationAuthenticationService = applicationAuthenticationService;
-		this.unitOfWork = unitOfWork;
-		this.subjectRegistrationsManagerService = subjectRegistrationsManagerService;
+		_applicationAuthenticationService = applicationAuthenticationService;
+		_unitOfWork = unitOfWork;
+		_subjectRegistrationsManagerService = subjectRegistrationsManagerService;
 	}
 
 
@@ -34,18 +34,18 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationId.Value != default);
 
 		// Verify registration date
-		if (!subjectRegistrationsManagerService.IsRegistrationPeriodActive())
+		if (!_subjectRegistrationsManagerService.IsRegistrationPeriodActive())
 		{
 			throw new OperationFailedException(
 				"Přihlášku není možné zrušit. Je před, nebo již po termínu přihlašování");
 		}
 
 		// Cancel
-		var currentUser = applicationAuthenticationService.GetCurrentUser();
+		var currentUser = _applicationAuthenticationService.GetCurrentUser();
 		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
-		await subjectRegistrationsManagerService.CancelRegistrationAsync(studentSubjectRegistrationId.Value, currentUser.StudentId.Value, cancellationToken);
+		await _subjectRegistrationsManagerService.CancelRegistrationAsync(studentSubjectRegistrationId.Value, currentUser.StudentId.Value, cancellationToken);
 
-		await unitOfWork.CommitAsync(cancellationToken);
+		await _unitOfWork.CommitAsync(cancellationToken);
 	}
 
 	[Authorize(Roles = nameof(Role.Student))]
@@ -59,7 +59,7 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.RegistrationType != default);
 
 		// Get student
-		var currentUser = applicationAuthenticationService.GetCurrentUser();
+		var currentUser = _applicationAuthenticationService.GetCurrentUser();
 		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
 
 		// Check that student can make the registration
@@ -71,53 +71,53 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 		}
 
 		// Create registration
-		subjectRegistrationsManagerService.CreateNewSubjectRegistration(
+		_subjectRegistrationsManagerService.CreateNewSubjectRegistration(
 			studentId: currentUser.StudentId.Value,
 			subjectId: studentSubjectRegistrationCreateDto.SubjectId.Value,
 			registrationType: studentSubjectRegistrationCreateDto.RegistrationType.Value);
 
-		await unitOfWork.CommitAsync(cancellationToken);
+		await _unitOfWork.CommitAsync(cancellationToken);
 	}
 
 	public async Task<StudentSubjectRegistrationPossibilityDto> CanStudentCreateRegistrationAsync(
 		StudentSubjectRegistrationCreateDto studentSubjectRegistrationCreateDto,
 		CancellationToken cancellationToken = default)
 	{
-		var currentUser = applicationAuthenticationService.GetCurrentUser();
+		var currentUser = _applicationAuthenticationService.GetCurrentUser();
 		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.SubjectId != default);
 		Contract.Requires<ArgumentException>(studentSubjectRegistrationCreateDto.RegistrationType != default);
 
 		// Verify registration date
-		if (!subjectRegistrationsManagerService.IsRegistrationPeriodActive())
+		if (!_subjectRegistrationsManagerService.IsRegistrationPeriodActive())
 		{
 			return StudentSubjectRegistrationPossibilityDto.CreateNotPossible("Přihlášku není možné vytvořit. Je před, nebo již po termínu přihlašování");
 		}
 
 		// Verify student isn't already registered for this subject
-		if (await subjectRegistrationsManagerService
+		if (await _subjectRegistrationsManagerService
 				.IsSubjectRegisteredForStudentAsync(studentSubjectRegistrationCreateDto.SubjectId.Value, currentUser.StudentId.Value, cancellationToken))
 		{
 			return StudentSubjectRegistrationPossibilityDto.CreateNotPossible("Na předmět již máte přihlášku");
 		}
 
 		// Verify subject isn't full
-		if (await subjectRegistrationsManagerService
+		if (await _subjectRegistrationsManagerService
 				.IsSubjectCapacityFullAsync(studentSubjectRegistrationCreateDto.SubjectId.Value, cancellationToken))
 		{
 			return StudentSubjectRegistrationPossibilityDto.CreateNotPossible("Předmět je již plný");
 		}
 
 		// Verify student is in correct grade
-		if (!await subjectRegistrationsManagerService
-				.IsStudentInAssignableGrade(currentUser.StudentId.Value, studentSubjectRegistrationCreateDto.SubjectId.Value, cancellationToken))
+		if (!await _subjectRegistrationsManagerService
+				.IsStudentInAssignableGradeAsync(currentUser.StudentId.Value, studentSubjectRegistrationCreateDto.SubjectId.Value, cancellationToken))
 		{
 			return StudentSubjectRegistrationPossibilityDto.CreateNotPossible("Předmět není určený pro váš ročník");
 		}
 
 		// Verify student doesn't already have reached `hours per week` limit
-		if (await subjectRegistrationsManagerService
-				.DidStudentAlreadyReachHoursPerWeekLimit(currentUser.StudentId.Value,
+		if (await _subjectRegistrationsManagerService
+				.DidStudentAlreadyReachHoursPerWeekLimitAsync(currentUser.StudentId.Value,
 					studentSubjectRegistrationCreateDto.SubjectId.Value, cancellationToken))
 		{
 			return StudentSubjectRegistrationPossibilityDto.CreateNotPossible("Již jste dosáhl maximálního počtu hodin za týden");

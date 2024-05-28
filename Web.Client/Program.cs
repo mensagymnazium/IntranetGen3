@@ -6,10 +6,13 @@ using Havit.Blazor.Grpc.Client.ServerExceptions;
 using Havit.Blazor.Grpc.Client.WebAssembly;
 using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
+using MensaGymnazium.IntranetGen3.Contracts.Security;
+using MensaGymnazium.IntranetGen3.Primitives;
 using MensaGymnazium.IntranetGen3.Web.Client.Infrastructure.Grpc;
 using MensaGymnazium.IntranetGen3.Web.Client.Infrastructure.Security;
 using MensaGymnazium.IntranetGen3.Web.Client.Services;
 using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -68,6 +71,25 @@ public class Program
 			builder.Configuration.Bind("AzureAd", options.ProviderOptions);
 			options.ProviderOptions.LoginMode = "redirect";
 			options.UserOptions.RoleClaim = "role";
+		});
+
+		// Policies
+		builder.Services.Configure<AuthorizationOptions>(config =>
+		{
+			config.AddPolicy(
+				ClientAuthorizationPolicyNames.StudentBeforeOktava,
+				policy =>
+				{
+					var gradesWithoutOctava = new GradeEntry[]
+					{
+						GradeEntry.Prima, GradeEntry.Sekunda, GradeEntry.Tercie,
+						GradeEntry.Kvarta, GradeEntry.Kvinta, GradeEntry.Sexta,
+						GradeEntry.Septima
+					}.Select(ge => ((int)ge).ToString());
+
+					policy.RequireClaim(ClaimConstants.StudentGradeIdClaimType, gradesWithoutOctava);
+					policy.RequireRole(nameof(Role.Student));
+				});
 		});
 
 		builder.Services.AddScoped(typeof(AccountClaimsPrincipalFactory<RemoteUserAccount>), typeof(CustomAccountClaimsPrincipalFactory));

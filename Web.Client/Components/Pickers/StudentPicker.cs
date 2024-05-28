@@ -1,7 +1,6 @@
 ﻿using Havit.Text.RegularExpressions;
 using MensaGymnazium.IntranetGen3.Contracts.Security;
 using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
-using Microsoft.AspNetCore.Components;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Components.Pickers;
 
@@ -11,13 +10,13 @@ public class StudentPicker : HxAutosuggest<StudentReferenceDto, int?>
 
 	public StudentPicker()
 	{
-		this.DataProvider = GetSuggestions;
-		this.ItemFromValueResolver = ResolveItemFromId;
+		this.DataProvider = GetSuggestionsAsync;
+		this.ItemFromValueResolver = ResolveItemFromIdAsync;
 		this.ValueSelector = (c => c.Id);
 		this.TextSelector = (c => c.Name);
 	}
 
-	private async Task<AutosuggestDataProviderResult<StudentReferenceDto>> GetSuggestions(AutosuggestDataProviderRequest request)
+	private async Task<AutosuggestDataProviderResult<StudentReferenceDto>> GetSuggestionsAsync(AutosuggestDataProviderRequest request)
 	{
 		var data = await StudentsDataStore.GetAllAsync();
 		return new AutosuggestDataProviderResult<StudentReferenceDto>()
@@ -25,14 +24,15 @@ public class StudentPicker : HxAutosuggest<StudentReferenceDto, int?>
 			Data = data
 				.Where(c => !c.IsDeleted)
 				.Where(c => RegexPatterns.IsWildcardMatch("*" + request.UserInput + "*", c.Name))
-				.OrderBy(c => c.Name.StartsWith(request.UserInput, StringComparison.OrdinalIgnoreCase) ? 0 : 1)
+				.OrderBy(c => (c.LastName?.StartsWith(request.UserInput, StringComparison.OrdinalIgnoreCase) ?? false) ? 0 : 1)
+				.ThenBy(c => c.LastName)
 				.ThenBy(c => c.Name)
 				.Take(5)
 				.ToList(),
 		};
 	}
 
-	private async Task<StudentReferenceDto> ResolveItemFromId(int? id)
+	private async Task<StudentReferenceDto> ResolveItemFromIdAsync(int? id)
 	{
 		if (id == null)
 		{

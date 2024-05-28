@@ -11,7 +11,7 @@ public class EducationalAreaFacade : IEducationalAreaFacade
 
 	public EducationalAreaFacade(IEducationalAreaRepository educationalAreaRepository)
 	{
-		this._educationalAreaRepository = educationalAreaRepository;
+		_educationalAreaRepository = educationalAreaRepository;
 	}
 
 	public async Task<List<EducationalAreaDto>> GetAllEducationalAreasAsync(CancellationToken cancellationToken = default)

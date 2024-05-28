@@ -15,7 +15,7 @@ public class StudentsDataStore : DictionaryStaticDataStore<int, StudentReference
 	protected override Func<StudentReferenceDto, int> KeySelector => (s) => s.Id;
 	protected override bool ShouldRefresh() => false; // just hit F5 :-D
 
-	protected async override Task<IEnumerable<StudentReferenceDto>> LoadDataAsync()
+	protected override async Task<IEnumerable<StudentReferenceDto>> LoadDataAsync()
 	{
 		var dto = await studentFacade.GetAllStudentReferencesAsync();
 		return dto ?? new List<StudentReferenceDto>();

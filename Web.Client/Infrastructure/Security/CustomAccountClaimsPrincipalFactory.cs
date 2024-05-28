@@ -6,14 +6,14 @@ namespace MensaGymnazium.IntranetGen3.Web.Client.Infrastructure.Security;
 
 public class CustomAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<RemoteUserAccount>
 {
-	private readonly IUserClientService userClientService;
+	private readonly IUserClientService _userClientService;
 
 	public CustomAccountClaimsPrincipalFactory(
 		IAccessTokenProviderAccessor accessor,
 		IUserClientService userClientService)
 		: base(accessor)
 	{
-		this.userClientService = userClientService;
+		_userClientService = userClientService;
 		// NOOP
 	}
 
@@ -25,7 +25,7 @@ public class CustomAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory
 		{
 			var identity = (ClaimsIdentity)user.Identity;
 
-			var claims = await userClientService.FetchAdditionalUserClaimsAsync(this.TokenProvider);
+			var claims = await _userClientService.FetchAdditionalUserClaimsAsync(this.TokenProvider);
 
 			foreach (var claim in claims)
 			{

@@ -31,34 +31,41 @@
             </AuthorizeView>
         </CommandsTemplate>
         <FilterTemplate>
-            <HxInputText @bind-Value="@context.Name" Label="Název" />
-            <GradePicker @bind-Value="@context.GradeId" Label="Ročník"/>
-            <SubjectCategoryPicker @bind-Value="context.SubjectCategoryId" Label="Skupina" />
-            <EducationalAreaPicker @bind-Value="@context.EducationalAreaId" Label="Vzdělávací oblast" />
-            <TeacherPicker @bind-Value="context.TeacherId" Label="Vyučující" />
+	        <HxInputText @bind-Value="@context.Name" Label="Název" />
+	        <SubjectCategoryPicker @bind-Value="context.SubjectCategoryId" Label="Skupina" />
+	        <EducationalAreaPicker @bind-Value="@context.EducationalAreaId" Label="Vzdělávací oblast" />
+	        <TeacherPicker @bind-Value="context.TeacherId" Label="Vyučující" />
         </FilterTemplate>
+        <SearchTemplate>
+	        <strong class="d-none d-sm-block">Ročník:</strong>
+	        <GradePicker @bind-Value='subjectListFilter.GradeId'
+	                     @bind-Value:after='subjectsGrid.RefreshDataAsync'
+	                     ExcludedGrades='[GradeEntry.Prima]'/> @*Don't show prima, it would create confusion like:
+                                                                   Why is there no subject for prima?'*@
+        </SearchTemplate>
         <DataTemplate>
             <HxGrid @ref="subjectsGrid"
                     TItem="SubjectListItemDto"
-                    DataProvider="LoadSubjects"
+                    DataProvider="LoadSubjectsAsync"
                     SelectedDataItem="subjectSelected"
                     SelectedDataItemChanged="HandleSelectedDataItemChanged"
                     ItemRowCssClassSelector="item => GetRowCssClass(item)"
                     HeaderRowCssClass="text-nowrap"
                     Context="item"
+                    @bind-CurrentUserState='gridUserState'
                     Responsive="true">
                 <Columns>
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" SortString="@nameof(SubjectListItemDto.Name)" IsDefaultSortColumn="true" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vyučující" ItemTextSelector="@(item => GetTeachers(item.TeacherIds))" SortString="@nameof(SubjectListItemDto.TeacherIds)" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Rozvrh" ItemTextSelector="@(item => ValueFormatter.GetScheduleTimeSlot(item.ScheduleDayOfWeek, item.ScheduleSlotInDay))" SortString="@nameof(SubjectListItemDto.ScheduleSlotInDay)" ItemCssClass="text-nowrap" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Kapacita" SortString="@nameof(SubjectListItemDto.Capacity)" >
+                    <HxGridColumn Id='0' TItem="SubjectListItemDto" HeaderText="Název" ItemTextSelector="@(item => item.Name)" SortString="@nameof(SubjectListItemDto.Name)" IsDefaultSortColumn="true" />
+                    <HxGridColumn Id='1' TItem="SubjectListItemDto" HeaderText="Vyučující" ItemTextSelector="@(item => GetTeachers(item.TeacherIds))" SortString="@nameof(SubjectListItemDto.TeacherIds)" />
+                    <HxGridColumn Id='2' TItem="SubjectListItemDto" HeaderText="Rozvrh" ItemTextSelector="@(item => ValueFormatter.GetScheduleTimeSlot(item.ScheduleDayOfWeek, item.ScheduleSlotInDay))" SortString="@nameof(SubjectListItemDto.ScheduleSlotInDay)" ItemCssClass="text-nowrap" />
+                    <HxGridColumn Id='3' TItem="SubjectListItemDto" HeaderText="Kapacita" SortString="@nameof(SubjectListItemDto.Capacity)" >
                         <ItemTemplate Context="item">
                             <CapacityDisplay Registrations="@item.StudentRegistrationsCountMain" Capacity="@item.Capacity" />
                         </ItemTemplate>
                     </HxGridColumn>
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Ročník(y)" ItemTextSelector="@(item => GetGrades(item.GradeIds))" SortString="@nameof(SubjectListItemDto.GradeIds)" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Skupina" ItemTextSelector="@(item => SubjectCategoriesDataStore.GetByKey(item.CategoryId.Value)?.Name)" SortString="@nameof(SubjectListItemDto.CategoryId)" />
-                    <HxGridColumn TItem="SubjectListItemDto" HeaderText="Vzdělávací oblast(i)" ItemTextSelector="@(item => GetEducationalAreas(item.EducationalAreaIds))" SortString="@nameof(SubjectListItemDto.EducationalAreaIds)" />
+                    <HxGridColumn Id='4' TItem="SubjectListItemDto" HeaderText="Ročník(y)" ItemTextSelector="@(item => GetGrades(item.GradeIds))" SortString="@nameof(SubjectListItemDto.GradeIds)" />
+                    <HxGridColumn Id='5' TItem="SubjectListItemDto" HeaderText="Skupina" ItemTextSelector="@(item => SubjectCategoriesDataStore.GetByKey(item.CategoryId.Value)?.Name)" SortString="@nameof(SubjectListItemDto.CategoryId)" />
+                    <HxGridColumn Id='6' TItem="SubjectListItemDto" HeaderText="Vzdělávací oblast(i)" ItemTextSelector="@(item => GetEducationalAreas(item.EducationalAreaIds))" SortString="@nameof(SubjectListItemDto.EducationalAreaIds)" />
                     <HxContextMenuGridColumn Context="item">
                         <AuthorizeView Roles="@nameof(Role.Administrator)">
                             <HxContextMenu>
@@ -70,7 +77,6 @@
                     </HxContextMenuGridColumn>
                 </Columns>
             </HxGrid>
-
         </DataTemplate>
     </HxListLayout>
 

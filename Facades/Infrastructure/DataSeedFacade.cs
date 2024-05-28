@@ -16,22 +16,22 @@ namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure;
 
 public class DataSeedFacade : IDataSeedFacade
 {
-	private readonly IDataSeedRunner dataSeedRunner;
-	private readonly ICacheService cacheService;
+	private readonly IDataSeedRunner _dataSeedRunner;
+	private readonly ICacheService _cacheService;
 
 	public DataSeedFacade(
 		IDataSeedRunner dataSeedRunner,
 		ICacheService cacheService)
 	{
-		this.dataSeedRunner = dataSeedRunner;
-		this.cacheService = cacheService;
+		_dataSeedRunner = dataSeedRunner;
+		_cacheService = cacheService;
 	}
 
 	/// <summary>
 	/// Provede seedování dat daného profilu.
 	/// Pokud jde produkční prostředí a profil není pro produkční prostředí povolen, vrací BadRequest.
 	/// </summary>
-	public Task SeedDataProfile(string profileName)
+	public Task SeedDataProfileAsync(string profileName)
 	{
 		// applicationAuthorizationService.VerifyCurrentUserAuthorization(Operations.SystemAdministration); // TODO alternative authorization approach
 
@@ -42,17 +42,17 @@ public class DataSeedFacade : IDataSeedFacade
 			throw new OperationFailedException($"Profil {profileName} nebyl nalezen.");
 		}
 
-		dataSeedRunner.SeedData(type, forceRun: true);
+		_dataSeedRunner.SeedData(type, forceRun: true);
 
-		cacheService.Clear();
+		_cacheService.Clear();
 
 		return Task.CompletedTask;
 	}
 
 	/// <summary>
-	/// Returns list of available data seed profiles (names are ready for use as parameter to <see cref="SeedDataProfile"/> method).
+	/// Returns list of available data seed profiles (names are ready for use as parameter to <see cref="SeedDataProfileAsync"/> method).
 	/// </summary>
-	public Task<List<string>> GetDataSeedProfiles()
+	public Task<List<string>> GetDataSeedProfilesAsync()
 	{
 		return Task.FromResult(GetProfileTypes()
 						.Select(t => t.Name)

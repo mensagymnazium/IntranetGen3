@@ -1,4 +1,5 @@
-﻿using Havit.Collections;
+﻿using Grpc.Core;
+using Havit.Collections;
 using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 
@@ -15,6 +16,7 @@ public partial class SubjectDetail
 	[Inject] protected IGraduationSubjectsDataStore GraduationSubjectsDataStore { get; set; }
 	[Inject] protected ITeachersDataStore TeachersDataStore { get; set; }
 	[Inject] protected IGradesDataStore GradesDataStore { get; set; }
+	[Inject] protected NavigationManager NavigationManager { get; set; }
 
 	private SubjectDto subject;
 	private SubjectEdit subjectEditComponent;
@@ -66,7 +68,14 @@ public partial class SubjectDetail
 
 	private async Task LoadSubjectAsync()
 	{
-		subject = await SubjectFacade.GetSubjectDetailAsync(Dto.FromValue(SubjectId.Value));
+		try // Xopa: If this try-catch pattern starts to repeat itself, consider creating an Interceptor
+		{
+			subject = await SubjectFacade.GetSubjectDetailAsync(Dto.FromValue(SubjectId.Value));
+		}
+		catch (RpcException e) when (e.Status.StatusCode == StatusCode.NotFound)
+		{
+			NavigationManager.NavigateTo(Routes.NotFound);
+		}
 	}
 
 	private async Task HandleEditClick()

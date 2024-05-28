@@ -17,7 +17,9 @@
 			</AuthorizeRouteView>
 		</Found>
 		<NotFound>
-			<MensaGymnazium.IntranetGen3.Web.Client.Shared.NotFoundPage.NotFoundPage />
+			<LayoutView Layout="@typeof(MainLayout)">
+				<MensaGymnazium.IntranetGen3.Web.Client.Shared.NotFoundPage.NotFoundPage/>
+			</LayoutView>
 		</NotFound>
 	</Router>
 </CascadingAuthenticationState>

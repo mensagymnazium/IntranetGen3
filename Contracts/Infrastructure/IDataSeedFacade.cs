@@ -5,7 +5,7 @@ namespace MensaGymnazium.IntranetGen3.Contracts.Infrastructure;
 [ApiContract]
 public interface IDataSeedFacade
 {
-	Task SeedDataProfile(string profileName);
+	Task SeedDataProfileAsync(string profileName);
 
-	Task<List<string>> GetDataSeedProfiles();
+	Task<List<string>> GetDataSeedProfilesAsync();
 }

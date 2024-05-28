@@ -5,8 +5,6 @@ namespace MensaGymnazium.IntranetGen3.Contracts;
 public record SubjectListItemDto : SubjectReferenceDto
 {
 	public int? Capacity { get; set; }
-	public DayOfWeek? ScheduleDayOfWeek { get; set; }
-	public ScheduleSlotInDay? ScheduleSlotInDay { get; set; }
 	public int HoursPerWeek { get; set; } = 2;
 	public int MinStudentsToOpen { get; set; } = 5;
 	public List<int> EducationalAreaIds { get; set; } = new List<int>();

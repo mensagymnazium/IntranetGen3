@@ -35,12 +35,12 @@ public static class AuthConfig
 		{
 			// Do not redirect API calls - customization to include gRPC calls
 			// https://github.com/dotnet/aspnetcore/blob/main/src/Security/Authentication/Cookies/src/CookieAuthenticationEvents.cs
-			configuration.Events.OnRedirectToLogin = (context) => RedirectOrApiStatus(context, HttpStatusCode.Unauthorized);
-			configuration.Events.OnRedirectToAccessDenied = (context) => RedirectOrApiStatus(context, HttpStatusCode.Forbidden);
+			configuration.Events.OnRedirectToLogin = (context) => RedirectOrApiStatusAsync(context, HttpStatusCode.Unauthorized);
+			configuration.Events.OnRedirectToAccessDenied = (context) => RedirectOrApiStatusAsync(context, HttpStatusCode.Forbidden);
 		});
 	}
 
-	private static Task RedirectOrApiStatus(RedirectContext<CookieAuthenticationOptions> context, HttpStatusCode apiStatus)
+	private static Task RedirectOrApiStatusAsync(RedirectContext<CookieAuthenticationOptions> context, HttpStatusCode apiStatus)
 	{
 		if (IsApiRequest(context.Request))
 		{

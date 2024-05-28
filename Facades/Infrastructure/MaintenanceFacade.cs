@@ -8,18 +8,18 @@ namespace MensaGymnazium.IntranetGen3.Facades.Infrastructure;
 [Authorize(Roles = nameof(Role.Administrator))]
 public class MaintenanceFacade : IMaintenanceFacade
 {
-	private readonly ICacheService cacheService;
+	private readonly ICacheService _cacheService;
 
 	public MaintenanceFacade(ICacheService cacheService)
 	{
-		this.cacheService = cacheService;
+		_cacheService = cacheService;
 	}
 
-	public Task ClearCache(CancellationToken cancellationToken = default)
+	public Task ClearCacheAsync(CancellationToken cancellationToken = default)
 	{
 		cancellationToken.ThrowIfCancellationRequested();
 
-		cacheService.Clear();
+		_cacheService.Clear();
 
 		return Task.CompletedTask;
 	}

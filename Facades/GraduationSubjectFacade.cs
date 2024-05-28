@@ -11,7 +11,7 @@ public class GraduationSubjectFacade : IGraduationSubjectFacade
 
 	public GraduationSubjectFacade(IGraduationSubjectRepository graduationSubjectRepository)
 	{
-		this._graduationSubjectRepository = graduationSubjectRepository;
+		_graduationSubjectRepository = graduationSubjectRepository;
 	}
 
 	public async Task<List<GraduationSubjectDto>> GetAllGraduationSubjectsAsync(CancellationToken cancellationToken = default)

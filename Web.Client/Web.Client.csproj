@@ -6,6 +6,9 @@
 		<AssemblyName>MensaGymnazium.IntranetGen3.Web.Client</AssemblyName>
 		<RootNamespace>MensaGymnazium.IntranetGen3.Web.Client</RootNamespace>
 		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+		<!--  VSTHRD003: Avoid awaiting or returning a Task representing work that was not started within your context as that can lead to deadlocks. -->
+		<!--  VSTHRD200: Allow HandleXyClick methods (without Async) -> Suppress 'Use "Async" suffix in names of methods that return an awaitable type' -->
+		<NoWarn>$(NoWarn);VSTHRD003;VSTHRD200</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
