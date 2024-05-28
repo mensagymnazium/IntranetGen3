@@ -23,8 +23,8 @@
     }
     <HxListLayout Title="Předměty"
                   TFilterModel="SubjectListQueryFilter"
-                  @bind-FilterModel='subjectListFilter'
-                  @bind-FilterModel:after='subjectsGrid.RefreshDataAsync'>
+                  @bind-FilterModel="subjectListFilter"
+                  @bind-FilterModel:after="subjectsGrid.RefreshDataAsync">
         <CommandsTemplate>
             <AuthorizeView Roles="@nameof(Role.Administrator)">
                 <HxButton Text="Nový předmět" OnClick="HandleNewItemClicked" Color="ThemeColor.Primary" />

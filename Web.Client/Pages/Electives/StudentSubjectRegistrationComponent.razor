@@ -1,23 +1,19 @@
 ﻿@if (shouldShowExtensionSeminarWarning)
 {
     <HxAlert Color="ThemeColor.Danger">
-        <HxIcon Icon="@BootstrapIcon.ExclamationTriangleFill"/>
-        <span>
-            Předmět si lze vybrat jako nadstavbový (ačkoliv je specializační), ale je potřeba <b>EXPLICITNÍ DOMLUVA</b> s někým z vedení.
-        </span>
-    </HxAlert>
+    <HxIcon Icon="@BootstrapIcon.ExclamationTriangleFill" />
+    <span>
+        Předmět si lze vybrat jako nadstavbový (ačkoliv je specializační), ale je potřeba <b>EXPLICITNÍ DOMLUVA</b> s
+        někým z vedení.
+    </span>
+</HxAlert>
 }
 
 @if (studentsRegistrationForThisSubject is not null)
 {
     // Registered already
-    <HxButton 
-        Text="Zrušit primární zápis"
-        OnClick="HandleCancelRegistrationClicked"
-        Color="ThemeColor.Primary"
-        Outline="true" 
-        Size="ButtonSize.Small" 
-        Icon="BootstrapIcon.Trash" />
+    <HxButton Text="Zrušit primární zápis" OnClick="HandleCancelRegistrationClicked" Color="ThemeColor.Primary"
+    Outline="true" Size="ButtonSize.Small" Icon="BootstrapIcon.Trash" />
 }
 else
 {
@@ -27,30 +23,24 @@ else
     @if (studentSubjectMainRegistrationPossibilityResult is not null)
     {
         // Result loaded
-        <HxButton
-            Text="Zapsat jako primární"
-            OnClick="async () => await HandleCreateRegistrationClicked(StudentRegistrationType.Main)" 
-            Color="ThemeColor.Primary"
-            Size="ButtonSize.Small"
-            Icon="BootstrapIcon.Basket" 
-            Enabled='@studentSubjectMainRegistrationPossibilityResult.IsRegistrationPossible'/>
+        <HxButton Text="Zapsat jako primární"
+    OnClick="async () => await HandleCreateRegistrationClicked(StudentRegistrationType.Main)" Color="ThemeColor.Primary"
+    Size="ButtonSize.Small" Icon="BootstrapIcon.Basket"
+    Enabled="@studentSubjectMainRegistrationPossibilityResult.IsRegistrationPossible" />
         @if (!studentSubjectMainRegistrationPossibilityResult.IsRegistrationPossible)
         {
             // Cannot create a main registration
             <small>
-                <span> - Nelze zapsat jako primární, důvod:</span>
-                <b class='text-danger'>@studentSubjectMainRegistrationPossibilityResult.Reason</b>
-            </small>
+    <span> - Nelze zapsat jako primární, důvod:</span>
+    <b class="text-danger">@studentSubjectMainRegistrationPossibilityResult.Reason</b>
+</small>
         }
     }
     else
     {
         // Result not loaded
-        <HxSpinner Size='SpinnerSize.Small'/>
-        <HxPlaceholderButton
-            Text="Zapsat jako primární"
-            Color="ThemeColor.Primary"
-            Size="ButtonSize.Small"
+        <HxSpinner Size="SpinnerSize.Small" />
+        <HxPlaceholderButton Text="Zapsat jako primární" Color="ThemeColor.Primary" Size="ButtonSize.Small"
             Icon="BootstrapIcon.Basket" />
     }
 }
