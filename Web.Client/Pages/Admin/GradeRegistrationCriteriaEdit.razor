@@ -1,23 +1,23 @@
 ﻿@attribute [Authorize(Roles = nameof(Role.Administrator))]
 
-<HxOffcanvas @ref="hxOffcanvas" 
-             Title="@($"Kritéria - {GradesDataStore.GetByKeyOrDefault(model.GradeId)?.Name}")"
-             OnClosed="this.OnClosed"
-             Size='OffcanvasSize.Large'>
+<HxOffcanvas @ref="hxOffcanvas" Title="@($"Kritéria - {GradesDataStore.GetByKeyOrDefault(model.GradeId)?.Name}")"
+    OnClosed="this.OnClosed" Size="OffcanvasSize.Large">
     <BodyTemplate>
         <EditForm EditContext="editContext">
-            <FluentValidationValidator/>
-            
-            <HxInputNumber Label="Počet hodin v rozvrhu (kromě jazyků)" TValue="int" @bind-Value="model.RequiredTotalAmountOfHoursPerWeekExcludingLanguage" />
-            
-            <HxSwitch Text="Vyžaduje cizí jazyk?" @bind-Value="model.RequiresForeignLanguage"/>
-			<HxSwitch Text="Cizí jazyk místo hodin?" @bind-Value="model.CanUseForeignLanguageInsteadOfHoursPerWeek" />
+            <FluentValidationValidator />
 
-			<HxSwitch Text="Kontrola ČS/ČS?" @bind-Value="model.RequiresCsOrCpValidation" />
-            <HxInputNumber Label="Alespoň hodin z ČS/ČP" TValue="int" @bind-Value="model.RequiredAmountOfHoursPerWeekInAreaCsOrCp" />
+            <HxInputNumber Label="Počet hodin v rozvrhu (kromě jazyků)" TValue="int"
+                @bind-Value="model.RequiredTotalAmountOfHoursPerWeekExcludingLanguage" />
+
+            <HxSwitch Text="Vyžaduje cizí jazyk?" @bind-Value="model.RequiresForeignLanguage" />
+            <HxSwitch Text="Cizí jazyk místo hodin?" @bind-Value="model.CanUseForeignLanguageInsteadOfHoursPerWeek" />
+
+            <HxSwitch Text="Kontrola ČS/ČS?" @bind-Value="model.RequiresCsOrCpValidation" />
+            <HxInputNumber Label="Alespoň hodin z ČS/ČP" TValue="int"
+                @bind-Value="model.RequiredAmountOfHoursPerWeekInAreaCsOrCp" />
         </EditForm>
     </BodyTemplate>
     <FooterTemplate>
-        <SaveButton EditContext="editContext" OnValidClick="HandleValidSubmit"/>
+        <SaveButton EditContext="editContext" OnValidClick="HandleValidSubmit" />
     </FooterTemplate>
 </HxOffcanvas>

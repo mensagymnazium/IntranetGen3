@@ -4,15 +4,15 @@
         <small>
             @if (IsProgressComplete)
             {
-                <HxIcon Icon='BootstrapIcon.CheckCircleFill' CssClass="me-2 text-success"/>
+                <HxIcon Icon="BootstrapIcon.CheckCircleFill" CssClass="me-2 text-success" />
             }
-            else if(!CompleteRegistrationIsValid)
+            else if (!CompleteRegistrationIsValid)
             {
-                <HxIcon Icon='BootstrapIcon.ExclamationCircleFill' CssClass="me-2 text-warning"/>
+                <HxIcon Icon="BootstrapIcon.ExclamationCircleFill" CssClass="me-2 text-warning" />
             }
         </small>
     </div>
     <b class="mb-1">@(CriteriaProgressDescription)</b>
-    <br/>
+    <br />
     <small>@CriteriaDescription</small>
 </HxListGroupItem>
