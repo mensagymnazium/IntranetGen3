@@ -14,7 +14,7 @@
       with pkgs;
       {
         devShells.default = mkShell {
-          buildInputs = [ dotnet-sdk_7 ];
+          buildInputs = [ dotnet-sdk_8 ];
         };
       }
     );
