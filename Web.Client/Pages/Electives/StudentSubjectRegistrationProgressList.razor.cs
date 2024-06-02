@@ -11,6 +11,7 @@ public partial class StudentSubjectRegistrationProgressList
 
 	private HxGrid<StudentSubjectRegistrationProgressListItemDto> _grid; // @ref
 	private StudentSubjectRegistrationProgressListFilter _filterModel = new();
+	private List<StudentSubjectRegistrationProgressListItemDto> _data;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -18,33 +19,38 @@ public partial class StudentSubjectRegistrationProgressList
 		await GradesDataStore.EnsureDataAsync();
 	}
 
-	private async Task<GridDataProviderResult<StudentSubjectRegistrationProgressListItemDto>> DataProvider(
+	protected override async Task OnParametersSetAsync()
+	{
+		await RefreshDataAsync();
+	}
+
+	private Task<GridDataProviderResult<StudentSubjectRegistrationProgressListItemDto>> DataProvider(
 		GridDataProviderRequest<StudentSubjectRegistrationProgressListItemDto> request)
 	{
-		var data = await ProgressValidationFacade
-			.GetProgressListAsync(_filterModel, request.CancellationToken);
+		return Task.FromResult(request.ApplyTo(_data));
+	}
 
-		// Due to deserialization, sometimes we receive empty lists,
-		// so 'List<>MissingCriteria' may be null
-
-		return request.ApplyTo(data);
+	private async Task RefreshDataAsync()
+	{
+		_data = await ProgressValidationFacade.GetProgressListAsync(_filterModel) ?? new();
+		await _grid.RefreshDataAsync();
 	}
 
 	private string GetStudentName(int studentId)
 	{
-		return StudentsDataStore.GetByKey(studentId).Name;
+		return StudentsDataStore.GetByKeyOrDefault(studentId)?.Name;
 	}
 
 	private string GetStudentLastName(int studentId)
 	{
-		return StudentsDataStore.GetByKey(studentId).LastName ?? "-příjmení nenačteno-";
+		return StudentsDataStore.GetByKeyOrDefault(studentId).LastName ?? "-příjmení nenačteno-";
 	}
 
 	private string GetStudentGradeName(int studentId)
 	{
 		var gradeId = StudentsDataStore.GetByKeyOrDefault(studentId)?.GradeId;
 		return gradeId is not null
-			? GradesDataStore.GetByKey(gradeId.Value)?.Name
+			? GradesDataStore.GetByKeyOrDefault(gradeId.Value)?.Name
 			: null;
 	}
 

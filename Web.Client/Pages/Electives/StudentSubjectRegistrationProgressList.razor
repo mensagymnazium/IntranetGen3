@@ -2,7 +2,7 @@
 
 <div>
 	@* div purely for CSS ISOLATION *@
-	<HxListLayout Title="Postupy registrací studentů" TFilterModel="StudentSubjectRegistrationProgressListFilter" @bind-FilterModel="_filterModel" @bind-FilterModel:after="_grid.RefreshDataAsync">
+	<HxListLayout Title="Postupy registrací studentů" TFilterModel="StudentSubjectRegistrationProgressListFilter" @bind-FilterModel="_filterModel" @bind-FilterModel:after="RefreshDataAsync">
 		<FilterTemplate>
 			<GradePicker Label="Ročník" @bind-Value="context.GradeId" />
 			<StudentPicker Label="Student" @bind-Value="context.StudentId" />
@@ -16,7 +16,8 @@
 					DataProvider="DataProvider"
 					ItemRowCssClassSelector="@(s => s.IsRegistrationValid ? "valid" : "invalid")"
 					SelectionEnabled="false"
-					PageSize="16">
+					ContentNavigationMode="GridContentNavigationMode.Pagination"
+					PageSize="0">
 					<Columns>
 						<HxGridColumn HeaderText="Jméno"
 									  ItemTextSelector="s => GetStudentName(s.StudentId)"
