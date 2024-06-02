@@ -4,7 +4,8 @@
 
 
 ::deep .invalid {
-	background-color: rgba(var(--bs-danger-rgb), 10%);
+	/*Don't be so angry :-D*/
+	/*background-color: rgba(var(--bs-danger-rgb), 10%);*/
 }
 
 /* Make sure color applies to HxGrid row children as well (they were overriding it) */
