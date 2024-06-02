@@ -260,3 +260,6 @@ Web/.vscode/launch.json
 /WebAPI/App_Data
 .DS_Store
 /Web.Server/appsettings.WebServer.local.json
+
+# direnv
+/.direnv
