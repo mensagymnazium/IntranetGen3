@@ -12,6 +12,7 @@ public class SubjectRegistrationProgressValidationFacade : ISubjectRegistrationP
 {
 	private readonly ISubjectRegistrationProgressValidationService _subjectRegistrationProgressValidationService;
 	private readonly IApplicationAuthenticationService _applicationAuthenticationService;
+
 	public SubjectRegistrationProgressValidationFacade(
 		ISubjectRegistrationProgressValidationService subjectRegistrationProgressValidationService,
 		IApplicationAuthenticationService applicationAuthenticationService)
@@ -21,21 +22,60 @@ public class SubjectRegistrationProgressValidationFacade : ISubjectRegistrationP
 	}
 
 	[Authorize(Roles = nameof(Role.Student))]
-	public async Task<StudentRegistrationProgressDto> GetProgressOfCurrentStudentAsync()
+	public async Task<StudentRegistrationProgressDto> GetProgressOfCurrentStudentAsync(CancellationToken cancellationToken = default)
 	{
 		var currentUser = _applicationAuthenticationService.GetCurrentUser();
 		Contract.Requires<SecurityException>(currentUser.StudentId is not null);
 
-		var progress = await _subjectRegistrationProgressValidationService.GetRegistrationProgressOfStudentAsync(currentUser.StudentId.Value);
+		var progress = await _subjectRegistrationProgressValidationService.GetRegistrationProgressOfStudentAsync(
+			currentUser.StudentId.Value,
+			cancellationToken);
 
 		return MapToDto(progress);
 	}
 
-	[Authorize(Roles = nameof(Role.Administrator))]
-	public Task<StudentRegistrationProgressDto> GetProgressOfStudentAsync(Dto<int> studentId)
+	[Authorize]
+	public async Task<List<StudentSubjectRegistrationProgressListItemDto>> GetProgressListAsync(
+		StudentSubjectRegistrationProgressListFilter filter,
+		CancellationToken cancellationToken = default)
 	{
-		//Todo: Implement
-		throw new NotImplementedException();
+		var progresses = await _subjectRegistrationProgressValidationService.GetRegistrationProgressOfAllStudentsAsync(
+			filter,
+			cancellationToken);
+
+		var mappedProgress = progresses
+			.Select(progressPair => new StudentSubjectRegistrationProgressListItemDto()
+			{
+				StudentId = progressPair.Key, // Key = StudentId
+				IsRegistrationValid = progressPair.Value.IsRegistrationValid,
+				MissingCriteriaMessages = GetMissingCriteriaMessages(progressPair.Value)
+			})
+			.ToList();
+
+		return mappedProgress;
+	}
+
+	private List<string> GetMissingCriteriaMessages(StudentRegistrationProgress progress)
+	{
+		var missingCriteria = new List<string>();
+
+		if (!progress.HoursPerWeekProgress.IsProgressComplete)
+		{
+			missingCriteria.Add("Počet hodin týdně");
+		}
+
+		if (!progress.CsOrCpRegistrationProgress.IsProgressComplete)
+		{
+			missingCriteria.Add("Počet hodin v ČS/ČP");
+		}
+
+		if (progress.LanguageRegistrationProgress.IsLanguageRequired &&
+			!progress.LanguageRegistrationProgress.HasRegisteredLanguage)
+		{
+			missingCriteria.Add("Jazyk");
+		}
+
+		return missingCriteria;
 	}
 
 	private StudentRegistrationProgressDto MapToDto(StudentRegistrationProgress obj)

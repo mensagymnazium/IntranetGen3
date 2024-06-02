@@ -1,6 +1,3 @@
 ﻿namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 
-public partial interface IGradeRepository
-{
-
-}
+public partial interface IGradeRepository;

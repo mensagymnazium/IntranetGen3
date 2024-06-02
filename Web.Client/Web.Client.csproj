@@ -32,27 +32,4 @@
 		<ProjectReference Include="..\Primitives\Primitives.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Pages\Development\MartinFiala.razor" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <_ContentIncludedByDefault Remove="Pages\Admin\GradeRegistrationCriteriaEdit.razor" />
-	  <_ContentIncludedByDefault Remove="Pages\Admin\GradeRegistrationCriteriaList.razor" />
-	  <_ContentIncludedByDefault Remove="Pages\Development\MartinFiala.razor" />
-	  <_ContentIncludedByDefault Remove="Pages\Electives\ElectiveProgressComponent.razor" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Pages\Electives\ElectiveProgressComponent.razor" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Pages\Admin\GradeRegistrationCriteriaList.razor" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Pages\Admin\GradeRegistrationCriteriaEdit.razor" />
-	</ItemGroup>
-
 </Project>

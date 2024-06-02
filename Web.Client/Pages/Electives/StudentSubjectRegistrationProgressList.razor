@@ -1,0 +1,56 @@
+﻿@attribute [Route(Routes.Electives.StudentSubjectRegistrationProgressList)]
+
+<div>
+	@* div purely for CSS ISOLATION *@
+	<HxListLayout Title="Postupy registrací studentů" TFilterModel="StudentSubjectRegistrationProgressListFilter" @bind-FilterModel="_filterModel" @bind-FilterModel:after="RefreshDataAsync">
+		<FilterTemplate>
+			<GradePicker Label="Ročník" @bind-Value="context.GradeId" />
+			<StudentPicker Label="Student" @bind-Value="context.StudentId" />
+			<HxSelect Label="Splněno" TItem="bool?" TValue="bool?" @bind-Value="context.ValidationState" TextSelector="@(v => v.Value ? "Pouze splněné" : "Pouze nesplněné")" NullText="Všechny" Nullable="true" ValueSelector="v => v" Data="[true, false]" />
+		</FilterTemplate>
+		<DataTemplate>
+			<AuthorizeView Context="_">
+				<HxGrid
+					@ref="_grid"
+					TItem="StudentSubjectRegistrationProgressListItemDto"
+					DataProvider="DataProvider"
+					ItemRowCssClassSelector="@(s => s.IsRegistrationValid ? "valid" : "invalid")"
+					SelectionEnabled="false"
+					ContentNavigationMode="GridContentNavigationMode.Pagination"
+					PageSize="0">
+					<Columns>
+						<HxGridColumn HeaderText="Jméno"
+									  ItemTextSelector="s => GetStudentName(s.StudentId)"
+									  SortKeySelector="s => GetStudentLastName(s.StudentId)"
+									  IsDefaultSortColumn="true" />
+
+						<HxGridColumn HeaderText="Ročník"
+									  ItemTextSelector="s => GetStudentGradeName(s.StudentId)"
+									  SortKeySelector="s => -GetStudentGradeId(s.StudentId)" />
+
+						<HxGridColumn HeaderText="Splněno A/N"
+						              ItemTextSelector="@(i => i.IsRegistrationValid ? "A" : "N")"
+						              SortKeySelector="s => s.IsRegistrationValid" />
+
+						<HxGridColumn
+							HeaderText="Chybí"
+							SortKeySelector="@(s => s.MissingCriteriaMessages != null ? s.MissingCriteriaMessages.Count : 0)">
+							<ItemTemplate>
+                                <ul>
+									@if (context is {IsRegistrationValid: false, MissingCriteriaMessages: not null})
+									{
+                                        // Only show missing messages when registration is invalid
+                                        @foreach (var message in context.MissingCriteriaMessages)
+										{
+											<li>@message</li>
+										}
+									}
+								</ul>
+							</ItemTemplate>
+						</HxGridColumn>
+					</Columns>
+				</HxGrid>
+			</AuthorizeView>
+		</DataTemplate>
+	</HxListLayout>
+</div>

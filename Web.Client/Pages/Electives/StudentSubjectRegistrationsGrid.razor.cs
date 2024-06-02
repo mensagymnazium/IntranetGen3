@@ -1,5 +1,4 @@
-﻿using Havit.Blazor.Components.Web.Bootstrap;
-using MensaGymnazium.IntranetGen3.Contracts;
+﻿using MensaGymnazium.IntranetGen3.Contracts;
 using MensaGymnazium.IntranetGen3.Web.Client.Services.DataStores;
 
 namespace MensaGymnazium.IntranetGen3.Web.Client.Pages.Electives;
@@ -18,7 +17,7 @@ public partial class StudentSubjectRegistrationsGrid
 	[Inject] protected IGradesDataStore GradesDataStore { get; set; }
 	[Inject] protected IHxMessengerService Messenger { get; set; }
 
-	private HxGrid<StudentSubjectRegistrationDto> gridComponent;
+	private HxGrid<StudentSubjectRegistrationDto> _gridComponent;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -27,7 +26,7 @@ public partial class StudentSubjectRegistrationsGrid
 		await GradesDataStore.EnsureDataAsync();
 	}
 
-	public Task RefreshDataAsync() => gridComponent.RefreshDataAsync();
+	public Task RefreshDataAsync() => _gridComponent.RefreshDataAsync();
 
 	private string GetStudentGradeName(StudentSubjectRegistrationDto item)
 	{
@@ -49,6 +48,6 @@ public partial class StudentSubjectRegistrationsGrid
 	{
 		await StudentSubjectRegistrationFacade.DeleteRegistrationAsync(Dto.FromValue(item.Id));
 		Messenger.AddInformation("Zápis smazán.");
-		await gridComponent.RefreshDataAsync();
+		await _gridComponent.RefreshDataAsync();
 	}
 }
