@@ -59,7 +59,7 @@ public class SubjectRegistrationProgressValidationFacade : ISubjectRegistrationP
 	{
 		var missingCriteria = new List<string>();
 
-		if(progress.IsRegistrationValid())
+		if (progress.IsRegistrationValid())
 		{
 			// Don't add anything if the registration is valid
 			return missingCriteria;
