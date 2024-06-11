@@ -77,7 +77,7 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 
 			// Filter again, based on ValidationState
 			if (filter.ValidationState is not null &&
-				filter.ValidationState != registrationProgress.IsRegistrationValid)
+				filter.ValidationState != registrationProgress.IsRegistrationValid())
 			{
 				continue;
 			}
@@ -105,11 +105,11 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 		var csOrCpProgress = GetCsOrCpRegistrationProgress(futureGrade, studentsRegistrations);
 		var languageProgress = GetLanguageRegistrationProgress(futureGrade, studentsRegistrations);
 
-		var registrationProgress = ConstructRegistrationProgress(
-			futureGrade,
+		var registrationProgress = new StudentRegistrationProgress(
 			hoursPerWeekProgress,
 			csOrCpProgress,
-			languageProgress);
+			languageProgress,
+			futureGrade.RegistrationCriteria.CanUseForeignLanguageInsteadOfHoursPerWeek);
 
 		return registrationProgress;
 	}
@@ -172,71 +172,5 @@ public sealed class SubjectRegistrationProgressValidationService : ISubjectRegis
 			DoesRequireCsOrCpValidation: true,
 			AmountOfHoursPerWeekInCsOrCp: ammOfHoursInCsOrCp,
 			RequiredMinimalAmountOfHoursPerWeekInCsOrCp: requiredAmountOfHoursPerWeekInCsOrCp);
-	}
-
-	/// <summary>
-	/// Responsible for creating the <see cref="StudentSubjectRegistration"/>.
-	/// Determines, whether the combination of "rule progresses" (i.e. <see cref="StudentCsOrCpRegistrationProgress"/>)
-	/// results in a valid registration (<see cref="StudentRegistrationProgress.IsRegistrationValid"/>).
-	/// 
-	/// This will be useful, when exceptions in the criteria are made, such as - Prima can choose a second language
-	/// instead of filling the donated hours with regular subjects, so he won't fill the donated hours criteria,
-	/// but it will still result in a valid registration.
-	/// </summary>
-	/// <returns></returns>
-	private StudentRegistrationProgress ConstructRegistrationProgress(
-		Grade forGrade,
-		StudentHoursPerWeekProgress hoursPerWeekProgress,
-		StudentCsOrCpRegistrationProgress csOrCpProgress,
-		StudentLanguageRegistrationProgress languageRegistrationProgress)
-	{
-		bool isRegistrationValid = IsRegistrationValid(
-			forGrade,
-			hoursPerWeekProgress,
-			csOrCpProgress,
-			languageRegistrationProgress);
-
-		return new StudentRegistrationProgress(
-			isRegistrationValid,
-			hoursPerWeekProgress,
-			csOrCpProgress,
-			languageRegistrationProgress,
-			forGrade.RegistrationCriteria.CanUseForeignLanguageInsteadOfHoursPerWeek);
-	}
-
-	private static bool IsRegistrationValid(
-		Grade forGrade,
-		StudentHoursPerWeekProgress hoursPerWeekProgress,
-		StudentCsOrCpRegistrationProgress csOrCpProgress,
-		StudentLanguageRegistrationProgress languageProgress)
-	{
-		var isRegistrationValid = true;
-
-		// Determine based on csOrCp
-		if (csOrCpProgress.DoesRequireCsOrCpValidation)
-		{
-			isRegistrationValid &= csOrCpProgress.IsProgressComplete;
-		}
-
-		// Determine based on if student can use language instead of donated hours
-		if (forGrade.RegistrationCriteria.CanUseForeignLanguageInsteadOfHoursPerWeek
-			&& languageProgress.HasRegisteredLanguage)
-		{
-			// If language progress is sufficient, we should check, that the student doesn't have any other donated hours
-			isRegistrationValid &= hoursPerWeekProgress.AmountOfHoursPerWeekExcludingLanguages == 0;
-		}
-		else
-		{
-			// -> Cannot skip donated hours validation (more common)
-			isRegistrationValid &= hoursPerWeekProgress.IsProgressComplete;
-		}
-
-		// Determine based on language
-		if (languageProgress.IsLanguageRequired)
-		{
-			isRegistrationValid &= languageProgress.HasRegisteredLanguage;
-		}
-
-		return isRegistrationValid;
 	}
 }

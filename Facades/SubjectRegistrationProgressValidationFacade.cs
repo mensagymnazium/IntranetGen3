@@ -47,7 +47,7 @@ public class SubjectRegistrationProgressValidationFacade : ISubjectRegistrationP
 			.Select(progressPair => new StudentSubjectRegistrationProgressListItemDto()
 			{
 				StudentId = progressPair.Key, // Key = StudentId
-				IsRegistrationValid = progressPair.Value.IsRegistrationValid,
+				IsRegistrationValid = progressPair.Value.IsRegistrationValid(),
 				MissingCriteriaMessages = GetMissingCriteriaMessages(progressPair.Value)
 			})
 			.ToList();
@@ -59,9 +59,18 @@ public class SubjectRegistrationProgressValidationFacade : ISubjectRegistrationP
 	{
 		var missingCriteria = new List<string>();
 
+		if(progress.IsRegistrationValid())
+		{
+			// Don't add anything if the registration is valid
+			return missingCriteria;
+		}
+
+		// Add default message
+		missingCriteria.Add("Špatná kombinace předmětů");
+
 		if (!progress.HoursPerWeekProgress.IsProgressComplete)
 		{
-			missingCriteria.Add("Počet hodin týdně");
+			missingCriteria.Add("Chybný počet hodin týdně");
 		}
 
 		if (!progress.CsOrCpRegistrationProgress.IsProgressComplete)
@@ -75,13 +84,18 @@ public class SubjectRegistrationProgressValidationFacade : ISubjectRegistrationP
 			missingCriteria.Add("Jazyk");
 		}
 
+		if (progress.RegisteredTooMuch)
+		{
+			missingCriteria.Add("Příliš mnoho předmětů");
+		}
+
 		return missingCriteria;
 	}
 
 	private StudentRegistrationProgressDto MapToDto(StudentRegistrationProgress obj)
 	{
 		return new StudentRegistrationProgressDto(
-			obj.IsRegistrationValid,
+			obj.IsRegistrationValid(),
 
 			obj.HoursPerWeekProgress.AmountOfHoursPerWeekExcludingLanguages,
 			obj.HoursPerWeekProgress.RequiredAmountOfHoursPerWeekExcludingLanguages,
