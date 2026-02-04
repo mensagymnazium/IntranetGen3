@@ -34,10 +34,9 @@ public class UserManager : IUserManager
 
 		principal ??= applicationAuthenticationService.GetCurrentClaimsPrincipal();
 		if (principal.HasClaim(ClaimConstants.GroupClaimType, AadGroupIds.Administrators)
-			|| (user.Email == "ema.smerdova@mensagymnazium.cz")
-   			|| (user.Email == "klaudie.pauerova@mensagymnazium.cz")
-			|| (user.Email == "klara.futejova@mensagymnazium.cz")
-			|| (user.Email == "jonas.holub@mensagymnazium.cz"))
+			|| (user.Email == "anna.belatkova@mensagymnazium.cz")
+   			|| (user.Email == "Jan.Brabec@mensagymnazium.cz")
+			|| (user.Email == "veronika.havlova@mensagymnazium.cz"))
 		{
 			roles.Add(Role.Administrator);
 		}
