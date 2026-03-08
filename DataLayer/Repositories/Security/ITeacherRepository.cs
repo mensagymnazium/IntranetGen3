@@ -5,4 +5,5 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Security;
 public partial interface ITeacherRepository
 {
 	Task<List<Teacher>> GetAllIncludingDeletedAsync(CancellationToken cancellationToken = default);
+	Task<Teacher> GetByIdIncludingDeletedAsync(int teacherId, CancellationToken cancellationToken = default);
 }

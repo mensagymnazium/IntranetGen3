@@ -5,17 +5,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Havit.Data.Patterns.DataSources;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataSources;
+
+[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
+public interface ISigningRuleDataSource : IDataSource<MensaGymnazium.IntranetGen3.Model.SigningRule>
 {
-	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public interface ISigningRuleDataSource : IDataSource<MensaGymnazium.IntranetGen3.Model.SigningRule>
-	{
-	}
 }

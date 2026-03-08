@@ -1,4 +1,45 @@
-﻿@attribute [Route(Routes.Administration.Teachers)]
+﻿@using MensaGymnazium.IntranetGen3.Contracts.Security
+@using MensaGymnazium.IntranetGen3.Web.Client.Pages.Admin.Components
+@attribute [Route(Routes.Administration.Teachers)]
 @attribute [Authorize(Roles = nameof(Role.Administrator))]
 
-TODO: Tady bude správa učitelů (grid, editace, přidávání, mazání)
+<div>
+    @* CSS Isolation *@
+
+    <HxListLayout Title="Učitelé" TFilterModel="object">
+        <DataTemplate>
+            <HxGrid @ref="teachersGrid"
+                    TItem="TeacherReferenceDto"
+                    DataProvider="LoadTeachers"
+                    HeaderRowCssClass="text-nowrap"
+                    Context="item"
+                    Responsive="true">
+                <Columns>
+                    <HxGridColumn TItem="TeacherReferenceDto" HeaderText="Jméno" ItemTextSelector="@(item => item.Name)" SortKeySelector="item => item.Name" IsDefaultSortColumn="true" />
+                    <HxGridColumn TItem="TeacherReferenceDto" HeaderText="Stav">
+                        <ItemTemplate Context="item">
+                            @if (item.IsDeleted)
+                            {
+                                <HxIcon Icon="BootstrapIcon.PersonXFill" CssClass="me-2 text-danger" />
+                                <span>Smazán</span>
+                            }
+                            else
+                            {
+                                <HxIcon Icon="BootstrapIcon.PersonCheckFill" CssClass="me-2 text-success" />
+                                <span>Aktivní</span>
+                            }
+                        </ItemTemplate>
+                    </HxGridColumn>
+                </Columns>
+
+                <ContextMenu Context="item">
+                    <HxContextMenu>
+                        <HxContextMenuItem Text="Upravit" Icon="BootstrapIcon.PencilFill" OnClick="async () => await HandleEditItemClicked(item)" />
+                    </HxContextMenu>
+                </ContextMenu>
+            </HxGrid>
+        </DataTemplate>
+    </HxListLayout>
+</div>
+
+<TeacherEdit @ref="teacherEditComponent" OnSaved="HandleTeacherEditSaved" />

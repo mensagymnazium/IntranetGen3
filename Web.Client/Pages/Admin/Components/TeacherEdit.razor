@@ -1,0 +1,17 @@
+<HxOffcanvas @ref="offcanvasComponent" Title="@title">
+    <BodyTemplate>
+        <EditForm EditContext="editContext">
+            <FluentValidationValidator />
+            <HxInputText @bind-Value="model.Name" Label="Jméno" />
+
+        @*  Not important...
+            <HxInputText @bind-Value="model.Email" Label="E-mail" />
+            <HxInputTextArea @bind-Value="model.FunFact" Label="Bio" />
+            <HxInputSwitch @bind-Value="model.IsDeleted" Label="Smazán" />
+         *@
+        </EditForm>
+    </BodyTemplate>
+    <FooterTemplate>
+        <SaveButton EditContext="editContext" IsNew="false" OnValidClick="HandleValidSubmit" />
+    </FooterTemplate>
+</HxOffcanvas>

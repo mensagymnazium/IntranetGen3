@@ -2,6 +2,7 @@
 @attribute [Authorize(Roles = nameof(Role.Administrator))]
 
 <h5>Administrace systému</h5>
+<p>note: po seedování / vyčištění cache appka spadne (kvůli staré implementaci cache) ale seed projde... lol</p>
 <div class="row row-cols-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-6 g-3 mb-4">
 	<div class="col">
 		<NavPanel Title="Server" Icon="BootstrapIcon.HddNetwork">

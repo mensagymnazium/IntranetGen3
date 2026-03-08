@@ -5,33 +5,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Data.Patterns.DataEntries;
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries
+[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
+public interface ISubjectTypeEntries : Havit.Data.Patterns.DataEntries.IDataEntries
 {
-	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public interface ISubjectTypeEntries : IDataEntries
-	{
-		MensaGymnazium.IntranetGen3.Model.SubjectType ArtCulture { get; }
-			
-		MensaGymnazium.IntranetGen3.Model.SubjectType HumanHealth { get; }
-			
-		MensaGymnazium.IntranetGen3.Model.SubjectType HumanNature { get; }
-			
-		MensaGymnazium.IntranetGen3.Model.SubjectType HumanSociety { get; }
-			
-		MensaGymnazium.IntranetGen3.Model.SubjectType HumanWork { get; }
-			
-		MensaGymnazium.IntranetGen3.Model.SubjectType Informatics { get; }
-			
-		MensaGymnazium.IntranetGen3.Model.SubjectType LanguageCommunication { get; }
-			
-		MensaGymnazium.IntranetGen3.Model.SubjectType MathApplication { get; }
-			
-	}
+	MensaGymnazium.IntranetGen3.Model.SubjectType ArtCulture { get; }
+	MensaGymnazium.IntranetGen3.Model.SubjectType HumanHealth { get; }
+	MensaGymnazium.IntranetGen3.Model.SubjectType HumanNature { get; }
+	MensaGymnazium.IntranetGen3.Model.SubjectType HumanSociety { get; }
+	MensaGymnazium.IntranetGen3.Model.SubjectType HumanWork { get; }
+	MensaGymnazium.IntranetGen3.Model.SubjectType Informatics { get; }
+	MensaGymnazium.IntranetGen3.Model.SubjectType LanguageCommunication { get; }
+	MensaGymnazium.IntranetGen3.Model.SubjectType MathApplication { get; }
 }

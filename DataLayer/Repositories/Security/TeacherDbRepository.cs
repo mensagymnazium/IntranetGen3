@@ -11,6 +11,11 @@ public partial class TeacherDbRepository : ITeacherRepository
 		return await DataIncludingDeleted.Include(t => t.User).ToListAsync(cancellationToken);
 	}
 
+	public async Task<Teacher> GetByIdIncludingDeletedAsync(int teacherId, CancellationToken cancellationToken = default)
+	{
+		return await DataIncludingDeleted.Include(t => t.User).FirstAsync(t => t.Id == teacherId, cancellationToken);
+	}
+
 	protected override IEnumerable<Expression<Func<Teacher, object>>> GetLoadReferences()
 	{
 		yield return t => t.User;

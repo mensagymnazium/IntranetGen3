@@ -5,36 +5,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Havit.Data.EntityFrameworkCore.Patterns;
-using Havit.Data.Patterns.DataEntries;
-using Havit.Data.Patterns.Repositories;
+namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries.Common;
 
-namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries.Common
+[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
+public class ApplicationSettingsEntries : Havit.Data.Patterns.DataEntries.DataEntries<MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings>, IApplicationSettingsEntries 
 {
-	[System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-	public class ApplicationSettingsEntries : DataEntries<MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings>, IApplicationSettingsEntries 
-	{
-		public MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings Current
-        {
-            get
-            {
-				if (current == null)
-				{
-					current = GetEntry(MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings.Entry.Current);
-				}
-				return current;
-            }
-        }
-		private MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings current;
+	private MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings current;
 
-		public ApplicationSettingsEntries(MensaGymnazium.IntranetGen3.DataLayer.Repositories.Common.IApplicationSettingsRepository repository)
-			: base(repository)
-		{
-		}
+	public MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings Current => current ??= GetEntry(MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings.Entry.Current);
+
+	public ApplicationSettingsEntries(MensaGymnazium.IntranetGen3.DataLayer.Repositories.Common.IApplicationSettingsRepository repository)
+		: base(repository)
+	{
 	}
 }
