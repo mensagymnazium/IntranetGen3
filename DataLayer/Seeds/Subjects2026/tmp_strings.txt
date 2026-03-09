@@ -1,0 +1,100 @@
+﻿0|Den
+1|Čas
+2|Přednášející
+3|Název
+4|Anotace
+5|Učebna
+6|Kapacita
+7|Pondělí 16.3.
+8|Lukáš Březina
+9|Kyberbezpečnost
+10|TikTok, Instagram, Snapchat…  
+Každý like, story a „fun“ filtr může být další dílek skládačky, kterou ti někdo složí do dokonalého podvodu.
+
+Řeč bude o tom,  jak tě nejenom sociální sítě a lidé za obrazovkou okrádají o identitu –  a jak se tomu bránit. Součástí bude diskuze/možnost ptát se na otázky z oblasti kyberbezpečnosti.
+11|Sekunda
+12|Jan Rak
+13|Fyzika
+14|Jan Rak je český jaderný a kvantový fyzik, který se zabývá výzkumem částicové fyziky a dlouhodobě pracoval na projektech v organizaci CERN ve Švýcarsku. Působil také jako profesor na univerzitě ve finském městě Jyväskylä. Vystupuje také na přednáškách a médiích, kde mluví o kvantové fyzice.
+15|Sexta
+16|Jiří Došlý
+17|Dopravní podnik hl. m. Prahym,
+18|System.Xml.XmlElement
+19|Tercie
+20|Jiří Hynek
+21|Investigativní novinařina
+22|V žurnalistice působí již od 90. let, většinu své kariéry se věnoval tématům korupce, justiční mafie a organizovaného zločinu. Dlouhodobě se věnuje především rozkrývání ruského vlivu v České republice. Po odchodu z České televize roku 2024 založil investigativní web Odkryto.cz. Držitel ceny Novinářská křepelka (cena udělovaná mladým novinářům). Téma přednášky bude obecně z oboru investigativní novinařiny
+23|Antonín Peták
+24|Finanční gramotnost
+25|hám digitálního světa.
+Dotkneme se také historie peněz, principů odpovědného úvěrování, nejčastějších triků online podvodníků a krátce i témat investic a kryptoměn — bez přehnaných očekávání, zato s důrazem na realitu.
+Cílem je poskytnout studentům praktické informace bez zbytečné teorie a ukázat, jak se vyhnout rizikům v online i offline světě.
+26|Petra Klabouchová
+27|Spisovatelství
+28|Autorka knih Prameny Vltavy, U severní zdi: Přišel čas platit účty za padesátá léta a Ignis fatuus, která je i v maturitní četbě. Její kniha prameny Vltavy se umístila na prvním místě mezi nominovanými publikacemi na cenu Johanna Steinbrennera v kategorii Beletrie/Poezie. Kniha Ignis fatuus byla v roce 2025 nominována mezi tři finalisty magnesia litera za fantastiku.
+29|Patrik Koláček, Michal Flekač
+30|Letečtí dispečeři
+31|Na této přednášce bude studentům představena funkce leteckého dispečera, následně si budou moci ve workshopové části vyzkoušet, jak takové plánování letu funguje, a to od přijetí nového letu až po jeho odlet.
+32|Pivovar Staropramen
+33|Sládek
+34|System.Xml.XmlElement
+35|Eva Kudová
+36|Neurologie
+37|Na přednášce se podíváme, jak se z přírodních steroidů v hlavě stávají moderní léky na deprese, epilepsii, poruchy autistického spektra, nespavost nebo poranění mozku – a proč někdy tyto látky můžou mozek naopak rozhodit. Ukážeme si i roli vitaminu D jako mozkového steroidu a to, proč hormony během puberty, těhotenství nebo menopauzy tak dramaticky mění prožívání světa.
+Přijďte zjistit, jak malé molekuly, o kterých většinou vůbec nevíte, potichu rozhodují o tom, jak se cítíte, jak spíte, jak se soustředíte – a jak by z nich jednou mohly být chytré aktualizace pro mozek budoucnosti.
+38|Úterý 17.3.
+39|Dominik Strouhal
+40|Bitcoin a další kryptoměny - dávají pořád smysl?
+41|Ekonom, expert na kryptoměny, bývalý ředitel Liberálního institutu, bývalý politik a bývalý ředitel českého a slovenského Ludwig von Mises institutu
+42|Jiří Hrdý
+43|System.Xml.XmlElement
+44|Přednosta Ústavu klinické imunologie a alergologie 1. lékařské fakulty Univerzity Karlovy a Všeobecné fakultní nemocnice v Praze
+45|Jakub Tomšej
+46|Slibuje právo víc, než dokáže splnit?
+47|System.Xml.XmlElement
+48|Miloš Škorpil
+49|Ultrarychlostní běh
+50|Ultramaratonec a zakladatel běžecké školy. Propagátor a trenér běhu. Třikrát oběhl Českou republiku. Maraton nejrychleji zaběhl za 2:33:18
+51|Martin Soukup
+52|Antropologie
+53|Martin Soukup je český kulturolog a kulturní antropolog. Od roku 2016 je zaměstnán na Fakultě sociálních věd Univerzity Karlovy. Je členem American Anthropological Association. Je laureátem Ceny Neuron pro mladé vědce 2017
+54|Petr Pelikán
+55|Orientalismus
+56|Arabista, íranista, paštunista a islamolog, překladatel, tlumočník, diplomat a vysokoškolský pedagog. Honorární konzul Súdánu v ČR. Veterán z války v  Perském zálivu (1990–1991). Během roku 2021 působil jako poradce předsedy vlády pro migraci. Téma přednášky zaměřené na islám.
+57|David Navara
+58|Šachy
+59|David Navara je přední český šachový velmistr (titul od roku 2002) a mnohonásobný mistr České republiky. Dlouhodobě patří mezi světovou špičku, přičemž jeho nejvyšším umístěním v žebříčku FIDE bylo 13. místo v říjnu 2006. Je známý pro svůj vysoce kreativní herní styl.
+60|Nadia Rovderová
+61|Galeristika
+62|Nadia Rovderová je galeristka, kurátorka, fotografka, publicistka a také influercerka na sociálních sítích. Narodila se v Popradu a na Univerzitě Komenského v Bratislavě vystudovala žurnalistiku. Od začátku devadesátých let žije v Praze, kde v roce 2010 založila galerii Artinbox, která se stala nezávislým a otevřeným prostorem pro začínající i renomované české umělce, zahrnujícím celé spektrum výtvarných forem. Přednáška se bude hlavně zabývat galerií, jejím vznikem, managementem, ale záleží na zájmu přítomných :).
+63|Gabriela Kahoferová
+64|Erasmus a studium v zahraničí
+65|Odbornička na mezinárodní komunikaci a mezinárodní etiketu. Zabývá se např. specifiky různých kultur a jejich vlivy na profesní znalosti a komunikaci nebo kulturními aspekty při vyjednávání. Vystudovaná religionistka a ekonomka. Dlouhodobě žila v Izraeli. Na příští školní rok je s ní domlouván seminář o ekonomii a mezinárodní komunikaci na naší škole.
+66|Středa 18.3.
+67|Martin Ladecký
+68|ak nezisková organizace v oblasti zdravotnictví roste na více než 70 tisíc uživatelů
+69|Tech lead v německé bance Commerzbank. CTO aplikace Loono. Dobrovolník v Česk.digital. Před tím pracoval 9 let jako Tech lead v Air Bank.
+70|Radek Bartoníček
+71|Novinařina
+72|Celý dosavadní život se věnuje novinařině. I když žije a pracuje v Praze, za svůj domov považuje moravské Slovácko, kde má své kořeny. Ve volném čase se do tohoto kraje vrací a zachycuje vztah místních lidí k práci, krajině, lidovým tradicím a víře. Řadu let pracoval v MF DNES, kde psal převážně o politice. V posledních letech je zpravodajem a reportérem webu Aktuálně.cz se zaměřením na dění v nejvyšších patrech politiky. Hodně se ale pohybuje také v terénu, kde mapuje proměnlivé nálady i emoce voličů. Kromě psaní také fotí a natáčí videa. Publikuje rovněž vlastní video komentáře z „české politiky a novinařiny proti lži, nenávisti a blbé náladě“.
+73|Vítězslav Škorpík
+74|System.Xml.XmlElement
+75|Popularizátor fyziky a astronomie, dramaturg popularizačního přednáškového cyklu Pátečníci, konající se každý pátek na Přírodovědecké fakultě UK v Praze.
+76|Sylva Horáková
+77|Lékaři bez hranic
+78|System.Xml.XmlElement
+79|Zuzana Hübnerová
+80|System.Xml.XmlElement
+81|Chronobiologie je vědní obor studující časovou organizaci biologických procesů a cyklické jevy (biorytmy) v organismech, odvozené od slunečních či měsíčních rytmů. Zkoumá vlivy na tělesné, duševní a emocionální funkce, zejména cirkadiánní rytmus (24hodinový cyklus). Klíčovou oblastí je regulace spánku a bdění hormonem melatoninem.
+82|Karel Eliáš
+83|Právo
+84|Právník, komercionalista a hlavní autor současného občanského zákoníku (89/2012 Sb.). Profesor v oboru obchodního práva. Člen vědecké rady Akademie věd ČR, Ústavu státu a práv AV ČR a právnických fakult v Praze a Olomouci. Člen legislativní rady vlády ČR. Na přelomu let 2011 a 2012 uveden do Právnické síně slávy. Pravidelně publikuje v odborných právnických časopisech.
+85|Daniel Dvořák
+86|Od bodybuildera k náboženství
+87|Daniel Dvořák byl 2x mistr světa, 2x mistr Evropy, 11x mistr České republiky, mistr Anglie, Izraele a Rakouska, vítěz Evropské ligy v powerliftingu. V průběhu svého života se však dostal k náboženství a o svém příběhu vám popovídá v rámci přednášky. Zabívá se i zdravím, spánkem a dělá stále i osobního trenéra.
+88|Erik Šafařík
+89|Youtubeřina, filmařina, fotografie a hudební tvorba
+90|Na internetu vystupuje také pod přezdívkou ERROR1K, pod kterou od roku 2017 publikuje videa na YouTube. Ve své tvorbě se věnuje především komentářům k různým tématům, reakcím, recenzím a obsahu zaměřenému na internetovou kulturu, intelekt a audiovizuální tvorbu. Sám si potrpí na dobrý audiovizuální dojem a svou produkci si vytváří sám, od scénáře přes natáčení až po střih. Studoval filmovou střední školu, je fotografem a filmařem na volné noze a v posledních pár letech se začal věnovat hudební, převážně rapové tvorbě.
+91|Petr Fiala
+92|Beseda s bývalým předsedou vlády
+93|Politolog, vysokoškolský učitel a politik (mj. bývalý předseda vlády a bývalý předseda ODS). První profesor v oboru politologie v ČR, v minuosti                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    dlouhodobý vedoucí katedry politologie Masarykovy univerzity. Rektor Masarykovy univerzity (2004 – 2011), předseda České konference rektorů (2009 – 2011). Člen Rady Ústavu pro studium totalitních režimů (2007 -2012). V letech 2012 – 2013 ministr školství, mládeže a tělovýchovy, předtím od roku 2011 hlavní vědecký pracovník předsedy vlády Petra Nečase. Od roku 2013 poslanec PSP ČR za Jihomoravský kraj, současně člen výboru pro vědu, vzdělávání, mládež a sport; v letech 2017 – 2021 též místopředseda PSP ČR. Historicky nejdéle sloužící předseda Občanské demokratické strany (18. 1. 2014 – 17. 1. 2026). Od 28. 11. 2021 do 15. 12. 2025 předseda vlády České republiky

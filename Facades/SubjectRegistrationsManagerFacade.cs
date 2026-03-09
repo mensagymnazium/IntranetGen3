@@ -221,13 +221,13 @@ public class SubjectRegistrationsManagerFacade : ISubjectRegistrationsManagerFac
 
 	private void VerifyRegistrationChangesAllowedToStudents()
 	{
-		if (timeService.GetCurrentDate() > new DateTime(2026, 4, 1))
+		if (timeService.GetCurrentDate() > new DateTime(2026, 3, 11))
 		{
 			throw new OperationFailedException("Registrace jsou uzavřeny, kontaktujte organizátory.");
 		}
-		else if (timeService.GetCurrentTime() < new DateTime(2026, 3, 9, 19, 0, 0))
+		else if (timeService.GetCurrentTime() < new DateTime(2026, 3, 10, 8, 0, 0))
 		{
-			throw new OperationFailedException("Registrace se otevírají 9. 3. v 19:00.");
+			throw new OperationFailedException("Registrace se otevírají 10. 3. v 8:00.");
 		}
 	}
 }
