@@ -11,5 +11,6 @@ namespace MensaGymnazium.IntranetGen3.Model.Metadata.Security;
 public static class UserMetadata
 {
 	public const int EmailMaxLength = 320;
+	public const int LastnameMaxLength = 64;
 	public const int NameMaxLength = 64;
 }

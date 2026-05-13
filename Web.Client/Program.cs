@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using BlazorApplicationInsights;
+using BlazorApplicationInsights.Models;
 using FluentValidation;
 using Havit.Blazor.Grpc.Client;
 using Havit.Blazor.Grpc.Client.ServerExceptions;
@@ -130,22 +131,21 @@ public class Program
 	{
 		var instrumentationKey = builder.Configuration.GetValue<string>("ApplicationInsights:InstrumentationKey");
 
-		builder.Services.AddBlazorApplicationInsights(async applicationInsights =>
-		{
-			await applicationInsights.SetInstrumentationKey(instrumentationKey);
-			await applicationInsights.LoadAppInsights();
-
-			var telemetryItem = new TelemetryItem()
+		builder.Services.AddBlazorApplicationInsights(
+			c => c.InstrumentationKey = instrumentationKey ?? String.Empty,
+			async applicationInsights =>
 			{
-				Tags = new Dictionary<string, object>()
+				var telemetryItem = new TelemetryItem()
 				{
-					{ "ai.cloud.role", "Web.Client" },
-					// { "ai.cloud.roleInstance", "..." },
-				}
-			};
+					Tags = new Dictionary<string, object>()
+					{
+						{ "ai.cloud.role", "Web.Client" },
+						// { "ai.cloud.roleInstance", "..." },
+					}
+				};
 
-			await applicationInsights.AddTelemetryInitializer(telemetryItem);
-		}, addILoggerProvider: true);
+				await applicationInsights.AddTelemetryInitializer(telemetryItem);
+			});
 
 		builder.Logging.AddFilter<ApplicationInsightsLoggerProvider>(level => (level == LogLevel.Error) || (level == LogLevel.Critical));
 

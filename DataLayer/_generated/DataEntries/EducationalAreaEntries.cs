@@ -8,25 +8,25 @@
 namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries;
 
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-public class EducationalAreaEntries : Havit.Data.Patterns.DataEntries.DataEntries<MensaGymnazium.IntranetGen3.Model.EducationalArea>, IEducationalAreaEntries 
+public class EducationalAreaEntries : Havit.Data.Patterns.DataEntries.DataEntries<MensaGymnazium.IntranetGen3.Model.EducationalArea, System.Int32>, IEducationalAreaEntries
 {
-	private MensaGymnazium.IntranetGen3.Model.EducationalArea artCulture;
-	private MensaGymnazium.IntranetGen3.Model.EducationalArea humanHealth;
-	private MensaGymnazium.IntranetGen3.Model.EducationalArea humanNature;
-	private MensaGymnazium.IntranetGen3.Model.EducationalArea humanSociety;
-	private MensaGymnazium.IntranetGen3.Model.EducationalArea humanWork;
-	private MensaGymnazium.IntranetGen3.Model.EducationalArea informatics;
-	private MensaGymnazium.IntranetGen3.Model.EducationalArea languageCommunication;
-	private MensaGymnazium.IntranetGen3.Model.EducationalArea mathApplication;
+	private MensaGymnazium.IntranetGen3.Model.EducationalArea _artCulture;
+	private MensaGymnazium.IntranetGen3.Model.EducationalArea _humanHealth;
+	private MensaGymnazium.IntranetGen3.Model.EducationalArea _humanNature;
+	private MensaGymnazium.IntranetGen3.Model.EducationalArea _humanSociety;
+	private MensaGymnazium.IntranetGen3.Model.EducationalArea _humanWork;
+	private MensaGymnazium.IntranetGen3.Model.EducationalArea _informatics;
+	private MensaGymnazium.IntranetGen3.Model.EducationalArea _languageCommunication;
+	private MensaGymnazium.IntranetGen3.Model.EducationalArea _mathApplication;
 
-	public MensaGymnazium.IntranetGen3.Model.EducationalArea ArtCulture => artCulture ??= GetEntry(MensaGymnazium.IntranetGen3.Model.EducationalArea.Entry.ArtCulture);
-	public MensaGymnazium.IntranetGen3.Model.EducationalArea HumanHealth => humanHealth ??= GetEntry(MensaGymnazium.IntranetGen3.Model.EducationalArea.Entry.HumanHealth);
-	public MensaGymnazium.IntranetGen3.Model.EducationalArea HumanNature => humanNature ??= GetEntry(MensaGymnazium.IntranetGen3.Model.EducationalArea.Entry.HumanNature);
-	public MensaGymnazium.IntranetGen3.Model.EducationalArea HumanSociety => humanSociety ??= GetEntry(MensaGymnazium.IntranetGen3.Model.EducationalArea.Entry.HumanSociety);
-	public MensaGymnazium.IntranetGen3.Model.EducationalArea HumanWork => humanWork ??= GetEntry(MensaGymnazium.IntranetGen3.Model.EducationalArea.Entry.HumanWork);
-	public MensaGymnazium.IntranetGen3.Model.EducationalArea Informatics => informatics ??= GetEntry(MensaGymnazium.IntranetGen3.Model.EducationalArea.Entry.Informatics);
-	public MensaGymnazium.IntranetGen3.Model.EducationalArea LanguageCommunication => languageCommunication ??= GetEntry(MensaGymnazium.IntranetGen3.Model.EducationalArea.Entry.LanguageCommunication);
-	public MensaGymnazium.IntranetGen3.Model.EducationalArea MathApplication => mathApplication ??= GetEntry(MensaGymnazium.IntranetGen3.Model.EducationalArea.Entry.MathApplication);
+	public MensaGymnazium.IntranetGen3.Model.EducationalArea ArtCulture => _artCulture ??= GetEntry(MensaGymnazium.IntranetGen3.Model.EducationalArea.Entry.ArtCulture);
+	public MensaGymnazium.IntranetGen3.Model.EducationalArea HumanHealth => _humanHealth ??= GetEntry(MensaGymnazium.IntranetGen3.Model.EducationalArea.Entry.HumanHealth);
+	public MensaGymnazium.IntranetGen3.Model.EducationalArea HumanNature => _humanNature ??= GetEntry(MensaGymnazium.IntranetGen3.Model.EducationalArea.Entry.HumanNature);
+	public MensaGymnazium.IntranetGen3.Model.EducationalArea HumanSociety => _humanSociety ??= GetEntry(MensaGymnazium.IntranetGen3.Model.EducationalArea.Entry.HumanSociety);
+	public MensaGymnazium.IntranetGen3.Model.EducationalArea HumanWork => _humanWork ??= GetEntry(MensaGymnazium.IntranetGen3.Model.EducationalArea.Entry.HumanWork);
+	public MensaGymnazium.IntranetGen3.Model.EducationalArea Informatics => _informatics ??= GetEntry(MensaGymnazium.IntranetGen3.Model.EducationalArea.Entry.Informatics);
+	public MensaGymnazium.IntranetGen3.Model.EducationalArea LanguageCommunication => _languageCommunication ??= GetEntry(MensaGymnazium.IntranetGen3.Model.EducationalArea.Entry.LanguageCommunication);
+	public MensaGymnazium.IntranetGen3.Model.EducationalArea MathApplication => _mathApplication ??= GetEntry(MensaGymnazium.IntranetGen3.Model.EducationalArea.Entry.MathApplication);
 
 	public EducationalAreaEntries(MensaGymnazium.IntranetGen3.DataLayer.Repositories.IEducationalAreaRepository repository)
 		: base(repository)

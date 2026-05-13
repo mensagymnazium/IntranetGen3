@@ -16,9 +16,9 @@ using Havit.Data.Patterns.Infrastructure;
 namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories.Common;
 
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-public abstract class ApplicationSettingsDbRepositoryBase : DbRepository<MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings>
+public abstract class ApplicationSettingsDbRepositoryBase : DbRepository<MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings, System.Int32>
 {
-	protected ApplicationSettingsDbRepositoryBase(IDbContext dbContext, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager, IRepositoryQueryProvider repositoryQueryProvider)
+	protected ApplicationSettingsDbRepositoryBase(IDbContext dbContext, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings, System.Int32> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager, IRepositoryQueryProvider<MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings, System.Int32> repositoryQueryProvider)
 		: base(dbContext, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager, repositoryQueryProvider)
 	{
 	}

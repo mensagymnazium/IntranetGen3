@@ -1,10 +1,11 @@
 ﻿using System.Runtime.CompilerServices;
 using Azure.Identity;
+using Havit.Data.EntityFrameworkCore;
 using Havit.Data.EntityFrameworkCore.Patterns.DependencyInjection;
 using Havit.Data.EntityFrameworkCore.Patterns.UnitOfWorks.EntityValidation;
 using Havit.Extensions.DependencyInjection;
 using Havit.Extensions.DependencyInjection.Abstractions;
-using MensaGymnazium.IntranetGen3.DataLayer.DataSources.Common;
+using MensaGymnazium.IntranetGen3.DataLayer;
 using MensaGymnazium.IntranetGen3.DependencyInjection.ConfigrationOptions;
 using MensaGymnazium.IntranetGen3.Entity;
 using MensaGymnazium.IntranetGen3.Services.Infrastructure;
@@ -92,22 +93,20 @@ public static class ServiceCollectionExtensions
 
 	private static void InstallHavitEntityFramework(IServiceCollection services, InstallConfiguration configuration)
 	{
-		services.WithEntityPatternsInstaller()
-			.AddEntityPatterns()
-			//.AddLocalizationServices<Language>()
-			.AddDbContext<IntranetGen3DbContext>(optionsBuilder =>
+		services.AddDbContext<IDbContext, IntranetGen3DbContext>(optionsBuilder =>
+		{
+			if (configuration.UseInMemoryDb)
 			{
-				if (configuration.UseInMemoryDb)
-				{
-					optionsBuilder.UseInMemoryDatabase(nameof(IntranetGen3DbContext));
-				}
-				else
-				{
+				optionsBuilder.UseInMemoryDatabase(nameof(IntranetGen3DbContext));
+			}
+			else
+			{
 
-					optionsBuilder.UseSqlServer(configuration.DatabaseConnectionString, c => c.MaxBatchSize(30));
-				}
-			})
-			.AddDataLayer(typeof(IApplicationSettingsDataSource).Assembly);
+				optionsBuilder.UseSqlServer(configuration.DatabaseConnectionString, c => c.MaxBatchSize(30));
+			}
+			optionsBuilder.UseDefaultHavitConventions();
+		})
+		.AddDataLayerServices();
 
 		services.AddSingleton<IEntityValidator<object>, ValidatableObjectEntityValidator>();
 	}

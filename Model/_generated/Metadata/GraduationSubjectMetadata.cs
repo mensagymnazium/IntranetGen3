@@ -5,11 +5,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Havit.Data.Patterns.Repositories;
-
-namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
+namespace MensaGymnazium.IntranetGen3.Model.Metadata;
 
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-public partial interface ISubjectRepository : IRepository<MensaGymnazium.IntranetGen3.Model.Subject, System.Int32>
+public static class GraduationSubjectMetadata
 {
+	public const int NameMaxLength = 50;
 }
