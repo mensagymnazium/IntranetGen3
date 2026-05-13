@@ -7,7 +7,7 @@ namespace MensaGymnazium.IntranetGen3.Services.SubjectRegistration;
 public interface ISubjectRegistrationsManagerService
 {
 	/// <returns>Whether there can be a registration performed now. Based on dates inside <see cref="IApplicationSettingsEntries"/></returns>
-	public bool IsRegistrationPeriodActive();
+	bool IsRegistrationPeriodActive();
 
 	// Xopa: Todo: Does registration conflict with other registrations? (time-wise)
 
@@ -17,7 +17,7 @@ public interface ISubjectRegistrationsManagerService
 	/// Constructs the object <b>and inserts it using <see cref="IUnitOfWork.AddForInsert{TEntity}"/></b>
 	/// </summary>
 	/// <returns></returns>
-	public StudentSubjectRegistration CreateNewSubjectRegistration(
+	StudentSubjectRegistration CreateNewSubjectRegistration(
 		int studentId,
 		int subjectId,
 		StudentRegistrationType registrationType);
@@ -29,7 +29,7 @@ public interface ISubjectRegistrationsManagerService
 	/// <param name="callerStudentId">The student attempting to cancel. This is necessary to check, that the student is canceling his own registration and not some1 elses.</param>
 	/// <param name="cancellationToken"></param>
 	/// <returns></returns>
-	public Task CancelRegistrationAsync(int registrationId, int callerStudentId, CancellationToken cancellationToken = default);
+	Task CancelRegistrationAsync(int registrationId, int callerStudentId, CancellationToken cancellationToken = default);
 
 	/// <returns>True, if the number of registrations for this subject reached the subject's capacity</returns>
 	Task<bool> IsSubjectCapacityFullAsync(int subjectId, CancellationToken cancellationToken = default);

@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<DisableImplicitComponentsAnalyzers>true</DisableImplicitComponentsAnalyzers>
 		<AssemblyName>MensaGymnazium.IntranetGen3.Web.Server</AssemblyName>
@@ -14,7 +13,6 @@
 		<PackageReference Include="Havit.Core" />
 		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
 		<PackageReference Include="Microsoft.Extensions.Logging.AzureAppServices" />
 		<PackageReference Include="Microsoft.Identity.Web" />
 	</ItemGroup>

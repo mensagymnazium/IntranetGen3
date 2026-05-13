@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
 	  <AssemblyName>MensaGymnazium.IntranetGen3.Resources</AssemblyName>
 	  <RootNamespace>MensaGymnazium.IntranetGen3.Resources</RootNamespace>
   </PropertyGroup>

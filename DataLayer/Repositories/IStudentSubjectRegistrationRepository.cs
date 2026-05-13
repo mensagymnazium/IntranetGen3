@@ -4,7 +4,7 @@ namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 
 public partial interface IStudentSubjectRegistrationRepository
 {
-	public Task<List<StudentSubjectRegistration>> GetBySubjectAsync(int subjectId, CancellationToken cancellationToken = default);
+	Task<List<StudentSubjectRegistration>> GetBySubjectAsync(int subjectId, CancellationToken cancellationToken = default);
 
 	/// <returns>Active (not deleted) registrations made by a student for a subject</returns>
 	Task<List<StudentSubjectRegistration>> GetActiveRegistrationsByStudentAsync(int studentId, CancellationToken cancellationToken = default);
