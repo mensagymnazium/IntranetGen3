@@ -11,9 +11,6 @@
 		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 		<DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
 		<AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(Configuration)'=='Release' ">
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	</PropertyGroup>
 
