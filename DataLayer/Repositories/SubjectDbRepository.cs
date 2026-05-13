@@ -16,7 +16,7 @@ public partial class SubjectDbRepository : ISubjectRepository
 		yield return s => s.GradeRelations;
 	}
 
-	protected override async Task LoadReferencesAsync(Subject[] entities, CancellationToken cancellationToken = default)
+	protected override async Task LoadReferencesAsync(IEnumerable<Subject> entities, CancellationToken cancellationToken = default)
 	{
 		await base.LoadReferencesAsync(entities, cancellationToken);
 		await DataLoader

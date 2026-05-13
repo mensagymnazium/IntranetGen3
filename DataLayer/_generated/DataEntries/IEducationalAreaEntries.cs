@@ -8,7 +8,7 @@
 namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries;
 
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-public interface IEducationalAreaEntries : Havit.Data.Patterns.DataEntries.IDataEntries
+public interface IEducationalAreaEntries
 {
 	MensaGymnazium.IntranetGen3.Model.EducationalArea ArtCulture { get; }
 	MensaGymnazium.IntranetGen3.Model.EducationalArea HumanHealth { get; }

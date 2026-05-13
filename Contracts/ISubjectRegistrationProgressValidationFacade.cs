@@ -3,10 +3,10 @@
 [ApiContract]
 public interface ISubjectRegistrationProgressValidationFacade
 {
-	public Task<StudentRegistrationProgressDto> GetProgressOfCurrentStudentAsync(
+	Task<StudentRegistrationProgressDto> GetProgressOfCurrentStudentAsync(
 		CancellationToken cancellationToken = default);
 
-	public Task<List<StudentSubjectRegistrationProgressListItemDto>> GetProgressListAsync(
+	Task<List<StudentSubjectRegistrationProgressListItemDto>> GetProgressListAsync(
 		StudentSubjectRegistrationProgressListFilter request,
 		CancellationToken cancellationToken = default);
 }

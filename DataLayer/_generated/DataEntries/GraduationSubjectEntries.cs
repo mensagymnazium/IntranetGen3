@@ -8,45 +8,45 @@
 namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries;
 
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-public class GraduationSubjectEntries : Havit.Data.Patterns.DataEntries.DataEntries<MensaGymnazium.IntranetGen3.Model.GraduationSubject>, IGraduationSubjectEntries 
+public class GraduationSubjectEntries : Havit.Data.Patterns.DataEntries.DataEntries<MensaGymnazium.IntranetGen3.Model.GraduationSubject, System.Int32>, IGraduationSubjectEntries
 {
-	private MensaGymnazium.IntranetGen3.Model.GraduationSubject artHistory;
-	private MensaGymnazium.IntranetGen3.Model.GraduationSubject biology;
-	private MensaGymnazium.IntranetGen3.Model.GraduationSubject chemistry;
-	private MensaGymnazium.IntranetGen3.Model.GraduationSubject czechLanguageLiterature;
-	private MensaGymnazium.IntranetGen3.Model.GraduationSubject economy;
-	private MensaGymnazium.IntranetGen3.Model.GraduationSubject english;
-	private MensaGymnazium.IntranetGen3.Model.GraduationSubject foreignLanguage;
-	private MensaGymnazium.IntranetGen3.Model.GraduationSubject geography;
-	private MensaGymnazium.IntranetGen3.Model.GraduationSubject history;
-	private MensaGymnazium.IntranetGen3.Model.GraduationSubject humanWork;
-	private MensaGymnazium.IntranetGen3.Model.GraduationSubject informatics;
-	private MensaGymnazium.IntranetGen3.Model.GraduationSubject law;
-	private MensaGymnazium.IntranetGen3.Model.GraduationSubject math;
-	private MensaGymnazium.IntranetGen3.Model.GraduationSubject philosophy;
-	private MensaGymnazium.IntranetGen3.Model.GraduationSubject physics;
-	private MensaGymnazium.IntranetGen3.Model.GraduationSubject politicalScience;
-	private MensaGymnazium.IntranetGen3.Model.GraduationSubject psychology;
-	private MensaGymnazium.IntranetGen3.Model.GraduationSubject sociology;
+	private MensaGymnazium.IntranetGen3.Model.GraduationSubject _artHistory;
+	private MensaGymnazium.IntranetGen3.Model.GraduationSubject _biology;
+	private MensaGymnazium.IntranetGen3.Model.GraduationSubject _chemistry;
+	private MensaGymnazium.IntranetGen3.Model.GraduationSubject _czechLanguageLiterature;
+	private MensaGymnazium.IntranetGen3.Model.GraduationSubject _economy;
+	private MensaGymnazium.IntranetGen3.Model.GraduationSubject _english;
+	private MensaGymnazium.IntranetGen3.Model.GraduationSubject _foreignLanguage;
+	private MensaGymnazium.IntranetGen3.Model.GraduationSubject _geography;
+	private MensaGymnazium.IntranetGen3.Model.GraduationSubject _history;
+	private MensaGymnazium.IntranetGen3.Model.GraduationSubject _humanWork;
+	private MensaGymnazium.IntranetGen3.Model.GraduationSubject _informatics;
+	private MensaGymnazium.IntranetGen3.Model.GraduationSubject _law;
+	private MensaGymnazium.IntranetGen3.Model.GraduationSubject _math;
+	private MensaGymnazium.IntranetGen3.Model.GraduationSubject _philosophy;
+	private MensaGymnazium.IntranetGen3.Model.GraduationSubject _physics;
+	private MensaGymnazium.IntranetGen3.Model.GraduationSubject _politicalScience;
+	private MensaGymnazium.IntranetGen3.Model.GraduationSubject _psychology;
+	private MensaGymnazium.IntranetGen3.Model.GraduationSubject _sociology;
 
-	public MensaGymnazium.IntranetGen3.Model.GraduationSubject ArtHistory => artHistory ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.ArtHistory);
-	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Biology => biology ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Biology);
-	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Chemistry => chemistry ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Chemistry);
-	public MensaGymnazium.IntranetGen3.Model.GraduationSubject CzechLanguageLiterature => czechLanguageLiterature ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.CzechLanguageLiterature);
-	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Economy => economy ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Economy);
-	public MensaGymnazium.IntranetGen3.Model.GraduationSubject English => english ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.English);
-	public MensaGymnazium.IntranetGen3.Model.GraduationSubject ForeignLanguage => foreignLanguage ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.ForeignLanguage);
-	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Geography => geography ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Geography);
-	public MensaGymnazium.IntranetGen3.Model.GraduationSubject History => history ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.History);
-	public MensaGymnazium.IntranetGen3.Model.GraduationSubject HumanWork => humanWork ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.HumanWork);
-	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Informatics => informatics ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Informatics);
-	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Law => law ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Law);
-	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Math => math ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Math);
-	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Philosophy => philosophy ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Philosophy);
-	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Physics => physics ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Physics);
-	public MensaGymnazium.IntranetGen3.Model.GraduationSubject PoliticalScience => politicalScience ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.PoliticalScience);
-	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Psychology => psychology ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Psychology);
-	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Sociology => sociology ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Sociology);
+	public MensaGymnazium.IntranetGen3.Model.GraduationSubject ArtHistory => _artHistory ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.ArtHistory);
+	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Biology => _biology ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Biology);
+	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Chemistry => _chemistry ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Chemistry);
+	public MensaGymnazium.IntranetGen3.Model.GraduationSubject CzechLanguageLiterature => _czechLanguageLiterature ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.CzechLanguageLiterature);
+	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Economy => _economy ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Economy);
+	public MensaGymnazium.IntranetGen3.Model.GraduationSubject English => _english ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.English);
+	public MensaGymnazium.IntranetGen3.Model.GraduationSubject ForeignLanguage => _foreignLanguage ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.ForeignLanguage);
+	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Geography => _geography ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Geography);
+	public MensaGymnazium.IntranetGen3.Model.GraduationSubject History => _history ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.History);
+	public MensaGymnazium.IntranetGen3.Model.GraduationSubject HumanWork => _humanWork ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.HumanWork);
+	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Informatics => _informatics ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Informatics);
+	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Law => _law ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Law);
+	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Math => _math ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Math);
+	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Philosophy => _philosophy ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Philosophy);
+	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Physics => _physics ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Physics);
+	public MensaGymnazium.IntranetGen3.Model.GraduationSubject PoliticalScience => _politicalScience ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.PoliticalScience);
+	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Psychology => _psychology ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Psychology);
+	public MensaGymnazium.IntranetGen3.Model.GraduationSubject Sociology => _sociology ??= GetEntry(MensaGymnazium.IntranetGen3.Model.GraduationSubject.Entry.Sociology);
 
 	public GraduationSubjectEntries(MensaGymnazium.IntranetGen3.DataLayer.Repositories.IGraduationSubjectRepository repository)
 		: base(repository)

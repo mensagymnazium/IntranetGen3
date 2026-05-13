@@ -70,8 +70,6 @@ public class Startup
 		app.UseBlazorFrameworkFiles();
 		app.UseStaticFiles();
 
-		app.UseExceptionMonitoring();
-
 		app.UseRouting();
 
 		app.UseAuthentication();

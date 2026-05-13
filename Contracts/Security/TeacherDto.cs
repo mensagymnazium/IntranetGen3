@@ -2,6 +2,7 @@
 using MensaGymnazium.IntranetGen3.Contracts.ModelMetadata.Security;
 
 namespace MensaGymnazium.IntranetGen3.Contracts.Security;
+
 public record TeacherDto
 {
 	public int Id { get; set; }

@@ -8,7 +8,7 @@
 namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries;
 
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-public interface IGraduationSubjectEntries : Havit.Data.Patterns.DataEntries.IDataEntries
+public interface IGraduationSubjectEntries
 {
 	MensaGymnazium.IntranetGen3.Model.GraduationSubject ArtHistory { get; }
 	MensaGymnazium.IntranetGen3.Model.GraduationSubject Biology { get; }

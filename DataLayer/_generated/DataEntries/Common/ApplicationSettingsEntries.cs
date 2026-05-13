@@ -8,11 +8,11 @@
 namespace MensaGymnazium.IntranetGen3.DataLayer.DataEntries.Common;
 
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-public class ApplicationSettingsEntries : Havit.Data.Patterns.DataEntries.DataEntries<MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings>, IApplicationSettingsEntries 
+public class ApplicationSettingsEntries : Havit.Data.Patterns.DataEntries.DataEntries<MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings, System.Int32>, IApplicationSettingsEntries
 {
-	private MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings current;
+	private MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings _current;
 
-	public MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings Current => current ??= GetEntry(MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings.Entry.Current);
+	public MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings Current => _current ??= GetEntry(MensaGymnazium.IntranetGen3.Model.Common.ApplicationSettings.Entry.Current);
 
 	public ApplicationSettingsEntries(MensaGymnazium.IntranetGen3.DataLayer.Repositories.Common.IApplicationSettingsRepository repository)
 		: base(repository)

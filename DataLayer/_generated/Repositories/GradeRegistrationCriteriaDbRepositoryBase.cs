@@ -16,9 +16,9 @@ using Havit.Data.Patterns.Infrastructure;
 namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-public abstract class GradeRegistrationCriteriaDbRepositoryBase : DbRepository<MensaGymnazium.IntranetGen3.Model.GradeRegistrationCriteria>
+public abstract class GradeRegistrationCriteriaDbRepositoryBase : DbRepository<MensaGymnazium.IntranetGen3.Model.GradeRegistrationCriteria, System.Int32>
 {
-	protected GradeRegistrationCriteriaDbRepositoryBase(IDbContext dbContext, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.GradeRegistrationCriteria, int> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager, IRepositoryQueryProvider repositoryQueryProvider)
+	protected GradeRegistrationCriteriaDbRepositoryBase(IDbContext dbContext, IEntityKeyAccessor<MensaGymnazium.IntranetGen3.Model.GradeRegistrationCriteria, System.Int32> entityKeyAccessor, IDataLoader dataLoader, ISoftDeleteManager softDeleteManager, IEntityCacheManager entityCacheManager, IRepositoryQueryProvider<MensaGymnazium.IntranetGen3.Model.GradeRegistrationCriteria, System.Int32> repositoryQueryProvider)
 		: base(dbContext, entityKeyAccessor, dataLoader, softDeleteManager, entityCacheManager, repositoryQueryProvider)
 	{
 	}

@@ -6,12 +6,11 @@
 		<FileVersion>1.0.0.0</FileVersion>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<Product>IntranetGen3</Product>
+		<TargetFramework>net10.0</TargetFramework>
 		<LangVersion>latest</LangVersion>
 		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 		<DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(Configuration)'=='Release' ">
+		<AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	</PropertyGroup>
 

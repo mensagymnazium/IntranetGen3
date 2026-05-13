@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 
 namespace MensaGymnazium.IntranetGen3.Contracts;
+
 public record GradeRegistrationCriteriaDto
 {
 	public int GradeId { get; set; }

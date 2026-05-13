@@ -10,6 +10,6 @@ using Havit.Data.Patterns.Repositories;
 namespace MensaGymnazium.IntranetGen3.DataLayer.Repositories;
 
 [System.CodeDom.Compiler.GeneratedCode("Havit.Data.EntityFrameworkCore.CodeGenerator", "1.0")]
-public partial interface IStudentSubjectRegistrationRepository : IRepository<MensaGymnazium.IntranetGen3.Model.StudentSubjectRegistration>
+public partial interface IStudentSubjectRegistrationRepository : IRepository<MensaGymnazium.IntranetGen3.Model.StudentSubjectRegistration, System.Int32>
 {
 }
